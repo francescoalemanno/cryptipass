@@ -1,8 +1,9 @@
 package cryptipass_test
 
 import (
-	"cryptipass"
 	"testing"
+
+	"github.com/francescoalemanno/cryptipass"
 )
 
 func TestBasic(t *testing.T) {
