@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"math"
 
-	cp "cryptipass"
+	cp "github.com/francescoalemanno/cryptipass"
 )
 
 func main() {

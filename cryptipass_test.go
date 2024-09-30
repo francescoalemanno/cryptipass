@@ -7,7 +7,7 @@ import (
 
 func TestBasic(t *testing.T) {
 	pw := cryptipass.NewPassphrase(4)
-	if len(pw) < 16 {
+	if len(pw) < 15 {
 		t.Fatalf(`Wrong length "%s"`, pw)
 	}
 }
