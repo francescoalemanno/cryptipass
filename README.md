@@ -1,7 +1,7 @@
 # CryptiPass
 
 CryptiPass is a Go library for generating high-entropy, pronounceable passphrases. It offers a secure and simple way to create human-friendly, memorable passphrases that are still cryptographically strong. Each passphrase is composed of a sequence of randomly generated words, ensuring both security and usability.
-
+We also have a [CLI](cmd/genpw) available for non-library uses.
 ## Features
 
 - **High Entropy**: CryptiPass ensures that generated passphrases exceed 20.25 bits of entropy per word, providing strong security against brute-force attacks.
