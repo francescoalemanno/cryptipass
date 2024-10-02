@@ -7,8 +7,11 @@ import (
 )
 
 func TestBasic(t *testing.T) {
-	pw := cryptipass.NewPassphrase(4)
+	pw, H := cryptipass.NewPassphrase(4)
 	if len(pw) < 15 {
 		t.Fatalf(`Wrong length "%s"`, pw)
+	}
+	if H < 60 {
+		t.Fatalf(`Wrong entropy "%s"`, pw)
 	}
 }

@@ -1,103 +1,80 @@
-# CryptiPass v1.1
+# Cryptipass
+NOTE: **We also have a [CLI](cmd/genpw) available for non-library uses.**
+Cryptipass is a Go package designed to generate secure passphrases composed of human-readable words. The passphrases are generated with a focus on both security (through entropy) and usability by combining cryptographic randomness and customizable word generation strategies. 
 
-CryptiPass is a Go library for generating high-entropy, pronounceable passphrases. It offers a secure and simple way to create human-friendly, memorable passphrases that are still cryptographically strong. Each passphrase is composed of a sequence of randomly generated words, ensuring both security and usability.
-We also have a [CLI](cmd/genpw) available for non-library uses.
 ## Features
 
-- **High Entropy**: CryptiPass ensures that generated passphrases exceed 21 bits of entropy per word, providing strong security against brute-force attacks.
-- **Pronounceable Words**: Unlike many other random passphrase generators, CryptiPass generates words that are pronounceable, making them easier to remember and use.
-- **Customizable Length**: You can specify the number of words in each passphrase, making the length customizable based on your security needs.
+- **Cryptographically secure randomization**: Uses `crypto/rand` for generating random data to seed the passphrase generation process, ensuring the highest level of security.
+- **Customizable passphrase length**: The number of words in the passphrase can be controlled by the user.
+- **Entropy calculation**: Provides an exact evaluation of the total entropy for the generated passphrase, helping users understand the strength of their passphrase.
+- **Configurable word lengths**: Words within the passphrase can vary in length, ensuring better randomness and complexity.
 
 ## Installation
 
-To install CryptiPass, use the following command:
+To use the `cryptipass` package in your project, you need to install it using Go's package management:
 
 ```bash
 go get github.com/francescoalemanno/cryptipass
 ```
 
+Then import it in your Go files:
+
+```go
+import "github.com/francescoalemanno/cryptipass"
+```
+
 ## Usage
 
-The library exposes two main functions for passphrase generation:
+### Generate a Passphrase
 
-### 1. `NewPassphrase(words uint64) string`
+The primary function of the `cryptipass` package is to generate secure passphrases. You can generate a new passphrase using the `NewPassphrase` function. You can specify how many words you want in the passphrase, and the function returns the passphrase and its total entropy.
 
-This function generates a passphrase with a specified number of randomly generated, pronounceable words. The words are separated by periods (`.`) for clarity and convenience.
-
-#### Example:
+Example:
 
 ```go
 package main
 
 import (
-    "fmt"
-    "github.com/francescoalemanno/cryptipass"
+	"fmt"
+	"cryptipass"
 )
 
 func main() {
-    passphrase := cryptipass.NewPassphrase(4)
-    fmt.Println("Your passphrase:", passphrase)
+	passphrase, entropy := cryptipass.NewPassphrase(5)
+	fmt.Printf("Passphrase: %s\n", passphrase)
+	fmt.Printf("Entropy: %.2f bits\n", entropy)
 }
 ```
 
-In this example, a passphrase with 4 words is generated, and the output might look like:
+### Example Output:
 
 ```
-Your passphrase: acatorty.britayert.untente.docknost
+Passphrase: jesside.flyperm.aunsis.dertsy
+Entropy: 97.63 bits
 ```
 
-### 2. `GenMixWord() string`
+### Word Generation
 
-This function generates a single high-entropy word using a mixture of syllable lengths, ensuring that each word is pronounceable while maintaining strong randomness.
+Internally, the package uses a series of functions to generate words of varying lengths. Each word contributes a certain amount of entropy, calculated during the generation process.
 
-#### Example:
+- `GenMixWord()`: Generates a random word of mixed length, returning both the word and its entropy.
+- `GenWord(n int)`: Generates a word of exactly `n` characters.
+- `PickLength()`: Picks a random length for a word.
+- `PickNext()`: Generates the next part of a word based on the current string.
 
-```go
-package main
+## Notes
 
-import (
-    "fmt"
-    "github.com/francescoalemanno/cryptipass"
-)
-
-func main() {
-    word := cryptipass.GenMixWord()
-    fmt.Println("Generated word:", word)
-}
-```
-
-This will output a randomly generated, pronounceable word such as:
-
-```
-Generated word: skilles
-```
-
-## How It Works
-
-1. **Passphrase Generation** (`NewPassphrase`):
-   - The function `NewPassphrase` generates a passphrase consisting of a specified number of words. It calls `GenMixWord` repeatedly to create each word and concatenates them with periods (`.`).
-
-2. **Word Generation** (`GenMixWord`):
-   - `GenMixWord` uses an entropy-certified word length distribution and creates words by selecting random starting syllables and building on them until a valid word is formed.
-   - This ensures that each generated word has more than 21 bits of entropy, providing strong security guarantees.
-
-3. **Pronounceability** (`GenWord`):
-   - The function `GenWord` ensures that the words are pronounceable by constructing them from a set of predefined syllables, avoiding consonant clusters or vowel sequences that would be difficult to pronounce.
-
-## Entropy and Security
-
-Each word generated by CryptiPass contains more than 21 bits of entropy, which means that a 4-word passphrase would have approximately 84 bits of entropy. This level of entropy makes the passphrase highly resistant to brute-force attacks, providing security even against well-resourced attackers.
-
-The entropy is certified based on the mixture of word lengths and the randomness of syllable generation, ensuring both unpredictability and usability.
+- The package seeds the random number generator with `crypto/rand`, making it cryptographically secure. In scenarios where cryptographic security is not necessary and faster execution is preferred, the package also provides an alternative (commented out) `PCG` random number generator.
+- The entropy provided in the output is a measure of how unpredictable the passphrase is. The higher the entropy, the more secure the passphrase is.
 
 ## Contributing
 
-If you'd like to contribute to CryptiPass, feel free to fork the repository and submit pull requests. Bug reports and feature requests are also welcome.
+Contributions are welcome! If you encounter any issues or have feature suggestions, feel free to open an issue or a pull request on the GitHub repository.
 
 ## License
 
-CryptiPass is licensed under the MIT License.
+This project is licensed under the MIT License.
 
-## Contact
+---
 
-For questions, suggestions, or contributions, feel free to reach out via the repository's [issue tracker](https://github.com/francescoalemanno/cryptipass/issues).
+Happy coding and stay secure with Cryptipass!

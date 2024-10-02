@@ -20,38 +20,30 @@ func init() {
 	// rng = rand.New(rand.NewPCG(rng.Uint64(), rng.Uint64()))
 }
 
-func NewPassphrase(words uint64) string {
-	tokens := []string{}
+func NewPassphrase(words uint64) (string, float64) {
+	wordvec := []string{}
+	total_entropy := 0.0
 	for range words {
-		tokens = append(tokens, GenMixWord())
+		tok, h := GenMixWord()
+		wordvec = append(wordvec, tok)
+		total_entropy += h
 	}
-	return strings.Join(tokens, ".")
+	return strings.Join(wordvec, "."), total_entropy
 }
 
-func GenMixWord() string {
-	n := rng.IntN(len(D))
-	return GenWord(D[n])
+func GenMixWord() (string, float64) {
+	l, entropy_l := PickLength()
+	w, entropy_w := GenWord(l)
+	return w, entropy_l + entropy_w
 }
 
-func GenWord(n int) string {
-repeat:
-	s := w2[rng.IntN(len(w2))]
-	for {
-		next := tm[s[len(s)-2:]]
-		if len(next) == 0 {
-			goto repeat
-		}
-		c := next[rng.IntN(len(next))]
-		if c == '@' {
-			break
-		}
-		s += string(c)
-		if len(s) > n {
-			goto repeat
-		}
+func GenWord(n int) (string, float64) {
+	s := ""
+	total_entropy := 0.0
+	h := 0.0
+	for len(s) < n {
+		s, h = PickNext(s)
+		total_entropy += h
 	}
-	if len(s) < n {
-		goto repeat
-	}
-	return s
+	return s, total_entropy
 }
