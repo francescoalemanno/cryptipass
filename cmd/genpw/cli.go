@@ -17,11 +17,12 @@ type Passphrase struct {
 
 func main() {
 	cert := flag.Bool("c", false, "run entropy certification algorithm (for developers)")
-	words := flag.Uint64("w", 4, "number of words per password")
-	passwords := flag.Uint64("p", 4, "number of passwords to generate")
+	depth := flag.Uint64("cd", 1, "certification depth, larger number -> more accurate results (for developers)")
+	words := flag.Uint64("w", 3, "number of words per password")
+	passwords := flag.Uint64("p", 6, "number of passwords to generate")
 	flag.Parse()
 	if *cert {
-		certify()
+		certify(*depth)
 	}
 
 	pws := []Passphrase{}
@@ -45,17 +46,19 @@ func main() {
 	}
 }
 
-func certify() {
+func certify(udepth uint64) {
 	cnt := make(map[string]int)
 	iN := 0
 	Q := 128
 	nominal_H := 0.0
+	nominal_H2 := 0.0
 	cnt_nom_H := 0.0
 	for {
 		Q += Q / 14
 		for range Q {
 			w, nh := cp.GenMixWord()
 			nominal_H += nh
+			nominal_H2 += nh * nh
 			cnt_nom_H++
 			cnt[w]++
 			iN++
@@ -76,9 +79,11 @@ func certify() {
 			fmt.Print("|")
 		}
 		nomH := nominal_H / cnt_nom_H
+		nomH2 := nominal_H2 / cnt_nom_H
+		stddev := math.Sqrt(max(nomH2-nomH*nomH, 0.0001))
 		gap := nomH - H
-		fmt.Printf("%v | E[H]-E=%.2f E[H] = %.2f  ", strings.Repeat(" ", 60-CH), gap, nomH)
-		if gap < 0.01 {
+		fmt.Printf("%v | E[H]-E=%.2f E[H] = %.2f ∂E[H] = %.2f  ", strings.Repeat(" ", 60-CH), gap, nomH, stddev)
+		if gap < stddev/(1+float64(udepth)) {
 			fmt.Print("\n")
 			fmt.Println(H)
 			break
