@@ -24,7 +24,7 @@ This will install the `genpw` binary in your `$GOPATH/bin` directory.
 
 Once installed, you can generate passphrases by running `genpw` with the following options:
 
-```
+```bash
 Usage of genpw:
   -n uint
         number of passwords to generate (default 6)
@@ -49,15 +49,15 @@ genpw
 
 This will output something like:
 
-```
-Passphrase                    Log10(Guesses)    EntropyLog2
-
-Joilionel.scric.glicam        20.70              69.76
-Haneatri.unfolop.freskl       21.17              71.33
-Ricie.enrelerc.morsman        21.90              73.74
-Snuterov.possarb.sprive       22.93              77.18
-Hartiner.acycata.ovalnegis    23.35              78.57
-Grantdoti.irthed.imeatill     23.61              79.45
+```bash
+Passphrase                    Log10(Guesses)    Log2Entropy      Strength
+                                                                
+Candox.swortone.harvingl         23.37             78.64       [============]
+Kinywaya.preterpr.reefrate       24.31             81.76       [============]
+Ratererl.ruse.elikewa            20.44             68.92       [==========..]
+Relemalo.anli.systuri            20.77             70.01       [==========..]
+Unpori.grog.bodityi              18.05             60.97       [=========...]
+Uperti.ampilyon.extedes          22.23             74.86       [===========.]
 ```
 
 1. **Generate passphrases with custom pattern**:
@@ -68,14 +68,14 @@ genpw -p "WW20dds" -n 5
 
 The output might look like:
 
-```go
-Passphrase                Log10(Guesses)    EntropyLog2
-
-DofyonLivord2012@         15.26              51.70
-DinkedMankess2026^        16.09              54.43
-BlyestaHameloty2062=      18.02              60.87
-ShantlyzSectoo2098=       18.15              61.29
-AxoncingTwovernis2056*    19.12              64.52
+```bash
+Passphrase               Log10(Guesses)    Log2Entropy      Strength
+                                                           
+HandmarmOvera2053"          16.24             54.96       [========....]
+ResabledAnverbou2004+       19.22             64.85       [==========..]
+RocraryiRegonede2072!       19.96             67.29       [==========..]
+SagureraHassain2045-        19.70             66.45       [==========..]
+WoutbDemitte2019#           15.37             52.07       [========....]
 ```
 
 or
@@ -86,14 +86,14 @@ genpw -p "w.w.w.w" -n 5
 
 The output might look like:
 
-```go
-Passphrase                              Log10(Guesses)    EntropyLog2
-
-stritters.candis.frot.unliti            27.06              90.91
-treralryi.jangli.stathle.resche         29.22              98.08
-andetap.quis.cloashea.firetorki         29.75              99.83
-humperes.stacessfi.splan.gidinkl        30.55              102.50
-unctirter.arbeday.amersdowf.ovyarvis    33.60              112.62
+```bash
+Passphrase                               Log10(Guesses)    Log2Entropy      Strength
+                                                                           
+cleatabit.sphongedi.zedizmobl.drooky        32.40             108.62      [============]
+comprewa.cedivet.refyerm.unancling          31.19             104.61      [============]
+eitispayi.woblyoffo.unounde.pradimisf       35.27             118.18      [============]
+juiselid.partu.ovenes.slampos               28.32             95.08       [============]
+yaholl.boort.rentlestu.hustfierm            29.38             98.61       [============]
 ```
 
 ### Entropy Considerations

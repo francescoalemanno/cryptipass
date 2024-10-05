@@ -24,7 +24,7 @@ func TestBasic(t *testing.T) {
 }
 
 func TestCert(t *testing.T) {
-	g := cryptipass.Generator{}
+	g := cryptipass.NewInstance()
 	g.Rng = rand.New(rand.NewPCG(37512033, 27996124))
 
 	type FN func() (string, float64)
