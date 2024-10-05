@@ -4,10 +4,12 @@ import (
 	"flag"
 	"fmt"
 	"math"
+	"os"
 	"slices"
 	"strings"
+	"text/tabwriter"
 
-	cp "github.com/francescoalemanno/cryptipass"
+	"github.com/francescoalemanno/cryptipass"
 )
 
 type Passphrase struct {
@@ -16,17 +18,15 @@ type Passphrase struct {
 }
 
 func main() {
-	g := cp.NewInstance()
+	g := cryptipass.NewInstance()
 	f_pattern := flag.String("p", "W.w.w",
 		`pattern used to generate passphrase e.g. try:
 	-p WWW20dd
 	
 	other possible patterns are formed by combining:
-	- 'W' for uppercase word.
-	- 'w' lowercase word.
-	- 's' symbol.
-	- 'd' digit.
-	- 'c' a character.
+	- 'w' lowercase word, 'W' for uppercase word.
+	- 'c' a lowercase character, 'C' a uppercase character.
+	- 's' symbol, 'd' digit.
 	`)
 	passwords := flag.Uint64("n", 6, "number of passwords to generate")
 	flag.Parse()
@@ -37,26 +37,25 @@ func main() {
 		F, H := g.GenFromPattern(pattern)
 		pws = append(pws, Passphrase{F: F, H: H})
 	}
+
 	slices.SortFunc(pws, func(a, b Passphrase) int {
-		if a.H > b.H {
+		if a.F > b.F {
 			return 1
-		} else if a.H < b.H {
+		} else if a.F < b.F {
 			return -1
 		}
 		return 0
 	})
-	maxlen := 0
-	for _, v := range pws {
-		maxlen = max(maxlen, len(v.F))
-	}
-	title := "Passphrase"
-	maxlen = max(maxlen, len(title))
 
-	pad := 4
-	padding := strings.Repeat(" ", pad+maxlen-len(title))
-	fmt.Printf("%s%s%s\n\n", title, padding, "Log10(Guesses)    EntropyLog2")
+	w := tabwriter.NewWriter(os.Stdout, 1, 1, 4, ' ', 0)
+	fmt.Fprintln(w, "Passphrase\tLog10(Guesses)\tLog2Entropy\t  Strength")
+	fmt.Fprintln(w, " \t \t \t ")
 	for _, p := range pws {
-		padding := strings.Repeat(" ", pad+maxlen-len(p.F))
-		fmt.Printf("%s%s%.2f              %.2f\n", p.F, padding, (p.H-1)/math.Log2(10), p.H)
+		log10guess := (p.H - 1) / math.Log2(10)
+		meterbar := int(min(log10guess/2+0.5, 12))
+		meter := "[" + strings.Repeat("=", meterbar) + strings.Repeat(".", 12-meterbar) + "]"
+		fmt.Fprintf(w, "%v\t   %.2f\t   %.2f\t%v\n", p.F, log10guess, p.H, meter)
 	}
+	w.Flush()
+
 }

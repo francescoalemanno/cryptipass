@@ -5,7 +5,7 @@ Cryptipass is a Go package designed to generate secure passphrases composed of h
 ## Features
 
 - **Cryptographically secure randomization**: Uses `crypto/rand` for generating random data to seed the passphrase generation process, ensuring the highest level of security.
-- **Customizable passphrase length**: The number of words in the passphrase can be controlled by the user.
+- **Customizable passphrase structure**: The number of words, symbols, digits in the passphrase can be controlled by the user.
 - **Entropy calculation**: Provides an exact evaluation of the total entropy for the generated passphrase, helping users understand the strength of their passphrase.
 - **Configurable word lengths**: Words within the passphrase can vary in length, ensuring better randomness and complexity.
 
@@ -40,7 +40,8 @@ import (
 )
 
 func main() {
-	passphrase, entropy := cryptipass.GenPassphrase(5)
+	cp := cryptipass.NewInstance()
+	passphrase, entropy := cp.GenPassphrase(5)
 	fmt.Printf("Passphrase: %s\n", passphrase)
 	fmt.Printf("Entropy: %.2f bits\n", entropy)
 }
@@ -49,8 +50,8 @@ func main() {
 ### Example Output:
 
 ```
-Passphrase: jesside.flyperm.aunsis.dertsy
-Entropy: 97.63 bits
+Passphrase: ardram.iondbagro.anhambler.scheemous.chmedi
+Entropy: 133.21 bits
 ```
 
 ### Generate a Password according to a pattern
@@ -66,9 +67,17 @@ import (
 	"fmt"
 	"github.com/francescoalemanno/cryptipass"
 )
-
+/*
+	possible patterns are formed by combining:
+    - 'w' lowercase word, 'W' for uppercase word.
+    - 'c' a lowercase character, 'C' a uppercase character.
+    - 's' symbol, 'd' digit.
+	other symbols are interpolated in the final password.
+	To interpolate one of the reserved symbols use escaping with "\".
+*/
 func main() {
-	passphrase, entropy := cryptipass.GenFromPattern("W-w.cccc.CCCC(ss)[20dd]")
+	cp := cryptipass.NewInstance()
+	passphrase, entropy := cp.GenFromPattern("W-w.cccc.CCCC(ss)[20dd]")
 	fmt.Printf("Passphrase: %s\n", passphrase)
 	fmt.Printf("Entropy: %.2f bits\n", entropy)
 }
@@ -81,15 +90,6 @@ func main() {
 Passphrase: Storegu-dedudend.skin.EALR(=*)[2045]
 Entropy: 96.41 bits
 ```
-
-### Word Generation
-
-Internally, the package uses a series of functions to generate words of varying lengths. Each word contributes a certain amount of entropy, calculated during the generation process.
-
-- `GenMixWord()`: Generates a random word of mixed length, returning both the word and its entropy.
-- `GenWord(n int)`: Generates a word of exactly `n` characters.
-- `PickLength()`: Picks a random length for a word.
-- `PickNext(seed string)`: Generates the next part of a word based on the current string.
 
 ## Notes
 
