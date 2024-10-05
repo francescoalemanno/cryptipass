@@ -30,33 +30,47 @@ func TestCert(t *testing.T) {
 	type FN func() (string, float64)
 	funcs := []FN{
 		func() (string, float64) {
-			return g.GenFromPattern("Cccs")
+			return g.GenFromPattern("Ccc20d")
 		},
 		func() (string, float64) {
-			return g.GenFromPattern("ddss")
+			return g.GenFromPattern("cCc2d0")
+		},
+		func() (string, float64) {
+			return g.GenFromPattern("dds")
 		},
 		func() (string, float64) {
 			return g.GenFromPattern("Cdd")
 		},
 		func() (string, float64) {
-			r := g.Rng.IntN(2)
-			s, h := g.GenFromPattern(strings.Repeat("cs", 1+r))
-			h += 1
+			return g.GenFromPattern("scd")
+		},
+		func() (string, float64) {
+			N := 3
+			r := g.Rng.IntN(N)
+			s, h := g.GenFromPattern(strings.Repeat("c", 2+r))
+			h += math.Log2(float64(N))
 			return s, h
 		},
 		func() (string, float64) {
 			r, h := g.PickLength()
-			r2, h2 := g.PickLength()
-			return fmt.Sprint(r, r2), h + h2
+			return fmt.Sprint(r), h
+		},
+		func() (string, float64) {
+			words := []string{"", "ciao", "gi", "ok", "s"}
+			N := len(words)
+			r := g.Rng.IntN(N)
+			nex, h := g.PickNext(words[r])
+			h += math.Log2(float64(N))
+			return words[r] + nex, h
 		},
 	}
 
 	for i, x := range funcs {
 		X := cryptipass.Certify(x)
-		if math.Abs(X.Gap) >= 0.5 {
-			t.Fatal("failed certification of function", i, X)
+		if math.Abs(X.Gap) >= 0.1 {
+			t.Fatal("failed certification of function", i+1, X)
 		} else {
-			t.Log("passed certification of function", i, X, ", OK!")
+			t.Log("passed certification of function", i+1)
 		}
 	}
 

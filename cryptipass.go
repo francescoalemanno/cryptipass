@@ -154,36 +154,34 @@ func Certify(Gen func() (string, float64)) CertifyResult {
 		nominal_H2 += nh * nh
 		cnt_nom_H++
 	}
-	nomH := nominal_H / cnt_nom_H
-	nomH2 := nominal_H2 / cnt_nom_H
-	stddev := math.Sqrt(max(nomH2-nomH*nomH, 0.0001))
-	target := nominal_H/cnt_nom_H + 3 + stddev
 	cnt := make(map[string]int)
 	n := float64(0)
-
+	Q := 64
 	for {
-		w, nh := Gen()
-		nominal_H += nh
-		nominal_H2 += nh * nh
-		cnt_nom_H++
-		cnt[w]++
-		n++
-		if math.Log2(n) >= target {
-			break
+		for range Q {
+			w, nh := Gen()
+			nominal_H += nh
+			nominal_H2 += nh * nh
+			cnt_nom_H++
+			cnt[w]++
+			n++
+		}
+		Q += Q / 16
+		m := float64(len(cnt))
+		H := 0.0
+		for _, iC := range cnt {
+			c := float64(iC)
+			p := (c / n)
+			H -= p * math.Log2(p)
+		}
+		H += (m - 1) / (2 * n)
+		nomH := nominal_H / cnt_nom_H
+		nomH2 := nominal_H2 / cnt_nom_H
+		stddev := math.Sqrt(max(nomH2-nomH*nomH, 1e-16))
+		gap := nomH - H
+		if math.Abs(gap) < 0.05 || math.Log2(n) > 3*nomH {
+			return CertifyResult{NominalH: nomH, Gap: gap, StdDev: stddev}
 		}
 	}
 
-	m := float64(len(cnt))
-	H := 0.0
-	for _, iC := range cnt {
-		c := float64(iC)
-		p := (c / n)
-		H -= p * math.Log2(p)
-	}
-	H += (m - 1) / (2 * n)
-	nomH = nominal_H / cnt_nom_H
-	nomH2 = nominal_H2 / cnt_nom_H
-	stddev = math.Sqrt(max(nomH2-nomH*nomH, 0.0001))
-	gap := nomH - H
-	return CertifyResult{NominalH: nomH, Gap: gap, StdDev: stddev}
 }
