@@ -18,7 +18,7 @@ function makesampler(io, rawV)
     S = S[X]
     C = C[X]
     if length(S) == 1
-        println(io, sep^2, "return seed+", gorepr(S[1]), ", 0.0")
+        println(io, sep^2, "return ", gorepr(S[1]), ", 0.0")
         return
     end
     nor = sum(C)
@@ -31,7 +31,7 @@ function makesampler(io, rawV)
     println(io, sep^2, "switch {")
     cum = 0
     for (s, c) in zip(S, C)
-        println(io, sep^3, "case r < $(cum+c): return seed+", gorepr(s), ", H")
+        println(io, sep^3, "case r < $(cum+c): return ", gorepr(s), ", H")
         cum += c
     end
     println(io, sep^3, "default: panic(\"unexpected rand num\")")
@@ -46,7 +46,7 @@ function whole_sampler(data)
     sep = "   "
     println(
         io,
-        raw"""// PickNext appends the next character to the current seed string based on specific rules.
+        raw"""// PickNext returns the next character to the current seed string based on specific rules.
 // It evaluates the last two characters of the seed to decide on the next character, either
 // through predefined cases (such as 'mh' becoming 'mho') or randomly selecting a new character 
 // with associated entropy.
@@ -60,7 +60,7 @@ function whole_sampler(data)
     )
     println(io, "func PickNext(seed string) (string, float64) {")
     println(io, sep, "L := min(len(seed),2)")
-    println(io, sep, "tok := seed[len(seed)-L:]")
+    println(io, sep, "tok := strings.ToLower(seed[len(seed)-L:])")
     println(io, sep, "retry:")
     println(io, sep, "switch tok {")
     for k in kes
@@ -116,7 +116,7 @@ end
 
 
 dict = map(readlines("./dev/eff.csv")) do w
-    replace(strip(w), '-' => "")
+    lowercase(replace(strip(w), '-' => ""))
 end
 
 alphabet = Set{Char}([])
@@ -147,7 +147,7 @@ end
 
 open("markovchain.go", "w") do io
     buf = whole_sampler(f22)
-    write(io, "package cryptipass\n")
+    write(io, "package cryptipass\n\nimport \"strings\"\n")
     write(io, "\n\n")
     write(io, "// THIS FILE HAS BEEN DISTILLED FROM EFF's long word list, without their work this software would not exist.")
     write(io, "\n\n")

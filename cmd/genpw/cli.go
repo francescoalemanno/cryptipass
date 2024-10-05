@@ -16,18 +16,29 @@ type Passphrase struct {
 }
 
 func main() {
-	cert := flag.Bool("c", false, "run entropy certification algorithm (for developers)")
-	depth := flag.Uint64("cd", 1, "certification depth, larger number -> more accurate results (for developers)")
-	words := flag.Uint64("w", 3, "number of words per password")
-	passwords := flag.Uint64("p", 6, "number of passwords to generate")
+	cert := flag.Bool("c", false, "run entropy certification algorithm\nusers not necessarily need to concern with this detail.")
+	depth := flag.Uint64("cd", 1, "certification effort.\nA larger number leads to more accurate results\nat the expense of exponentially longer completion times.")
+	f_pattern := flag.String("p", "W.w.w",
+		`pattern used to generate passphrase e.g. try:
+	-p WWW20dd
+	
+	other possible patterns are formed by combining:
+	- 'W' for uppercase word.
+	- 'w' lowercase word.
+	- 's' symbol.
+	- 'd' digit.
+	- 'c' a character.
+	`)
+	passwords := flag.Uint64("n", 6, "number of passwords to generate")
 	flag.Parse()
+	pattern := *f_pattern
 	if *cert {
-		certify(*depth)
+		certify(pattern, *depth)
 	}
 
 	pws := []Passphrase{}
 	for range *passwords {
-		F, H := cp.NewPassphrase(*words)
+		F, H := cp.GenFromPattern(pattern)
 		pws = append(pws, Passphrase{F: F, H: H})
 	}
 	slices.SortFunc(pws, func(a, b Passphrase) int {
@@ -38,15 +49,23 @@ func main() {
 		}
 		return 0
 	})
+	maxlen := 0
+	for _, v := range pws {
+		maxlen = max(maxlen, len(v.F))
+	}
+	title := "Passphrase"
+	maxlen = max(maxlen, len(title))
 
-	fmt.Printf("       ENTROPY |          PASSPHRASE\n")
-	fmt.Printf("+++++++++++++++|++++++++++++++++++++++++++++++++\n")
+	pad := 4
+	padding := strings.Repeat(" ", pad+maxlen-len(title))
+	fmt.Printf("%s%s%s\n\n", title, padding, "Log10(Guesses)    EntropyLog2")
 	for _, p := range pws {
-		fmt.Printf("% 13.2f  |  %s\n", p.H, p.F)
+		padding := strings.Repeat(" ", pad+maxlen-len(p.F))
+		fmt.Printf("%s%s%.2f              %.2f\n", p.F, padding, (p.H-1)/math.Log2(10), p.H)
 	}
 }
 
-func certify(udepth uint64) {
+func certify(pattern string, udepth uint64) {
 	cnt := make(map[string]int)
 	iN := 0
 	Q := 128
@@ -56,7 +75,7 @@ func certify(udepth uint64) {
 	for {
 		Q += Q / 14
 		for range Q {
-			w, nh := cp.GenMixWord()
+			w, nh := cp.GenFromPattern(pattern)
 			nominal_H += nh
 			nominal_H2 += nh * nh
 			cnt_nom_H++

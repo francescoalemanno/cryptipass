@@ -1,8 +1,10 @@
 package cryptipass
 
+import "strings"
+
 // THIS FILE HAS BEEN DISTILLED FROM EFF's long word list, without their work this software would not exist.
 
-// PickNext appends the next character to the current seed string based on specific rules.
+// PickNext returns the next character to the current seed string based on specific rules.
 // It evaluates the last two characters of the seed to decide on the next character, either
 // through predefined cases (such as 'mh' becoming 'mho') or randomly selecting a new character
 // with associated entropy.
@@ -15,151 +17,151 @@ package cryptipass
 //     float64: The entropy contributed by the character selection process.
 func PickNext(seed string) (string, float64) {
 	L := min(len(seed), 2)
-	tok := seed[len(seed)-L:]
+	tok := strings.ToLower(seed[len(seed)-L:])
 retry:
 	switch tok {
 	case `mh`:
-		return seed + `o`, 0.0
+		return `o`, 0.0
 	case `mv`:
-		return seed + `e`, 0.0
+		return `e`, 0.0
 	case `bf`:
-		return seed + `l`, 0.0
+		return `l`, 0.0
 	case `cq`:
-		return seed + `u`, 0.0
+		return `u`, 0.0
 	case `ii`:
-		return seed + `n`, 0.0
+		return `n`, 0.0
 	case `zm`:
-		return seed + `o`, 0.0
+		return `o`, 0.0
 	case `pk`:
-		return seed + `i`, 0.0
+		return `i`, 0.0
 	case `hd`:
-		return seed + `a`, 0.0
+		return `a`, 0.0
 	case `kd`:
-		return seed + `r`, 0.0
+		return `r`, 0.0
 	case `yz`:
-		return seed + `e`, 0.0
+		return `e`, 0.0
 	case `bz`:
-		return seed + `e`, 0.0
+		return `e`, 0.0
 	case `xb`:
-		return seed + `o`, 0.0
+		return `o`, 0.0
 	case `uk`:
-		return seed + `e`, 0.0
+		return `e`, 0.0
 	case `q`:
-		return seed + `u`, 0.0
+		return `u`, 0.0
 	case `bj`:
-		return seed + `e`, 0.0
+		return `e`, 0.0
 	case `yu`:
-		return seed + `m`, 0.0
+		return `m`, 0.0
 	case `kf`:
-		return seed + `i`, 0.0
+		return `i`, 0.0
 	case `ww`:
-		return seed + `o`, 0.0
+		return `o`, 0.0
 	case `oq`:
-		return seed + `u`, 0.0
+		return `u`, 0.0
 	case `wg`:
-		return seed + `i`, 0.0
+		return `i`, 0.0
 	case `gz`:
-		return seed + `a`, 0.0
+		return `a`, 0.0
 	case `oj`:
-		return seed + `e`, 0.0
+		return `e`, 0.0
 	case `uj`:
-		return seed + `i`, 0.0
+		return `i`, 0.0
 	case `wc`:
-		return seed + `a`, 0.0
+		return `a`, 0.0
 	case `rx`:
-		return seed + `i`, 0.0
+		return `i`, 0.0
 	case `bg`:
-		return seed + `r`, 0.0
+		return `r`, 0.0
 	case `fn`:
-		return seed + `e`, 0.0
+		return `e`, 0.0
 	case `sj`:
-		return seed + `o`, 0.0
+		return `o`, 0.0
 	case `vr`:
-		return seed + `o`, 0.0
+		return `o`, 0.0
 	case `zy`:
-		return seed + `m`, 0.0
+		return `m`, 0.0
 	case `km`:
-		return seed + `a`, 0.0
+		return `a`, 0.0
 	case `pg`:
-		return seed + `r`, 0.0
+		return `r`, 0.0
 	case `wt`:
-		return seed + `i`, 0.0
+		return `i`, 0.0
 	case `uv`:
-		return seed + `e`, 0.0
+		return `e`, 0.0
 	case `gf`:
-		return seed + `u`, 0.0
+		return `u`, 0.0
 	case `sq`:
-		return seed + `u`, 0.0
+		return `u`, 0.0
 	case `xq`:
-		return seed + `u`, 0.0
+		return `u`, 0.0
 	case `cs`:
-		return seed + `i`, 0.0
+		return `i`, 0.0
 	case `dt`:
-		return seed + `h`, 0.0
+		return `h`, 0.0
 	case `bc`:
-		return seed + `a`, 0.0
+		return `a`, 0.0
 	case `xf`:
-		return seed + `o`, 0.0
+		return `o`, 0.0
 	case `bv`:
-		return seed + `i`, 0.0
+		return `i`, 0.0
 	case `sg`:
-		return seed + `r`, 0.0
+		return `r`, 0.0
 	case `md`:
-		return seed + `r`, 0.0
+		return `r`, 0.0
 	case `eq`:
-		return seed + `u`, 0.0
+		return `u`, 0.0
 	case `wk`:
-		return seed + `w`, 0.0
+		return `w`, 0.0
 	case `dv`:
-		return seed + `i`, 0.0
+		return `i`, 0.0
 	case `xs`:
-		return seed + `e`, 0.0
+		return `e`, 0.0
 	case `wu`:
-		return seed + `n`, 0.0
+		return `n`, 0.0
 	case `pm`:
-		return seed + `e`, 0.0
+		return `e`, 0.0
 	case `iu`:
-		return seed + `m`, 0.0
+		return `m`, 0.0
 	case `dk`:
-		return seed + `i`, 0.0
+		return `i`, 0.0
 	case `hs`:
-		return seed + `t`, 0.0
+		return `t`, 0.0
 	case `hk`:
-		return seed + `i`, 0.0
+		return `i`, 0.0
 	case `lh`:
-		return seed + `o`, 0.0
+		return `o`, 0.0
 	case `lz`:
-		return seed + `o`, 0.0
+		return `o`, 0.0
 	case `mw`:
-		return seed + `e`, 0.0
+		return `e`, 0.0
 	case `gd`:
-		return seed + `o`, 0.0
+		return `o`, 0.0
 	case `uf`:
-		return seed + `f`, 0.0
+		return `f`, 0.0
 	case `xl`:
-		return seed + `i`, 0.0
+		return `i`, 0.0
 	case `iq`:
-		return seed + `u`, 0.0
+		return `u`, 0.0
 	case `aq`:
-		return seed + `u`, 0.0
+		return `u`, 0.0
 	case `hh`:
-		return seed + `o`, 0.0
+		return `o`, 0.0
 	case `yh`:
-		return seed + `o`, 0.0
+		return `o`, 0.0
 	case `yk`:
-		return seed + `e`, 0.0
+		return `e`, 0.0
 	case `gt`:
-		return seed + `h`, 0.0
+		return `h`, 0.0
 	case `nq`:
-		return seed + `u`, 0.0
+		return `u`, 0.0
 	case `hm`:
 		H := 1.0
 		r := rng.IntN(2)
 		switch {
 		case r < 1:
-			return seed + `a`, H
+			return `a`, H
 		case r < 2:
-			return seed + `e`, H
+			return `e`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -168,9 +170,9 @@ retry:
 		r := rng.IntN(5)
 		switch {
 		case r < 3:
-			return seed + `o`, H
+			return `o`, H
 		case r < 5:
-			return seed + `e`, H
+			return `e`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -179,9 +181,9 @@ retry:
 		r := rng.IntN(7)
 		switch {
 		case r < 6:
-			return seed + `z`, H
+			return `z`, H
 		case r < 7:
-			return seed + `e`, H
+			return `e`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -190,9 +192,9 @@ retry:
 		r := rng.IntN(3)
 		switch {
 		case r < 2:
-			return seed + `e`, H
+			return `e`, H
 		case r < 3:
-			return seed + `a`, H
+			return `a`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -201,9 +203,9 @@ retry:
 		r := rng.IntN(6)
 		switch {
 		case r < 5:
-			return seed + `s`, H
+			return `s`, H
 		case r < 6:
-			return seed + `t`, H
+			return `t`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -212,9 +214,9 @@ retry:
 		r := rng.IntN(3)
 		switch {
 		case r < 2:
-			return seed + `o`, H
+			return `o`, H
 		case r < 3:
-			return seed + `a`, H
+			return `a`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -223,9 +225,9 @@ retry:
 		r := rng.IntN(2)
 		switch {
 		case r < 1:
-			return seed + `i`, H
+			return `i`, H
 		case r < 2:
-			return seed + `r`, H
+			return `r`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -234,9 +236,9 @@ retry:
 		r := rng.IntN(3)
 		switch {
 		case r < 2:
-			return seed + `a`, H
+			return `a`, H
 		case r < 3:
-			return seed + `i`, H
+			return `i`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -245,9 +247,9 @@ retry:
 		r := rng.IntN(2)
 		switch {
 		case r < 1:
-			return seed + `n`, H
+			return `n`, H
 		case r < 2:
-			return seed + `e`, H
+			return `e`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -256,9 +258,9 @@ retry:
 		r := rng.IntN(3)
 		switch {
 		case r < 2:
-			return seed + `t`, H
+			return `t`, H
 		case r < 3:
-			return seed + `h`, H
+			return `h`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -267,9 +269,9 @@ retry:
 		r := rng.IntN(2)
 		switch {
 		case r < 1:
-			return seed + `e`, H
+			return `e`, H
 		case r < 2:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -278,9 +280,9 @@ retry:
 		r := rng.IntN(2)
 		switch {
 		case r < 1:
-			return seed + `r`, H
+			return `r`, H
 		case r < 2:
-			return seed + `m`, H
+			return `m`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -289,9 +291,9 @@ retry:
 		r := rng.IntN(2)
 		switch {
 		case r < 1:
-			return seed + `g`, H
+			return `g`, H
 		case r < 2:
-			return seed + `m`, H
+			return `m`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -300,9 +302,9 @@ retry:
 		r := rng.IntN(6)
 		switch {
 		case r < 4:
-			return seed + `e`, H
+			return `e`, H
 		case r < 6:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -311,9 +313,9 @@ retry:
 		r := rng.IntN(3)
 		switch {
 		case r < 2:
-			return seed + `a`, H
+			return `a`, H
 		case r < 3:
-			return seed + `h`, H
+			return `h`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -322,9 +324,9 @@ retry:
 		r := rng.IntN(9)
 		switch {
 		case r < 5:
-			return seed + `u`, H
+			return `u`, H
 		case r < 9:
-			return seed + `t`, H
+			return `t`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -333,9 +335,9 @@ retry:
 		r := rng.IntN(8)
 		switch {
 		case r < 4:
-			return seed + `a`, H
+			return `a`, H
 		case r < 8:
-			return seed + `e`, H
+			return `e`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -344,9 +346,9 @@ retry:
 		r := rng.IntN(11)
 		switch {
 		case r < 6:
-			return seed + `o`, H
+			return `o`, H
 		case r < 11:
-			return seed + `e`, H
+			return `e`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -355,9 +357,9 @@ retry:
 		r := rng.IntN(5)
 		switch {
 		case r < 3:
-			return seed + `y`, H
+			return `y`, H
 		case r < 5:
-			return seed + `e`, H
+			return `e`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -366,9 +368,9 @@ retry:
 		r := rng.IntN(10)
 		switch {
 		case r < 6:
-			return seed + `e`, H
+			return `e`, H
 		case r < 10:
-			return seed + `i`, H
+			return `i`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -377,9 +379,9 @@ retry:
 		r := rng.IntN(4)
 		switch {
 		case r < 3:
-			return seed + `a`, H
+			return `a`, H
 		case r < 4:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -388,9 +390,9 @@ retry:
 		r := rng.IntN(2)
 		switch {
 		case r < 1:
-			return seed + `u`, H
+			return `u`, H
 		case r < 2:
-			return seed + `e`, H
+			return `e`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -399,9 +401,9 @@ retry:
 		r := rng.IntN(3)
 		switch {
 		case r < 2:
-			return seed + `a`, H
+			return `a`, H
 		case r < 3:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -410,9 +412,9 @@ retry:
 		r := rng.IntN(4)
 		switch {
 		case r < 3:
-			return seed + `a`, H
+			return `a`, H
 		case r < 4:
-			return seed + `e`, H
+			return `e`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -421,9 +423,9 @@ retry:
 		r := rng.IntN(2)
 		switch {
 		case r < 1:
-			return seed + `e`, H
+			return `e`, H
 		case r < 2:
-			return seed + `b`, H
+			return `b`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -432,9 +434,9 @@ retry:
 		r := rng.IntN(3)
 		switch {
 		case r < 2:
-			return seed + `o`, H
+			return `o`, H
 		case r < 3:
-			return seed + `e`, H
+			return `e`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -443,9 +445,9 @@ retry:
 		r := rng.IntN(12)
 		switch {
 		case r < 11:
-			return seed + `e`, H
+			return `e`, H
 		case r < 12:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -454,9 +456,9 @@ retry:
 		r := rng.IntN(6)
 		switch {
 		case r < 5:
-			return seed + `r`, H
+			return `r`, H
 		case r < 6:
-			return seed + `k`, H
+			return `k`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -465,9 +467,9 @@ retry:
 		r := rng.IntN(3)
 		switch {
 		case r < 2:
-			return seed + `u`, H
+			return `u`, H
 		case r < 3:
-			return seed + `e`, H
+			return `e`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -476,9 +478,9 @@ retry:
 		r := rng.IntN(2)
 		switch {
 		case r < 1:
-			return seed + `a`, H
+			return `a`, H
 		case r < 2:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -487,9 +489,9 @@ retry:
 		r := rng.IntN(3)
 		switch {
 		case r < 2:
-			return seed + `o`, H
+			return `o`, H
 		case r < 3:
-			return seed + `a`, H
+			return `a`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -498,9 +500,9 @@ retry:
 		r := rng.IntN(5)
 		switch {
 		case r < 4:
-			return seed + `a`, H
+			return `a`, H
 		case r < 5:
-			return seed + `e`, H
+			return `e`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -509,9 +511,9 @@ retry:
 		r := rng.IntN(4)
 		switch {
 		case r < 3:
-			return seed + `o`, H
+			return `o`, H
 		case r < 4:
-			return seed + `a`, H
+			return `a`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -520,9 +522,9 @@ retry:
 		r := rng.IntN(5)
 		switch {
 		case r < 4:
-			return seed + `o`, H
+			return `o`, H
 		case r < 5:
-			return seed + `a`, H
+			return `a`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -531,9 +533,9 @@ retry:
 		r := rng.IntN(2)
 		switch {
 		case r < 1:
-			return seed + `i`, H
+			return `i`, H
 		case r < 2:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -542,9 +544,9 @@ retry:
 		r := rng.IntN(2)
 		switch {
 		case r < 1:
-			return seed + `u`, H
+			return `u`, H
 		case r < 2:
-			return seed + `e`, H
+			return `e`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -553,11 +555,11 @@ retry:
 		r := rng.IntN(4)
 		switch {
 		case r < 2:
-			return seed + `u`, H
+			return `u`, H
 		case r < 3:
-			return seed + `e`, H
+			return `e`, H
 		case r < 4:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -566,11 +568,11 @@ retry:
 		r := rng.IntN(5)
 		switch {
 		case r < 3:
-			return seed + `o`, H
+			return `o`, H
 		case r < 4:
-			return seed + `y`, H
+			return `y`, H
 		case r < 5:
-			return seed + `e`, H
+			return `e`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -579,11 +581,11 @@ retry:
 		r := rng.IntN(3)
 		switch {
 		case r < 1:
-			return seed + `a`, H
+			return `a`, H
 		case r < 2:
-			return seed + `s`, H
+			return `s`, H
 		case r < 3:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -592,11 +594,11 @@ retry:
 		r := rng.IntN(3)
 		switch {
 		case r < 1:
-			return seed + `h`, H
+			return `h`, H
 		case r < 2:
-			return seed + `e`, H
+			return `e`, H
 		case r < 3:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -605,11 +607,11 @@ retry:
 		r := rng.IntN(8)
 		switch {
 		case r < 5:
-			return seed + `a`, H
+			return `a`, H
 		case r < 7:
-			return seed + `o`, H
+			return `o`, H
 		case r < 8:
-			return seed + `h`, H
+			return `h`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -618,11 +620,11 @@ retry:
 		r := rng.IntN(5)
 		switch {
 		case r < 3:
-			return seed + `e`, H
+			return `e`, H
 		case r < 4:
-			return seed + `n`, H
+			return `n`, H
 		case r < 5:
-			return seed + `a`, H
+			return `a`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -631,11 +633,11 @@ retry:
 		r := rng.IntN(6)
 		switch {
 		case r < 3:
-			return seed + `e`, H
+			return `e`, H
 		case r < 5:
-			return seed + `i`, H
+			return `i`, H
 		case r < 6:
-			return seed + `a`, H
+			return `a`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -644,11 +646,11 @@ retry:
 		r := rng.IntN(11)
 		switch {
 		case r < 5:
-			return seed + `a`, H
+			return `a`, H
 		case r < 10:
-			return seed + `o`, H
+			return `o`, H
 		case r < 11:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -657,11 +659,11 @@ retry:
 		r := rng.IntN(4)
 		switch {
 		case r < 2:
-			return seed + `o`, H
+			return `o`, H
 		case r < 3:
-			return seed + `a`, H
+			return `a`, H
 		case r < 4:
-			return seed + `e`, H
+			return `e`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -670,11 +672,11 @@ retry:
 		r := rng.IntN(21)
 		switch {
 		case r < 14:
-			return seed + `e`, H
+			return `e`, H
 		case r < 18:
-			return seed + `a`, H
+			return `a`, H
 		case r < 21:
-			return seed + `i`, H
+			return `i`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -683,11 +685,11 @@ retry:
 		r := rng.IntN(4)
 		switch {
 		case r < 2:
-			return seed + `a`, H
+			return `a`, H
 		case r < 3:
-			return seed + `h`, H
+			return `h`, H
 		case r < 4:
-			return seed + `l`, H
+			return `l`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -696,11 +698,11 @@ retry:
 		r := rng.IntN(6)
 		switch {
 		case r < 2:
-			return seed + `a`, H
+			return `a`, H
 		case r < 4:
-			return seed + `e`, H
+			return `e`, H
 		case r < 6:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -709,11 +711,11 @@ retry:
 		r := rng.IntN(4)
 		switch {
 		case r < 2:
-			return seed + `o`, H
+			return `o`, H
 		case r < 3:
-			return seed + `a`, H
+			return `a`, H
 		case r < 4:
-			return seed + `e`, H
+			return `e`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -722,11 +724,11 @@ retry:
 		r := rng.IntN(12)
 		switch {
 		case r < 7:
-			return seed + `o`, H
+			return `o`, H
 		case r < 11:
-			return seed + `u`, H
+			return `u`, H
 		case r < 12:
-			return seed + `a`, H
+			return `a`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -735,11 +737,11 @@ retry:
 		r := rng.IntN(4)
 		switch {
 		case r < 2:
-			return seed + `a`, H
+			return `a`, H
 		case r < 3:
-			return seed + `l`, H
+			return `l`, H
 		case r < 4:
-			return seed + `r`, H
+			return `r`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -748,11 +750,11 @@ retry:
 		r := rng.IntN(8)
 		switch {
 		case r < 4:
-			return seed + `e`, H
+			return `e`, H
 		case r < 7:
-			return seed + `i`, H
+			return `i`, H
 		case r < 8:
-			return seed + `a`, H
+			return `a`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -761,11 +763,11 @@ retry:
 		r := rng.IntN(5)
 		switch {
 		case r < 3:
-			return seed + `r`, H
+			return `r`, H
 		case r < 4:
-			return seed + `g`, H
+			return `g`, H
 		case r < 5:
-			return seed + `t`, H
+			return `t`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -774,11 +776,11 @@ retry:
 		r := rng.IntN(12)
 		switch {
 		case r < 8:
-			return seed + `r`, H
+			return `r`, H
 		case r < 11:
-			return seed + `a`, H
+			return `a`, H
 		case r < 12:
-			return seed + `i`, H
+			return `i`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -787,11 +789,11 @@ retry:
 		r := rng.IntN(3)
 		switch {
 		case r < 1:
-			return seed + `e`, H
+			return `e`, H
 		case r < 2:
-			return seed + `r`, H
+			return `r`, H
 		case r < 3:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -800,11 +802,11 @@ retry:
 		r := rng.IntN(4)
 		switch {
 		case r < 2:
-			return seed + `e`, H
+			return `e`, H
 		case r < 3:
-			return seed + `a`, H
+			return `a`, H
 		case r < 4:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -813,11 +815,11 @@ retry:
 		r := rng.IntN(4)
 		switch {
 		case r < 2:
-			return seed + `u`, H
+			return `u`, H
 		case r < 3:
-			return seed + `y`, H
+			return `y`, H
 		case r < 4:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -826,11 +828,11 @@ retry:
 		r := rng.IntN(3)
 		switch {
 		case r < 1:
-			return seed + `s`, H
+			return `s`, H
 		case r < 2:
-			return seed + `r`, H
+			return `r`, H
 		case r < 3:
-			return seed + `k`, H
+			return `k`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -839,11 +841,11 @@ retry:
 		r := rng.IntN(3)
 		switch {
 		case r < 1:
-			return seed + `a`, H
+			return `a`, H
 		case r < 2:
-			return seed + `e`, H
+			return `e`, H
 		case r < 3:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -852,11 +854,11 @@ retry:
 		r := rng.IntN(3)
 		switch {
 		case r < 1:
-			return seed + `i`, H
+			return `i`, H
 		case r < 2:
-			return seed + `l`, H
+			return `l`, H
 		case r < 3:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -865,11 +867,11 @@ retry:
 		r := rng.IntN(13)
 		switch {
 		case r < 9:
-			return seed + `e`, H
+			return `e`, H
 		case r < 12:
-			return seed + `i`, H
+			return `i`, H
 		case r < 13:
-			return seed + `y`, H
+			return `y`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -878,11 +880,11 @@ retry:
 		r := rng.IntN(6)
 		switch {
 		case r < 4:
-			return seed + `o`, H
+			return `o`, H
 		case r < 5:
-			return seed + `h`, H
+			return `h`, H
 		case r < 6:
-			return seed + `a`, H
+			return `a`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -891,11 +893,11 @@ retry:
 		r := rng.IntN(5)
 		switch {
 		case r < 2:
-			return seed + `i`, H
+			return `i`, H
 		case r < 4:
-			return seed + `u`, H
+			return `u`, H
 		case r < 5:
-			return seed + `r`, H
+			return `r`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -904,11 +906,11 @@ retry:
 		r := rng.IntN(3)
 		switch {
 		case r < 1:
-			return seed + `w`, H
+			return `w`, H
 		case r < 2:
-			return seed + `i`, H
+			return `i`, H
 		case r < 3:
-			return seed + `k`, H
+			return `k`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -917,11 +919,11 @@ retry:
 		r := rng.IntN(7)
 		switch {
 		case r < 4:
-			return seed + `o`, H
+			return `o`, H
 		case r < 6:
-			return seed + `e`, H
+			return `e`, H
 		case r < 7:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -930,11 +932,11 @@ retry:
 		r := rng.IntN(4)
 		switch {
 		case r < 2:
-			return seed + `r`, H
+			return `r`, H
 		case r < 3:
-			return seed + `a`, H
+			return `a`, H
 		case r < 4:
-			return seed + `b`, H
+			return `b`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -943,11 +945,11 @@ retry:
 		r := rng.IntN(3)
 		switch {
 		case r < 1:
-			return seed + `a`, H
+			return `a`, H
 		case r < 2:
-			return seed + `e`, H
+			return `e`, H
 		case r < 3:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -956,11 +958,11 @@ retry:
 		r := rng.IntN(5)
 		switch {
 		case r < 2:
-			return seed + `a`, H
+			return `a`, H
 		case r < 4:
-			return seed + `o`, H
+			return `o`, H
 		case r < 5:
-			return seed + `r`, H
+			return `r`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -969,11 +971,11 @@ retry:
 		r := rng.IntN(4)
 		switch {
 		case r < 2:
-			return seed + `l`, H
+			return `l`, H
 		case r < 3:
-			return seed + `i`, H
+			return `i`, H
 		case r < 4:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -982,11 +984,11 @@ retry:
 		r := rng.IntN(9)
 		switch {
 		case r < 4:
-			return seed + `a`, H
+			return `a`, H
 		case r < 8:
-			return seed + `i`, H
+			return `i`, H
 		case r < 9:
-			return seed + `e`, H
+			return `e`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -995,13 +997,13 @@ retry:
 		r := rng.IntN(6)
 		switch {
 		case r < 2:
-			return seed + `a`, H
+			return `a`, H
 		case r < 4:
-			return seed + `e`, H
+			return `e`, H
 		case r < 5:
-			return seed + `u`, H
+			return `u`, H
 		case r < 6:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1010,13 +1012,13 @@ retry:
 		r := rng.IntN(13)
 		switch {
 		case r < 9:
-			return seed + `c`, H
+			return `c`, H
 		case r < 11:
-			return seed + `t`, H
+			return `t`, H
 		case r < 12:
-			return seed + `l`, H
+			return `l`, H
 		case r < 13:
-			return seed + `m`, H
+			return `m`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1025,13 +1027,13 @@ retry:
 		r := rng.IntN(6)
 		switch {
 		case r < 2:
-			return seed + `y`, H
+			return `y`, H
 		case r < 4:
-			return seed + `i`, H
+			return `i`, H
 		case r < 5:
-			return seed + `u`, H
+			return `u`, H
 		case r < 6:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1040,13 +1042,13 @@ retry:
 		r := rng.IntN(5)
 		switch {
 		case r < 2:
-			return seed + `u`, H
+			return `u`, H
 		case r < 3:
-			return seed + `i`, H
+			return `i`, H
 		case r < 4:
-			return seed + `l`, H
+			return `l`, H
 		case r < 5:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1055,13 +1057,13 @@ retry:
 		r := rng.IntN(12)
 		switch {
 		case r < 5:
-			return seed + `i`, H
+			return `i`, H
 		case r < 9:
-			return seed + `u`, H
+			return `u`, H
 		case r < 11:
-			return seed + `a`, H
+			return `a`, H
 		case r < 12:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1070,13 +1072,13 @@ retry:
 		r := rng.IntN(7)
 		switch {
 		case r < 2:
-			return seed + `a`, H
+			return `a`, H
 		case r < 4:
-			return seed + `i`, H
+			return `i`, H
 		case r < 6:
-			return seed + `o`, H
+			return `o`, H
 		case r < 7:
-			return seed + `e`, H
+			return `e`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1085,13 +1087,13 @@ retry:
 		r := rng.IntN(5)
 		switch {
 		case r < 2:
-			return seed + `r`, H
+			return `r`, H
 		case r < 3:
-			return seed + `l`, H
+			return `l`, H
 		case r < 4:
-			return seed + `e`, H
+			return `e`, H
 		case r < 5:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1100,13 +1102,13 @@ retry:
 		r := rng.IntN(47)
 		switch {
 		case r < 44:
-			return seed + `t`, H
+			return `t`, H
 		case r < 45:
-			return seed + `a`, H
+			return `a`, H
 		case r < 46:
-			return seed + `y`, H
+			return `y`, H
 		case r < 47:
-			return seed + `i`, H
+			return `i`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1115,13 +1117,13 @@ retry:
 		r := rng.IntN(22)
 		switch {
 		case r < 8:
-			return seed + `o`, H
+			return `o`, H
 		case r < 15:
-			return seed + `e`, H
+			return `e`, H
 		case r < 21:
-			return seed + `i`, H
+			return `i`, H
 		case r < 22:
-			return seed + `a`, H
+			return `a`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1130,13 +1132,13 @@ retry:
 		r := rng.IntN(25)
 		switch {
 		case r < 22:
-			return seed + `n`, H
+			return `n`, H
 		case r < 23:
-			return seed + `d`, H
+			return `d`, H
 		case r < 24:
-			return seed + `e`, H
+			return `e`, H
 		case r < 25:
-			return seed + `p`, H
+			return `p`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1145,13 +1147,13 @@ retry:
 		r := rng.IntN(20)
 		switch {
 		case r < 13:
-			return seed + `l`, H
+			return `l`, H
 		case r < 16:
-			return seed + `i`, H
+			return `i`, H
 		case r < 18:
-			return seed + `a`, H
+			return `a`, H
 		case r < 20:
-			return seed + `y`, H
+			return `y`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1160,13 +1162,13 @@ retry:
 		r := rng.IntN(37)
 		switch {
 		case r < 13:
-			return seed + `e`, H
+			return `e`, H
 		case r < 22:
-			return seed + `a`, H
+			return `a`, H
 		case r < 30:
-			return seed + `i`, H
+			return `i`, H
 		case r < 37:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1175,13 +1177,13 @@ retry:
 		r := rng.IntN(55)
 		switch {
 		case r < 41:
-			return seed + `e`, H
+			return `e`, H
 		case r < 52:
-			return seed + `i`, H
+			return `i`, H
 		case r < 54:
-			return seed + `y`, H
+			return `y`, H
 		case r < 55:
-			return seed + `a`, H
+			return `a`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1190,13 +1192,13 @@ retry:
 		r := rng.IntN(18)
 		switch {
 		case r < 7:
-			return seed + `e`, H
+			return `e`, H
 		case r < 13:
-			return seed + `o`, H
+			return `o`, H
 		case r < 16:
-			return seed + `i`, H
+			return `i`, H
 		case r < 18:
-			return seed + `a`, H
+			return `a`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1205,13 +1207,13 @@ retry:
 		r := rng.IntN(14)
 		switch {
 		case r < 9:
-			return seed + `l`, H
+			return `l`, H
 		case r < 11:
-			return seed + `h`, H
+			return `h`, H
 		case r < 13:
-			return seed + `a`, H
+			return `a`, H
 		case r < 14:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1220,13 +1222,13 @@ retry:
 		r := rng.IntN(295)
 		switch {
 		case r < 130:
-			return seed + `a`, H
+			return `a`, H
 		case r < 237:
-			return seed + `o`, H
+			return `o`, H
 		case r < 290:
-			return seed + `u`, H
+			return `u`, H
 		case r < 295:
-			return seed + `y`, H
+			return `y`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1235,13 +1237,13 @@ retry:
 		r := rng.IntN(7)
 		switch {
 		case r < 4:
-			return seed + `a`, H
+			return `a`, H
 		case r < 5:
-			return seed + `h`, H
+			return `h`, H
 		case r < 6:
-			return seed + `i`, H
+			return `i`, H
 		case r < 7:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1250,13 +1252,13 @@ retry:
 		r := rng.IntN(8)
 		switch {
 		case r < 3:
-			return seed + `h`, H
+			return `h`, H
 		case r < 6:
-			return seed + `t`, H
+			return `t`, H
 		case r < 7:
-			return seed + `a`, H
+			return `a`, H
 		case r < 8:
-			return seed + `i`, H
+			return `i`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1265,13 +1267,13 @@ retry:
 		r := rng.IntN(99)
 		switch {
 		case r < 37:
-			return seed + `i`, H
+			return `i`, H
 		case r < 71:
-			return seed + `a`, H
+			return `a`, H
 		case r < 95:
-			return seed + `e`, H
+			return `e`, H
 		case r < 99:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1280,13 +1282,13 @@ retry:
 		r := rng.IntN(5)
 		switch {
 		case r < 2:
-			return seed + `r`, H
+			return `r`, H
 		case r < 3:
-			return seed + `n`, H
+			return `n`, H
 		case r < 4:
-			return seed + `d`, H
+			return `d`, H
 		case r < 5:
-			return seed + `p`, H
+			return `p`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1295,13 +1297,13 @@ retry:
 		r := rng.IntN(249)
 		switch {
 		case r < 122:
-			return seed + `a`, H
+			return `a`, H
 		case r < 184:
-			return seed + `e`, H
+			return `e`, H
 		case r < 232:
-			return seed + `u`, H
+			return `u`, H
 		case r < 249:
-			return seed + `y`, H
+			return `y`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1310,13 +1312,13 @@ retry:
 		r := rng.IntN(7)
 		switch {
 		case r < 4:
-			return seed + `o`, H
+			return `o`, H
 		case r < 5:
-			return seed + `a`, H
+			return `a`, H
 		case r < 6:
-			return seed + `i`, H
+			return `i`, H
 		case r < 7:
-			return seed + `e`, H
+			return `e`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1325,13 +1327,13 @@ retry:
 		r := rng.IntN(8)
 		switch {
 		case r < 3:
-			return seed + `e`, H
+			return `e`, H
 		case r < 5:
-			return seed + `a`, H
+			return `a`, H
 		case r < 7:
-			return seed + `o`, H
+			return `o`, H
 		case r < 8:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1340,13 +1342,13 @@ retry:
 		r := rng.IntN(5)
 		switch {
 		case r < 2:
-			return seed + `e`, H
+			return `e`, H
 		case r < 3:
-			return seed + `i`, H
+			return `i`, H
 		case r < 4:
-			return seed + `u`, H
+			return `u`, H
 		case r < 5:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1355,13 +1357,13 @@ retry:
 		r := rng.IntN(17)
 		switch {
 		case r < 11:
-			return seed + `i`, H
+			return `i`, H
 		case r < 14:
-			return seed + `e`, H
+			return `e`, H
 		case r < 16:
-			return seed + `o`, H
+			return `o`, H
 		case r < 17:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1370,13 +1372,13 @@ retry:
 		r := rng.IntN(34)
 		switch {
 		case r < 27:
-			return seed + `e`, H
+			return `e`, H
 		case r < 31:
-			return seed + `i`, H
+			return `i`, H
 		case r < 33:
-			return seed + `a`, H
+			return `a`, H
 		case r < 34:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1385,13 +1387,13 @@ retry:
 		r := rng.IntN(11)
 		switch {
 		case r < 4:
-			return seed + `h`, H
+			return `h`, H
 		case r < 7:
-			return seed + `i`, H
+			return `i`, H
 		case r < 9:
-			return seed + `e`, H
+			return `e`, H
 		case r < 11:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1400,13 +1402,13 @@ retry:
 		r := rng.IntN(9)
 		switch {
 		case r < 4:
-			return seed + `e`, H
+			return `e`, H
 		case r < 6:
-			return seed + `l`, H
+			return `l`, H
 		case r < 8:
-			return seed + `r`, H
+			return `r`, H
 		case r < 9:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1415,13 +1417,13 @@ retry:
 		r := rng.IntN(16)
 		switch {
 		case r < 6:
-			return seed + `i`, H
+			return `i`, H
 		case r < 11:
-			return seed + `e`, H
+			return `e`, H
 		case r < 14:
-			return seed + `a`, H
+			return `a`, H
 		case r < 16:
-			return seed + `t`, H
+			return `t`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1430,13 +1432,13 @@ retry:
 		r := rng.IntN(6)
 		switch {
 		case r < 2:
-			return seed + `i`, H
+			return `i`, H
 		case r < 4:
-			return seed + `e`, H
+			return `e`, H
 		case r < 5:
-			return seed + `a`, H
+			return `a`, H
 		case r < 6:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1445,13 +1447,13 @@ retry:
 		r := rng.IntN(14)
 		switch {
 		case r < 5:
-			return seed + `i`, H
+			return `i`, H
 		case r < 10:
-			return seed + `o`, H
+			return `o`, H
 		case r < 12:
-			return seed + `a`, H
+			return `a`, H
 		case r < 14:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1460,13 +1462,13 @@ retry:
 		r := rng.IntN(11)
 		switch {
 		case r < 5:
-			return seed + `e`, H
+			return `e`, H
 		case r < 9:
-			return seed + `a`, H
+			return `a`, H
 		case r < 10:
-			return seed + `u`, H
+			return `u`, H
 		case r < 11:
-			return seed + `y`, H
+			return `y`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1475,13 +1477,13 @@ retry:
 		r := rng.IntN(7)
 		switch {
 		case r < 3:
-			return seed + `i`, H
+			return `i`, H
 		case r < 5:
-			return seed + `y`, H
+			return `y`, H
 		case r < 6:
-			return seed + `a`, H
+			return `a`, H
 		case r < 7:
-			return seed + `e`, H
+			return `e`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1490,13 +1492,13 @@ retry:
 		r := rng.IntN(4)
 		switch {
 		case r < 1:
-			return seed + `n`, H
+			return `n`, H
 		case r < 2:
-			return seed + `y`, H
+			return `y`, H
 		case r < 3:
-			return seed + `i`, H
+			return `i`, H
 		case r < 4:
-			return seed + `e`, H
+			return `e`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1505,13 +1507,13 @@ retry:
 		r := rng.IntN(5)
 		switch {
 		case r < 2:
-			return seed + `i`, H
+			return `i`, H
 		case r < 3:
-			return seed + `a`, H
+			return `a`, H
 		case r < 4:
-			return seed + `l`, H
+			return `l`, H
 		case r < 5:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1520,13 +1522,13 @@ retry:
 		r := rng.IntN(17)
 		switch {
 		case r < 9:
-			return seed + `u`, H
+			return `u`, H
 		case r < 13:
-			return seed + `i`, H
+			return `i`, H
 		case r < 16:
-			return seed + `o`, H
+			return `o`, H
 		case r < 17:
-			return seed + `l`, H
+			return `l`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1535,13 +1537,13 @@ retry:
 		r := rng.IntN(8)
 		switch {
 		case r < 3:
-			return seed + `i`, H
+			return `i`, H
 		case r < 5:
-			return seed + `a`, H
+			return `a`, H
 		case r < 7:
-			return seed + `e`, H
+			return `e`, H
 		case r < 8:
-			return seed + `r`, H
+			return `r`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1550,13 +1552,13 @@ retry:
 		r := rng.IntN(5)
 		switch {
 		case r < 2:
-			return seed + `a`, H
+			return `a`, H
 		case r < 3:
-			return seed + `h`, H
+			return `h`, H
 		case r < 4:
-			return seed + `e`, H
+			return `e`, H
 		case r < 5:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1565,13 +1567,13 @@ retry:
 		r := rng.IntN(7)
 		switch {
 		case r < 3:
-			return seed + `o`, H
+			return `o`, H
 		case r < 5:
-			return seed + `u`, H
+			return `u`, H
 		case r < 6:
-			return seed + `i`, H
+			return `i`, H
 		case r < 7:
-			return seed + `r`, H
+			return `r`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1580,13 +1582,13 @@ retry:
 		r := rng.IntN(132)
 		switch {
 		case r < 47:
-			return seed + `i`, H
+			return `i`, H
 		case r < 81:
-			return seed + `a`, H
+			return `a`, H
 		case r < 115:
-			return seed + `e`, H
+			return `e`, H
 		case r < 132:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1595,13 +1597,13 @@ retry:
 		r := rng.IntN(5)
 		switch {
 		case r < 2:
-			return seed + `p`, H
+			return `p`, H
 		case r < 3:
-			return seed + `n`, H
+			return `n`, H
 		case r < 4:
-			return seed + `d`, H
+			return `d`, H
 		case r < 5:
-			return seed + `s`, H
+			return `s`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1610,13 +1612,13 @@ retry:
 		r := rng.IntN(18)
 		switch {
 		case r < 9:
-			return seed + `a`, H
+			return `a`, H
 		case r < 14:
-			return seed + `o`, H
+			return `o`, H
 		case r < 17:
-			return seed + `i`, H
+			return `i`, H
 		case r < 18:
-			return seed + `e`, H
+			return `e`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1625,15 +1627,15 @@ retry:
 		r := rng.IntN(39)
 		switch {
 		case r < 18:
-			return seed + `i`, H
+			return `i`, H
 		case r < 28:
-			return seed + `e`, H
+			return `e`, H
 		case r < 35:
-			return seed + `a`, H
+			return `a`, H
 		case r < 38:
-			return seed + `o`, H
+			return `o`, H
 		case r < 39:
-			return seed + `h`, H
+			return `h`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1642,15 +1644,15 @@ retry:
 		r := rng.IntN(95)
 		switch {
 		case r < 39:
-			return seed + `e`, H
+			return `e`, H
 		case r < 77:
-			return seed + `y`, H
+			return `y`, H
 		case r < 88:
-			return seed + `i`, H
+			return `i`, H
 		case r < 93:
-			return seed + `a`, H
+			return `a`, H
 		case r < 95:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1659,15 +1661,15 @@ retry:
 		r := rng.IntN(87)
 		switch {
 		case r < 26:
-			return seed + `o`, H
+			return `o`, H
 		case r < 49:
-			return seed + `i`, H
+			return `i`, H
 		case r < 67:
-			return seed + `e`, H
+			return `e`, H
 		case r < 78:
-			return seed + `a`, H
+			return `a`, H
 		case r < 87:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1676,15 +1678,15 @@ retry:
 		r := rng.IntN(23)
 		switch {
 		case r < 6:
-			return seed + `a`, H
+			return `a`, H
 		case r < 12:
-			return seed + `e`, H
+			return `e`, H
 		case r < 18:
-			return seed + `o`, H
+			return `o`, H
 		case r < 21:
-			return seed + `i`, H
+			return `i`, H
 		case r < 23:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1693,15 +1695,15 @@ retry:
 		r := rng.IntN(27)
 		switch {
 		case r < 10:
-			return seed + `e`, H
+			return `e`, H
 		case r < 16:
-			return seed + `a`, H
+			return `a`, H
 		case r < 22:
-			return seed + `o`, H
+			return `o`, H
 		case r < 26:
-			return seed + `i`, H
+			return `i`, H
 		case r < 27:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1710,15 +1712,15 @@ retry:
 		r := rng.IntN(7)
 		switch {
 		case r < 2:
-			return seed + `a`, H
+			return `a`, H
 		case r < 4:
-			return seed + `o`, H
+			return `o`, H
 		case r < 5:
-			return seed + `l`, H
+			return `l`, H
 		case r < 6:
-			return seed + `r`, H
+			return `r`, H
 		case r < 7:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1727,15 +1729,15 @@ retry:
 		r := rng.IntN(34)
 		switch {
 		case r < 14:
-			return seed + `i`, H
+			return `i`, H
 		case r < 26:
-			return seed + `e`, H
+			return `e`, H
 		case r < 29:
-			return seed + `a`, H
+			return `a`, H
 		case r < 32:
-			return seed + `y`, H
+			return `y`, H
 		case r < 34:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1744,15 +1746,15 @@ retry:
 		r := rng.IntN(59)
 		switch {
 		case r < 48:
-			return seed + `h`, H
+			return `h`, H
 		case r < 54:
-			return seed + `a`, H
+			return `a`, H
 		case r < 57:
-			return seed + `o`, H
+			return `o`, H
 		case r < 58:
-			return seed + `l`, H
+			return `l`, H
 		case r < 59:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1761,15 +1763,15 @@ retry:
 		r := rng.IntN(12)
 		switch {
 		case r < 5:
-			return seed + `t`, H
+			return `t`, H
 		case r < 8:
-			return seed + `e`, H
+			return `e`, H
 		case r < 10:
-			return seed + `a`, H
+			return `a`, H
 		case r < 11:
-			return seed + `f`, H
+			return `f`, H
 		case r < 12:
-			return seed + `i`, H
+			return `i`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1778,15 +1780,15 @@ retry:
 		r := rng.IntN(9)
 		switch {
 		case r < 3:
-			return seed + `n`, H
+			return `n`, H
 		case r < 6:
-			return seed + `t`, H
+			return `t`, H
 		case r < 7:
-			return seed + `f`, H
+			return `f`, H
 		case r < 8:
-			return seed + `g`, H
+			return `g`, H
 		case r < 9:
-			return seed + `m`, H
+			return `m`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1795,15 +1797,15 @@ retry:
 		r := rng.IntN(96)
 		switch {
 		case r < 36:
-			return seed + `u`, H
+			return `u`, H
 		case r < 62:
-			return seed + `a`, H
+			return `a`, H
 		case r < 81:
-			return seed + `o`, H
+			return `o`, H
 		case r < 89:
-			return seed + `i`, H
+			return `i`, H
 		case r < 96:
-			return seed + `e`, H
+			return `e`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1812,15 +1814,15 @@ retry:
 		r := rng.IntN(22)
 		switch {
 		case r < 9:
-			return seed + `i`, H
+			return `i`, H
 		case r < 16:
-			return seed + `e`, H
+			return `e`, H
 		case r < 19:
-			return seed + `a`, H
+			return `a`, H
 		case r < 21:
-			return seed + `o`, H
+			return `o`, H
 		case r < 22:
-			return seed + `y`, H
+			return `y`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1829,15 +1831,15 @@ retry:
 		r := rng.IntN(15)
 		switch {
 		case r < 5:
-			return seed + `d`, H
+			return `d`, H
 		case r < 10:
-			return seed + `r`, H
+			return `r`, H
 		case r < 13:
-			return seed + `m`, H
+			return `m`, H
 		case r < 14:
-			return seed + `n`, H
+			return `n`, H
 		case r < 15:
-			return seed + `s`, H
+			return `s`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1846,15 +1848,15 @@ retry:
 		r := rng.IntN(48)
 		switch {
 		case r < 24:
-			return seed + `o`, H
+			return `o`, H
 		case r < 33:
-			return seed + `a`, H
+			return `a`, H
 		case r < 39:
-			return seed + `i`, H
+			return `i`, H
 		case r < 44:
-			return seed + `u`, H
+			return `u`, H
 		case r < 48:
-			return seed + `e`, H
+			return `e`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1863,15 +1865,15 @@ retry:
 		r := rng.IntN(33)
 		switch {
 		case r < 23:
-			return seed + `e`, H
+			return `e`, H
 		case r < 28:
-			return seed + `i`, H
+			return `i`, H
 		case r < 31:
-			return seed + `y`, H
+			return `y`, H
 		case r < 32:
-			return seed + `r`, H
+			return `r`, H
 		case r < 33:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1880,15 +1882,15 @@ retry:
 		r := rng.IntN(9)
 		switch {
 		case r < 3:
-			return seed + `i`, H
+			return `i`, H
 		case r < 5:
-			return seed + `a`, H
+			return `a`, H
 		case r < 7:
-			return seed + `o`, H
+			return `o`, H
 		case r < 8:
-			return seed + `h`, H
+			return `h`, H
 		case r < 9:
-			return seed + `r`, H
+			return `r`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1897,15 +1899,15 @@ retry:
 		r := rng.IntN(362)
 		switch {
 		case r < 126:
-			return seed + `a`, H
+			return `a`, H
 		case r < 197:
-			return seed + `o`, H
+			return `o`, H
 		case r < 254:
-			return seed + `r`, H
+			return `r`, H
 		case r < 309:
-			return seed + `u`, H
+			return `u`, H
 		case r < 362:
-			return seed + `l`, H
+			return `l`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1914,15 +1916,15 @@ retry:
 		r := rng.IntN(13)
 		switch {
 		case r < 5:
-			return seed + `a`, H
+			return `a`, H
 		case r < 9:
-			return seed + `o`, H
+			return `o`, H
 		case r < 11:
-			return seed + `l`, H
+			return `l`, H
 		case r < 12:
-			return seed + `r`, H
+			return `r`, H
 		case r < 13:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1931,15 +1933,15 @@ retry:
 		r := rng.IntN(9)
 		switch {
 		case r < 3:
-			return seed + `a`, H
+			return `a`, H
 		case r < 5:
-			return seed + `i`, H
+			return `i`, H
 		case r < 7:
-			return seed + `o`, H
+			return `o`, H
 		case r < 8:
-			return seed + `y`, H
+			return `y`, H
 		case r < 9:
-			return seed + `e`, H
+			return `e`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1948,15 +1950,15 @@ retry:
 		r := rng.IntN(36)
 		switch {
 		case r < 23:
-			return seed + `e`, H
+			return `e`, H
 		case r < 30:
-			return seed + `i`, H
+			return `i`, H
 		case r < 33:
-			return seed + `y`, H
+			return `y`, H
 		case r < 35:
-			return seed + `a`, H
+			return `a`, H
 		case r < 36:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1965,15 +1967,15 @@ retry:
 		r := rng.IntN(97)
 		switch {
 		case r < 33:
-			return seed + `e`, H
+			return `e`, H
 		case r < 59:
-			return seed + `u`, H
+			return `u`, H
 		case r < 84:
-			return seed + `a`, H
+			return `a`, H
 		case r < 96:
-			return seed + `i`, H
+			return `i`, H
 		case r < 97:
-			return seed + `y`, H
+			return `y`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1982,15 +1984,15 @@ retry:
 		r := rng.IntN(11)
 		switch {
 		case r < 4:
-			return seed + `a`, H
+			return `a`, H
 		case r < 6:
-			return seed + `e`, H
+			return `e`, H
 		case r < 8:
-			return seed + `t`, H
+			return `t`, H
 		case r < 10:
-			return seed + `o`, H
+			return `o`, H
 		case r < 11:
-			return seed + `d`, H
+			return `d`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -1999,15 +2001,15 @@ retry:
 		r := rng.IntN(43)
 		switch {
 		case r < 14:
-			return seed + `o`, H
+			return `o`, H
 		case r < 24:
-			return seed + `i`, H
+			return `i`, H
 		case r < 32:
-			return seed + `e`, H
+			return `e`, H
 		case r < 39:
-			return seed + `a`, H
+			return `a`, H
 		case r < 43:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2016,15 +2018,15 @@ retry:
 		r := rng.IntN(160)
 		switch {
 		case r < 125:
-			return seed + `e`, H
+			return `e`, H
 		case r < 141:
-			return seed + `i`, H
+			return `i`, H
 		case r < 155:
-			return seed + `a`, H
+			return `a`, H
 		case r < 158:
-			return seed + `o`, H
+			return `o`, H
 		case r < 160:
-			return seed + `y`, H
+			return `y`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2033,15 +2035,15 @@ retry:
 		r := rng.IntN(7)
 		switch {
 		case r < 3:
-			return seed + `i`, H
+			return `i`, H
 		case r < 4:
-			return seed + `s`, H
+			return `s`, H
 		case r < 5:
-			return seed + `a`, H
+			return `a`, H
 		case r < 6:
-			return seed + `e`, H
+			return `e`, H
 		case r < 7:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2050,15 +2052,15 @@ retry:
 		r := rng.IntN(25)
 		switch {
 		case r < 7:
-			return seed + `i`, H
+			return `i`, H
 		case r < 14:
-			return seed + `e`, H
+			return `e`, H
 		case r < 20:
-			return seed + `o`, H
+			return `o`, H
 		case r < 24:
-			return seed + `a`, H
+			return `a`, H
 		case r < 25:
-			return seed + `y`, H
+			return `y`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2067,15 +2069,15 @@ retry:
 		r := rng.IntN(6)
 		switch {
 		case r < 2:
-			return seed + `i`, H
+			return `i`, H
 		case r < 3:
-			return seed + `h`, H
+			return `h`, H
 		case r < 4:
-			return seed + `e`, H
+			return `e`, H
 		case r < 5:
-			return seed + `t`, H
+			return `t`, H
 		case r < 6:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2084,15 +2086,15 @@ retry:
 		r := rng.IntN(16)
 		switch {
 		case r < 6:
-			return seed + `e`, H
+			return `e`, H
 		case r < 11:
-			return seed + `y`, H
+			return `y`, H
 		case r < 13:
-			return seed + `i`, H
+			return `i`, H
 		case r < 15:
-			return seed + `o`, H
+			return `o`, H
 		case r < 16:
-			return seed + `a`, H
+			return `a`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2101,15 +2103,15 @@ retry:
 		r := rng.IntN(19)
 		switch {
 		case r < 6:
-			return seed + `e`, H
+			return `e`, H
 		case r < 11:
-			return seed + `a`, H
+			return `a`, H
 		case r < 16:
-			return seed + `p`, H
+			return `p`, H
 		case r < 18:
-			return seed + `o`, H
+			return `o`, H
 		case r < 19:
-			return seed + `b`, H
+			return `b`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2118,15 +2120,15 @@ retry:
 		r := rng.IntN(13)
 		switch {
 		case r < 5:
-			return seed + `i`, H
+			return `i`, H
 		case r < 8:
-			return seed + `a`, H
+			return `a`, H
 		case r < 11:
-			return seed + `u`, H
+			return `u`, H
 		case r < 12:
-			return seed + `r`, H
+			return `r`, H
 		case r < 13:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2135,15 +2137,15 @@ retry:
 		r := rng.IntN(19)
 		switch {
 		case r < 5:
-			return seed + `a`, H
+			return `a`, H
 		case r < 10:
-			return seed + `e`, H
+			return `e`, H
 		case r < 15:
-			return seed + `o`, H
+			return `o`, H
 		case r < 18:
-			return seed + `i`, H
+			return `i`, H
 		case r < 19:
-			return seed + `r`, H
+			return `r`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2152,15 +2154,15 @@ retry:
 		r := rng.IntN(13)
 		switch {
 		case r < 4:
-			return seed + `e`, H
+			return `e`, H
 		case r < 7:
-			return seed + `i`, H
+			return `i`, H
 		case r < 9:
-			return seed + `y`, H
+			return `y`, H
 		case r < 11:
-			return seed + `a`, H
+			return `a`, H
 		case r < 13:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2169,15 +2171,15 @@ retry:
 		r := rng.IntN(27)
 		switch {
 		case r < 8:
-			return seed + `a`, H
+			return `a`, H
 		case r < 16:
-			return seed + `o`, H
+			return `o`, H
 		case r < 21:
-			return seed + `i`, H
+			return `i`, H
 		case r < 25:
-			return seed + `e`, H
+			return `e`, H
 		case r < 27:
-			return seed + `r`, H
+			return `r`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2186,15 +2188,15 @@ retry:
 		r := rng.IntN(42)
 		switch {
 		case r < 16:
-			return seed + `i`, H
+			return `i`, H
 		case r < 25:
-			return seed + `e`, H
+			return `e`, H
 		case r < 33:
-			return seed + `a`, H
+			return `a`, H
 		case r < 41:
-			return seed + `o`, H
+			return `o`, H
 		case r < 42:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2203,15 +2205,15 @@ retry:
 		r := rng.IntN(14)
 		switch {
 		case r < 7:
-			return seed + `a`, H
+			return `a`, H
 		case r < 11:
-			return seed + `o`, H
+			return `o`, H
 		case r < 12:
-			return seed + `l`, H
+			return `l`, H
 		case r < 13:
-			return seed + `r`, H
+			return `r`, H
 		case r < 14:
-			return seed + `i`, H
+			return `i`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2220,15 +2222,15 @@ retry:
 		r := rng.IntN(194)
 		switch {
 		case r < 63:
-			return seed + `a`, H
+			return `a`, H
 		case r < 119:
-			return seed + `i`, H
+			return `i`, H
 		case r < 157:
-			return seed + `u`, H
+			return `u`, H
 		case r < 189:
-			return seed + `e`, H
+			return `e`, H
 		case r < 194:
-			return seed + `y`, H
+			return `y`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2237,15 +2239,15 @@ retry:
 		r := rng.IntN(27)
 		switch {
 		case r < 11:
-			return seed + `e`, H
+			return `e`, H
 		case r < 16:
-			return seed + `i`, H
+			return `i`, H
 		case r < 20:
-			return seed + `a`, H
+			return `a`, H
 		case r < 24:
-			return seed + `o`, H
+			return `o`, H
 		case r < 27:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2254,15 +2256,15 @@ retry:
 		r := rng.IntN(12)
 		switch {
 		case r < 6:
-			return seed + `r`, H
+			return `r`, H
 		case r < 9:
-			return seed + `b`, H
+			return `b`, H
 		case r < 10:
-			return seed + `g`, H
+			return `g`, H
 		case r < 11:
-			return seed + `c`, H
+			return `c`, H
 		case r < 12:
-			return seed + `p`, H
+			return `p`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2271,15 +2273,15 @@ retry:
 		r := rng.IntN(69)
 		switch {
 		case r < 50:
-			return seed + `e`, H
+			return `e`, H
 		case r < 60:
-			return seed + `z`, H
+			return `z`, H
 		case r < 64:
-			return seed + `a`, H
+			return `a`, H
 		case r < 68:
-			return seed + `i`, H
+			return `i`, H
 		case r < 69:
-			return seed + `m`, H
+			return `m`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2288,15 +2290,15 @@ retry:
 		r := rng.IntN(29)
 		switch {
 		case r < 11:
-			return seed + `i`, H
+			return `i`, H
 		case r < 18:
-			return seed + `o`, H
+			return `o`, H
 		case r < 23:
-			return seed + `e`, H
+			return `e`, H
 		case r < 27:
-			return seed + `a`, H
+			return `a`, H
 		case r < 29:
-			return seed + `y`, H
+			return `y`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2305,15 +2307,15 @@ retry:
 		r := rng.IntN(161)
 		switch {
 		case r < 91:
-			return seed + `e`, H
+			return `e`, H
 		case r < 131:
-			return seed + `i`, H
+			return `i`, H
 		case r < 153:
-			return seed + `a`, H
+			return `a`, H
 		case r < 160:
-			return seed + `o`, H
+			return `o`, H
 		case r < 161:
-			return seed + `y`, H
+			return `y`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2322,15 +2324,15 @@ retry:
 		r := rng.IntN(21)
 		switch {
 		case r < 11:
-			return seed + `p`, H
+			return `p`, H
 		case r < 18:
-			return seed + `d`, H
+			return `d`, H
 		case r < 19:
-			return seed + `s`, H
+			return `s`, H
 		case r < 20:
-			return seed + `m`, H
+			return `m`, H
 		case r < 21:
-			return seed + `b`, H
+			return `b`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2339,15 +2341,15 @@ retry:
 		r := rng.IntN(18)
 		switch {
 		case r < 13:
-			return seed + `e`, H
+			return `e`, H
 		case r < 15:
-			return seed + `a`, H
+			return `a`, H
 		case r < 16:
-			return seed + `i`, H
+			return `i`, H
 		case r < 17:
-			return seed + `u`, H
+			return `u`, H
 		case r < 18:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2356,15 +2358,15 @@ retry:
 		r := rng.IntN(123)
 		switch {
 		case r < 36:
-			return seed + `a`, H
+			return `a`, H
 		case r < 64:
-			return seed + `e`, H
+			return `e`, H
 		case r < 84:
-			return seed + `i`, H
+			return `i`, H
 		case r < 104:
-			return seed + `u`, H
+			return `u`, H
 		case r < 123:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2373,15 +2375,15 @@ retry:
 		r := rng.IntN(96)
 		switch {
 		case r < 41:
-			return seed + `e`, H
+			return `e`, H
 		case r < 69:
-			return seed + `i`, H
+			return `i`, H
 		case r < 82:
-			return seed + `a`, H
+			return `a`, H
 		case r < 93:
-			return seed + `o`, H
+			return `o`, H
 		case r < 96:
-			return seed + `y`, H
+			return `y`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2390,15 +2392,15 @@ retry:
 		r := rng.IntN(155)
 		switch {
 		case r < 47:
-			return seed + `i`, H
+			return `i`, H
 		case r < 89:
-			return seed + `a`, H
+			return `a`, H
 		case r < 117:
-			return seed + `o`, H
+			return `o`, H
 		case r < 137:
-			return seed + `r`, H
+			return `r`, H
 		case r < 155:
-			return seed + `h`, H
+			return `h`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2407,15 +2409,15 @@ retry:
 		r := rng.IntN(82)
 		switch {
 		case r < 37:
-			return seed + `e`, H
+			return `e`, H
 		case r < 58:
-			return seed + `y`, H
+			return `y`, H
 		case r < 73:
-			return seed + `i`, H
+			return `i`, H
 		case r < 78:
-			return seed + `o`, H
+			return `o`, H
 		case r < 82:
-			return seed + `a`, H
+			return `a`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2424,15 +2426,15 @@ retry:
 		r := rng.IntN(17)
 		switch {
 		case r < 8:
-			return seed + `y`, H
+			return `y`, H
 		case r < 11:
-			return seed + `i`, H
+			return `i`, H
 		case r < 14:
-			return seed + `o`, H
+			return `o`, H
 		case r < 16:
-			return seed + `e`, H
+			return `e`, H
 		case r < 17:
-			return seed + `a`, H
+			return `a`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2441,15 +2443,15 @@ retry:
 		r := rng.IntN(31)
 		switch {
 		case r < 18:
-			return seed + `e`, H
+			return `e`, H
 		case r < 24:
-			return seed + `i`, H
+			return `i`, H
 		case r < 28:
-			return seed + `y`, H
+			return `y`, H
 		case r < 30:
-			return seed + `a`, H
+			return `a`, H
 		case r < 31:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2458,15 +2460,15 @@ retry:
 		r := rng.IntN(18)
 		switch {
 		case r < 10:
-			return seed + `t`, H
+			return `t`, H
 		case r < 14:
-			return seed + `e`, H
+			return `e`, H
 		case r < 16:
-			return seed + `l`, H
+			return `l`, H
 		case r < 17:
-			return seed + `p`, H
+			return `p`, H
 		case r < 18:
-			return seed + `i`, H
+			return `i`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2475,15 +2477,15 @@ retry:
 		r := rng.IntN(13)
 		switch {
 		case r < 6:
-			return seed + `e`, H
+			return `e`, H
 		case r < 9:
-			return seed + `y`, H
+			return `y`, H
 		case r < 11:
-			return seed + `i`, H
+			return `i`, H
 		case r < 12:
-			return seed + `a`, H
+			return `a`, H
 		case r < 13:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2492,15 +2494,15 @@ retry:
 		r := rng.IntN(53)
 		switch {
 		case r < 18:
-			return seed + `a`, H
+			return `a`, H
 		case r < 32:
-			return seed + `o`, H
+			return `o`, H
 		case r < 44:
-			return seed + `i`, H
+			return `i`, H
 		case r < 50:
-			return seed + `u`, H
+			return `u`, H
 		case r < 53:
-			return seed + `e`, H
+			return `e`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2509,17 +2511,17 @@ retry:
 		r := rng.IntN(513)
 		switch {
 		case r < 345:
-			return seed + `e`, H
+			return `e`, H
 		case r < 401:
-			return seed + `a`, H
+			return `a`, H
 		case r < 445:
-			return seed + `i`, H
+			return `i`, H
 		case r < 484:
-			return seed + `o`, H
+			return `o`, H
 		case r < 512:
-			return seed + `u`, H
+			return `u`, H
 		case r < 513:
-			return seed + `h`, H
+			return `h`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2528,17 +2530,17 @@ retry:
 		r := rng.IntN(168)
 		switch {
 		case r < 42:
-			return seed + `a`, H
+			return `a`, H
 		case r < 83:
-			return seed + `e`, H
+			return `e`, H
 		case r < 112:
-			return seed + `i`, H
+			return `i`, H
 		case r < 140:
-			return seed + `u`, H
+			return `u`, H
 		case r < 164:
-			return seed + `o`, H
+			return `o`, H
 		case r < 168:
-			return seed + `y`, H
+			return `y`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2547,17 +2549,17 @@ retry:
 		r := rng.IntN(10)
 		switch {
 		case r < 3:
-			return seed + `u`, H
+			return `u`, H
 		case r < 6:
-			return seed + `o`, H
+			return `o`, H
 		case r < 7:
-			return seed + `h`, H
+			return `h`, H
 		case r < 8:
-			return seed + `a`, H
+			return `a`, H
 		case r < 9:
-			return seed + `i`, H
+			return `i`, H
 		case r < 10:
-			return seed + `r`, H
+			return `r`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2566,17 +2568,17 @@ retry:
 		r := rng.IntN(112)
 		switch {
 		case r < 35:
-			return seed + `e`, H
+			return `e`, H
 		case r < 54:
-			return seed + `a`, H
+			return `a`, H
 		case r < 72:
-			return seed + `i`, H
+			return `i`, H
 		case r < 89:
-			return seed + `y`, H
+			return `y`, H
 		case r < 105:
-			return seed + `o`, H
+			return `o`, H
 		case r < 112:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2585,17 +2587,17 @@ retry:
 		r := rng.IntN(18)
 		switch {
 		case r < 7:
-			return seed + `n`, H
+			return `n`, H
 		case r < 11:
-			return seed + `m`, H
+			return `m`, H
 		case r < 14:
-			return seed + `s`, H
+			return `s`, H
 		case r < 16:
-			return seed + `c`, H
+			return `c`, H
 		case r < 17:
-			return seed + `r`, H
+			return `r`, H
 		case r < 18:
-			return seed + `b`, H
+			return `b`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2604,17 +2606,17 @@ retry:
 		r := rng.IntN(293)
 		switch {
 		case r < 177:
-			return seed + `e`, H
+			return `e`, H
 		case r < 213:
-			return seed + `i`, H
+			return `i`, H
 		case r < 248:
-			return seed + `y`, H
+			return `y`, H
 		case r < 267:
-			return seed + `a`, H
+			return `a`, H
 		case r < 282:
-			return seed + `o`, H
+			return `o`, H
 		case r < 293:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2623,17 +2625,17 @@ retry:
 		r := rng.IntN(13)
 		switch {
 		case r < 5:
-			return seed + `o`, H
+			return `o`, H
 		case r < 9:
-			return seed + `n`, H
+			return `n`, H
 		case r < 10:
-			return seed + `a`, H
+			return `a`, H
 		case r < 11:
-			return seed + `i`, H
+			return `i`, H
 		case r < 12:
-			return seed + `d`, H
+			return `d`, H
 		case r < 13:
-			return seed + `m`, H
+			return `m`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2642,17 +2644,17 @@ retry:
 		r := rng.IntN(178)
 		switch {
 		case r < 63:
-			return seed + `a`, H
+			return `a`, H
 		case r < 99:
-			return seed + `e`, H
+			return `e`, H
 		case r < 130:
-			return seed + `i`, H
+			return `i`, H
 		case r < 153:
-			return seed + `o`, H
+			return `o`, H
 		case r < 167:
-			return seed + `y`, H
+			return `y`, H
 		case r < 178:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2661,17 +2663,17 @@ retry:
 		r := rng.IntN(98)
 		switch {
 		case r < 33:
-			return seed + `e`, H
+			return `e`, H
 		case r < 56:
-			return seed + `a`, H
+			return `a`, H
 		case r < 76:
-			return seed + `o`, H
+			return `o`, H
 		case r < 92:
-			return seed + `i`, H
+			return `i`, H
 		case r < 97:
-			return seed + `u`, H
+			return `u`, H
 		case r < 98:
-			return seed + `y`, H
+			return `y`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2680,17 +2682,17 @@ retry:
 		r := rng.IntN(14)
 		switch {
 		case r < 7:
-			return seed + `e`, H
+			return `e`, H
 		case r < 10:
-			return seed + `i`, H
+			return `i`, H
 		case r < 11:
-			return seed + `y`, H
+			return `y`, H
 		case r < 12:
-			return seed + `a`, H
+			return `a`, H
 		case r < 13:
-			return seed + `o`, H
+			return `o`, H
 		case r < 14:
-			return seed + `z`, H
+			return `z`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2699,17 +2701,17 @@ retry:
 		r := rng.IntN(7)
 		switch {
 		case r < 2:
-			return seed + `i`, H
+			return `i`, H
 		case r < 3:
-			return seed + `a`, H
+			return `a`, H
 		case r < 4:
-			return seed + `u`, H
+			return `u`, H
 		case r < 5:
-			return seed + `r`, H
+			return `r`, H
 		case r < 6:
-			return seed + `o`, H
+			return `o`, H
 		case r < 7:
-			return seed + `e`, H
+			return `e`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2718,17 +2720,17 @@ retry:
 		r := rng.IntN(8)
 		switch {
 		case r < 2:
-			return seed + `a`, H
+			return `a`, H
 		case r < 4:
-			return seed + `l`, H
+			return `l`, H
 		case r < 5:
-			return seed + `w`, H
+			return `w`, H
 		case r < 6:
-			return seed + `d`, H
+			return `d`, H
 		case r < 7:
-			return seed + `p`, H
+			return `p`, H
 		case r < 8:
-			return seed + `r`, H
+			return `r`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2737,17 +2739,17 @@ retry:
 		r := rng.IntN(47)
 		switch {
 		case r < 15:
-			return seed + `i`, H
+			return `i`, H
 		case r < 25:
-			return seed + `y`, H
+			return `y`, H
 		case r < 35:
-			return seed + `e`, H
+			return `e`, H
 		case r < 41:
-			return seed + `o`, H
+			return `o`, H
 		case r < 46:
-			return seed + `a`, H
+			return `a`, H
 		case r < 47:
-			return seed + `d`, H
+			return `d`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2756,17 +2758,17 @@ retry:
 		r := rng.IntN(308)
 		switch {
 		case r < 76:
-			return seed + `r`, H
+			return `r`, H
 		case r < 139:
-			return seed + `l`, H
+			return `l`, H
 		case r < 193:
-			return seed + `a`, H
+			return `a`, H
 		case r < 235:
-			return seed + `o`, H
+			return `o`, H
 		case r < 276:
-			return seed + `i`, H
+			return `i`, H
 		case r < 308:
-			return seed + `e`, H
+			return `e`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2775,17 +2777,17 @@ retry:
 		r := rng.IntN(21)
 		switch {
 		case r < 7:
-			return seed + `a`, H
+			return `a`, H
 		case r < 13:
-			return seed + `l`, H
+			return `l`, H
 		case r < 17:
-			return seed + `i`, H
+			return `i`, H
 		case r < 19:
-			return seed + `o`, H
+			return `o`, H
 		case r < 20:
-			return seed + `e`, H
+			return `e`, H
 		case r < 21:
-			return seed + `r`, H
+			return `r`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2794,17 +2796,17 @@ retry:
 		r := rng.IntN(104)
 		switch {
 		case r < 47:
-			return seed + `a`, H
+			return `a`, H
 		case r < 64:
-			return seed + `e`, H
+			return `e`, H
 		case r < 80:
-			return seed + `i`, H
+			return `i`, H
 		case r < 92:
-			return seed + `o`, H
+			return `o`, H
 		case r < 101:
-			return seed + `y`, H
+			return `y`, H
 		case r < 104:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2813,17 +2815,17 @@ retry:
 		r := rng.IntN(239)
 		switch {
 		case r < 99:
-			return seed + `o`, H
+			return `o`, H
 		case r < 169:
-			return seed + `e`, H
+			return `e`, H
 		case r < 214:
-			return seed + `i`, H
+			return `i`, H
 		case r < 230:
-			return seed + `a`, H
+			return `a`, H
 		case r < 237:
-			return seed + `u`, H
+			return `u`, H
 		case r < 239:
-			return seed + `y`, H
+			return `y`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2832,17 +2834,17 @@ retry:
 		r := rng.IntN(17)
 		switch {
 		case r < 7:
-			return seed + `o`, H
+			return `o`, H
 		case r < 12:
-			return seed + `a`, H
+			return `a`, H
 		case r < 14:
-			return seed + `i`, H
+			return `i`, H
 		case r < 15:
-			return seed + `e`, H
+			return `e`, H
 		case r < 16:
-			return seed + `r`, H
+			return `r`, H
 		case r < 17:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2851,17 +2853,17 @@ retry:
 		r := rng.IntN(12)
 		switch {
 		case r < 3:
-			return seed + `a`, H
+			return `a`, H
 		case r < 6:
-			return seed + `o`, H
+			return `o`, H
 		case r < 8:
-			return seed + `e`, H
+			return `e`, H
 		case r < 10:
-			return seed + `r`, H
+			return `r`, H
 		case r < 11:
-			return seed + `i`, H
+			return `i`, H
 		case r < 12:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2870,17 +2872,17 @@ retry:
 		r := rng.IntN(7)
 		switch {
 		case r < 2:
-			return seed + `i`, H
+			return `i`, H
 		case r < 3:
-			return seed + `y`, H
+			return `y`, H
 		case r < 4:
-			return seed + `u`, H
+			return `u`, H
 		case r < 5:
-			return seed + `r`, H
+			return `r`, H
 		case r < 6:
-			return seed + `e`, H
+			return `e`, H
 		case r < 7:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2889,17 +2891,17 @@ retry:
 		r := rng.IntN(52)
 		switch {
 		case r < 20:
-			return seed + `l`, H
+			return `l`, H
 		case r < 35:
-			return seed + `e`, H
+			return `e`, H
 		case r < 42:
-			return seed + `i`, H
+			return `i`, H
 		case r < 48:
-			return seed + `y`, H
+			return `y`, H
 		case r < 50:
-			return seed + `a`, H
+			return `a`, H
 		case r < 52:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2908,17 +2910,17 @@ retry:
 		r := rng.IntN(9)
 		switch {
 		case r < 3:
-			return seed + `t`, H
+			return `t`, H
 		case r < 5:
-			return seed + `i`, H
+			return `i`, H
 		case r < 6:
-			return seed + `h`, H
+			return `h`, H
 		case r < 7:
-			return seed + `y`, H
+			return `y`, H
 		case r < 8:
-			return seed + `u`, H
+			return `u`, H
 		case r < 9:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2927,17 +2929,17 @@ retry:
 		r := rng.IntN(74)
 		switch {
 		case r < 31:
-			return seed + `e`, H
+			return `e`, H
 		case r < 47:
-			return seed + `i`, H
+			return `i`, H
 		case r < 57:
-			return seed + `a`, H
+			return `a`, H
 		case r < 65:
-			return seed + `y`, H
+			return `y`, H
 		case r < 72:
-			return seed + `o`, H
+			return `o`, H
 		case r < 74:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2946,17 +2948,17 @@ retry:
 		r := rng.IntN(91)
 		switch {
 		case r < 27:
-			return seed + `i`, H
+			return `i`, H
 		case r < 44:
-			return seed + `e`, H
+			return `e`, H
 		case r < 60:
-			return seed + `a`, H
+			return `a`, H
 		case r < 75:
-			return seed + `o`, H
+			return `o`, H
 		case r < 88:
-			return seed + `y`, H
+			return `y`, H
 		case r < 91:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2965,17 +2967,17 @@ retry:
 		r := rng.IntN(34)
 		switch {
 		case r < 13:
-			return seed + `i`, H
+			return `i`, H
 		case r < 22:
-			return seed + `e`, H
+			return `e`, H
 		case r < 27:
-			return seed + `z`, H
+			return `z`, H
 		case r < 30:
-			return seed + `y`, H
+			return `y`, H
 		case r < 33:
-			return seed + `a`, H
+			return `a`, H
 		case r < 34:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -2984,17 +2986,17 @@ retry:
 		r := rng.IntN(159)
 		switch {
 		case r < 76:
-			return seed + `a`, H
+			return `a`, H
 		case r < 104:
-			return seed + `e`, H
+			return `e`, H
 		case r < 127:
-			return seed + `o`, H
+			return `o`, H
 		case r < 147:
-			return seed + `i`, H
+			return `i`, H
 		case r < 158:
-			return seed + `u`, H
+			return `u`, H
 		case r < 159:
-			return seed + `y`, H
+			return `y`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -3003,17 +3005,17 @@ retry:
 		r := rng.IntN(16)
 		switch {
 		case r < 5:
-			return seed + `c`, H
+			return `c`, H
 		case r < 8:
-			return seed + `s`, H
+			return `s`, H
 		case r < 11:
-			return seed + `t`, H
+			return `t`, H
 		case r < 13:
-			return seed + `l`, H
+			return `l`, H
 		case r < 15:
-			return seed + `e`, H
+			return `e`, H
 		case r < 16:
-			return seed + `r`, H
+			return `r`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -3022,17 +3024,17 @@ retry:
 		r := rng.IntN(9)
 		switch {
 		case r < 2:
-			return seed + `g`, H
+			return `g`, H
 		case r < 4:
-			return seed + `m`, H
+			return `m`, H
 		case r < 6:
-			return seed + `b`, H
+			return `b`, H
 		case r < 7:
-			return seed + `c`, H
+			return `c`, H
 		case r < 8:
-			return seed + `l`, H
+			return `l`, H
 		case r < 9:
-			return seed + `t`, H
+			return `t`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -3041,17 +3043,17 @@ retry:
 		r := rng.IntN(52)
 		switch {
 		case r < 19:
-			return seed + `i`, H
+			return `i`, H
 		case r < 29:
-			return seed + `e`, H
+			return `e`, H
 		case r < 38:
-			return seed + `o`, H
+			return `o`, H
 		case r < 45:
-			return seed + `y`, H
+			return `y`, H
 		case r < 50:
-			return seed + `a`, H
+			return `a`, H
 		case r < 52:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -3060,17 +3062,17 @@ retry:
 		r := rng.IntN(85)
 		switch {
 		case r < 26:
-			return seed + `i`, H
+			return `i`, H
 		case r < 50:
-			return seed + `a`, H
+			return `a`, H
 		case r < 63:
-			return seed + `e`, H
+			return `e`, H
 		case r < 76:
-			return seed + `o`, H
+			return `o`, H
 		case r < 81:
-			return seed + `u`, H
+			return `u`, H
 		case r < 85:
-			return seed + `y`, H
+			return `y`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -3079,17 +3081,17 @@ retry:
 		r := rng.IntN(21)
 		switch {
 		case r < 12:
-			return seed + `u`, H
+			return `u`, H
 		case r < 15:
-			return seed + `o`, H
+			return `o`, H
 		case r < 17:
-			return seed + `l`, H
+			return `l`, H
 		case r < 19:
-			return seed + `e`, H
+			return `e`, H
 		case r < 20:
-			return seed + `a`, H
+			return `a`, H
 		case r < 21:
-			return seed + `i`, H
+			return `i`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -3098,17 +3100,17 @@ retry:
 		r := rng.IntN(22)
 		switch {
 		case r < 13:
-			return seed + `i`, H
+			return `i`, H
 		case r < 17:
-			return seed + `y`, H
+			return `y`, H
 		case r < 19:
-			return seed + `e`, H
+			return `e`, H
 		case r < 20:
-			return seed + `f`, H
+			return `f`, H
 		case r < 21:
-			return seed + `c`, H
+			return `c`, H
 		case r < 22:
-			return seed + `l`, H
+			return `l`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -3117,17 +3119,17 @@ retry:
 		r := rng.IntN(69)
 		switch {
 		case r < 19:
-			return seed + `e`, H
+			return `e`, H
 		case r < 35:
-			return seed + `o`, H
+			return `o`, H
 		case r < 46:
-			return seed + `i`, H
+			return `i`, H
 		case r < 55:
-			return seed + `y`, H
+			return `y`, H
 		case r < 64:
-			return seed + `a`, H
+			return `a`, H
 		case r < 69:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -3136,17 +3138,17 @@ retry:
 		r := rng.IntN(97)
 		switch {
 		case r < 27:
-			return seed + `a`, H
+			return `a`, H
 		case r < 50:
-			return seed + `e`, H
+			return `e`, H
 		case r < 71:
-			return seed + `i`, H
+			return `i`, H
 		case r < 91:
-			return seed + `o`, H
+			return `o`, H
 		case r < 95:
-			return seed + `u`, H
+			return `u`, H
 		case r < 97:
-			return seed + `y`, H
+			return `y`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -3155,17 +3157,17 @@ retry:
 		r := rng.IntN(267)
 		switch {
 		case r < 75:
-			return seed + `a`, H
+			return `a`, H
 		case r < 147:
-			return seed + `i`, H
+			return `i`, H
 		case r < 186:
-			return seed + `o`, H
+			return `o`, H
 		case r < 221:
-			return seed + `e`, H
+			return `e`, H
 		case r < 254:
-			return seed + `u`, H
+			return `u`, H
 		case r < 267:
-			return seed + `y`, H
+			return `y`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -3174,17 +3176,17 @@ retry:
 		r := rng.IntN(10)
 		switch {
 		case r < 3:
-			return seed + `n`, H
+			return `n`, H
 		case r < 5:
-			return seed + `s`, H
+			return `s`, H
 		case r < 7:
-			return seed + `i`, H
+			return `i`, H
 		case r < 8:
-			return seed + `l`, H
+			return `l`, H
 		case r < 9:
-			return seed + `m`, H
+			return `m`, H
 		case r < 10:
-			return seed + `b`, H
+			return `b`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -3193,17 +3195,17 @@ retry:
 		r := rng.IntN(20)
 		switch {
 		case r < 9:
-			return seed + `e`, H
+			return `e`, H
 		case r < 14:
-			return seed + `r`, H
+			return `r`, H
 		case r < 17:
-			return seed + `i`, H
+			return `i`, H
 		case r < 18:
-			return seed + `h`, H
+			return `h`, H
 		case r < 19:
-			return seed + `y`, H
+			return `y`, H
 		case r < 20:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -3212,17 +3214,17 @@ retry:
 		r := rng.IntN(106)
 		switch {
 		case r < 42:
-			return seed + `e`, H
+			return `e`, H
 		case r < 72:
-			return seed + `i`, H
+			return `i`, H
 		case r < 89:
-			return seed + `a`, H
+			return `a`, H
 		case r < 104:
-			return seed + `o`, H
+			return `o`, H
 		case r < 105:
-			return seed + `y`, H
+			return `y`, H
 		case r < 106:
-			return seed + `r`, H
+			return `r`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -3231,19 +3233,19 @@ retry:
 		r := rng.IntN(12)
 		switch {
 		case r < 4:
-			return seed + `i`, H
+			return `i`, H
 		case r < 7:
-			return seed + `p`, H
+			return `p`, H
 		case r < 8:
-			return seed + `w`, H
+			return `w`, H
 		case r < 9:
-			return seed + `s`, H
+			return `s`, H
 		case r < 10:
-			return seed + `d`, H
+			return `d`, H
 		case r < 11:
-			return seed + `o`, H
+			return `o`, H
 		case r < 12:
-			return seed + `b`, H
+			return `b`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -3252,19 +3254,19 @@ retry:
 		r := rng.IntN(51)
 		switch {
 		case r < 17:
-			return seed + `i`, H
+			return `i`, H
 		case r < 27:
-			return seed + `o`, H
+			return `o`, H
 		case r < 33:
-			return seed + `u`, H
+			return `u`, H
 		case r < 38:
-			return seed + `a`, H
+			return `a`, H
 		case r < 43:
-			return seed + `r`, H
+			return `r`, H
 		case r < 47:
-			return seed + `e`, H
+			return `e`, H
 		case r < 51:
-			return seed + `l`, H
+			return `l`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -3273,19 +3275,19 @@ retry:
 		r := rng.IntN(66)
 		switch {
 		case r < 24:
-			return seed + `n`, H
+			return `n`, H
 		case r < 44:
-			return seed + `l`, H
+			return `l`, H
 		case r < 51:
-			return seed + `d`, H
+			return `d`, H
 		case r < 58:
-			return seed + `c`, H
+			return `c`, H
 		case r < 64:
-			return seed + `s`, H
+			return `s`, H
 		case r < 65:
-			return seed + `r`, H
+			return `r`, H
 		case r < 66:
-			return seed + `t`, H
+			return `t`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -3294,19 +3296,19 @@ retry:
 		r := rng.IntN(25)
 		switch {
 		case r < 5:
-			return seed + `e`, H
+			return `e`, H
 		case r < 9:
-			return seed + `r`, H
+			return `r`, H
 		case r < 13:
-			return seed + `o`, H
+			return `o`, H
 		case r < 17:
-			return seed + `u`, H
+			return `u`, H
 		case r < 20:
-			return seed + `a`, H
+			return `a`, H
 		case r < 23:
-			return seed + `l`, H
+			return `l`, H
 		case r < 25:
-			return seed + `i`, H
+			return `i`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -3315,19 +3317,19 @@ retry:
 		r := rng.IntN(30)
 		switch {
 		case r < 8:
-			return seed + `e`, H
+			return `e`, H
 		case r < 15:
-			return seed + `l`, H
+			return `l`, H
 		case r < 21:
-			return seed + `o`, H
+			return `o`, H
 		case r < 25:
-			return seed + `a`, H
+			return `a`, H
 		case r < 28:
-			return seed + `i`, H
+			return `i`, H
 		case r < 29:
-			return seed + `r`, H
+			return `r`, H
 		case r < 30:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -3336,19 +3338,19 @@ retry:
 		r := rng.IntN(20)
 		switch {
 		case r < 7:
-			return seed + `l`, H
+			return `l`, H
 		case r < 13:
-			return seed + `p`, H
+			return `p`, H
 		case r < 16:
-			return seed + `i`, H
+			return `i`, H
 		case r < 17:
-			return seed + `f`, H
+			return `f`, H
 		case r < 18:
-			return seed + `h`, H
+			return `h`, H
 		case r < 19:
-			return seed + `c`, H
+			return `c`, H
 		case r < 20:
-			return seed + `k`, H
+			return `k`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -3357,19 +3359,19 @@ retry:
 		r := rng.IntN(17)
 		switch {
 		case r < 7:
-			return seed + `t`, H
+			return `t`, H
 		case r < 9:
-			return seed + `h`, H
+			return `h`, H
 		case r < 11:
-			return seed + `a`, H
+			return `a`, H
 		case r < 13:
-			return seed + `l`, H
+			return `l`, H
 		case r < 15:
-			return seed + `p`, H
+			return `p`, H
 		case r < 16:
-			return seed + `i`, H
+			return `i`, H
 		case r < 17:
-			return seed + `k`, H
+			return `k`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -3378,19 +3380,19 @@ retry:
 		r := rng.IntN(20)
 		switch {
 		case r < 7:
-			return seed + `r`, H
+			return `r`, H
 		case r < 11:
-			return seed + `m`, H
+			return `m`, H
 		case r < 14:
-			return seed + `s`, H
+			return `s`, H
 		case r < 16:
-			return seed + `n`, H
+			return `n`, H
 		case r < 18:
-			return seed + `t`, H
+			return `t`, H
 		case r < 19:
-			return seed + `c`, H
+			return `c`, H
 		case r < 20:
-			return seed + `p`, H
+			return `p`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -3399,19 +3401,19 @@ retry:
 		r := rng.IntN(61)
 		switch {
 		case r < 40:
-			return seed + `l`, H
+			return `l`, H
 		case r < 52:
-			return seed + `s`, H
+			return `s`, H
 		case r < 55:
-			return seed + `r`, H
+			return `r`, H
 		case r < 57:
-			return seed + `n`, H
+			return `n`, H
 		case r < 59:
-			return seed + `t`, H
+			return `t`, H
 		case r < 60:
-			return seed + `e`, H
+			return `e`, H
 		case r < 61:
-			return seed + `m`, H
+			return `m`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -3420,19 +3422,19 @@ retry:
 		r := rng.IntN(33)
 		switch {
 		case r < 20:
-			return seed + `n`, H
+			return `n`, H
 		case r < 25:
-			return seed + `p`, H
+			return `p`, H
 		case r < 29:
-			return seed + `l`, H
+			return `l`, H
 		case r < 30:
-			return seed + `g`, H
+			return `g`, H
 		case r < 31:
-			return seed + `c`, H
+			return `c`, H
 		case r < 32:
-			return seed + `e`, H
+			return `e`, H
 		case r < 33:
-			return seed + `t`, H
+			return `t`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -3441,19 +3443,19 @@ retry:
 		r := rng.IntN(17)
 		switch {
 		case r < 5:
-			return seed + `i`, H
+			return `i`, H
 		case r < 10:
-			return seed + `e`, H
+			return `e`, H
 		case r < 12:
-			return seed + `n`, H
+			return `n`, H
 		case r < 14:
-			return seed + `y`, H
+			return `y`, H
 		case r < 15:
-			return seed + `w`, H
+			return `w`, H
 		case r < 16:
-			return seed + `r`, H
+			return `r`, H
 		case r < 17:
-			return seed + `a`, H
+			return `a`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -3462,19 +3464,19 @@ retry:
 		r := rng.IntN(20)
 		switch {
 		case r < 5:
-			return seed + `l`, H
+			return `l`, H
 		case r < 9:
-			return seed + `u`, H
+			return `u`, H
 		case r < 12:
-			return seed + `a`, H
+			return `a`, H
 		case r < 15:
-			return seed + `e`, H
+			return `e`, H
 		case r < 17:
-			return seed + `i`, H
+			return `i`, H
 		case r < 19:
-			return seed + `r`, H
+			return `r`, H
 		case r < 20:
-			return seed + `h`, H
+			return `h`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -3483,19 +3485,19 @@ retry:
 		r := rng.IntN(48)
 		switch {
 		case r < 18:
-			return seed + `l`, H
+			return `l`, H
 		case r < 31:
-			return seed + `e`, H
+			return `e`, H
 		case r < 39:
-			return seed + `i`, H
+			return `i`, H
 		case r < 42:
-			return seed + `y`, H
+			return `y`, H
 		case r < 45:
-			return seed + `a`, H
+			return `a`, H
 		case r < 47:
-			return seed + `h`, H
+			return `h`, H
 		case r < 48:
-			return seed + `r`, H
+			return `r`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -3504,19 +3506,19 @@ retry:
 		r := rng.IntN(24)
 		switch {
 		case r < 7:
-			return seed + `r`, H
+			return `r`, H
 		case r < 13:
-			return seed + `a`, H
+			return `a`, H
 		case r < 17:
-			return seed + `d`, H
+			return `d`, H
 		case r < 19:
-			return seed + `s`, H
+			return `s`, H
 		case r < 21:
-			return seed + `e`, H
+			return `e`, H
 		case r < 23:
-			return seed + `l`, H
+			return `l`, H
 		case r < 24:
-			return seed + `n`, H
+			return `n`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -3525,21 +3527,21 @@ retry:
 		r := rng.IntN(114)
 		switch {
 		case r < 43:
-			return seed + `e`, H
+			return `e`, H
 		case r < 69:
-			return seed + `i`, H
+			return `i`, H
 		case r < 84:
-			return seed + `l`, H
+			return `l`, H
 		case r < 94:
-			return seed + `y`, H
+			return `y`, H
 		case r < 103:
-			return seed + `r`, H
+			return `r`, H
 		case r < 111:
-			return seed + `o`, H
+			return `o`, H
 		case r < 113:
-			return seed + `a`, H
+			return `a`, H
 		case r < 114:
-			return seed + `s`, H
+			return `s`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -3548,21 +3550,21 @@ retry:
 		r := rng.IntN(18)
 		switch {
 		case r < 5:
-			return seed + `b`, H
+			return `b`, H
 		case r < 8:
-			return seed + `l`, H
+			return `l`, H
 		case r < 11:
-			return seed + `r`, H
+			return `r`, H
 		case r < 13:
-			return seed + `g`, H
+			return `g`, H
 		case r < 15:
-			return seed + `t`, H
+			return `t`, H
 		case r < 16:
-			return seed + `n`, H
+			return `n`, H
 		case r < 17:
-			return seed + `c`, H
+			return `c`, H
 		case r < 18:
-			return seed + `y`, H
+			return `y`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -3571,21 +3573,21 @@ retry:
 		r := rng.IntN(35)
 		switch {
 		case r < 10:
-			return seed + `e`, H
+			return `e`, H
 		case r < 17:
-			return seed + `t`, H
+			return `t`, H
 		case r < 23:
-			return seed + `o`, H
+			return `o`, H
 		case r < 28:
-			return seed + `i`, H
+			return `i`, H
 		case r < 32:
-			return seed + `c`, H
+			return `c`, H
 		case r < 33:
-			return seed + `u`, H
+			return `u`, H
 		case r < 34:
-			return seed + `l`, H
+			return `l`, H
 		case r < 35:
-			return seed + `y`, H
+			return `y`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -3594,21 +3596,21 @@ retry:
 		r := rng.IntN(106)
 		switch {
 		case r < 27:
-			return seed + `t`, H
+			return `t`, H
 		case r < 51:
-			return seed + `y`, H
+			return `y`, H
 		case r < 75:
-			return seed + `i`, H
+			return `i`, H
 		case r < 88:
-			return seed + `f`, H
+			return `f`, H
 		case r < 96:
-			return seed + `e`, H
+			return `e`, H
 		case r < 100:
-			return seed + `l`, H
+			return `l`, H
 		case r < 103:
-			return seed + `u`, H
+			return `u`, H
 		case r < 106:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -3617,21 +3619,21 @@ retry:
 		r := rng.IntN(27)
 		switch {
 		case r < 11:
-			return seed + `r`, H
+			return `r`, H
 		case r < 16:
-			return seed + `d`, H
+			return `d`, H
 		case r < 20:
-			return seed + `n`, H
+			return `n`, H
 		case r < 22:
-			return seed + `l`, H
+			return `l`, H
 		case r < 24:
-			return seed + `s`, H
+			return `s`, H
 		case r < 25:
-			return seed + `a`, H
+			return `a`, H
 		case r < 26:
-			return seed + `p`, H
+			return `p`, H
 		case r < 27:
-			return seed + `b`, H
+			return `b`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -3640,21 +3642,21 @@ retry:
 		r := rng.IntN(67)
 		switch {
 		case r < 22:
-			return seed + `e`, H
+			return `e`, H
 		case r < 38:
-			return seed + `i`, H
+			return `i`, H
 		case r < 50:
-			return seed + `d`, H
+			return `d`, H
 		case r < 59:
-			return seed + `g`, H
+			return `g`, H
 		case r < 62:
-			return seed + `a`, H
+			return `a`, H
 		case r < 65:
-			return seed + `o`, H
+			return `o`, H
 		case r < 66:
-			return seed + `y`, H
+			return `y`, H
 		case r < 67:
-			return seed + `s`, H
+			return `s`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -3663,21 +3665,21 @@ retry:
 		r := rng.IntN(547)
 		switch {
 		case r < 200:
-			return seed + `e`, H
+			return `e`, H
 		case r < 338:
-			return seed + `i`, H
+			return `i`, H
 		case r < 401:
-			return seed + `r`, H
+			return `r`, H
 		case r < 451:
-			return seed + `a`, H
+			return `a`, H
 		case r < 500:
-			return seed + `o`, H
+			return `o`, H
 		case r < 535:
-			return seed + `u`, H
+			return `u`, H
 		case r < 542:
-			return seed + `w`, H
+			return `w`, H
 		case r < 547:
-			return seed + `y`, H
+			return `y`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -3686,21 +3688,21 @@ retry:
 		r := rng.IntN(21)
 		switch {
 		case r < 4:
-			return seed + `n`, H
+			return `n`, H
 		case r < 8:
-			return seed + `t`, H
+			return `t`, H
 		case r < 11:
-			return seed + `v`, H
+			return `v`, H
 		case r < 14:
-			return seed + `s`, H
+			return `s`, H
 		case r < 17:
-			return seed + `g`, H
+			return `g`, H
 		case r < 19:
-			return seed + `l`, H
+			return `l`, H
 		case r < 20:
-			return seed + `m`, H
+			return `m`, H
 		case r < 21:
-			return seed + `z`, H
+			return `z`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -3709,21 +3711,21 @@ retry:
 		r := rng.IntN(9)
 		switch {
 		case r < 2:
-			return seed + `a`, H
+			return `a`, H
 		case r < 3:
-			return seed + `w`, H
+			return `w`, H
 		case r < 4:
-			return seed + `h`, H
+			return `h`, H
 		case r < 5:
-			return seed + `l`, H
+			return `l`, H
 		case r < 6:
-			return seed + `e`, H
+			return `e`, H
 		case r < 7:
-			return seed + `o`, H
+			return `o`, H
 		case r < 8:
-			return seed + `m`, H
+			return `m`, H
 		case r < 9:
-			return seed + `b`, H
+			return `b`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -3732,21 +3734,21 @@ retry:
 		r := rng.IntN(59)
 		switch {
 		case r < 23:
-			return seed + `e`, H
+			return `e`, H
 		case r < 32:
-			return seed + `i`, H
+			return `i`, H
 		case r < 38:
-			return seed + `l`, H
+			return `l`, H
 		case r < 44:
-			return seed + `o`, H
+			return `o`, H
 		case r < 48:
-			return seed + `y`, H
+			return `y`, H
 		case r < 52:
-			return seed + `r`, H
+			return `r`, H
 		case r < 56:
-			return seed + `a`, H
+			return `a`, H
 		case r < 59:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -3755,21 +3757,21 @@ retry:
 		r := rng.IntN(323)
 		switch {
 		case r < 105:
-			return seed + `r`, H
+			return `r`, H
 		case r < 169:
-			return seed + `a`, H
+			return `a`, H
 		case r < 230:
-			return seed + `h`, H
+			return `h`, H
 		case r < 271:
-			return seed + `i`, H
+			return `i`, H
 		case r < 296:
-			return seed + `u`, H
+			return `u`, H
 		case r < 319:
-			return seed + `w`, H
+			return `w`, H
 		case r < 322:
-			return seed + `y`, H
+			return `y`, H
 		case r < 323:
-			return seed + `s`, H
+			return `s`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -3778,21 +3780,21 @@ retry:
 		r := rng.IntN(14)
 		switch {
 		case r < 4:
-			return seed + `l`, H
+			return `l`, H
 		case r < 6:
-			return seed + `a`, H
+			return `a`, H
 		case r < 8:
-			return seed + `r`, H
+			return `r`, H
 		case r < 10:
-			return seed + `o`, H
+			return `o`, H
 		case r < 11:
-			return seed + `u`, H
+			return `u`, H
 		case r < 12:
-			return seed + `e`, H
+			return `e`, H
 		case r < 13:
-			return seed + `i`, H
+			return `i`, H
 		case r < 14:
-			return seed + `y`, H
+			return `y`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -3801,21 +3803,21 @@ retry:
 		r := rng.IntN(14)
 		switch {
 		case r < 5:
-			return seed + `n`, H
+			return `n`, H
 		case r < 7:
-			return seed + `y`, H
+			return `y`, H
 		case r < 9:
-			return seed + `g`, H
+			return `g`, H
 		case r < 10:
-			return seed + `f`, H
+			return `f`, H
 		case r < 11:
-			return seed + `v`, H
+			return `v`, H
 		case r < 12:
-			return seed + `u`, H
+			return `u`, H
 		case r < 13:
-			return seed + `r`, H
+			return `r`, H
 		case r < 14:
-			return seed + `d`, H
+			return `d`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -3824,21 +3826,21 @@ retry:
 		r := rng.IntN(476)
 		switch {
 		case r < 410:
-			return seed + `n`, H
+			return `n`, H
 		case r < 446:
-			return seed + `p`, H
+			return `p`, H
 		case r < 455:
-			return seed + `r`, H
+			return `r`, H
 		case r < 463:
-			return seed + `s`, H
+			return `s`, H
 		case r < 469:
-			return seed + `t`, H
+			return `t`, H
 		case r < 472:
-			return seed + `l`, H
+			return `l`, H
 		case r < 475:
-			return seed + `m`, H
+			return `m`, H
 		case r < 476:
-			return seed + `d`, H
+			return `d`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -3847,21 +3849,21 @@ retry:
 		r := rng.IntN(27)
 		switch {
 		case r < 8:
-			return seed + `t`, H
+			return `t`, H
 		case r < 15:
-			return seed + `e`, H
+			return `e`, H
 		case r < 21:
-			return seed + `i`, H
+			return `i`, H
 		case r < 23:
-			return seed + `y`, H
+			return `y`, H
 		case r < 24:
-			return seed + `w`, H
+			return `w`, H
 		case r < 25:
-			return seed + `u`, H
+			return `u`, H
 		case r < 26:
-			return seed + `a`, H
+			return `a`, H
 		case r < 27:
-			return seed + `c`, H
+			return `c`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -3870,21 +3872,21 @@ retry:
 		r := rng.IntN(45)
 		switch {
 		case r < 21:
-			return seed + `i`, H
+			return `i`, H
 		case r < 28:
-			return seed + `u`, H
+			return `u`, H
 		case r < 35:
-			return seed + `o`, H
+			return `o`, H
 		case r < 38:
-			return seed + `l`, H
+			return `l`, H
 		case r < 41:
-			return seed + `e`, H
+			return `e`, H
 		case r < 43:
-			return seed + `a`, H
+			return `a`, H
 		case r < 44:
-			return seed + `h`, H
+			return `h`, H
 		case r < 45:
-			return seed + `y`, H
+			return `y`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -3893,21 +3895,21 @@ retry:
 		r := rng.IntN(59)
 		switch {
 		case r < 25:
-			return seed + `f`, H
+			return `f`, H
 		case r < 42:
-			return seed + `t`, H
+			return `t`, H
 		case r < 50:
-			return seed + `e`, H
+			return `e`, H
 		case r < 53:
-			return seed + `l`, H
+			return `l`, H
 		case r < 55:
-			return seed + `a`, H
+			return `a`, H
 		case r < 57:
-			return seed + `r`, H
+			return `r`, H
 		case r < 58:
-			return seed + `n`, H
+			return `n`, H
 		case r < 59:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -3916,21 +3918,21 @@ retry:
 		r := rng.IntN(24)
 		switch {
 		case r < 9:
-			return seed + `e`, H
+			return `e`, H
 		case r < 13:
-			return seed + `u`, H
+			return `u`, H
 		case r < 16:
-			return seed + `a`, H
+			return `a`, H
 		case r < 19:
-			return seed + `i`, H
+			return `i`, H
 		case r < 21:
-			return seed + `l`, H
+			return `l`, H
 		case r < 22:
-			return seed + `r`, H
+			return `r`, H
 		case r < 23:
-			return seed + `o`, H
+			return `o`, H
 		case r < 24:
-			return seed + `b`, H
+			return `b`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -3939,21 +3941,21 @@ retry:
 		r := rng.IntN(55)
 		switch {
 		case r < 27:
-			return seed + `i`, H
+			return `i`, H
 		case r < 38:
-			return seed + `e`, H
+			return `e`, H
 		case r < 43:
-			return seed + `n`, H
+			return `n`, H
 		case r < 48:
-			return seed + `a`, H
+			return `a`, H
 		case r < 51:
-			return seed + `o`, H
+			return `o`, H
 		case r < 53:
-			return seed + `u`, H
+			return `u`, H
 		case r < 54:
-			return seed + `l`, H
+			return `l`, H
 		case r < 55:
-			return seed + `r`, H
+			return `r`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -3962,21 +3964,21 @@ retry:
 		r := rng.IntN(75)
 		switch {
 		case r < 30:
-			return seed + `l`, H
+			return `l`, H
 		case r < 44:
-			return seed + `e`, H
+			return `e`, H
 		case r < 52:
-			return seed + `a`, H
+			return `a`, H
 		case r < 60:
-			return seed + `i`, H
+			return `i`, H
 		case r < 68:
-			return seed + `o`, H
+			return `o`, H
 		case r < 72:
-			return seed + `u`, H
+			return `u`, H
 		case r < 74:
-			return seed + `r`, H
+			return `r`, H
 		case r < 75:
-			return seed + `n`, H
+			return `n`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -3985,21 +3987,21 @@ retry:
 		r := rng.IntN(56)
 		switch {
 		case r < 17:
-			return seed + `o`, H
+			return `o`, H
 		case r < 29:
-			return seed + `a`, H
+			return `a`, H
 		case r < 41:
-			return seed + `e`, H
+			return `e`, H
 		case r < 47:
-			return seed + `i`, H
+			return `i`, H
 		case r < 51:
-			return seed + `r`, H
+			return `r`, H
 		case r < 54:
-			return seed + `y`, H
+			return `y`, H
 		case r < 55:
-			return seed + `l`, H
+			return `l`, H
 		case r < 56:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -4008,21 +4010,21 @@ retry:
 		r := rng.IntN(134)
 		switch {
 		case r < 40:
-			return seed + `a`, H
+			return `a`, H
 		case r < 73:
-			return seed + `o`, H
+			return `o`, H
 		case r < 99:
-			return seed + `r`, H
+			return `r`, H
 		case r < 112:
-			return seed + `u`, H
+			return `u`, H
 		case r < 121:
-			return seed + `h`, H
+			return `h`, H
 		case r < 129:
-			return seed + `e`, H
+			return `e`, H
 		case r < 133:
-			return seed + `i`, H
+			return `i`, H
 		case r < 134:
-			return seed + `l`, H
+			return `l`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -4031,23 +4033,23 @@ retry:
 		r := rng.IntN(57)
 		switch {
 		case r < 16:
-			return seed + `r`, H
+			return `r`, H
 		case r < 27:
-			return seed + `l`, H
+			return `l`, H
 		case r < 34:
-			return seed + `c`, H
+			return `c`, H
 		case r < 40:
-			return seed + `u`, H
+			return `u`, H
 		case r < 45:
-			return seed + `t`, H
+			return `t`, H
 		case r < 49:
-			return seed + `i`, H
+			return `i`, H
 		case r < 53:
-			return seed + `k`, H
+			return `k`, H
 		case r < 55:
-			return seed + `w`, H
+			return `w`, H
 		case r < 57:
-			return seed + `y`, H
+			return `y`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -4056,23 +4058,23 @@ retry:
 		r := rng.IntN(751)
 		switch {
 		case r < 224:
-			return seed + `o`, H
+			return `o`, H
 		case r < 389:
-			return seed + `a`, H
+			return `a`, H
 		case r < 496:
-			return seed + `r`, H
+			return `r`, H
 		case r < 593:
-			return seed + `h`, H
+			return `h`, H
 		case r < 656:
-			return seed + `l`, H
+			return `l`, H
 		case r < 708:
-			return seed + `u`, H
+			return `u`, H
 		case r < 727:
-			return seed + `i`, H
+			return `i`, H
 		case r < 743:
-			return seed + `e`, H
+			return `e`, H
 		case r < 751:
-			return seed + `y`, H
+			return `y`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -4081,23 +4083,23 @@ retry:
 		r := rng.IntN(304)
 		switch {
 		case r < 97:
-			return seed + `r`, H
+			return `r`, H
 		case r < 142:
-			return seed + `a`, H
+			return `a`, H
 		case r < 185:
-			return seed + `l`, H
+			return `l`, H
 		case r < 218:
-			return seed + `e`, H
+			return `e`, H
 		case r < 250:
-			return seed + `o`, H
+			return `o`, H
 		case r < 277:
-			return seed + `u`, H
+			return `u`, H
 		case r < 301:
-			return seed + `i`, H
+			return `i`, H
 		case r < 303:
-			return seed + `n`, H
+			return `n`, H
 		case r < 304:
-			return seed + `y`, H
+			return `y`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -4106,23 +4108,23 @@ retry:
 		r := rng.IntN(61)
 		switch {
 		case r < 32:
-			return seed + `i`, H
+			return `i`, H
 		case r < 46:
-			return seed + `e`, H
+			return `e`, H
 		case r < 54:
-			return seed + `y`, H
+			return `y`, H
 		case r < 56:
-			return seed + `a`, H
+			return `a`, H
 		case r < 57:
-			return seed + `n`, H
+			return `n`, H
 		case r < 58:
-			return seed + `w`, H
+			return `w`, H
 		case r < 59:
-			return seed + `l`, H
+			return `l`, H
 		case r < 60:
-			return seed + `t`, H
+			return `t`, H
 		case r < 61:
-			return seed + `b`, H
+			return `b`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -4131,23 +4133,23 @@ retry:
 		r := rng.IntN(19)
 		switch {
 		case r < 4:
-			return seed + `h`, H
+			return `h`, H
 		case r < 7:
-			return seed + `i`, H
+			return `i`, H
 		case r < 9:
-			return seed + `f`, H
+			return `f`, H
 		case r < 11:
-			return seed + `a`, H
+			return `a`, H
 		case r < 13:
-			return seed + `e`, H
+			return `e`, H
 		case r < 15:
-			return seed + `l`, H
+			return `l`, H
 		case r < 17:
-			return seed + `t`, H
+			return `t`, H
 		case r < 18:
-			return seed + `r`, H
+			return `r`, H
 		case r < 19:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -4156,23 +4158,23 @@ retry:
 		r := rng.IntN(19)
 		switch {
 		case r < 6:
-			return seed + `r`, H
+			return `r`, H
 		case r < 11:
-			return seed + `b`, H
+			return `b`, H
 		case r < 13:
-			return seed + `l`, H
+			return `l`, H
 		case r < 14:
-			return seed + `n`, H
+			return `n`, H
 		case r < 15:
-			return seed + `w`, H
+			return `w`, H
 		case r < 16:
-			return seed + `g`, H
+			return `g`, H
 		case r < 17:
-			return seed + `h`, H
+			return `h`, H
 		case r < 18:
-			return seed + `p`, H
+			return `p`, H
 		case r < 19:
-			return seed + `m`, H
+			return `m`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -4181,23 +4183,23 @@ retry:
 		r := rng.IntN(14)
 		switch {
 		case r < 3:
-			return seed + `m`, H
+			return `m`, H
 		case r < 5:
-			return seed + `w`, H
+			return `w`, H
 		case r < 7:
-			return seed + `t`, H
+			return `t`, H
 		case r < 9:
-			return seed + `o`, H
+			return `o`, H
 		case r < 10:
-			return seed + `h`, H
+			return `h`, H
 		case r < 11:
-			return seed + `x`, H
+			return `x`, H
 		case r < 12:
-			return seed + `l`, H
+			return `l`, H
 		case r < 13:
-			return seed + `p`, H
+			return `p`, H
 		case r < 14:
-			return seed + `b`, H
+			return `b`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -4206,23 +4208,23 @@ retry:
 		r := rng.IntN(25)
 		switch {
 		case r < 8:
-			return seed + `e`, H
+			return `e`, H
 		case r < 14:
-			return seed + `n`, H
+			return `n`, H
 		case r < 17:
-			return seed + `t`, H
+			return `t`, H
 		case r < 19:
-			return seed + `h`, H
+			return `h`, H
 		case r < 21:
-			return seed + `o`, H
+			return `o`, H
 		case r < 22:
-			return seed + `a`, H
+			return `a`, H
 		case r < 23:
-			return seed + `l`, H
+			return `l`, H
 		case r < 24:
-			return seed + `i`, H
+			return `i`, H
 		case r < 25:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -4231,23 +4233,23 @@ retry:
 		r := rng.IntN(19)
 		switch {
 		case r < 8:
-			return seed + `e`, H
+			return `e`, H
 		case r < 11:
-			return seed + `l`, H
+			return `l`, H
 		case r < 13:
-			return seed + `i`, H
+			return `i`, H
 		case r < 14:
-			return seed + `n`, H
+			return `n`, H
 		case r < 15:
-			return seed + `f`, H
+			return `f`, H
 		case r < 16:
-			return seed + `w`, H
+			return `w`, H
 		case r < 17:
-			return seed + `y`, H
+			return `y`, H
 		case r < 18:
-			return seed + `r`, H
+			return `r`, H
 		case r < 19:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -4256,23 +4258,23 @@ retry:
 		r := rng.IntN(53)
 		switch {
 		case r < 15:
-			return seed + `h`, H
+			return `h`, H
 		case r < 26:
-			return seed + `e`, H
+			return `e`, H
 		case r < 34:
-			return seed + `o`, H
+			return `o`, H
 		case r < 39:
-			return seed + `u`, H
+			return `u`, H
 		case r < 43:
-			return seed + `a`, H
+			return `a`, H
 		case r < 47:
-			return seed + `i`, H
+			return `i`, H
 		case r < 50:
-			return seed + `l`, H
+			return `l`, H
 		case r < 52:
-			return seed + `t`, H
+			return `t`, H
 		case r < 53:
-			return seed + `r`, H
+			return `r`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -4281,23 +4283,23 @@ retry:
 		r := rng.IntN(132)
 		switch {
 		case r < 56:
-			return seed + `n`, H
+			return `n`, H
 		case r < 88:
-			return seed + `l`, H
+			return `l`, H
 		case r < 102:
-			return seed + `r`, H
+			return `r`, H
 		case r < 115:
-			return seed + `d`, H
+			return `d`, H
 		case r < 123:
-			return seed + `m`, H
+			return `m`, H
 		case r < 128:
-			return seed + `s`, H
+			return `s`, H
 		case r < 130:
-			return seed + `t`, H
+			return `t`, H
 		case r < 131:
-			return seed + `k`, H
+			return `k`, H
 		case r < 132:
-			return seed + `c`, H
+			return `c`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -4306,23 +4308,23 @@ retry:
 		r := rng.IntN(47)
 		switch {
 		case r < 12:
-			return seed + `o`, H
+			return `o`, H
 		case r < 23:
-			return seed + `i`, H
+			return `i`, H
 		case r < 30:
-			return seed + `a`, H
+			return `a`, H
 		case r < 36:
-			return seed + `e`, H
+			return `e`, H
 		case r < 40:
-			return seed + `l`, H
+			return `l`, H
 		case r < 43:
-			return seed + `y`, H
+			return `y`, H
 		case r < 45:
-			return seed + `u`, H
+			return `u`, H
 		case r < 46:
-			return seed + `r`, H
+			return `r`, H
 		case r < 47:
-			return seed + `s`, H
+			return `s`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -4331,23 +4333,23 @@ retry:
 		r := rng.IntN(33)
 		switch {
 		case r < 13:
-			return seed + `e`, H
+			return `e`, H
 		case r < 20:
-			return seed + `i`, H
+			return `i`, H
 		case r < 25:
-			return seed + `y`, H
+			return `y`, H
 		case r < 28:
-			return seed + `l`, H
+			return `l`, H
 		case r < 29:
-			return seed + `n`, H
+			return `n`, H
 		case r < 30:
-			return seed + `w`, H
+			return `w`, H
 		case r < 31:
-			return seed + `h`, H
+			return `h`, H
 		case r < 32:
-			return seed + `s`, H
+			return `s`, H
 		case r < 33:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -4356,23 +4358,23 @@ retry:
 		r := rng.IntN(63)
 		switch {
 		case r < 16:
-			return seed + `e`, H
+			return `e`, H
 		case r < 30:
-			return seed + `i`, H
+			return `i`, H
 		case r < 44:
-			return seed + `l`, H
+			return `l`, H
 		case r < 49:
-			return seed + `o`, H
+			return `o`, H
 		case r < 53:
-			return seed + `u`, H
+			return `u`, H
 		case r < 57:
-			return seed + `y`, H
+			return `y`, H
 		case r < 60:
-			return seed + `r`, H
+			return `r`, H
 		case r < 62:
-			return seed + `a`, H
+			return `a`, H
 		case r < 63:
-			return seed + `n`, H
+			return `n`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -4381,23 +4383,23 @@ retry:
 		r := rng.IntN(578)
 		switch {
 		case r < 166:
-			return seed + `r`, H
+			return `r`, H
 		case r < 302:
-			return seed + `a`, H
+			return `a`, H
 		case r < 379:
-			return seed + `o`, H
+			return `o`, H
 		case r < 447:
-			return seed + `e`, H
+			return `e`, H
 		case r < 506:
-			return seed + `u`, H
+			return `u`, H
 		case r < 562:
-			return seed + `l`, H
+			return `l`, H
 		case r < 574:
-			return seed + `h`, H
+			return `h`, H
 		case r < 577:
-			return seed + `y`, H
+			return `y`, H
 		case r < 578:
-			return seed + `s`, H
+			return `s`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -4406,23 +4408,23 @@ retry:
 		r := rng.IntN(47)
 		switch {
 		case r < 10:
-			return seed + `a`, H
+			return `a`, H
 		case r < 20:
-			return seed + `o`, H
+			return `o`, H
 		case r < 29:
-			return seed + `u`, H
+			return `u`, H
 		case r < 34:
-			return seed + `r`, H
+			return `r`, H
 		case r < 38:
-			return seed + `l`, H
+			return `l`, H
 		case r < 41:
-			return seed + `i`, H
+			return `i`, H
 		case r < 43:
-			return seed + `t`, H
+			return `t`, H
 		case r < 45:
-			return seed + `e`, H
+			return `e`, H
 		case r < 47:
-			return seed + `b`, H
+			return `b`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -4431,23 +4433,23 @@ retry:
 		r := rng.IntN(127)
 		switch {
 		case r < 59:
-			return seed + `e`, H
+			return `e`, H
 		case r < 80:
-			return seed + `i`, H
+			return `i`, H
 		case r < 96:
-			return seed + `l`, H
+			return `l`, H
 		case r < 106:
-			return seed + `a`, H
+			return `a`, H
 		case r < 116:
-			return seed + `o`, H
+			return `o`, H
 		case r < 123:
-			return seed + `y`, H
+			return `y`, H
 		case r < 125:
-			return seed + `r`, H
+			return `r`, H
 		case r < 126:
-			return seed + `h`, H
+			return `h`, H
 		case r < 127:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -4456,23 +4458,23 @@ retry:
 		r := rng.IntN(41)
 		switch {
 		case r < 8:
-			return seed + `l`, H
+			return `l`, H
 		case r < 16:
-			return seed + `o`, H
+			return `o`, H
 		case r < 22:
-			return seed + `e`, H
+			return `e`, H
 		case r < 28:
-			return seed + `a`, H
+			return `a`, H
 		case r < 33:
-			return seed + `i`, H
+			return `i`, H
 		case r < 37:
-			return seed + `h`, H
+			return `h`, H
 		case r < 39:
-			return seed + `r`, H
+			return `r`, H
 		case r < 40:
-			return seed + `n`, H
+			return `n`, H
 		case r < 41:
-			return seed + `y`, H
+			return `y`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -4481,23 +4483,23 @@ retry:
 		r := rng.IntN(50)
 		switch {
 		case r < 13:
-			return seed + `e`, H
+			return `e`, H
 		case r < 25:
-			return seed + `i`, H
+			return `i`, H
 		case r < 33:
-			return seed + `y`, H
+			return `y`, H
 		case r < 40:
-			return seed + `u`, H
+			return `u`, H
 		case r < 43:
-			return seed + `g`, H
+			return `g`, H
 		case r < 46:
-			return seed + `o`, H
+			return `o`, H
 		case r < 48:
-			return seed + `l`, H
+			return `l`, H
 		case r < 49:
-			return seed + `a`, H
+			return `a`, H
 		case r < 50:
-			return seed + `d`, H
+			return `d`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -4506,23 +4508,23 @@ retry:
 		r := rng.IntN(187)
 		switch {
 		case r < 140:
-			return seed + `n`, H
+			return `n`, H
 		case r < 163:
-			return seed + `u`, H
+			return `u`, H
 		case r < 169:
-			return seed + `r`, H
+			return `r`, H
 		case r < 175:
-			return seed + `l`, H
+			return `l`, H
 		case r < 180:
-			return seed + `t`, H
+			return `t`, H
 		case r < 183:
-			return seed + `c`, H
+			return `c`, H
 		case r < 185:
-			return seed + `d`, H
+			return `d`, H
 		case r < 186:
-			return seed + `x`, H
+			return `x`, H
 		case r < 187:
-			return seed + `m`, H
+			return `m`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -4531,23 +4533,23 @@ retry:
 		r := rng.IntN(51)
 		switch {
 		case r < 19:
-			return seed + `l`, H
+			return `l`, H
 		case r < 30:
-			return seed + `e`, H
+			return `e`, H
 		case r < 36:
-			return seed + `u`, H
+			return `u`, H
 		case r < 41:
-			return seed + `b`, H
+			return `b`, H
 		case r < 44:
-			return seed + `i`, H
+			return `i`, H
 		case r < 47:
-			return seed + `r`, H
+			return `r`, H
 		case r < 49:
-			return seed + `a`, H
+			return `a`, H
 		case r < 50:
-			return seed + `o`, H
+			return `o`, H
 		case r < 51:
-			return seed + `c`, H
+			return `c`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -4556,25 +4558,25 @@ retry:
 		r := rng.IntN(160)
 		switch {
 		case r < 38:
-			return seed + `o`, H
+			return `o`, H
 		case r < 73:
-			return seed + `e`, H
+			return `e`, H
 		case r < 102:
-			return seed + `i`, H
+			return `i`, H
 		case r < 119:
-			return seed + `l`, H
+			return `l`, H
 		case r < 136:
-			return seed + `r`, H
+			return `r`, H
 		case r < 145:
-			return seed + `a`, H
+			return `a`, H
 		case r < 152:
-			return seed + `h`, H
+			return `h`, H
 		case r < 156:
-			return seed + `u`, H
+			return `u`, H
 		case r < 159:
-			return seed + `y`, H
+			return `y`, H
 		case r < 160:
-			return seed + `n`, H
+			return `n`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -4583,25 +4585,25 @@ retry:
 		r := rng.IntN(23)
 		switch {
 		case r < 6:
-			return seed + `e`, H
+			return `e`, H
 		case r < 11:
-			return seed + `a`, H
+			return `a`, H
 		case r < 14:
-			return seed + `o`, H
+			return `o`, H
 		case r < 16:
-			return seed + `i`, H
+			return `i`, H
 		case r < 18:
-			return seed + `s`, H
+			return `s`, H
 		case r < 19:
-			return seed + `n`, H
+			return `n`, H
 		case r < 20:
-			return seed + `f`, H
+			return `f`, H
 		case r < 21:
-			return seed + `l`, H
+			return `l`, H
 		case r < 22:
-			return seed + `m`, H
+			return `m`, H
 		case r < 23:
-			return seed + `r`, H
+			return `r`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -4610,25 +4612,25 @@ retry:
 		r := rng.IntN(22)
 		switch {
 		case r < 5:
-			return seed + `h`, H
+			return `h`, H
 		case r < 8:
-			return seed + `i`, H
+			return `i`, H
 		case r < 11:
-			return seed + `m`, H
+			return `m`, H
 		case r < 13:
-			return seed + `y`, H
+			return `y`, H
 		case r < 15:
-			return seed + `u`, H
+			return `u`, H
 		case r < 17:
-			return seed + `k`, H
+			return `k`, H
 		case r < 19:
-			return seed + `o`, H
+			return `o`, H
 		case r < 20:
-			return seed + `c`, H
+			return `c`, H
 		case r < 21:
-			return seed + `e`, H
+			return `e`, H
 		case r < 22:
-			return seed + `p`, H
+			return `p`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -4637,25 +4639,25 @@ retry:
 		r := rng.IntN(118)
 		switch {
 		case r < 44:
-			return seed + `i`, H
+			return `i`, H
 		case r < 67:
-			return seed + `o`, H
+			return `o`, H
 		case r < 83:
-			return seed + `e`, H
+			return `e`, H
 		case r < 96:
-			return seed + `a`, H
+			return `a`, H
 		case r < 106:
-			return seed + `u`, H
+			return `u`, H
 		case r < 110:
-			return seed + `l`, H
+			return `l`, H
 		case r < 113:
-			return seed + `s`, H
+			return `s`, H
 		case r < 116:
-			return seed + `r`, H
+			return `r`, H
 		case r < 117:
-			return seed + `f`, H
+			return `f`, H
 		case r < 118:
-			return seed + `m`, H
+			return `m`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -4664,25 +4666,25 @@ retry:
 		r := rng.IntN(58)
 		switch {
 		case r < 18:
-			return seed + `r`, H
+			return `r`, H
 		case r < 27:
-			return seed + `l`, H
+			return `l`, H
 		case r < 35:
-			return seed + `a`, H
+			return `a`, H
 		case r < 43:
-			return seed + `e`, H
+			return `e`, H
 		case r < 51:
-			return seed + `d`, H
+			return `d`, H
 		case r < 54:
-			return seed + `n`, H
+			return `n`, H
 		case r < 55:
-			return seed + `i`, H
+			return `i`, H
 		case r < 56:
-			return seed + `s`, H
+			return `s`, H
 		case r < 57:
-			return seed + `b`, H
+			return `b`, H
 		case r < 58:
-			return seed + `p`, H
+			return `p`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -4691,25 +4693,25 @@ retry:
 		r := rng.IntN(20)
 		switch {
 		case r < 6:
-			return seed + `t`, H
+			return `t`, H
 		case r < 8:
-			return seed + `h`, H
+			return `h`, H
 		case r < 10:
-			return seed + `i`, H
+			return `i`, H
 		case r < 12:
-			return seed + `e`, H
+			return `e`, H
 		case r < 14:
-			return seed + `m`, H
+			return `m`, H
 		case r < 16:
-			return seed + `c`, H
+			return `c`, H
 		case r < 17:
-			return seed + `f`, H
+			return `f`, H
 		case r < 18:
-			return seed + `a`, H
+			return `a`, H
 		case r < 19:
-			return seed + `o`, H
+			return `o`, H
 		case r < 20:
-			return seed + `l`, H
+			return `l`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -4718,25 +4720,25 @@ retry:
 		r := rng.IntN(12)
 		switch {
 		case r < 2:
-			return seed + `s`, H
+			return `s`, H
 		case r < 4:
-			return seed + `r`, H
+			return `r`, H
 		case r < 5:
-			return seed + `n`, H
+			return `n`, H
 		case r < 6:
-			return seed + `x`, H
+			return `x`, H
 		case r < 7:
-			return seed + `d`, H
+			return `d`, H
 		case r < 8:
-			return seed + `y`, H
+			return `y`, H
 		case r < 9:
-			return seed + `t`, H
+			return `t`, H
 		case r < 10:
-			return seed + `m`, H
+			return `m`, H
 		case r < 11:
-			return seed + `i`, H
+			return `i`, H
 		case r < 12:
-			return seed + `v`, H
+			return `v`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -4745,25 +4747,25 @@ retry:
 		r := rng.IntN(207)
 		switch {
 		case r < 66:
-			return seed + `e`, H
+			return `e`, H
 		case r < 109:
-			return seed + `h`, H
+			return `h`, H
 		case r < 130:
-			return seed + `i`, H
+			return `i`, H
 		case r < 149:
-			return seed + `o`, H
+			return `o`, H
 		case r < 165:
-			return seed + `y`, H
+			return `y`, H
 		case r < 177:
-			return seed + `l`, H
+			return `l`, H
 		case r < 188:
-			return seed + `t`, H
+			return `t`, H
 		case r < 196:
-			return seed + `r`, H
+			return `r`, H
 		case r < 202:
-			return seed + `a`, H
+			return `a`, H
 		case r < 207:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -4772,25 +4774,25 @@ retry:
 		r := rng.IntN(106)
 		switch {
 		case r < 26:
-			return seed + `l`, H
+			return `l`, H
 		case r < 48:
-			return seed + `n`, H
+			return `n`, H
 		case r < 66:
-			return seed + `t`, H
+			return `t`, H
 		case r < 84:
-			return seed + `b`, H
+			return `b`, H
 		case r < 93:
-			return seed + `r`, H
+			return `r`, H
 		case r < 97:
-			return seed + `g`, H
+			return `g`, H
 		case r < 100:
-			return seed + `c`, H
+			return `c`, H
 		case r < 102:
-			return seed + `s`, H
+			return `s`, H
 		case r < 104:
-			return seed + `m`, H
+			return `m`, H
 		case r < 106:
-			return seed + `p`, H
+			return `p`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -4799,25 +4801,25 @@ retry:
 		r := rng.IntN(36)
 		switch {
 		case r < 11:
-			return seed + `i`, H
+			return `i`, H
 		case r < 17:
-			return seed + `e`, H
+			return `e`, H
 		case r < 21:
-			return seed + `y`, H
+			return `y`, H
 		case r < 25:
-			return seed + `r`, H
+			return `r`, H
 		case r < 28:
-			return seed + `h`, H
+			return `h`, H
 		case r < 30:
-			return seed + `u`, H
+			return `u`, H
 		case r < 32:
-			return seed + `a`, H
+			return `a`, H
 		case r < 34:
-			return seed + `z`, H
+			return `z`, H
 		case r < 35:
-			return seed + `o`, H
+			return `o`, H
 		case r < 36:
-			return seed + `t`, H
+			return `t`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -4826,25 +4828,25 @@ retry:
 		r := rng.IntN(91)
 		switch {
 		case r < 17:
-			return seed + `u`, H
+			return `u`, H
 		case r < 33:
-			return seed + `i`, H
+			return `i`, H
 		case r < 45:
-			return seed + `e`, H
+			return `e`, H
 		case r < 56:
-			return seed + `o`, H
+			return `o`, H
 		case r < 66:
-			return seed + `l`, H
+			return `l`, H
 		case r < 73:
-			return seed + `r`, H
+			return `r`, H
 		case r < 79:
-			return seed + `a`, H
+			return `a`, H
 		case r < 85:
-			return seed + `t`, H
+			return `t`, H
 		case r < 89:
-			return seed + `f`, H
+			return `f`, H
 		case r < 91:
-			return seed + `y`, H
+			return `y`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -4853,25 +4855,25 @@ retry:
 		r := rng.IntN(258)
 		switch {
 		case r < 73:
-			return seed + `s`, H
+			return `s`, H
 		case r < 146:
-			return seed + `t`, H
+			return `t`, H
 		case r < 211:
-			return seed + `n`, H
+			return `n`, H
 		case r < 227:
-			return seed + `r`, H
+			return `r`, H
 		case r < 237:
-			return seed + `c`, H
+			return `c`, H
 		case r < 244:
-			return seed + `g`, H
+			return `g`, H
 		case r < 250:
-			return seed + `p`, H
+			return `p`, H
 		case r < 253:
-			return seed + `d`, H
+			return `d`, H
 		case r < 256:
-			return seed + `b`, H
+			return `b`, H
 		case r < 258:
-			return seed + `l`, H
+			return `l`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -4880,27 +4882,27 @@ retry:
 		r := rng.IntN(61)
 		switch {
 		case r < 17:
-			return seed + `i`, H
+			return `i`, H
 		case r < 30:
-			return seed + `e`, H
+			return `e`, H
 		case r < 38:
-			return seed + `l`, H
+			return `l`, H
 		case r < 44:
-			return seed + `y`, H
+			return `y`, H
 		case r < 49:
-			return seed + `n`, H
+			return `n`, H
 		case r < 52:
-			return seed + `s`, H
+			return `s`, H
 		case r < 54:
-			return seed + `h`, H
+			return `h`, H
 		case r < 56:
-			return seed + `a`, H
+			return `a`, H
 		case r < 58:
-			return seed + `m`, H
+			return `m`, H
 		case r < 60:
-			return seed + `b`, H
+			return `b`, H
 		case r < 61:
-			return seed + `r`, H
+			return `r`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -4909,27 +4911,27 @@ retry:
 		r := rng.IntN(26)
 		switch {
 		case r < 5:
-			return seed + `i`, H
+			return `i`, H
 		case r < 9:
-			return seed + `r`, H
+			return `r`, H
 		case r < 12:
-			return seed + `s`, H
+			return `s`, H
 		case r < 15:
-			return seed + `z`, H
+			return `z`, H
 		case r < 17:
-			return seed + `e`, H
+			return `e`, H
 		case r < 19:
-			return seed + `a`, H
+			return `a`, H
 		case r < 21:
-			return seed + `m`, H
+			return `m`, H
 		case r < 23:
-			return seed + `g`, H
+			return `g`, H
 		case r < 24:
-			return seed + `w`, H
+			return `w`, H
 		case r < 25:
-			return seed + `o`, H
+			return `o`, H
 		case r < 26:
-			return seed + `p`, H
+			return `p`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -4938,27 +4940,27 @@ retry:
 		r := rng.IntN(99)
 		switch {
 		case r < 29:
-			return seed + `b`, H
+			return `b`, H
 		case r < 49:
-			return seed + `p`, H
+			return `p`, H
 		case r < 64:
-			return seed + `m`, H
+			return `m`, H
 		case r < 78:
-			return seed + `e`, H
+			return `e`, H
 		case r < 87:
-			return seed + `i`, H
+			return `i`, H
 		case r < 92:
-			return seed + `o`, H
+			return `o`, H
 		case r < 94:
-			return seed + `s`, H
+			return `s`, H
 		case r < 96:
-			return seed + `a`, H
+			return `a`, H
 		case r < 97:
-			return seed + `n`, H
+			return `n`, H
 		case r < 98:
-			return seed + `d`, H
+			return `d`, H
 		case r < 99:
-			return seed + `v`, H
+			return `v`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -4967,27 +4969,27 @@ retry:
 		r := rng.IntN(23)
 		switch {
 		case r < 6:
-			return seed + `l`, H
+			return `l`, H
 		case r < 9:
-			return seed + `r`, H
+			return `r`, H
 		case r < 12:
-			return seed + `c`, H
+			return `c`, H
 		case r < 14:
-			return seed + `n`, H
+			return `n`, H
 		case r < 16:
-			return seed + `d`, H
+			return `d`, H
 		case r < 18:
-			return seed + `m`, H
+			return `m`, H
 		case r < 19:
-			return seed + `t`, H
+			return `t`, H
 		case r < 20:
-			return seed + `p`, H
+			return `p`, H
 		case r < 21:
-			return seed + `g`, H
+			return `g`, H
 		case r < 22:
-			return seed + `v`, H
+			return `v`, H
 		case r < 23:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -4996,27 +4998,27 @@ retry:
 		r := rng.IntN(59)
 		switch {
 		case r < 19:
-			return seed + `l`, H
+			return `l`, H
 		case r < 34:
-			return seed + `e`, H
+			return `e`, H
 		case r < 47:
-			return seed + `i`, H
+			return `i`, H
 		case r < 51:
-			return seed + `y`, H
+			return `y`, H
 		case r < 53:
-			return seed + `a`, H
+			return `a`, H
 		case r < 54:
-			return seed + `n`, H
+			return `n`, H
 		case r < 55:
-			return seed + `o`, H
+			return `o`, H
 		case r < 56:
-			return seed + `r`, H
+			return `r`, H
 		case r < 57:
-			return seed + `s`, H
+			return `s`, H
 		case r < 58:
-			return seed + `p`, H
+			return `p`, H
 		case r < 59:
-			return seed + `b`, H
+			return `b`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -5025,27 +5027,27 @@ retry:
 		r := rng.IntN(69)
 		switch {
 		case r < 27:
-			return seed + `r`, H
+			return `r`, H
 		case r < 43:
-			return seed + `d`, H
+			return `d`, H
 		case r < 50:
-			return seed + `l`, H
+			return `l`, H
 		case r < 56:
-			return seed + `a`, H
+			return `a`, H
 		case r < 59:
-			return seed + `t`, H
+			return `t`, H
 		case r < 61:
-			return seed + `n`, H
+			return `n`, H
 		case r < 63:
-			return seed + `e`, H
+			return `e`, H
 		case r < 65:
-			return seed + `s`, H
+			return `s`, H
 		case r < 67:
-			return seed + `c`, H
+			return `c`, H
 		case r < 68:
-			return seed + `y`, H
+			return `y`, H
 		case r < 69:
-			return seed + `z`, H
+			return `z`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -5054,27 +5056,27 @@ retry:
 		r := rng.IntN(32)
 		switch {
 		case r < 11:
-			return seed + `y`, H
+			return `y`, H
 		case r < 17:
-			return seed + `i`, H
+			return `i`, H
 		case r < 20:
-			return seed + `l`, H
+			return `l`, H
 		case r < 22:
-			return seed + `r`, H
+			return `r`, H
 		case r < 24:
-			return seed + `k`, H
+			return `k`, H
 		case r < 26:
-			return seed + `c`, H
+			return `c`, H
 		case r < 28:
-			return seed + `g`, H
+			return `g`, H
 		case r < 29:
-			return seed + `h`, H
+			return `h`, H
 		case r < 30:
-			return seed + `t`, H
+			return `t`, H
 		case r < 31:
-			return seed + `v`, H
+			return `v`, H
 		case r < 32:
-			return seed + `b`, H
+			return `b`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -5083,27 +5085,27 @@ retry:
 		r := rng.IntN(34)
 		switch {
 		case r < 10:
-			return seed + `g`, H
+			return `g`, H
 		case r < 19:
-			return seed + `h`, H
+			return `h`, H
 		case r < 22:
-			return seed + `n`, H
+			return `n`, H
 		case r < 25:
-			return seed + `a`, H
+			return `a`, H
 		case r < 27:
-			return seed + `u`, H
+			return `u`, H
 		case r < 29:
-			return seed + `l`, H
+			return `l`, H
 		case r < 30:
-			return seed + `e`, H
+			return `e`, H
 		case r < 31:
-			return seed + `o`, H
+			return `o`, H
 		case r < 32:
-			return seed + `s`, H
+			return `s`, H
 		case r < 33:
-			return seed + `i`, H
+			return `i`, H
 		case r < 34:
-			return seed + `m`, H
+			return `m`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -5112,27 +5114,27 @@ retry:
 		r := rng.IntN(102)
 		switch {
 		case r < 30:
-			return seed + `p`, H
+			return `p`, H
 		case r < 50:
-			return seed + `t`, H
+			return `t`, H
 		case r < 69:
-			return seed + `c`, H
+			return `c`, H
 		case r < 77:
-			return seed + `e`, H
+			return `e`, H
 		case r < 85:
-			return seed + `i`, H
+			return `i`, H
 		case r < 91:
-			return seed + `a`, H
+			return `a`, H
 		case r < 95:
-			return seed + `o`, H
+			return `o`, H
 		case r < 98:
-			return seed + `h`, H
+			return `h`, H
 		case r < 100:
-			return seed + `u`, H
+			return `u`, H
 		case r < 101:
-			return seed + `f`, H
+			return `f`, H
 		case r < 102:
-			return seed + `q`, H
+			return `q`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -5141,27 +5143,27 @@ retry:
 		r := rng.IntN(108)
 		switch {
 		case r < 28:
-			return seed + `l`, H
+			return `l`, H
 		case r < 47:
-			return seed + `t`, H
+			return `t`, H
 		case r < 59:
-			return seed + `r`, H
+			return `r`, H
 		case r < 70:
-			return seed + `b`, H
+			return `b`, H
 		case r < 80:
-			return seed + `n`, H
+			return `n`, H
 		case r < 89:
-			return seed + `g`, H
+			return `g`, H
 		case r < 97:
-			return seed + `c`, H
+			return `c`, H
 		case r < 103:
-			return seed + `s`, H
+			return `s`, H
 		case r < 105:
-			return seed + `i`, H
+			return `i`, H
 		case r < 107:
-			return seed + `p`, H
+			return `p`, H
 		case r < 108:
-			return seed + `d`, H
+			return `d`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -5170,27 +5172,27 @@ retry:
 		r := rng.IntN(74)
 		switch {
 		case r < 25:
-			return seed + `i`, H
+			return `i`, H
 		case r < 35:
-			return seed + `u`, H
+			return `u`, H
 		case r < 43:
-			return seed + `e`, H
+			return `e`, H
 		case r < 51:
-			return seed + `a`, H
+			return `a`, H
 		case r < 59:
-			return seed + `g`, H
+			return `g`, H
 		case r < 63:
-			return seed + `d`, H
+			return `d`, H
 		case r < 67:
-			return seed + `o`, H
+			return `o`, H
 		case r < 70:
-			return seed + `y`, H
+			return `y`, H
 		case r < 72:
-			return seed + `l`, H
+			return `l`, H
 		case r < 73:
-			return seed + `t`, H
+			return `t`, H
 		case r < 74:
-			return seed + `r`, H
+			return `r`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -5199,27 +5201,27 @@ retry:
 		r := rng.IntN(71)
 		switch {
 		case r < 19:
-			return seed + `e`, H
+			return `e`, H
 		case r < 38:
-			return seed + `i`, H
+			return `i`, H
 		case r < 47:
-			return seed + `u`, H
+			return `u`, H
 		case r < 54:
-			return seed + `a`, H
+			return `a`, H
 		case r < 59:
-			return seed + `o`, H
+			return `o`, H
 		case r < 63:
-			return seed + `y`, H
+			return `y`, H
 		case r < 66:
-			return seed + `l`, H
+			return `l`, H
 		case r < 68:
-			return seed + `p`, H
+			return `p`, H
 		case r < 69:
-			return seed + `f`, H
+			return `f`, H
 		case r < 70:
-			return seed + `w`, H
+			return `w`, H
 		case r < 71:
-			return seed + `c`, H
+			return `c`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -5228,27 +5230,27 @@ retry:
 		r := rng.IntN(39)
 		switch {
 		case r < 9:
-			return seed + `l`, H
+			return `l`, H
 		case r < 17:
-			return seed + `n`, H
+			return `n`, H
 		case r < 21:
-			return seed + `d`, H
+			return `d`, H
 		case r < 25:
-			return seed + `e`, H
+			return `e`, H
 		case r < 29:
-			return seed + `s`, H
+			return `s`, H
 		case r < 33:
-			return seed + `a`, H
+			return `a`, H
 		case r < 35:
-			return seed + `r`, H
+			return `r`, H
 		case r < 36:
-			return seed + `f`, H
+			return `f`, H
 		case r < 37:
-			return seed + `t`, H
+			return `t`, H
 		case r < 38:
-			return seed + `u`, H
+			return `u`, H
 		case r < 39:
-			return seed + `b`, H
+			return `b`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -5257,27 +5259,27 @@ retry:
 		r := rng.IntN(26)
 		switch {
 		case r < 7:
-			return seed + `f`, H
+			return `f`, H
 		case r < 11:
-			return seed + `e`, H
+			return `e`, H
 		case r < 14:
-			return seed + `i`, H
+			return `i`, H
 		case r < 17:
-			return seed + `a`, H
+			return `a`, H
 		case r < 19:
-			return seed + `o`, H
+			return `o`, H
 		case r < 21:
-			return seed + `t`, H
+			return `t`, H
 		case r < 22:
-			return seed + `s`, H
+			return `s`, H
 		case r < 23:
-			return seed + `y`, H
+			return `y`, H
 		case r < 24:
-			return seed + `r`, H
+			return `r`, H
 		case r < 25:
-			return seed + `u`, H
+			return `u`, H
 		case r < 26:
-			return seed + `b`, H
+			return `b`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -5286,27 +5288,27 @@ retry:
 		r := rng.IntN(67)
 		switch {
 		case r < 33:
-			return seed + `r`, H
+			return `r`, H
 		case r < 43:
-			return seed + `o`, H
+			return `o`, H
 		case r < 51:
-			return seed + `m`, H
+			return `m`, H
 		case r < 54:
-			return seed + `v`, H
+			return `v`, H
 		case r < 57:
-			return seed + `b`, H
+			return `b`, H
 		case r < 59:
-			return seed + `w`, H
+			return `w`, H
 		case r < 61:
-			return seed + `k`, H
+			return `k`, H
 		case r < 63:
-			return seed + `u`, H
+			return `u`, H
 		case r < 65:
-			return seed + `l`, H
+			return `l`, H
 		case r < 66:
-			return seed + `n`, H
+			return `n`, H
 		case r < 67:
-			return seed + `f`, H
+			return `f`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -5315,27 +5317,27 @@ retry:
 		r := rng.IntN(131)
 		switch {
 		case r < 38:
-			return seed + `n`, H
+			return `n`, H
 		case r < 70:
-			return seed + `r`, H
+			return `r`, H
 		case r < 93:
-			return seed + `d`, H
+			return `d`, H
 		case r < 104:
-			return seed + `t`, H
+			return `t`, H
 		case r < 113:
-			return seed + `s`, H
+			return `s`, H
 		case r < 121:
-			return seed + `l`, H
+			return `l`, H
 		case r < 126:
-			return seed + `a`, H
+			return `a`, H
 		case r < 128:
-			return seed + `g`, H
+			return `g`, H
 		case r < 129:
-			return seed + `o`, H
+			return `o`, H
 		case r < 130:
-			return seed + `m`, H
+			return `m`, H
 		case r < 131:
-			return seed + `v`, H
+			return `v`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -5344,27 +5346,27 @@ retry:
 		r := rng.IntN(60)
 		switch {
 		case r < 10:
-			return seed + `y`, H
+			return `y`, H
 		case r < 18:
-			return seed + `r`, H
+			return `r`, H
 		case r < 26:
-			return seed + `g`, H
+			return `g`, H
 		case r < 33:
-			return seed + `e`, H
+			return `e`, H
 		case r < 40:
-			return seed + `a`, H
+			return `a`, H
 		case r < 46:
-			return seed + `i`, H
+			return `i`, H
 		case r < 52:
-			return seed + `u`, H
+			return `u`, H
 		case r < 56:
-			return seed + `n`, H
+			return `n`, H
 		case r < 58:
-			return seed + `l`, H
+			return `l`, H
 		case r < 59:
-			return seed + `w`, H
+			return `w`, H
 		case r < 60:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -5373,29 +5375,29 @@ retry:
 		r := rng.IntN(72)
 		switch {
 		case r < 15:
-			return seed + `l`, H
+			return `l`, H
 		case r < 29:
-			return seed + `t`, H
+			return `t`, H
 		case r < 41:
-			return seed + `n`, H
+			return `n`, H
 		case r < 48:
-			return seed + `d`, H
+			return `d`, H
 		case r < 53:
-			return seed + `c`, H
+			return `c`, H
 		case r < 57:
-			return seed + `e`, H
+			return `e`, H
 		case r < 61:
-			return seed + `r`, H
+			return `r`, H
 		case r < 65:
-			return seed + `a`, H
+			return `a`, H
 		case r < 67:
-			return seed + `o`, H
+			return `o`, H
 		case r < 69:
-			return seed + `s`, H
+			return `s`, H
 		case r < 71:
-			return seed + `g`, H
+			return `g`, H
 		case r < 72:
-			return seed + `z`, H
+			return `z`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -5404,29 +5406,29 @@ retry:
 		r := rng.IntN(135)
 		switch {
 		case r < 28:
-			return seed + `i`, H
+			return `i`, H
 		case r < 50:
-			return seed + `e`, H
+			return `e`, H
 		case r < 72:
-			return seed + `p`, H
+			return `p`, H
 		case r < 92:
-			return seed + `o`, H
+			return `o`, H
 		case r < 111:
-			return seed + `b`, H
+			return `b`, H
 		case r < 126:
-			return seed + `a`, H
+			return `a`, H
 		case r < 128:
-			return seed + `y`, H
+			return `y`, H
 		case r < 130:
-			return seed + `l`, H
+			return `l`, H
 		case r < 132:
-			return seed + `u`, H
+			return `u`, H
 		case r < 133:
-			return seed + `n`, H
+			return `n`, H
 		case r < 134:
-			return seed + `s`, H
+			return `s`, H
 		case r < 135:
-			return seed + `c`, H
+			return `c`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -5435,29 +5437,29 @@ retry:
 		r := rng.IntN(69)
 		switch {
 		case r < 15:
-			return seed + `t`, H
+			return `t`, H
 		case r < 28:
-			return seed + `n`, H
+			return `n`, H
 		case r < 39:
-			return seed + `d`, H
+			return `d`, H
 		case r < 48:
-			return seed + `s`, H
+			return `s`, H
 		case r < 55:
-			return seed + `c`, H
+			return `c`, H
 		case r < 60:
-			return seed + `g`, H
+			return `g`, H
 		case r < 63:
-			return seed + `r`, H
+			return `r`, H
 		case r < 65:
-			return seed + `l`, H
+			return `l`, H
 		case r < 66:
-			return seed + `p`, H
+			return `p`, H
 		case r < 67:
-			return seed + `z`, H
+			return `z`, H
 		case r < 68:
-			return seed + `v`, H
+			return `v`, H
 		case r < 69:
-			return seed + `b`, H
+			return `b`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -5466,29 +5468,29 @@ retry:
 		r := rng.IntN(35)
 		switch {
 		case r < 12:
-			return seed + `a`, H
+			return `a`, H
 		case r < 18:
-			return seed + `l`, H
+			return `l`, H
 		case r < 22:
-			return seed + `n`, H
+			return `n`, H
 		case r < 25:
-			return seed + `e`, H
+			return `e`, H
 		case r < 27:
-			return seed + `f`, H
+			return `f`, H
 		case r < 29:
-			return seed + `k`, H
+			return `k`, H
 		case r < 30:
-			return seed + `d`, H
+			return `d`, H
 		case r < 31:
-			return seed + `o`, H
+			return `o`, H
 		case r < 32:
-			return seed + `h`, H
+			return `h`, H
 		case r < 33:
-			return seed + `s`, H
+			return `s`, H
 		case r < 34:
-			return seed + `i`, H
+			return `i`, H
 		case r < 35:
-			return seed + `r`, H
+			return `r`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -5497,29 +5499,29 @@ retry:
 		r := rng.IntN(44)
 		switch {
 		case r < 16:
-			return seed + `a`, H
+			return `a`, H
 		case r < 24:
-			return seed + `i`, H
+			return `i`, H
 		case r < 30:
-			return seed + `e`, H
+			return `e`, H
 		case r < 33:
-			return seed + `o`, H
+			return `o`, H
 		case r < 35:
-			return seed + `r`, H
+			return `r`, H
 		case r < 37:
-			return seed + `m`, H
+			return `m`, H
 		case r < 39:
-			return seed + `l`, H
+			return `l`, H
 		case r < 40:
-			return seed + `n`, H
+			return `n`, H
 		case r < 41:
-			return seed + `d`, H
+			return `d`, H
 		case r < 42:
-			return seed + `h`, H
+			return `h`, H
 		case r < 43:
-			return seed + `y`, H
+			return `y`, H
 		case r < 44:
-			return seed + `p`, H
+			return `p`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -5528,29 +5530,29 @@ retry:
 		r := rng.IntN(189)
 		switch {
 		case r < 64:
-			return seed + `t`, H
+			return `t`, H
 		case r < 90:
-			return seed + `o`, H
+			return `o`, H
 		case r < 106:
-			return seed + `e`, H
+			return `e`, H
 		case r < 122:
-			return seed + `i`, H
+			return `i`, H
 		case r < 135:
-			return seed + `k`, H
+			return `k`, H
 		case r < 148:
-			return seed + `a`, H
+			return `a`, H
 		case r < 161:
-			return seed + `l`, H
+			return `l`, H
 		case r < 172:
-			return seed + `u`, H
+			return `u`, H
 		case r < 179:
-			return seed + `r`, H
+			return `r`, H
 		case r < 184:
-			return seed + `h`, H
+			return `h`, H
 		case r < 188:
-			return seed + `y`, H
+			return `y`, H
 		case r < 189:
-			return seed + `c`, H
+			return `c`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -5559,29 +5561,29 @@ retry:
 		r := rng.IntN(91)
 		switch {
 		case r < 37:
-			return seed + `k`, H
+			return `k`, H
 		case r < 49:
-			return seed + `a`, H
+			return `a`, H
 		case r < 57:
-			return seed + `c`, H
+			return `c`, H
 		case r < 64:
-			return seed + `r`, H
+			return `r`, H
 		case r < 70:
-			return seed + `e`, H
+			return `e`, H
 		case r < 76:
-			return seed + `i`, H
+			return `i`, H
 		case r < 81:
-			return seed + `t`, H
+			return `t`, H
 		case r < 85:
-			return seed + `u`, H
+			return `u`, H
 		case r < 87:
-			return seed + `o`, H
+			return `o`, H
 		case r < 89:
-			return seed + `h`, H
+			return `h`, H
 		case r < 90:
-			return seed + `y`, H
+			return `y`, H
 		case r < 91:
-			return seed + `l`, H
+			return `l`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -5590,29 +5592,29 @@ retry:
 		r := rng.IntN(80)
 		switch {
 		case r < 22:
-			return seed + `s`, H
+			return `s`, H
 		case r < 36:
-			return seed + `l`, H
+			return `l`, H
 		case r < 47:
-			return seed + `t`, H
+			return `t`, H
 		case r < 55:
-			return seed + `m`, H
+			return `m`, H
 		case r < 61:
-			return seed + `r`, H
+			return `r`, H
 		case r < 66:
-			return seed + `n`, H
+			return `n`, H
 		case r < 71:
-			return seed + `g`, H
+			return `g`, H
 		case r < 74:
-			return seed + `d`, H
+			return `d`, H
 		case r < 77:
-			return seed + `c`, H
+			return `c`, H
 		case r < 78:
-			return seed + `f`, H
+			return `f`, H
 		case r < 79:
-			return seed + `p`, H
+			return `p`, H
 		case r < 80:
-			return seed + `z`, H
+			return `z`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -5621,29 +5623,29 @@ retry:
 		r := rng.IntN(87)
 		switch {
 		case r < 31:
-			return seed + `k`, H
+			return `k`, H
 		case r < 44:
-			return seed + `h`, H
+			return `h`, H
 		case r < 57:
-			return seed + `t`, H
+			return `t`, H
 		case r < 66:
-			return seed + `e`, H
+			return `e`, H
 		case r < 71:
-			return seed + `i`, H
+			return `i`, H
 		case r < 75:
-			return seed + `a`, H
+			return `a`, H
 		case r < 78:
-			return seed + `c`, H
+			return `c`, H
 		case r < 81:
-			return seed + `l`, H
+			return `l`, H
 		case r < 83:
-			return seed + `o`, H
+			return `o`, H
 		case r < 85:
-			return seed + `u`, H
+			return `u`, H
 		case r < 86:
-			return seed + `y`, H
+			return `y`, H
 		case r < 87:
-			return seed + `r`, H
+			return `r`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -5652,29 +5654,29 @@ retry:
 		r := rng.IntN(128)
 		switch {
 		case r < 33:
-			return seed + `e`, H
+			return `e`, H
 		case r < 66:
-			return seed + `t`, H
+			return `t`, H
 		case r < 84:
-			return seed + `s`, H
+			return `s`, H
 		case r < 101:
-			return seed + `i`, H
+			return `i`, H
 		case r < 108:
-			return seed + `a`, H
+			return `a`, H
 		case r < 112:
-			return seed + `p`, H
+			return `p`, H
 		case r < 116:
-			return seed + `m`, H
+			return `m`, H
 		case r < 120:
-			return seed + `u`, H
+			return `u`, H
 		case r < 123:
-			return seed + `h`, H
+			return `h`, H
 		case r < 126:
-			return seed + `y`, H
+			return `y`, H
 		case r < 127:
-			return seed + `o`, H
+			return `o`, H
 		case r < 128:
-			return seed + `l`, H
+			return `l`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -5683,29 +5685,29 @@ retry:
 		r := rng.IntN(26)
 		switch {
 		case r < 8:
-			return seed + `d`, H
+			return `d`, H
 		case r < 12:
-			return seed + `s`, H
+			return `s`, H
 		case r < 15:
-			return seed + `m`, H
+			return `m`, H
 		case r < 17:
-			return seed + `n`, H
+			return `n`, H
 		case r < 19:
-			return seed + `c`, H
+			return `c`, H
 		case r < 20:
-			return seed + `f`, H
+			return `f`, H
 		case r < 21:
-			return seed + `o`, H
+			return `o`, H
 		case r < 22:
-			return seed + `r`, H
+			return `r`, H
 		case r < 23:
-			return seed + `t`, H
+			return `t`, H
 		case r < 24:
-			return seed + `a`, H
+			return `a`, H
 		case r < 25:
-			return seed + `g`, H
+			return `g`, H
 		case r < 26:
-			return seed + `l`, H
+			return `l`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -5714,29 +5716,29 @@ retry:
 		r := rng.IntN(42)
 		switch {
 		case r < 8:
-			return seed + `n`, H
+			return `n`, H
 		case r < 16:
-			return seed + `r`, H
+			return `r`, H
 		case r < 22:
-			return seed + `s`, H
+			return `s`, H
 		case r < 27:
-			return seed + `d`, H
+			return `d`, H
 		case r < 30:
-			return seed + `i`, H
+			return `i`, H
 		case r < 33:
-			return seed + `m`, H
+			return `m`, H
 		case r < 36:
-			return seed + `g`, H
+			return `g`, H
 		case r < 38:
-			return seed + `b`, H
+			return `b`, H
 		case r < 39:
-			return seed + `j`, H
+			return `j`, H
 		case r < 40:
-			return seed + `k`, H
+			return `k`, H
 		case r < 41:
-			return seed + `v`, H
+			return `v`, H
 		case r < 42:
-			return seed + `l`, H
+			return `l`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -5745,29 +5747,29 @@ retry:
 		r := rng.IntN(129)
 		switch {
 		case r < 34:
-			return seed + `e`, H
+			return `e`, H
 		case r < 64:
-			return seed + `i`, H
+			return `i`, H
 		case r < 83:
-			return seed + `r`, H
+			return `r`, H
 		case r < 98:
-			return seed + `o`, H
+			return `o`, H
 		case r < 107:
-			return seed + `a`, H
+			return `a`, H
 		case r < 114:
-			return seed + `y`, H
+			return `y`, H
 		case r < 119:
-			return seed + `l`, H
+			return `l`, H
 		case r < 124:
-			return seed + `u`, H
+			return `u`, H
 		case r < 126:
-			return seed + `w`, H
+			return `w`, H
 		case r < 127:
-			return seed + `p`, H
+			return `p`, H
 		case r < 128:
-			return seed + `m`, H
+			return `m`, H
 		case r < 129:
-			return seed + `b`, H
+			return `b`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -5776,29 +5778,29 @@ retry:
 		r := rng.IntN(124)
 		switch {
 		case r < 38:
-			return seed + `r`, H
+			return `r`, H
 		case r < 64:
-			return seed + `l`, H
+			return `l`, H
 		case r < 84:
-			return seed + `s`, H
+			return `s`, H
 		case r < 96:
-			return seed + `p`, H
+			return `p`, H
 		case r < 105:
-			return seed + `t`, H
+			return `t`, H
 		case r < 110:
-			return seed + `b`, H
+			return `b`, H
 		case r < 113:
-			return seed + `f`, H
+			return `f`, H
 		case r < 116:
-			return seed + `d`, H
+			return `d`, H
 		case r < 119:
-			return seed + `e`, H
+			return `e`, H
 		case r < 122:
-			return seed + `m`, H
+			return `m`, H
 		case r < 123:
-			return seed + `c`, H
+			return `c`, H
 		case r < 124:
-			return seed + `a`, H
+			return `a`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -5807,29 +5809,29 @@ retry:
 		r := rng.IntN(33)
 		switch {
 		case r < 9:
-			return seed + `e`, H
+			return `e`, H
 		case r < 15:
-			return seed + `l`, H
+			return `l`, H
 		case r < 18:
-			return seed + `f`, H
+			return `f`, H
 		case r < 21:
-			return seed + `o`, H
+			return `o`, H
 		case r < 24:
-			return seed + `i`, H
+			return `i`, H
 		case r < 27:
-			return seed + `c`, H
+			return `c`, H
 		case r < 28:
-			return seed + `n`, H
+			return `n`, H
 		case r < 29:
-			return seed + `h`, H
+			return `h`, H
 		case r < 30:
-			return seed + `s`, H
+			return `s`, H
 		case r < 31:
-			return seed + `y`, H
+			return `y`, H
 		case r < 32:
-			return seed + `a`, H
+			return `a`, H
 		case r < 33:
-			return seed + `m`, H
+			return `m`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -5838,29 +5840,29 @@ retry:
 		r := rng.IntN(129)
 		switch {
 		case r < 79:
-			return seed + `n`, H
+			return `n`, H
 		case r < 96:
-			return seed + `l`, H
+			return `l`, H
 		case r < 102:
-			return seed + `m`, H
+			return `m`, H
 		case r < 107:
-			return seed + `e`, H
+			return `e`, H
 		case r < 112:
-			return seed + `s`, H
+			return `s`, H
 		case r < 117:
-			return seed + `t`, H
+			return `t`, H
 		case r < 120:
-			return seed + `r`, H
+			return `r`, H
 		case r < 123:
-			return seed + `p`, H
+			return `p`, H
 		case r < 125:
-			return seed + `d`, H
+			return `d`, H
 		case r < 127:
-			return seed + `c`, H
+			return `c`, H
 		case r < 128:
-			return seed + `w`, H
+			return `w`, H
 		case r < 129:
-			return seed + `i`, H
+			return `i`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -5869,29 +5871,29 @@ retry:
 		r := rng.IntN(115)
 		switch {
 		case r < 59:
-			return seed + `m`, H
+			return `m`, H
 		case r < 71:
-			return seed + `d`, H
+			return `d`, H
 		case r < 80:
-			return seed + `r`, H
+			return `r`, H
 		case r < 88:
-			return seed + `s`, H
+			return `s`, H
 		case r < 94:
-			return seed + `c`, H
+			return `c`, H
 		case r < 99:
-			return seed + `t`, H
+			return `t`, H
 		case r < 103:
-			return seed + `g`, H
+			return `g`, H
 		case r < 106:
-			return seed + `o`, H
+			return `o`, H
 		case r < 109:
-			return seed + `p`, H
+			return `p`, H
 		case r < 112:
-			return seed + `l`, H
+			return `l`, H
 		case r < 114:
-			return seed + `v`, H
+			return `v`, H
 		case r < 115:
-			return seed + `b`, H
+			return `b`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -5900,29 +5902,29 @@ retry:
 		r := rng.IntN(73)
 		switch {
 		case r < 17:
-			return seed + `t`, H
+			return `t`, H
 		case r < 27:
-			return seed + `s`, H
+			return `s`, H
 		case r < 36:
-			return seed + `n`, H
+			return `n`, H
 		case r < 44:
-			return seed + `r`, H
+			return `r`, H
 		case r < 52:
-			return seed + `c`, H
+			return `c`, H
 		case r < 59:
-			return seed + `d`, H
+			return `d`, H
 		case r < 66:
-			return seed + `l`, H
+			return `l`, H
 		case r < 68:
-			return seed + `v`, H
+			return `v`, H
 		case r < 70:
-			return seed + `g`, H
+			return `g`, H
 		case r < 71:
-			return seed + `e`, H
+			return `e`, H
 		case r < 72:
-			return seed + `p`, H
+			return `p`, H
 		case r < 73:
-			return seed + `z`, H
+			return `z`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -5931,29 +5933,29 @@ retry:
 		r := rng.IntN(122)
 		switch {
 		case r < 29:
-			return seed + `p`, H
+			return `p`, H
 		case r < 51:
-			return seed + `e`, H
+			return `e`, H
 		case r < 72:
-			return seed + `i`, H
+			return `i`, H
 		case r < 91:
-			return seed + `a`, H
+			return `a`, H
 		case r < 104:
-			return seed + `m`, H
+			return `m`, H
 		case r < 110:
-			return seed + `b`, H
+			return `b`, H
 		case r < 114:
-			return seed + `y`, H
+			return `y`, H
 		case r < 117:
-			return seed + `o`, H
+			return `o`, H
 		case r < 119:
-			return seed + `f`, H
+			return `f`, H
 		case r < 120:
-			return seed + `n`, H
+			return `n`, H
 		case r < 121:
-			return seed + `r`, H
+			return `r`, H
 		case r < 122:
-			return seed + `s`, H
+			return `s`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -5962,29 +5964,29 @@ retry:
 		r := rng.IntN(93)
 		switch {
 		case r < 16:
-			return seed + `t`, H
+			return `t`, H
 		case r < 29:
-			return seed + `r`, H
+			return `r`, H
 		case r < 41:
-			return seed + `i`, H
+			return `i`, H
 		case r < 52:
-			return seed + `a`, H
+			return `a`, H
 		case r < 63:
-			return seed + `l`, H
+			return `l`, H
 		case r < 71:
-			return seed + `u`, H
+			return `u`, H
 		case r < 78:
-			return seed + `e`, H
+			return `e`, H
 		case r < 84:
-			return seed + `o`, H
+			return `o`, H
 		case r < 87:
-			return seed + `h`, H
+			return `h`, H
 		case r < 90:
-			return seed + `s`, H
+			return `s`, H
 		case r < 92:
-			return seed + `p`, H
+			return `p`, H
 		case r < 93:
-			return seed + `n`, H
+			return `n`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -5993,29 +5995,29 @@ retry:
 		r := rng.IntN(198)
 		switch {
 		case r < 41:
-			return seed + `a`, H
+			return `a`, H
 		case r < 78:
-			return seed + `k`, H
+			return `k`, H
 		case r < 107:
-			return seed + `e`, H
+			return `e`, H
 		case r < 134:
-			return seed + `i`, H
+			return `i`, H
 		case r < 151:
-			return seed + `s`, H
+			return `s`, H
 		case r < 166:
-			return seed + `t`, H
+			return `t`, H
 		case r < 179:
-			return seed + `o`, H
+			return `o`, H
 		case r < 184:
-			return seed + `y`, H
+			return `y`, H
 		case r < 189:
-			return seed + `l`, H
+			return `l`, H
 		case r < 193:
-			return seed + `h`, H
+			return `h`, H
 		case r < 197:
-			return seed + `u`, H
+			return `u`, H
 		case r < 198:
-			return seed + `r`, H
+			return `r`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -6024,31 +6026,31 @@ retry:
 		r := rng.IntN(187)
 		switch {
 		case r < 52:
-			return seed + `t`, H
+			return `t`, H
 		case r < 93:
-			return seed + `e`, H
+			return `e`, H
 		case r < 126:
-			return seed + `h`, H
+			return `h`, H
 		case r < 148:
-			return seed + `i`, H
+			return `i`, H
 		case r < 162:
-			return seed + `a`, H
+			return `a`, H
 		case r < 171:
-			return seed + `k`, H
+			return `k`, H
 		case r < 175:
-			return seed + `p`, H
+			return `p`, H
 		case r < 178:
-			return seed + `s`, H
+			return `s`, H
 		case r < 180:
-			return seed + `y`, H
+			return `y`, H
 		case r < 182:
-			return seed + `l`, H
+			return `l`, H
 		case r < 184:
-			return seed + `u`, H
+			return `u`, H
 		case r < 186:
-			return seed + `b`, H
+			return `b`, H
 		case r < 187:
-			return seed + `c`, H
+			return `c`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -6057,31 +6059,31 @@ retry:
 		r := rng.IntN(28)
 		switch {
 		case r < 4:
-			return seed + `w`, H
+			return `w`, H
 		case r < 8:
-			return seed + `i`, H
+			return `i`, H
 		case r < 12:
-			return seed + `c`, H
+			return `c`, H
 		case r < 15:
-			return seed + `r`, H
+			return `r`, H
 		case r < 17:
-			return seed + `n`, H
+			return `n`, H
 		case r < 19:
-			return seed + `y`, H
+			return `y`, H
 		case r < 21:
-			return seed + `m`, H
+			return `m`, H
 		case r < 23:
-			return seed + `u`, H
+			return `u`, H
 		case r < 24:
-			return seed + `s`, H
+			return `s`, H
 		case r < 25:
-			return seed + `z`, H
+			return `z`, H
 		case r < 26:
-			return seed + `v`, H
+			return `v`, H
 		case r < 27:
-			return seed + `l`, H
+			return `l`, H
 		case r < 28:
-			return seed + `b`, H
+			return `b`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -6090,31 +6092,31 @@ retry:
 		r := rng.IntN(67)
 		switch {
 		case r < 17:
-			return seed + `a`, H
+			return `a`, H
 		case r < 31:
-			return seed + `o`, H
+			return `o`, H
 		case r < 42:
-			return seed + `e`, H
+			return `e`, H
 		case r < 53:
-			return seed + `i`, H
+			return `i`, H
 		case r < 57:
-			return seed + `l`, H
+			return `l`, H
 		case r < 59:
-			return seed + `f`, H
+			return `f`, H
 		case r < 61:
-			return seed + `u`, H
+			return `u`, H
 		case r < 62:
-			return seed + `h`, H
+			return `h`, H
 		case r < 63:
-			return seed + `y`, H
+			return `y`, H
 		case r < 64:
-			return seed + `r`, H
+			return `r`, H
 		case r < 65:
-			return seed + `c`, H
+			return `c`, H
 		case r < 66:
-			return seed + `p`, H
+			return `p`, H
 		case r < 67:
-			return seed + `b`, H
+			return `b`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -6123,31 +6125,31 @@ retry:
 		r := rng.IntN(70)
 		switch {
 		case r < 17:
-			return seed + `a`, H
+			return `a`, H
 		case r < 27:
-			return seed + `i`, H
+			return `i`, H
 		case r < 36:
-			return seed + `g`, H
+			return `g`, H
 		case r < 44:
-			return seed + `r`, H
+			return `r`, H
 		case r < 51:
-			return seed + `o`, H
+			return `o`, H
 		case r < 57:
-			return seed + `u`, H
+			return `u`, H
 		case r < 60:
-			return seed + `e`, H
+			return `e`, H
 		case r < 63:
-			return seed + `l`, H
+			return `l`, H
 		case r < 65:
-			return seed + `n`, H
+			return `n`, H
 		case r < 67:
-			return seed + `w`, H
+			return `w`, H
 		case r < 68:
-			return seed + `y`, H
+			return `y`, H
 		case r < 69:
-			return seed + `m`, H
+			return `m`, H
 		case r < 70:
-			return seed + `b`, H
+			return `b`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -6156,31 +6158,31 @@ retry:
 		r := rng.IntN(77)
 		switch {
 		case r < 25:
-			return seed + `l`, H
+			return `l`, H
 		case r < 40:
-			return seed + `t`, H
+			return `t`, H
 		case r < 52:
-			return seed + `r`, H
+			return `r`, H
 		case r < 57:
-			return seed + `d`, H
+			return `d`, H
 		case r < 62:
-			return seed + `b`, H
+			return `b`, H
 		case r < 66:
-			return seed + `n`, H
+			return `n`, H
 		case r < 69:
-			return seed + `i`, H
+			return `i`, H
 		case r < 71:
-			return seed + `k`, H
+			return `k`, H
 		case r < 73:
-			return seed + `c`, H
+			return `c`, H
 		case r < 74:
-			return seed + `h`, H
+			return `h`, H
 		case r < 75:
-			return seed + `s`, H
+			return `s`, H
 		case r < 76:
-			return seed + `g`, H
+			return `g`, H
 		case r < 77:
-			return seed + `v`, H
+			return `v`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -6189,31 +6191,31 @@ retry:
 		r := rng.IntN(86)
 		switch {
 		case r < 18:
-			return seed + `d`, H
+			return `d`, H
 		case r < 36:
-			return seed + `t`, H
+			return `t`, H
 		case r < 49:
-			return seed + `s`, H
+			return `s`, H
 		case r < 62:
-			return seed + `r`, H
+			return `r`, H
 		case r < 68:
-			return seed + `c`, H
+			return `c`, H
 		case r < 73:
-			return seed + `k`, H
+			return `k`, H
 		case r < 76:
-			return seed + `n`, H
+			return `n`, H
 		case r < 79:
-			return seed + `m`, H
+			return `m`, H
 		case r < 82:
-			return seed + `l`, H
+			return `l`, H
 		case r < 83:
-			return seed + `f`, H
+			return `f`, H
 		case r < 84:
-			return seed + `g`, H
+			return `g`, H
 		case r < 85:
-			return seed + `u`, H
+			return `u`, H
 		case r < 86:
-			return seed + `b`, H
+			return `b`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -6222,31 +6224,31 @@ retry:
 		r := rng.IntN(58)
 		switch {
 		case r < 20:
-			return seed + `p`, H
+			return `p`, H
 		case r < 33:
-			return seed + `e`, H
+			return `e`, H
 		case r < 39:
-			return seed + `t`, H
+			return `t`, H
 		case r < 42:
-			return seed + `o`, H
+			return `o`, H
 		case r < 45:
-			return seed + `h`, H
+			return `h`, H
 		case r < 48:
-			return seed + `s`, H
+			return `s`, H
 		case r < 51:
-			return seed + `l`, H
+			return `l`, H
 		case r < 53:
-			return seed + `a`, H
+			return `a`, H
 		case r < 54:
-			return seed + `f`, H
+			return `f`, H
 		case r < 55:
-			return seed + `i`, H
+			return `i`, H
 		case r < 56:
-			return seed + `c`, H
+			return `c`, H
 		case r < 57:
-			return seed + `m`, H
+			return `m`, H
 		case r < 58:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -6255,31 +6257,31 @@ retry:
 		r := rng.IntN(149)
 		switch {
 		case r < 78:
-			return seed + `e`, H
+			return `e`, H
 		case r < 98:
-			return seed + `i`, H
+			return `i`, H
 		case r < 109:
-			return seed + `d`, H
+			return `d`, H
 		case r < 119:
-			return seed + `a`, H
+			return `a`, H
 		case r < 128:
-			return seed + `g`, H
+			return `g`, H
 		case r < 135:
-			return seed + `l`, H
+			return `l`, H
 		case r < 138:
-			return seed + `o`, H
+			return `o`, H
 		case r < 141:
-			return seed + `y`, H
+			return `y`, H
 		case r < 144:
-			return seed + `u`, H
+			return `u`, H
 		case r < 146:
-			return seed + `n`, H
+			return `n`, H
 		case r < 147:
-			return seed + `s`, H
+			return `s`, H
 		case r < 148:
-			return seed + `t`, H
+			return `t`, H
 		case r < 149:
-			return seed + `b`, H
+			return `b`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -6288,31 +6290,31 @@ retry:
 		r := rng.IntN(80)
 		switch {
 		case r < 21:
-			return seed + `m`, H
+			return `m`, H
 		case r < 35:
-			return seed + `n`, H
+			return `n`, H
 		case r < 47:
-			return seed + `r`, H
+			return `r`, H
 		case r < 54:
-			return seed + `s`, H
+			return `s`, H
 		case r < 58:
-			return seed + `f`, H
+			return `f`, H
 		case r < 62:
-			return seed + `d`, H
+			return `d`, H
 		case r < 66:
-			return seed + `t`, H
+			return `t`, H
 		case r < 69:
-			return seed + `c`, H
+			return `c`, H
 		case r < 72:
-			return seed + `l`, H
+			return `l`, H
 		case r < 74:
-			return seed + `a`, H
+			return `a`, H
 		case r < 76:
-			return seed + `p`, H
+			return `p`, H
 		case r < 78:
-			return seed + `g`, H
+			return `g`, H
 		case r < 80:
-			return seed + `b`, H
+			return `b`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -6321,31 +6323,31 @@ retry:
 		r := rng.IntN(69)
 		switch {
 		case r < 13:
-			return seed + `l`, H
+			return `l`, H
 		case r < 24:
-			return seed + `i`, H
+			return `i`, H
 		case r < 33:
-			return seed + `r`, H
+			return `r`, H
 		case r < 41:
-			return seed + `e`, H
+			return `e`, H
 		case r < 48:
-			return seed + `s`, H
+			return `s`, H
 		case r < 55:
-			return seed + `a`, H
+			return `a`, H
 		case r < 61:
-			return seed + `m`, H
+			return `m`, H
 		case r < 64:
-			return seed + `t`, H
+			return `t`, H
 		case r < 65:
-			return seed + `n`, H
+			return `n`, H
 		case r < 66:
-			return seed + `o`, H
+			return `o`, H
 		case r < 67:
-			return seed + `y`, H
+			return `y`, H
 		case r < 68:
-			return seed + `p`, H
+			return `p`, H
 		case r < 69:
-			return seed + `z`, H
+			return `z`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -6354,31 +6356,31 @@ retry:
 		r := rng.IntN(89)
 		switch {
 		case r < 26:
-			return seed + `r`, H
+			return `r`, H
 		case r < 44:
-			return seed + `l`, H
+			return `l`, H
 		case r < 56:
-			return seed + `s`, H
+			return `s`, H
 		case r < 67:
-			return seed + `t`, H
+			return `t`, H
 		case r < 74:
-			return seed + `n`, H
+			return `n`, H
 		case r < 77:
-			return seed + `p`, H
+			return `p`, H
 		case r < 80:
-			return seed + `m`, H
+			return `m`, H
 		case r < 82:
-			return seed + `z`, H
+			return `z`, H
 		case r < 84:
-			return seed + `g`, H
+			return `g`, H
 		case r < 86:
-			return seed + `b`, H
+			return `b`, H
 		case r < 87:
-			return seed + `d`, H
+			return `d`, H
 		case r < 88:
-			return seed + `e`, H
+			return `e`, H
 		case r < 89:
-			return seed + `c`, H
+			return `c`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -6387,31 +6389,31 @@ retry:
 		r := rng.IntN(181)
 		switch {
 		case r < 55:
-			return seed + `p`, H
+			return `p`, H
 		case r < 86:
-			return seed + `m`, H
+			return `m`, H
 		case r < 114:
-			return seed + `e`, H
+			return `e`, H
 		case r < 138:
-			return seed + `a`, H
+			return `a`, H
 		case r < 154:
-			return seed + `i`, H
+			return `i`, H
 		case r < 160:
-			return seed + `b`, H
+			return `b`, H
 		case r < 165:
-			return seed + `o`, H
+			return `o`, H
 		case r < 170:
-			return seed + `u`, H
+			return `u`, H
 		case r < 173:
-			return seed + `n`, H
+			return `n`, H
 		case r < 176:
-			return seed + `s`, H
+			return `s`, H
 		case r < 178:
-			return seed + `y`, H
+			return `y`, H
 		case r < 180:
-			return seed + `l`, H
+			return `l`, H
 		case r < 181:
-			return seed + `w`, H
+			return `w`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -6420,31 +6422,31 @@ retry:
 		r := rng.IntN(219)
 		switch {
 		case r < 52:
-			return seed + `i`, H
+			return `i`, H
 		case r < 98:
-			return seed + `e`, H
+			return `e`, H
 		case r < 127:
-			return seed + `a`, H
+			return `a`, H
 		case r < 152:
-			return seed + `r`, H
+			return `r`, H
 		case r < 168:
-			return seed + `l`, H
+			return `l`, H
 		case r < 180:
-			return seed + `o`, H
+			return `o`, H
 		case r < 192:
-			return seed + `h`, H
+			return `h`, H
 		case r < 202:
-			return seed + `y`, H
+			return `y`, H
 		case r < 209:
-			return seed + `u`, H
+			return `u`, H
 		case r < 215:
-			return seed + `s`, H
+			return `s`, H
 		case r < 217:
-			return seed + `w`, H
+			return `w`, H
 		case r < 218:
-			return seed + `d`, H
+			return `d`, H
 		case r < 219:
-			return seed + `m`, H
+			return `m`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -6453,31 +6455,31 @@ retry:
 		r := rng.IntN(129)
 		switch {
 		case r < 49:
-			return seed + `n`, H
+			return `n`, H
 		case r < 65:
-			return seed + `l`, H
+			return `l`, H
 		case r < 79:
-			return seed + `r`, H
+			return `r`, H
 		case r < 90:
-			return seed + `e`, H
+			return `e`, H
 		case r < 98:
-			return seed + `c`, H
+			return `c`, H
 		case r < 104:
-			return seed + `d`, H
+			return `d`, H
 		case r < 110:
-			return seed + `s`, H
+			return `s`, H
 		case r < 115:
-			return seed + `o`, H
+			return `o`, H
 		case r < 120:
-			return seed + `t`, H
+			return `t`, H
 		case r < 124:
-			return seed + `a`, H
+			return `a`, H
 		case r < 127:
-			return seed + `p`, H
+			return `p`, H
 		case r < 128:
-			return seed + `f`, H
+			return `f`, H
 		case r < 129:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -6486,31 +6488,31 @@ retry:
 		r := rng.IntN(143)
 		switch {
 		case r < 29:
-			return seed + `l`, H
+			return `l`, H
 		case r < 49:
-			return seed + `o`, H
+			return `o`, H
 		case r < 68:
-			return seed + `e`, H
+			return `e`, H
 		case r < 83:
-			return seed + `i`, H
+			return `i`, H
 		case r < 98:
-			return seed + `a`, H
+			return `a`, H
 		case r < 110:
-			return seed + `r`, H
+			return `r`, H
 		case r < 121:
-			return seed + `t`, H
+			return `t`, H
 		case r < 129:
-			return seed + `h`, H
+			return `h`, H
 		case r < 136:
-			return seed + `u`, H
+			return `u`, H
 		case r < 140:
-			return seed + `s`, H
+			return `s`, H
 		case r < 141:
-			return seed + `n`, H
+			return `n`, H
 		case r < 142:
-			return seed + `f`, H
+			return `f`, H
 		case r < 143:
-			return seed + `b`, H
+			return `b`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -6519,31 +6521,31 @@ retry:
 		r := rng.IntN(496)
 		switch {
 		case r < 106:
-			return seed + `a`, H
+			return `a`, H
 		case r < 200:
-			return seed + `e`, H
+			return `e`, H
 		case r < 286:
-			return seed + `i`, H
+			return `i`, H
 		case r < 356:
-			return seed + `r`, H
+			return `r`, H
 		case r < 413:
-			return seed + `o`, H
+			return `o`, H
 		case r < 445:
-			return seed + `u`, H
+			return `u`, H
 		case r < 467:
-			return seed + `y`, H
+			return `y`, H
 		case r < 478:
-			return seed + `l`, H
+			return `l`, H
 		case r < 483:
-			return seed + `n`, H
+			return `n`, H
 		case r < 488:
-			return seed + `f`, H
+			return `f`, H
 		case r < 492:
-			return seed + `b`, H
+			return `b`, H
 		case r < 494:
-			return seed + `w`, H
+			return `w`, H
 		case r < 496:
-			return seed + `c`, H
+			return `c`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -6552,31 +6554,31 @@ retry:
 		r := rng.IntN(136)
 		switch {
 		case r < 37:
-			return seed + `d`, H
+			return `d`, H
 		case r < 64:
-			return seed + `r`, H
+			return `r`, H
 		case r < 83:
-			return seed + `n`, H
+			return `n`, H
 		case r < 92:
-			return seed + `s`, H
+			return `s`, H
 		case r < 101:
-			return seed + `v`, H
+			return `v`, H
 		case r < 110:
-			return seed + `l`, H
+			return `l`, H
 		case r < 118:
-			return seed + `w`, H
+			return `w`, H
 		case r < 124:
-			return seed + `t`, H
+			return `t`, H
 		case r < 129:
-			return seed + `f`, H
+			return `f`, H
 		case r < 133:
-			return seed + `c`, H
+			return `c`, H
 		case r < 134:
-			return seed + `k`, H
+			return `k`, H
 		case r < 135:
-			return seed + `m`, H
+			return `m`, H
 		case r < 136:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -6585,31 +6587,31 @@ retry:
 		r := rng.IntN(79)
 		switch {
 		case r < 23:
-			return seed + `e`, H
+			return `e`, H
 		case r < 37:
-			return seed + `t`, H
+			return `t`, H
 		case r < 49:
-			return seed + `i`, H
+			return `i`, H
 		case r < 57:
-			return seed + `h`, H
+			return `h`, H
 		case r < 64:
-			return seed + `u`, H
+			return `u`, H
 		case r < 69:
-			return seed + `a`, H
+			return `a`, H
 		case r < 72:
-			return seed + `o`, H
+			return `o`, H
 		case r < 74:
-			return seed + `l`, H
+			return `l`, H
 		case r < 75:
-			return seed + `n`, H
+			return `n`, H
 		case r < 76:
-			return seed + `w`, H
+			return `w`, H
 		case r < 77:
-			return seed + `d`, H
+			return `d`, H
 		case r < 78:
-			return seed + `p`, H
+			return `p`, H
 		case r < 79:
-			return seed + `m`, H
+			return `m`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -6618,33 +6620,33 @@ retry:
 		r := rng.IntN(243)
 		switch {
 		case r < 85:
-			return seed + `r`, H
+			return `r`, H
 		case r < 130:
-			return seed + `n`, H
+			return `n`, H
 		case r < 163:
-			return seed + `d`, H
+			return `d`, H
 		case r < 180:
-			return seed + `t`, H
+			return `t`, H
 		case r < 196:
-			return seed + `c`, H
+			return `c`, H
 		case r < 210:
-			return seed + `a`, H
+			return `a`, H
 		case r < 223:
-			return seed + `l`, H
+			return `l`, H
 		case r < 230:
-			return seed + `s`, H
+			return `s`, H
 		case r < 235:
-			return seed + `e`, H
+			return `e`, H
 		case r < 237:
-			return seed + `z`, H
+			return `z`, H
 		case r < 239:
-			return seed + `g`, H
+			return `g`, H
 		case r < 241:
-			return seed + `b`, H
+			return `b`, H
 		case r < 242:
-			return seed + `w`, H
+			return `w`, H
 		case r < 243:
-			return seed + `p`, H
+			return `p`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -6653,33 +6655,33 @@ retry:
 		r := rng.IntN(49)
 		switch {
 		case r < 14:
-			return seed + `e`, H
+			return `e`, H
 		case r < 25:
-			return seed + `i`, H
+			return `i`, H
 		case r < 34:
-			return seed + `a`, H
+			return `a`, H
 		case r < 37:
-			return seed + `f`, H
+			return `f`, H
 		case r < 39:
-			return seed + `o`, H
+			return `o`, H
 		case r < 41:
-			return seed + `b`, H
+			return `b`, H
 		case r < 42:
-			return seed + `n`, H
+			return `n`, H
 		case r < 43:
-			return seed + `h`, H
+			return `h`, H
 		case r < 44:
-			return seed + `s`, H
+			return `s`, H
 		case r < 45:
-			return seed + `y`, H
+			return `y`, H
 		case r < 46:
-			return seed + `c`, H
+			return `c`, H
 		case r < 47:
-			return seed + `m`, H
+			return `m`, H
 		case r < 48:
-			return seed + `l`, H
+			return `l`, H
 		case r < 49:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -6688,33 +6690,33 @@ retry:
 		r := rng.IntN(89)
 		switch {
 		case r < 24:
-			return seed + `l`, H
+			return `l`, H
 		case r < 37:
-			return seed + `n`, H
+			return `n`, H
 		case r < 46:
-			return seed + `c`, H
+			return `c`, H
 		case r < 54:
-			return seed + `s`, H
+			return `s`, H
 		case r < 61:
-			return seed + `r`, H
+			return `r`, H
 		case r < 67:
-			return seed + `f`, H
+			return `f`, H
 		case r < 72:
-			return seed + `d`, H
+			return `d`, H
 		case r < 77:
-			return seed + `t`, H
+			return `t`, H
 		case r < 80:
-			return seed + `i`, H
+			return `i`, H
 		case r < 83:
-			return seed + `g`, H
+			return `g`, H
 		case r < 86:
-			return seed + `b`, H
+			return `b`, H
 		case r < 87:
-			return seed + `p`, H
+			return `p`, H
 		case r < 88:
-			return seed + `m`, H
+			return `m`, H
 		case r < 89:
-			return seed + `z`, H
+			return `z`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -6723,33 +6725,33 @@ retry:
 		r := rng.IntN(266)
 		switch {
 		case r < 75:
-			return seed + `y`, H
+			return `y`, H
 		case r < 118:
-			return seed + `e`, H
+			return `e`, H
 		case r < 156:
-			return seed + `a`, H
+			return `a`, H
 		case r < 184:
-			return seed + `i`, H
+			return `i`, H
 		case r < 207:
-			return seed + `t`, H
+			return `t`, H
 		case r < 221:
-			return seed + `u`, H
+			return `u`, H
 		case r < 234:
-			return seed + `c`, H
+			return `c`, H
 		case r < 245:
-			return seed + `o`, H
+			return `o`, H
 		case r < 250:
-			return seed + `h`, H
+			return `h`, H
 		case r < 255:
-			return seed + `r`, H
+			return `r`, H
 		case r < 259:
-			return seed + `z`, H
+			return `z`, H
 		case r < 263:
-			return seed + `l`, H
+			return `l`, H
 		case r < 265:
-			return seed + `s`, H
+			return `s`, H
 		case r < 266:
-			return seed + `m`, H
+			return `m`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -6758,33 +6760,33 @@ retry:
 		r := rng.IntN(109)
 		switch {
 		case r < 42:
-			return seed + `h`, H
+			return `h`, H
 		case r < 55:
-			return seed + `a`, H
+			return `a`, H
 		case r < 66:
-			return seed + `n`, H
+			return `n`, H
 		case r < 75:
-			return seed + `g`, H
+			return `g`, H
 		case r < 82:
-			return seed + `e`, H
+			return `e`, H
 		case r < 89:
-			return seed + `u`, H
+			return `u`, H
 		case r < 95:
-			return seed + `o`, H
+			return `o`, H
 		case r < 100:
-			return seed + `i`, H
+			return `i`, H
 		case r < 102:
-			return seed + `r`, H
+			return `r`, H
 		case r < 104:
-			return seed + `m`, H
+			return `m`, H
 		case r < 106:
-			return seed + `l`, H
+			return `l`, H
 		case r < 107:
-			return seed + `s`, H
+			return `s`, H
 		case r < 108:
-			return seed + `y`, H
+			return `y`, H
 		case r < 109:
-			return seed + `z`, H
+			return `z`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -6793,33 +6795,33 @@ retry:
 		r := rng.IntN(197)
 		switch {
 		case r < 56:
-			return seed + `e`, H
+			return `e`, H
 		case r < 109:
-			return seed + `a`, H
+			return `a`, H
 		case r < 144:
-			return seed + `i`, H
+			return `i`, H
 		case r < 162:
-			return seed + `o`, H
+			return `o`, H
 		case r < 172:
-			return seed + `u`, H
+			return `u`, H
 		case r < 178:
-			return seed + `y`, H
+			return `y`, H
 		case r < 183:
-			return seed + `l`, H
+			return `l`, H
 		case r < 188:
-			return seed + `b`, H
+			return `b`, H
 		case r < 190:
-			return seed + `n`, H
+			return `n`, H
 		case r < 192:
-			return seed + `r`, H
+			return `r`, H
 		case r < 194:
-			return seed + `m`, H
+			return `m`, H
 		case r < 195:
-			return seed + `w`, H
+			return `w`, H
 		case r < 196:
-			return seed + `t`, H
+			return `t`, H
 		case r < 197:
-			return seed + `k`, H
+			return `k`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -6828,33 +6830,33 @@ retry:
 		r := rng.IntN(278)
 		switch {
 		case r < 81:
-			return seed + `k`, H
+			return `k`, H
 		case r < 133:
-			return seed + `t`, H
+			return `t`, H
 		case r < 166:
-			return seed + `e`, H
+			return `e`, H
 		case r < 199:
-			return seed + `h`, H
+			return `h`, H
 		case r < 225:
-			return seed + `i`, H
+			return `i`, H
 		case r < 235:
-			return seed + `a`, H
+			return `a`, H
 		case r < 244:
-			return seed + `c`, H
+			return `c`, H
 		case r < 252:
-			return seed + `y`, H
+			return `y`, H
 		case r < 259:
-			return seed + `o`, H
+			return `o`, H
 		case r < 266:
-			return seed + `u`, H
+			return `u`, H
 		case r < 272:
-			return seed + `r`, H
+			return `r`, H
 		case r < 275:
-			return seed + `q`, H
+			return `q`, H
 		case r < 277:
-			return seed + `l`, H
+			return `l`, H
 		case r < 278:
-			return seed + `s`, H
+			return `s`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -6863,33 +6865,33 @@ retry:
 		r := rng.IntN(88)
 		switch {
 		case r < 17:
-			return seed + `r`, H
+			return `r`, H
 		case r < 30:
-			return seed + `n`, H
+			return `n`, H
 		case r < 43:
-			return seed + `d`, H
+			return `d`, H
 		case r < 54:
-			return seed + `l`, H
+			return `l`, H
 		case r < 62:
-			return seed + `s`, H
+			return `s`, H
 		case r < 68:
-			return seed + `p`, H
+			return `p`, H
 		case r < 72:
-			return seed + `i`, H
+			return `i`, H
 		case r < 76:
-			return seed + `a`, H
+			return `a`, H
 		case r < 79:
-			return seed + `e`, H
+			return `e`, H
 		case r < 82:
-			return seed + `t`, H
+			return `t`, H
 		case r < 85:
-			return seed + `m`, H
+			return `m`, H
 		case r < 86:
-			return seed + `f`, H
+			return `f`, H
 		case r < 87:
-			return seed + `c`, H
+			return `c`, H
 		case r < 88:
-			return seed + `b`, H
+			return `b`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -6898,33 +6900,33 @@ retry:
 		r := rng.IntN(174)
 		switch {
 		case r < 31:
-			return seed + `o`, H
+			return `o`, H
 		case r < 58:
-			return seed + `l`, H
+			return `l`, H
 		case r < 83:
-			return seed + `d`, H
+			return `d`, H
 		case r < 105:
-			return seed + `e`, H
+			return `e`, H
 		case r < 125:
-			return seed + `i`, H
+			return `i`, H
 		case r < 143:
-			return seed + `a`, H
+			return `a`, H
 		case r < 150:
-			return seed + `y`, H
+			return `y`, H
 		case r < 157:
-			return seed + `v`, H
+			return `v`, H
 		case r < 163:
-			return seed + `t`, H
+			return `t`, H
 		case r < 167:
-			return seed + `u`, H
+			return `u`, H
 		case r < 170:
-			return seed + `k`, H
+			return `k`, H
 		case r < 172:
-			return seed + `f`, H
+			return `f`, H
 		case r < 173:
-			return seed + `s`, H
+			return `s`, H
 		case r < 174:
-			return seed + `p`, H
+			return `p`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -6933,33 +6935,33 @@ retry:
 		r := rng.IntN(166)
 		switch {
 		case r < 45:
-			return seed + `b`, H
+			return `b`, H
 		case r < 80:
-			return seed + `r`, H
+			return `r`, H
 		case r < 98:
-			return seed + `p`, H
+			return `p`, H
 		case r < 110:
-			return seed + `l`, H
+			return `l`, H
 		case r < 121:
-			return seed + `a`, H
+			return `a`, H
 		case r < 131:
-			return seed + `i`, H
+			return `i`, H
 		case r < 140:
-			return seed + `s`, H
+			return `s`, H
 		case r < 147:
-			return seed + `m`, H
+			return `m`, H
 		case r < 153:
-			return seed + `f`, H
+			return `f`, H
 		case r < 157:
-			return seed + `e`, H
+			return `e`, H
 		case r < 160:
-			return seed + `d`, H
+			return `d`, H
 		case r < 163:
-			return seed + `c`, H
+			return `c`, H
 		case r < 165:
-			return seed + `g`, H
+			return `g`, H
 		case r < 166:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -6968,33 +6970,33 @@ retry:
 		r := rng.IntN(80)
 		switch {
 		case r < 23:
-			return seed + `c`, H
+			return `c`, H
 		case r < 36:
-			return seed + `n`, H
+			return `n`, H
 		case r < 45:
-			return seed + `l`, H
+			return `l`, H
 		case r < 52:
-			return seed + `s`, H
+			return `s`, H
 		case r < 58:
-			return seed + `m`, H
+			return `m`, H
 		case r < 63:
-			return seed + `v`, H
+			return `v`, H
 		case r < 67:
-			return seed + `i`, H
+			return `i`, H
 		case r < 70:
-			return seed + `r`, H
+			return `r`, H
 		case r < 73:
-			return seed + `b`, H
+			return `b`, H
 		case r < 75:
-			return seed + `d`, H
+			return `d`, H
 		case r < 77:
-			return seed + `u`, H
+			return `u`, H
 		case r < 78:
-			return seed + `t`, H
+			return `t`, H
 		case r < 79:
-			return seed + `z`, H
+			return `z`, H
 		case r < 80:
-			return seed + `x`, H
+			return `x`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -7003,33 +7005,33 @@ retry:
 		r := rng.IntN(220)
 		switch {
 		case r < 143:
-			return seed + `l`, H
+			return `l`, H
 		case r < 158:
-			return seed + `i`, H
+			return `i`, H
 		case r < 171:
-			return seed + `o`, H
+			return `o`, H
 		case r < 184:
-			return seed + `b`, H
+			return `b`, H
 		case r < 194:
-			return seed + `s`, H
+			return `s`, H
 		case r < 202:
-			return seed + `r`, H
+			return `r`, H
 		case r < 207:
-			return seed + `a`, H
+			return `a`, H
 		case r < 211:
-			return seed + `e`, H
+			return `e`, H
 		case r < 214:
-			return seed + `d`, H
+			return `d`, H
 		case r < 216:
-			return seed + `y`, H
+			return `y`, H
 		case r < 217:
-			return seed + `n`, H
+			return `n`, H
 		case r < 218:
-			return seed + `m`, H
+			return `m`, H
 		case r < 219:
-			return seed + `g`, H
+			return `g`, H
 		case r < 220:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -7038,33 +7040,33 @@ retry:
 		r := rng.IntN(141)
 		switch {
 		case r < 34:
-			return seed + `n`, H
+			return `n`, H
 		case r < 57:
-			return seed + `e`, H
+			return `e`, H
 		case r < 75:
-			return seed + `l`, H
+			return `l`, H
 		case r < 88:
-			return seed + `s`, H
+			return `s`, H
 		case r < 99:
-			return seed + `d`, H
+			return `d`, H
 		case r < 108:
-			return seed + `r`, H
+			return `r`, H
 		case r < 115:
-			return seed + `c`, H
+			return `c`, H
 		case r < 122:
-			return seed + `g`, H
+			return `g`, H
 		case r < 128:
-			return seed + `t`, H
+			return `t`, H
 		case r < 133:
-			return seed + `x`, H
+			return `x`, H
 		case r < 137:
-			return seed + `f`, H
+			return `f`, H
 		case r < 139:
-			return seed + `a`, H
+			return `a`, H
 		case r < 140:
-			return seed + `v`, H
+			return `v`, H
 		case r < 141:
-			return seed + `b`, H
+			return `b`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -7073,35 +7075,35 @@ retry:
 		r := rng.IntN(156)
 		switch {
 		case r < 32:
-			return seed + `e`, H
+			return `e`, H
 		case r < 60:
-			return seed + `i`, H
+			return `i`, H
 		case r < 83:
-			return seed + `t`, H
+			return `t`, H
 		case r < 98:
-			return seed + `h`, H
+			return `h`, H
 		case r < 112:
-			return seed + `r`, H
+			return `r`, H
 		case r < 125:
-			return seed + `a`, H
+			return `a`, H
 		case r < 136:
-			return seed + `o`, H
+			return `o`, H
 		case r < 141:
-			return seed + `y`, H
+			return `y`, H
 		case r < 146:
-			return seed + `u`, H
+			return `u`, H
 		case r < 150:
-			return seed + `c`, H
+			return `c`, H
 		case r < 152:
-			return seed + `f`, H
+			return `f`, H
 		case r < 153:
-			return seed + `d`, H
+			return `d`, H
 		case r < 154:
-			return seed + `s`, H
+			return `s`, H
 		case r < 155:
-			return seed + `z`, H
+			return `z`, H
 		case r < 156:
-			return seed + `b`, H
+			return `b`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -7110,35 +7112,35 @@ retry:
 		r := rng.IntN(383)
 		switch {
 		case r < 168:
-			return seed + `r`, H
+			return `r`, H
 		case r < 271:
-			return seed + `d`, H
+			return `d`, H
 		case r < 318:
-			return seed + `n`, H
+			return `n`, H
 		case r < 336:
-			return seed + `e`, H
+			return `e`, H
 		case r < 344:
-			return seed + `m`, H
+			return `m`, H
 		case r < 351:
-			return seed + `a`, H
+			return `a`, H
 		case r < 357:
-			return seed + `l`, H
+			return `l`, H
 		case r < 362:
-			return seed + `x`, H
+			return `x`, H
 		case r < 366:
-			return seed + `s`, H
+			return `s`, H
 		case r < 370:
-			return seed + `c`, H
+			return `c`, H
 		case r < 374:
-			return seed + `p`, H
+			return `p`, H
 		case r < 378:
-			return seed + `g`, H
+			return `g`, H
 		case r < 380:
-			return seed + `t`, H
+			return `t`, H
 		case r < 382:
-			return seed + `b`, H
+			return `b`, H
 		case r < 383:
-			return seed + `w`, H
+			return `w`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -7147,35 +7149,35 @@ retry:
 		r := rng.IntN(110)
 		switch {
 		case r < 39:
-			return seed + `e`, H
+			return `e`, H
 		case r < 52:
-			return seed + `i`, H
+			return `i`, H
 		case r < 64:
-			return seed + `t`, H
+			return `t`, H
 		case r < 71:
-			return seed + `r`, H
+			return `r`, H
 		case r < 77:
-			return seed + `c`, H
+			return `c`, H
 		case r < 82:
-			return seed + `s`, H
+			return `s`, H
 		case r < 87:
-			return seed + `a`, H
+			return `a`, H
 		case r < 92:
-			return seed + `m`, H
+			return `m`, H
 		case r < 96:
-			return seed + `d`, H
+			return `d`, H
 		case r < 99:
-			return seed + `k`, H
+			return `k`, H
 		case r < 102:
-			return seed + `u`, H
+			return `u`, H
 		case r < 105:
-			return seed + `l`, H
+			return `l`, H
 		case r < 107:
-			return seed + `y`, H
+			return `y`, H
 		case r < 109:
-			return seed + `p`, H
+			return `p`, H
 		case r < 110:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -7184,35 +7186,35 @@ retry:
 		r := rng.IntN(1087)
 		switch {
 		case r < 207:
-			return seed + `t`, H
+			return `t`, H
 		case r < 322:
-			return seed + `h`, H
+			return `h`, H
 		case r < 437:
-			return seed + `u`, H
+			return `u`, H
 		case r < 541:
-			return seed + `p`, H
+			return `p`, H
 		case r < 633:
-			return seed + `a`, H
+			return `a`, H
 		case r < 718:
-			return seed + `c`, H
+			return `c`, H
 		case r < 790:
-			return seed + `e`, H
+			return `e`, H
 		case r < 847:
-			return seed + `l`, H
+			return `l`, H
 		case r < 902:
-			return seed + `i`, H
+			return `i`, H
 		case r < 947:
-			return seed + `n`, H
+			return `n`, H
 		case r < 985:
-			return seed + `k`, H
+			return `k`, H
 		case r < 1020:
-			return seed + `w`, H
+			return `w`, H
 		case r < 1050:
-			return seed + `m`, H
+			return `m`, H
 		case r < 1073:
-			return seed + `q`, H
+			return `q`, H
 		case r < 1087:
-			return seed + `y`, H
+			return `y`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -7221,35 +7223,35 @@ retry:
 		r := rng.IntN(112)
 		switch {
 		case r < 33:
-			return seed + `n`, H
+			return `n`, H
 		case r < 51:
-			return seed + `l`, H
+			return `l`, H
 		case r < 65:
-			return seed + `s`, H
+			return `s`, H
 		case r < 75:
-			return seed + `r`, H
+			return `r`, H
 		case r < 83:
-			return seed + `d`, H
+			return `d`, H
 		case r < 89:
-			return seed + `m`, H
+			return `m`, H
 		case r < 94:
-			return seed + `f`, H
+			return `f`, H
 		case r < 99:
-			return seed + `t`, H
+			return `t`, H
 		case r < 102:
-			return seed + `e`, H
+			return `e`, H
 		case r < 104:
-			return seed + `c`, H
+			return `c`, H
 		case r < 106:
-			return seed + `p`, H
+			return `p`, H
 		case r < 108:
-			return seed + `z`, H
+			return `z`, H
 		case r < 110:
-			return seed + `g`, H
+			return `g`, H
 		case r < 111:
-			return seed + `k`, H
+			return `k`, H
 		case r < 112:
-			return seed + `v`, H
+			return `v`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -7258,35 +7260,35 @@ retry:
 		r := rng.IntN(199)
 		switch {
 		case r < 48:
-			return seed + `c`, H
+			return `c`, H
 		case r < 77:
-			return seed + `r`, H
+			return `r`, H
 		case r < 103:
-			return seed + `n`, H
+			return `n`, H
 		case r < 127:
-			return seed + `t`, H
+			return `t`, H
 		case r < 146:
-			return seed + `l`, H
+			return `l`, H
 		case r < 162:
-			return seed + `g`, H
+			return `g`, H
 		case r < 175:
-			return seed + `s`, H
+			return `s`, H
 		case r < 182:
-			return seed + `b`, H
+			return `b`, H
 		case r < 188:
-			return seed + `k`, H
+			return `k`, H
 		case r < 193:
-			return seed + `d`, H
+			return `d`, H
 		case r < 195:
-			return seed + `f`, H
+			return `f`, H
 		case r < 196:
-			return seed + `y`, H
+			return `y`, H
 		case r < 197:
-			return seed + `m`, H
+			return `m`, H
 		case r < 198:
-			return seed + `z`, H
+			return `z`, H
 		case r < 199:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -7295,35 +7297,35 @@ retry:
 		r := rng.IntN(122)
 		switch {
 		case r < 24:
-			return seed + `e`, H
+			return `e`, H
 		case r < 42:
-			return seed + `a`, H
+			return `a`, H
 		case r < 59:
-			return seed + `i`, H
+			return `i`, H
 		case r < 71:
-			return seed + `h`, H
+			return `h`, H
 		case r < 83:
-			return seed + `l`, H
+			return `l`, H
 		case r < 91:
-			return seed + `u`, H
+			return `u`, H
 		case r < 97:
-			return seed + `o`, H
+			return `o`, H
 		case r < 103:
-			return seed + `y`, H
+			return `y`, H
 		case r < 108:
-			return seed + `n`, H
+			return `n`, H
 		case r < 113:
-			return seed + `s`, H
+			return `s`, H
 		case r < 115:
-			return seed + `w`, H
+			return `w`, H
 		case r < 117:
-			return seed + `r`, H
+			return `r`, H
 		case r < 119:
-			return seed + `c`, H
+			return `c`, H
 		case r < 121:
-			return seed + `z`, H
+			return `z`, H
 		case r < 122:
-			return seed + `f`, H
+			return `f`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -7332,35 +7334,35 @@ retry:
 		r := rng.IntN(129)
 		switch {
 		case r < 54:
-			return seed + `n`, H
+			return `n`, H
 		case r < 70:
-			return seed + `l`, H
+			return `l`, H
 		case r < 80:
-			return seed + `r`, H
+			return `r`, H
 		case r < 90:
-			return seed + `c`, H
+			return `c`, H
 		case r < 99:
-			return seed + `p`, H
+			return `p`, H
 		case r < 106:
-			return seed + `f`, H
+			return `f`, H
 		case r < 112:
-			return seed + `e`, H
+			return `e`, H
 		case r < 117:
-			return seed + `m`, H
+			return `m`, H
 		case r < 120:
-			return seed + `s`, H
+			return `s`, H
 		case r < 123:
-			return seed + `v`, H
+			return `v`, H
 		case r < 125:
-			return seed + `t`, H
+			return `t`, H
 		case r < 126:
-			return seed + `d`, H
+			return `d`, H
 		case r < 127:
-			return seed + `h`, H
+			return `h`, H
 		case r < 128:
-			return seed + `a`, H
+			return `a`, H
 		case r < 129:
-			return seed + `g`, H
+			return `g`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -7369,35 +7371,35 @@ retry:
 		r := rng.IntN(86)
 		switch {
 		case r < 26:
-			return seed + `o`, H
+			return `o`, H
 		case r < 45:
-			return seed + `r`, H
+			return `r`, H
 		case r < 58:
-			return seed + `l`, H
+			return `l`, H
 		case r < 65:
-			return seed + `u`, H
+			return `u`, H
 		case r < 70:
-			return seed + `n`, H
+			return `n`, H
 		case r < 74:
-			return seed + `c`, H
+			return `c`, H
 		case r < 76:
-			return seed + `s`, H
+			return `s`, H
 		case r < 78:
-			return seed + `i`, H
+			return `i`, H
 		case r < 80:
-			return seed + `g`, H
+			return `g`, H
 		case r < 81:
-			return seed + `w`, H
+			return `w`, H
 		case r < 82:
-			return seed + `d`, H
+			return `d`, H
 		case r < 83:
-			return seed + `e`, H
+			return `e`, H
 		case r < 84:
-			return seed + `y`, H
+			return `y`, H
 		case r < 85:
-			return seed + `a`, H
+			return `a`, H
 		case r < 86:
-			return seed + `x`, H
+			return `x`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -7406,35 +7408,35 @@ retry:
 		r := rng.IntN(179)
 		switch {
 		case r < 76:
-			return seed + `e`, H
+			return `e`, H
 		case r < 99:
-			return seed + `g`, H
+			return `g`, H
 		case r < 115:
-			return seed + `i`, H
+			return `i`, H
 		case r < 131:
-			return seed + `r`, H
+			return `r`, H
 		case r < 144:
-			return seed + `n`, H
+			return `n`, H
 		case r < 154:
-			return seed + `o`, H
+			return `o`, H
 		case r < 160:
-			return seed + `u`, H
+			return `u`, H
 		case r < 165:
-			return seed + `s`, H
+			return `s`, H
 		case r < 169:
-			return seed + `a`, H
+			return `a`, H
 		case r < 173:
-			return seed + `m`, H
+			return `m`, H
 		case r < 175:
-			return seed + `p`, H
+			return `p`, H
 		case r < 176:
-			return seed + `f`, H
+			return `f`, H
 		case r < 177:
-			return seed + `w`, H
+			return `w`, H
 		case r < 178:
-			return seed + `h`, H
+			return `h`, H
 		case r < 179:
-			return seed + `l`, H
+			return `l`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -7443,35 +7445,35 @@ retry:
 		r := rng.IntN(137)
 		switch {
 		case r < 34:
-			return seed + `y`, H
+			return `y`, H
 		case r < 64:
-			return seed + `e`, H
+			return `e`, H
 		case r < 93:
-			return seed + `i`, H
+			return `i`, H
 		case r < 106:
-			return seed + `a`, H
+			return `a`, H
 		case r < 116:
-			return seed + `o`, H
+			return `o`, H
 		case r < 120:
-			return seed + `f`, H
+			return `f`, H
 		case r < 123:
-			return seed + `s`, H
+			return `s`, H
 		case r < 126:
-			return seed + `u`, H
+			return `u`, H
 		case r < 128:
-			return seed + `n`, H
+			return `n`, H
 		case r < 130:
-			return seed + `d`, H
+			return `d`, H
 		case r < 132:
-			return seed + `h`, H
+			return `h`, H
 		case r < 134:
-			return seed + `p`, H
+			return `p`, H
 		case r < 135:
-			return seed + `w`, H
+			return `w`, H
 		case r < 136:
-			return seed + `r`, H
+			return `r`, H
 		case r < 137:
-			return seed + `b`, H
+			return `b`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -7480,35 +7482,35 @@ retry:
 		r := rng.IntN(148)
 		switch {
 		case r < 33:
-			return seed + `s`, H
+			return `s`, H
 		case r < 57:
-			return seed + `n`, H
+			return `n`, H
 		case r < 76:
-			return seed + `m`, H
+			return `m`, H
 		case r < 89:
-			return seed + `d`, H
+			return `d`, H
 		case r < 101:
-			return seed + `b`, H
+			return `b`, H
 		case r < 112:
-			return seed + `c`, H
+			return `c`, H
 		case r < 119:
-			return seed + `t`, H
+			return `t`, H
 		case r < 125:
-			return seed + `p`, H
+			return `p`, H
 		case r < 130:
-			return seed + `f`, H
+			return `f`, H
 		case r < 135:
-			return seed + `e`, H
+			return `e`, H
 		case r < 140:
-			return seed + `g`, H
+			return `g`, H
 		case r < 143:
-			return seed + `i`, H
+			return `i`, H
 		case r < 146:
-			return seed + `l`, H
+			return `l`, H
 		case r < 147:
-			return seed + `r`, H
+			return `r`, H
 		case r < 148:
-			return seed + `x`, H
+			return `x`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -7517,35 +7519,35 @@ retry:
 		r := rng.IntN(178)
 		switch {
 		case r < 40:
-			return seed + `e`, H
+			return `e`, H
 		case r < 73:
-			return seed + `i`, H
+			return `i`, H
 		case r < 103:
-			return seed + `p`, H
+			return `p`, H
 		case r < 122:
-			return seed + `b`, H
+			return `b`, H
 		case r < 135:
-			return seed + `a`, H
+			return `a`, H
 		case r < 145:
-			return seed + `o`, H
+			return `o`, H
 		case r < 155:
-			return seed + `m`, H
+			return `m`, H
 		case r < 162:
-			return seed + `u`, H
+			return `u`, H
 		case r < 167:
-			return seed + `l`, H
+			return `l`, H
 		case r < 170:
-			return seed + `s`, H
+			return `s`, H
 		case r < 172:
-			return seed + `n`, H
+			return `n`, H
 		case r < 174:
-			return seed + `y`, H
+			return `y`, H
 		case r < 176:
-			return seed + `r`, H
+			return `r`, H
 		case r < 177:
-			return seed + `t`, H
+			return `t`, H
 		case r < 178:
-			return seed + `c`, H
+			return `c`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -7554,35 +7556,35 @@ retry:
 		r := rng.IntN(132)
 		switch {
 		case r < 34:
-			return seed + `r`, H
+			return `r`, H
 		case r < 62:
-			return seed + `n`, H
+			return `n`, H
 		case r < 90:
-			return seed + `d`, H
+			return `d`, H
 		case r < 100:
-			return seed + `t`, H
+			return `t`, H
 		case r < 107:
-			return seed + `o`, H
+			return `o`, H
 		case r < 113:
-			return seed + `s`, H
+			return `s`, H
 		case r < 118:
-			return seed + `e`, H
+			return `e`, H
 		case r < 123:
-			return seed + `l`, H
+			return `l`, H
 		case r < 126:
-			return seed + `a`, H
+			return `a`, H
 		case r < 127:
-			return seed + `f`, H
+			return `f`, H
 		case r < 128:
-			return seed + `y`, H
+			return `y`, H
 		case r < 129:
-			return seed + `i`, H
+			return `i`, H
 		case r < 130:
-			return seed + `c`, H
+			return `c`, H
 		case r < 131:
-			return seed + `m`, H
+			return `m`, H
 		case r < 132:
-			return seed + `b`, H
+			return `b`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -7591,35 +7593,35 @@ retry:
 		r := rng.IntN(280)
 		switch {
 		case r < 79:
-			return seed + `t`, H
+			return `t`, H
 		case r < 135:
-			return seed + `h`, H
+			return `h`, H
 		case r < 172:
-			return seed + `s`, H
+			return `s`, H
 		case r < 202:
-			return seed + `i`, H
+			return `i`, H
 		case r < 229:
-			return seed + `e`, H
+			return `e`, H
 		case r < 242:
-			return seed + `p`, H
+			return `p`, H
 		case r < 253:
-			return seed + `c`, H
+			return `c`, H
 		case r < 261:
-			return seed + `k`, H
+			return `k`, H
 		case r < 265:
-			return seed + `o`, H
+			return `o`, H
 		case r < 269:
-			return seed + `a`, H
+			return `a`, H
 		case r < 273:
-			return seed + `m`, H
+			return `m`, H
 		case r < 276:
-			return seed + `u`, H
+			return `u`, H
 		case r < 278:
-			return seed + `y`, H
+			return `y`, H
 		case r < 279:
-			return seed + `q`, H
+			return `q`, H
 		case r < 280:
-			return seed + `l`, H
+			return `l`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -7628,35 +7630,35 @@ retry:
 		r := rng.IntN(150)
 		switch {
 		case r < 54:
-			return seed + `n`, H
+			return `n`, H
 		case r < 77:
-			return seed + `s`, H
+			return `s`, H
 		case r < 97:
-			return seed + `c`, H
+			return `c`, H
 		case r < 115:
-			return seed + `t`, H
+			return `t`, H
 		case r < 128:
-			return seed + `l`, H
+			return `l`, H
 		case r < 132:
-			return seed + `d`, H
+			return `d`, H
 		case r < 135:
-			return seed + `f`, H
+			return `f`, H
 		case r < 138:
-			return seed + `x`, H
+			return `x`, H
 		case r < 140:
-			return seed + `e`, H
+			return `e`, H
 		case r < 142:
-			return seed + `a`, H
+			return `a`, H
 		case r < 144:
-			return seed + `z`, H
+			return `z`, H
 		case r < 146:
-			return seed + `g`, H
+			return `g`, H
 		case r < 148:
-			return seed + `u`, H
+			return `u`, H
 		case r < 149:
-			return seed + `r`, H
+			return `r`, H
 		case r < 150:
-			return seed + `m`, H
+			return `m`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -7665,35 +7667,35 @@ retry:
 		r := rng.IntN(52)
 		switch {
 		case r < 11:
-			return seed + `e`, H
+			return `e`, H
 		case r < 19:
-			return seed + `i`, H
+			return `i`, H
 		case r < 24:
-			return seed + `r`, H
+			return `r`, H
 		case r < 29:
-			return seed + `l`, H
+			return `l`, H
 		case r < 33:
-			return seed + `o`, H
+			return `o`, H
 		case r < 36:
-			return seed + `w`, H
+			return `w`, H
 		case r < 39:
-			return seed + `c`, H
+			return `c`, H
 		case r < 41:
-			return seed + `h`, H
+			return `h`, H
 		case r < 43:
-			return seed + `s`, H
+			return `s`, H
 		case r < 45:
-			return seed + `y`, H
+			return `y`, H
 		case r < 47:
-			return seed + `a`, H
+			return `a`, H
 		case r < 49:
-			return seed + `u`, H
+			return `u`, H
 		case r < 50:
-			return seed + `n`, H
+			return `n`, H
 		case r < 51:
-			return seed + `d`, H
+			return `d`, H
 		case r < 52:
-			return seed + `b`, H
+			return `b`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -7702,35 +7704,35 @@ retry:
 		r := rng.IntN(128)
 		switch {
 		case r < 24:
-			return seed + `e`, H
+			return `e`, H
 		case r < 46:
-			return seed + `t`, H
+			return `t`, H
 		case r < 60:
-			return seed + `i`, H
+			return `i`, H
 		case r < 73:
-			return seed + `u`, H
+			return `u`, H
 		case r < 84:
-			return seed + `o`, H
+			return `o`, H
 		case r < 94:
-			return seed + `h`, H
+			return `h`, H
 		case r < 103:
-			return seed + `a`, H
+			return `a`, H
 		case r < 108:
-			return seed + `c`, H
+			return `c`, H
 		case r < 113:
-			return seed + `p`, H
+			return `p`, H
 		case r < 117:
-			return seed + `l`, H
+			return `l`, H
 		case r < 120:
-			return seed + `w`, H
+			return `w`, H
 		case r < 123:
-			return seed + `m`, H
+			return `m`, H
 		case r < 125:
-			return seed + `n`, H
+			return `n`, H
 		case r < 127:
-			return seed + `f`, H
+			return `f`, H
 		case r < 128:
-			return seed + `k`, H
+			return `k`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -7739,35 +7741,35 @@ retry:
 		r := rng.IntN(84)
 		switch {
 		case r < 20:
-			return seed + `r`, H
+			return `r`, H
 		case r < 31:
-			return seed + `n`, H
+			return `n`, H
 		case r < 42:
-			return seed + `c`, H
+			return `c`, H
 		case r < 50:
-			return seed + `d`, H
+			return `d`, H
 		case r < 58:
-			return seed + `s`, H
+			return `s`, H
 		case r < 65:
-			return seed + `e`, H
+			return `e`, H
 		case r < 70:
-			return seed + `m`, H
+			return `m`, H
 		case r < 74:
-			return seed + `l`, H
+			return `l`, H
 		case r < 77:
-			return seed + `t`, H
+			return `t`, H
 		case r < 79:
-			return seed + `a`, H
+			return `a`, H
 		case r < 80:
-			return seed + `w`, H
+			return `w`, H
 		case r < 81:
-			return seed + `h`, H
+			return `h`, H
 		case r < 82:
-			return seed + `i`, H
+			return `i`, H
 		case r < 83:
-			return seed + `v`, H
+			return `v`, H
 		case r < 84:
-			return seed + `g`, H
+			return `g`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -7776,35 +7778,35 @@ retry:
 		r := rng.IntN(277)
 		switch {
 		case r < 169:
-			return seed + `r`, H
+			return `r`, H
 		case r < 212:
-			return seed + `n`, H
+			return `n`, H
 		case r < 229:
-			return seed + `d`, H
+			return `d`, H
 		case r < 245:
-			return seed + `l`, H
+			return `l`, H
 		case r < 254:
-			return seed + `s`, H
+			return `s`, H
 		case r < 262:
-			return seed + `t`, H
+			return `t`, H
 		case r < 265:
-			return seed + `y`, H
+			return `y`, H
 		case r < 268:
-			return seed + `a`, H
+			return `a`, H
 		case r < 270:
-			return seed + `i`, H
+			return `i`, H
 		case r < 272:
-			return seed + `g`, H
+			return `g`, H
 		case r < 273:
-			return seed + `w`, H
+			return `w`, H
 		case r < 274:
-			return seed + `e`, H
+			return `e`, H
 		case r < 275:
-			return seed + `h`, H
+			return `h`, H
 		case r < 276:
-			return seed + `m`, H
+			return `m`, H
 		case r < 277:
-			return seed + `x`, H
+			return `x`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -7813,35 +7815,35 @@ retry:
 		r := rng.IntN(113)
 		switch {
 		case r < 30:
-			return seed + `r`, H
+			return `r`, H
 		case r < 54:
-			return seed + `d`, H
+			return `d`, H
 		case r < 69:
-			return seed + `n`, H
+			return `n`, H
 		case r < 82:
-			return seed + `t`, H
+			return `t`, H
 		case r < 88:
-			return seed + `l`, H
+			return `l`, H
 		case r < 93:
-			return seed + `w`, H
+			return `w`, H
 		case r < 98:
-			return seed + `e`, H
+			return `e`, H
 		case r < 103:
-			return seed + `s`, H
+			return `s`, H
 		case r < 105:
-			return seed + `y`, H
+			return `y`, H
 		case r < 107:
-			return seed + `p`, H
+			return `p`, H
 		case r < 109:
-			return seed + `b`, H
+			return `b`, H
 		case r < 110:
-			return seed + `o`, H
+			return `o`, H
 		case r < 111:
-			return seed + `h`, H
+			return `h`, H
 		case r < 112:
-			return seed + `m`, H
+			return `m`, H
 		case r < 113:
-			return seed + `g`, H
+			return `g`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -7850,35 +7852,35 @@ retry:
 		r := rng.IntN(143)
 		switch {
 		case r < 60:
-			return seed + `p`, H
+			return `p`, H
 		case r < 82:
-			return seed + `e`, H
+			return `e`, H
 		case r < 93:
-			return seed + `s`, H
+			return `s`, H
 		case r < 103:
-			return seed + `t`, H
+			return `t`, H
 		case r < 111:
-			return seed + `h`, H
+			return `h`, H
 		case r < 119:
-			return seed + `a`, H
+			return `a`, H
 		case r < 125:
-			return seed + `i`, H
+			return `i`, H
 		case r < 130:
-			return seed + `r`, H
+			return `r`, H
 		case r < 134:
-			return seed + `l`, H
+			return `l`, H
 		case r < 137:
-			return seed + `o`, H
+			return `o`, H
 		case r < 139:
-			return seed + `d`, H
+			return `d`, H
 		case r < 140:
-			return seed + `n`, H
+			return `n`, H
 		case r < 141:
-			return seed + `k`, H
+			return `k`, H
 		case r < 142:
-			return seed + `y`, H
+			return `y`, H
 		case r < 143:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -7887,35 +7889,35 @@ retry:
 		r := rng.IntN(102)
 		switch {
 		case r < 43:
-			return seed + `n`, H
+			return `n`, H
 		case r < 51:
-			return seed + `s`, H
+			return `s`, H
 		case r < 59:
-			return seed + `l`, H
+			return `l`, H
 		case r < 66:
-			return seed + `g`, H
+			return `g`, H
 		case r < 72:
-			return seed + `d`, H
+			return `d`, H
 		case r < 78:
-			return seed + `c`, H
+			return `c`, H
 		case r < 84:
-			return seed + `b`, H
+			return `b`, H
 		case r < 89:
-			return seed + `v`, H
+			return `v`, H
 		case r < 92:
-			return seed + `e`, H
+			return `e`, H
 		case r < 95:
-			return seed + `z`, H
+			return `z`, H
 		case r < 97:
-			return seed + `r`, H
+			return `r`, H
 		case r < 99:
-			return seed + `m`, H
+			return `m`, H
 		case r < 100:
-			return seed + `f`, H
+			return `f`, H
 		case r < 101:
-			return seed + `o`, H
+			return `o`, H
 		case r < 102:
-			return seed + `a`, H
+			return `a`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -7924,35 +7926,35 @@ retry:
 		r := rng.IntN(69)
 		switch {
 		case r < 14:
-			return seed + `s`, H
+			return `s`, H
 		case r < 25:
-			return seed + `i`, H
+			return `i`, H
 		case r < 36:
-			return seed + `b`, H
+			return `b`, H
 		case r < 45:
-			return seed + `e`, H
+			return `e`, H
 		case r < 51:
-			return seed + `l`, H
+			return `l`, H
 		case r < 56:
-			return seed + `a`, H
+			return `a`, H
 		case r < 60:
-			return seed + `t`, H
+			return `t`, H
 		case r < 62:
-			return seed + `o`, H
+			return `o`, H
 		case r < 63:
-			return seed + `n`, H
+			return `n`, H
 		case r < 64:
-			return seed + `w`, H
+			return `w`, H
 		case r < 65:
-			return seed + `j`, H
+			return `j`, H
 		case r < 66:
-			return seed + `y`, H
+			return `y`, H
 		case r < 67:
-			return seed + `c`, H
+			return `c`, H
 		case r < 68:
-			return seed + `v`, H
+			return `v`, H
 		case r < 69:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -7961,35 +7963,35 @@ retry:
 		r := rng.IntN(189)
 		switch {
 		case r < 45:
-			return seed + `n`, H
+			return `n`, H
 		case r < 77:
-			return seed + `s`, H
+			return `s`, H
 		case r < 94:
-			return seed + `d`, H
+			return `d`, H
 		case r < 110:
-			return seed + `t`, H
+			return `t`, H
 		case r < 125:
-			return seed + `a`, H
+			return `a`, H
 		case r < 138:
-			return seed + `o`, H
+			return `o`, H
 		case r < 149:
-			return seed + `v`, H
+			return `v`, H
 		case r < 159:
-			return seed + `e`, H
+			return `e`, H
 		case r < 168:
-			return seed + `c`, H
+			return `c`, H
 		case r < 177:
-			return seed + `l`, H
+			return `l`, H
 		case r < 183:
-			return seed + `r`, H
+			return `r`, H
 		case r < 186:
-			return seed + `g`, H
+			return `g`, H
 		case r < 187:
-			return seed + `p`, H
+			return `p`, H
 		case r < 188:
-			return seed + `x`, H
+			return `x`, H
 		case r < 189:
-			return seed + `b`, H
+			return `b`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -7998,35 +8000,35 @@ retry:
 		r := rng.IntN(227)
 		switch {
 		case r < 56:
-			return seed + `r`, H
+			return `r`, H
 		case r < 109:
-			return seed + `a`, H
+			return `a`, H
 		case r < 138:
-			return seed + `d`, H
+			return `d`, H
 		case r < 157:
-			return seed + `l`, H
+			return `l`, H
 		case r < 173:
-			return seed + `s`, H
+			return `s`, H
 		case r < 186:
-			return seed + `m`, H
+			return `m`, H
 		case r < 197:
-			return seed + `e`, H
+			return `e`, H
 		case r < 207:
-			return seed + `n`, H
+			return `n`, H
 		case r < 212:
-			return seed + `w`, H
+			return `w`, H
 		case r < 216:
-			return seed + `f`, H
+			return `f`, H
 		case r < 219:
-			return seed + `o`, H
+			return `o`, H
 		case r < 221:
-			return seed + `t`, H
+			return `t`, H
 		case r < 223:
-			return seed + `c`, H
+			return `c`, H
 		case r < 225:
-			return seed + `v`, H
+			return `v`, H
 		case r < 227:
-			return seed + `x`, H
+			return `x`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -8035,37 +8037,37 @@ retry:
 		r := rng.IntN(57)
 		switch {
 		case r < 14:
-			return seed + `m`, H
+			return `m`, H
 		case r < 25:
-			return seed + `t`, H
+			return `t`, H
 		case r < 30:
-			return seed + `s`, H
+			return `s`, H
 		case r < 34:
-			return seed + `a`, H
+			return `a`, H
 		case r < 38:
-			return seed + `g`, H
+			return `g`, H
 		case r < 41:
-			return seed + `e`, H
+			return `e`, H
 		case r < 44:
-			return seed + `r`, H
+			return `r`, H
 		case r < 47:
-			return seed + `c`, H
+			return `c`, H
 		case r < 49:
-			return seed + `o`, H
+			return `o`, H
 		case r < 51:
-			return seed + `l`, H
+			return `l`, H
 		case r < 52:
-			return seed + `n`, H
+			return `n`, H
 		case r < 53:
-			return seed + `f`, H
+			return `f`, H
 		case r < 54:
-			return seed + `i`, H
+			return `i`, H
 		case r < 55:
-			return seed + `p`, H
+			return `p`, H
 		case r < 56:
-			return seed + `z`, H
+			return `z`, H
 		case r < 57:
-			return seed + `b`, H
+			return `b`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -8074,37 +8076,37 @@ retry:
 		r := rng.IntN(127)
 		switch {
 		case r < 27:
-			return seed + `s`, H
+			return `s`, H
 		case r < 41:
-			return seed + `t`, H
+			return `t`, H
 		case r < 54:
-			return seed + `m`, H
+			return `m`, H
 		case r < 66:
-			return seed + `n`, H
+			return `n`, H
 		case r < 77:
-			return seed + `r`, H
+			return `r`, H
 		case r < 87:
-			return seed + `c`, H
+			return `c`, H
 		case r < 96:
-			return seed + `d`, H
+			return `d`, H
 		case r < 104:
-			return seed + `e`, H
+			return `e`, H
 		case r < 110:
-			return seed + `g`, H
+			return `g`, H
 		case r < 116:
-			return seed + `b`, H
+			return `b`, H
 		case r < 120:
-			return seed + `x`, H
+			return `x`, H
 		case r < 123:
-			return seed + `a`, H
+			return `a`, H
 		case r < 124:
-			return seed + `f`, H
+			return `f`, H
 		case r < 125:
-			return seed + `i`, H
+			return `i`, H
 		case r < 126:
-			return seed + `k`, H
+			return `k`, H
 		case r < 127:
-			return seed + `l`, H
+			return `l`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -8113,37 +8115,37 @@ retry:
 		r := rng.IntN(58)
 		switch {
 		case r < 16:
-			return seed + `l`, H
+			return `l`, H
 		case r < 31:
-			return seed + `n`, H
+			return `n`, H
 		case r < 42:
-			return seed + `r`, H
+			return `r`, H
 		case r < 44:
-			return seed + `i`, H
+			return `i`, H
 		case r < 46:
-			return seed + `t`, H
+			return `t`, H
 		case r < 48:
-			return seed + `u`, H
+			return `u`, H
 		case r < 49:
-			return seed + `f`, H
+			return `f`, H
 		case r < 50:
-			return seed + `w`, H
+			return `w`, H
 		case r < 51:
-			return seed + `d`, H
+			return `d`, H
 		case r < 52:
-			return seed + `o`, H
+			return `o`, H
 		case r < 53:
-			return seed + `a`, H
+			return `a`, H
 		case r < 54:
-			return seed + `c`, H
+			return `c`, H
 		case r < 55:
-			return seed + `p`, H
+			return `p`, H
 		case r < 56:
-			return seed + `m`, H
+			return `m`, H
 		case r < 57:
-			return seed + `v`, H
+			return `v`, H
 		case r < 58:
-			return seed + `b`, H
+			return `b`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -8152,37 +8154,37 @@ retry:
 		r := rng.IntN(506)
 		switch {
 		case r < 182:
-			return seed + `e`, H
+			return `e`, H
 		case r < 271:
-			return seed + `i`, H
+			return `i`, H
 		case r < 319:
-			return seed + `t`, H
+			return `t`, H
 		case r < 365:
-			return seed + `o`, H
+			return `o`, H
 		case r < 395:
-			return seed + `c`, H
+			return `c`, H
 		case r < 420:
-			return seed + `h`, H
+			return `h`, H
 		case r < 441:
-			return seed + `u`, H
+			return `u`, H
 		case r < 460:
-			return seed + `r`, H
+			return `r`, H
 		case r < 479:
-			return seed + `a`, H
+			return `a`, H
 		case r < 485:
-			return seed + `l`, H
+			return `l`, H
 		case r < 490:
-			return seed + `s`, H
+			return `s`, H
 		case r < 494:
-			return seed + `n`, H
+			return `n`, H
 		case r < 498:
-			return seed + `f`, H
+			return `f`, H
 		case r < 501:
-			return seed + `w`, H
+			return `w`, H
 		case r < 504:
-			return seed + `b`, H
+			return `b`, H
 		case r < 506:
-			return seed + `y`, H
+			return `y`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -8191,37 +8193,37 @@ retry:
 		r := rng.IntN(106)
 		switch {
 		case r < 29:
-			return seed + `e`, H
+			return `e`, H
 		case r < 50:
-			return seed + `p`, H
+			return `p`, H
 		case r < 63:
-			return seed + `i`, H
+			return `i`, H
 		case r < 69:
-			return seed + `o`, H
+			return `o`, H
 		case r < 75:
-			return seed + `s`, H
+			return `s`, H
 		case r < 81:
-			return seed + `l`, H
+			return `l`, H
 		case r < 87:
-			return seed + `u`, H
+			return `u`, H
 		case r < 92:
-			return seed + `h`, H
+			return `h`, H
 		case r < 96:
-			return seed + `y`, H
+			return `y`, H
 		case r < 99:
-			return seed + `a`, H
+			return `a`, H
 		case r < 101:
-			return seed + `t`, H
+			return `t`, H
 		case r < 102:
-			return seed + `w`, H
+			return `w`, H
 		case r < 103:
-			return seed + `d`, H
+			return `d`, H
 		case r < 104:
-			return seed + `k`, H
+			return `k`, H
 		case r < 105:
-			return seed + `c`, H
+			return `c`, H
 		case r < 106:
-			return seed + `b`, H
+			return `b`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -8230,37 +8232,37 @@ retry:
 		r := rng.IntN(195)
 		switch {
 		case r < 40:
-			return seed + `t`, H
+			return `t`, H
 		case r < 67:
-			return seed + `k`, H
+			return `k`, H
 		case r < 92:
-			return seed + `n`, H
+			return `n`, H
 		case r < 111:
-			return seed + `m`, H
+			return `m`, H
 		case r < 124:
-			return seed + `d`, H
+			return `d`, H
 		case r < 137:
-			return seed + `r`, H
+			return `r`, H
 		case r < 149:
-			return seed + `f`, H
+			return `f`, H
 		case r < 161:
-			return seed + `l`, H
+			return `l`, H
 		case r < 171:
-			return seed + `p`, H
+			return `p`, H
 		case r < 177:
-			return seed + `s`, H
+			return `s`, H
 		case r < 183:
-			return seed + `z`, H
+			return `z`, H
 		case r < 188:
-			return seed + `g`, H
+			return `g`, H
 		case r < 191:
-			return seed + `v`, H
+			return `v`, H
 		case r < 193:
-			return seed + `i`, H
+			return `i`, H
 		case r < 194:
-			return seed + `e`, H
+			return `e`, H
 		case r < 195:
-			return seed + `c`, H
+			return `c`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -8269,37 +8271,37 @@ retry:
 		r := rng.IntN(67)
 		switch {
 		case r < 16:
-			return seed + `n`, H
+			return `n`, H
 		case r < 25:
-			return seed + `o`, H
+			return `o`, H
 		case r < 33:
-			return seed + `r`, H
+			return `r`, H
 		case r < 40:
-			return seed + `t`, H
+			return `t`, H
 		case r < 47:
-			return seed + `l`, H
+			return `l`, H
 		case r < 51:
-			return seed + `u`, H
+			return `u`, H
 		case r < 54:
-			return seed + `s`, H
+			return `s`, H
 		case r < 57:
-			return seed + `i`, H
+			return `i`, H
 		case r < 60:
-			return seed + `a`, H
+			return `a`, H
 		case r < 61:
-			return seed + `w`, H
+			return `w`, H
 		case r < 62:
-			return seed + `d`, H
+			return `d`, H
 		case r < 63:
-			return seed + `e`, H
+			return `e`, H
 		case r < 64:
-			return seed + `p`, H
+			return `p`, H
 		case r < 65:
-			return seed + `m`, H
+			return `m`, H
 		case r < 66:
-			return seed + `g`, H
+			return `g`, H
 		case r < 67:
-			return seed + `v`, H
+			return `v`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -8308,37 +8310,37 @@ retry:
 		r := rng.IntN(405)
 		switch {
 		case r < 232:
-			return seed + `s`, H
+			return `s`, H
 		case r < 299:
-			return seed + `t`, H
+			return `t`, H
 		case r < 323:
-			return seed + `i`, H
+			return `i`, H
 		case r < 341:
-			return seed + `e`, H
+			return `e`, H
 		case r < 352:
-			return seed + `h`, H
+			return `h`, H
 		case r < 362:
-			return seed + `o`, H
+			return `o`, H
 		case r < 372:
-			return seed + `c`, H
+			return `c`, H
 		case r < 380:
-			return seed + `p`, H
+			return `p`, H
 		case r < 388:
-			return seed + `u`, H
+			return `u`, H
 		case r < 394:
-			return seed + `a`, H
+			return `a`, H
 		case r < 399:
-			return seed + `k`, H
+			return `k`, H
 		case r < 401:
-			return seed + `m`, H
+			return `m`, H
 		case r < 402:
-			return seed + `d`, H
+			return `d`, H
 		case r < 403:
-			return seed + `y`, H
+			return `y`, H
 		case r < 404:
-			return seed + `q`, H
+			return `q`, H
 		case r < 405:
-			return seed + `l`, H
+			return `l`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -8347,37 +8349,37 @@ retry:
 		r := rng.IntN(132)
 		switch {
 		case r < 31:
-			return seed + `n`, H
+			return `n`, H
 		case r < 52:
-			return seed + `t`, H
+			return `t`, H
 		case r < 64:
-			return seed + `d`, H
+			return `d`, H
 		case r < 75:
-			return seed + `s`, H
+			return `s`, H
 		case r < 85:
-			return seed + `a`, H
+			return `a`, H
 		case r < 93:
-			return seed + `e`, H
+			return `e`, H
 		case r < 101:
-			return seed + `o`, H
+			return `o`, H
 		case r < 108:
-			return seed + `l`, H
+			return `l`, H
 		case r < 114:
-			return seed + `r`, H
+			return `r`, H
 		case r < 119:
-			return seed + `f`, H
+			return `f`, H
 		case r < 123:
-			return seed + `v`, H
+			return `v`, H
 		case r < 126:
-			return seed + `p`, H
+			return `p`, H
 		case r < 129:
-			return seed + `m`, H
+			return `m`, H
 		case r < 130:
-			return seed + `z`, H
+			return `z`, H
 		case r < 131:
-			return seed + `u`, H
+			return `u`, H
 		case r < 132:
-			return seed + `b`, H
+			return `b`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -8386,37 +8388,37 @@ retry:
 		r := rng.IntN(233)
 		switch {
 		case r < 48:
-			return seed + `o`, H
+			return `o`, H
 		case r < 91:
-			return seed + `i`, H
+			return `i`, H
 		case r < 133:
-			return seed + `e`, H
+			return `e`, H
 		case r < 174:
-			return seed + `a`, H
+			return `a`, H
 		case r < 192:
-			return seed + `r`, H
+			return `r`, H
 		case r < 202:
-			return seed + `y`, H
+			return `y`, H
 		case r < 212:
-			return seed + `u`, H
+			return `u`, H
 		case r < 218:
-			return seed + `l`, H
+			return `l`, H
 		case r < 223:
-			return seed + `b`, H
+			return `b`, H
 		case r < 227:
-			return seed + `c`, H
+			return `c`, H
 		case r < 228:
-			return seed + `n`, H
+			return `n`, H
 		case r < 229:
-			return seed + `d`, H
+			return `d`, H
 		case r < 230:
-			return seed + `h`, H
+			return `h`, H
 		case r < 231:
-			return seed + `s`, H
+			return `s`, H
 		case r < 232:
-			return seed + `t`, H
+			return `t`, H
 		case r < 233:
-			return seed + `p`, H
+			return `p`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -8425,37 +8427,37 @@ retry:
 		r := rng.IntN(296)
 		switch {
 		case r < 59:
-			return seed + `r`, H
+			return `r`, H
 		case r < 110:
-			return seed + `d`, H
+			return `d`, H
 		case r < 159:
-			return seed + `t`, H
+			return `t`, H
 		case r < 195:
-			return seed + `s`, H
+			return `s`, H
 		case r < 218:
-			return seed + `l`, H
+			return `l`, H
 		case r < 237:
-			return seed + `m`, H
+			return `m`, H
 		case r < 255:
-			return seed + `c`, H
+			return `c`, H
 		case r < 264:
-			return seed + `k`, H
+			return `k`, H
 		case r < 271:
-			return seed + `n`, H
+			return `n`, H
 		case r < 278:
-			return seed + `v`, H
+			return `v`, H
 		case r < 283:
-			return seed + `p`, H
+			return `p`, H
 		case r < 288:
-			return seed + `b`, H
+			return `b`, H
 		case r < 291:
-			return seed + `f`, H
+			return `f`, H
 		case r < 293:
-			return seed + `w`, H
+			return `w`, H
 		case r < 295:
-			return seed + `g`, H
+			return `g`, H
 		case r < 296:
-			return seed + `h`, H
+			return `h`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -8464,39 +8466,39 @@ retry:
 		r := rng.IntN(120)
 		switch {
 		case r < 25:
-			return seed + `r`, H
+			return `r`, H
 		case r < 48:
-			return seed + `s`, H
+			return `s`, H
 		case r < 67:
-			return seed + `y`, H
+			return `y`, H
 		case r < 77:
-			return seed + `l`, H
+			return `l`, H
 		case r < 83:
-			return seed + `n`, H
+			return `n`, H
 		case r < 89:
-			return seed + `t`, H
+			return `t`, H
 		case r < 95:
-			return seed + `g`, H
+			return `g`, H
 		case r < 100:
-			return seed + `k`, H
+			return `k`, H
 		case r < 105:
-			return seed + `b`, H
+			return `b`, H
 		case r < 109:
-			return seed + `v`, H
+			return `v`, H
 		case r < 112:
-			return seed + `d`, H
+			return `d`, H
 		case r < 114:
-			return seed + `f`, H
+			return `f`, H
 		case r < 116:
-			return seed + `w`, H
+			return `w`, H
 		case r < 117:
-			return seed + `i`, H
+			return `i`, H
 		case r < 118:
-			return seed + `c`, H
+			return `c`, H
 		case r < 119:
-			return seed + `p`, H
+			return `p`, H
 		case r < 120:
-			return seed + `m`, H
+			return `m`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -8505,39 +8507,39 @@ retry:
 		r := rng.IntN(53)
 		switch {
 		case r < 6:
-			return seed + `e`, H
+			return `e`, H
 		case r < 12:
-			return seed + `b`, H
+			return `b`, H
 		case r < 17:
-			return seed + `s`, H
+			return `s`, H
 		case r < 22:
-			return seed + `i`, H
+			return `i`, H
 		case r < 26:
-			return seed + `m`, H
+			return `m`, H
 		case r < 29:
-			return seed + `f`, H
+			return `f`, H
 		case r < 32:
-			return seed + `d`, H
+			return `d`, H
 		case r < 35:
-			return seed + `r`, H
+			return `r`, H
 		case r < 38:
-			return seed + `t`, H
+			return `t`, H
 		case r < 41:
-			return seed + `a`, H
+			return `a`, H
 		case r < 44:
-			return seed + `l`, H
+			return `l`, H
 		case r < 46:
-			return seed + `o`, H
+			return `o`, H
 		case r < 48:
-			return seed + `c`, H
+			return `c`, H
 		case r < 50:
-			return seed + `p`, H
+			return `p`, H
 		case r < 51:
-			return seed + `w`, H
+			return `w`, H
 		case r < 52:
-			return seed + `h`, H
+			return `h`, H
 		case r < 53:
-			return seed + `g`, H
+			return `g`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -8546,39 +8548,39 @@ retry:
 		r := rng.IntN(86)
 		switch {
 		case r < 12:
-			return seed + `e`, H
+			return `e`, H
 		case r < 23:
-			return seed + `p`, H
+			return `p`, H
 		case r < 33:
-			return seed + `t`, H
+			return `t`, H
 		case r < 42:
-			return seed + `s`, H
+			return `s`, H
 		case r < 50:
-			return seed + `r`, H
+			return `r`, H
 		case r < 58:
-			return seed + `l`, H
+			return `l`, H
 		case r < 63:
-			return seed + `h`, H
+			return `h`, H
 		case r < 68:
-			return seed + `i`, H
+			return `i`, H
 		case r < 72:
-			return seed + `c`, H
+			return `c`, H
 		case r < 75:
-			return seed + `y`, H
+			return `y`, H
 		case r < 77:
-			return seed + `w`, H
+			return `w`, H
 		case r < 79:
-			return seed + `o`, H
+			return `o`, H
 		case r < 81:
-			return seed + `a`, H
+			return `a`, H
 		case r < 83:
-			return seed + `b`, H
+			return `b`, H
 		case r < 84:
-			return seed + `f`, H
+			return `f`, H
 		case r < 85:
-			return seed + `d`, H
+			return `d`, H
 		case r < 86:
-			return seed + `g`, H
+			return `g`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -8587,39 +8589,39 @@ retry:
 		r := rng.IntN(101)
 		switch {
 		case r < 19:
-			return seed + `w`, H
+			return `w`, H
 		case r < 34:
-			return seed + `t`, H
+			return `t`, H
 		case r < 47:
-			return seed + `r`, H
+			return `r`, H
 		case r < 55:
-			return seed + `u`, H
+			return `u`, H
 		case r < 62:
-			return seed + `s`, H
+			return `s`, H
 		case r < 69:
-			return seed + `p`, H
+			return `p`, H
 		case r < 76:
-			return seed + `m`, H
+			return `m`, H
 		case r < 83:
-			return seed + `l`, H
+			return `l`, H
 		case r < 86:
-			return seed + `o`, H
+			return `o`, H
 		case r < 89:
-			return seed + `g`, H
+			return `g`, H
 		case r < 92:
-			return seed + `x`, H
+			return `x`, H
 		case r < 95:
-			return seed + `v`, H
+			return `v`, H
 		case r < 97:
-			return seed + `n`, H
+			return `n`, H
 		case r < 98:
-			return seed + `e`, H
+			return `e`, H
 		case r < 99:
-			return seed + `y`, H
+			return `y`, H
 		case r < 100:
-			return seed + `i`, H
+			return `i`, H
 		case r < 101:
-			return seed + `b`, H
+			return `b`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -8628,39 +8630,39 @@ retry:
 		r := rng.IntN(135)
 		switch {
 		case r < 50:
-			return seed + `r`, H
+			return `r`, H
 		case r < 63:
-			return seed + `a`, H
+			return `a`, H
 		case r < 74:
-			return seed + `d`, H
+			return `d`, H
 		case r < 83:
-			return seed + `m`, H
+			return `m`, H
 		case r < 91:
-			return seed + `n`, H
+			return `n`, H
 		case r < 99:
-			return seed + `b`, H
+			return `b`, H
 		case r < 105:
-			return seed + `s`, H
+			return `s`, H
 		case r < 111:
-			return seed + `t`, H
+			return `t`, H
 		case r < 116:
-			return seed + `f`, H
+			return `f`, H
 		case r < 121:
-			return seed + `c`, H
+			return `c`, H
 		case r < 126:
-			return seed + `p`, H
+			return `p`, H
 		case r < 128:
-			return seed + `e`, H
+			return `e`, H
 		case r < 130:
-			return seed + `i`, H
+			return `i`, H
 		case r < 132:
-			return seed + `l`, H
+			return `l`, H
 		case r < 133:
-			return seed + `o`, H
+			return `o`, H
 		case r < 134:
-			return seed + `g`, H
+			return `g`, H
 		case r < 135:
-			return seed + `x`, H
+			return `x`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -8669,39 +8671,39 @@ retry:
 		r := rng.IntN(107)
 		switch {
 		case r < 19:
-			return seed + `n`, H
+			return `n`, H
 		case r < 37:
-			return seed + `y`, H
+			return `y`, H
 		case r < 53:
-			return seed + `r`, H
+			return `r`, H
 		case r < 67:
-			return seed + `t`, H
+			return `t`, H
 		case r < 74:
-			return seed + `b`, H
+			return `b`, H
 		case r < 80:
-			return seed + `i`, H
+			return `i`, H
 		case r < 85:
-			return seed + `l`, H
+			return `l`, H
 		case r < 89:
-			return seed + `c`, H
+			return `c`, H
 		case r < 92:
-			return seed + `d`, H
+			return `d`, H
 		case r < 95:
-			return seed + `s`, H
+			return `s`, H
 		case r < 98:
-			return seed + `u`, H
+			return `u`, H
 		case r < 100:
-			return seed + `w`, H
+			return `w`, H
 		case r < 102:
-			return seed + `z`, H
+			return `z`, H
 		case r < 104:
-			return seed + `g`, H
+			return `g`, H
 		case r < 105:
-			return seed + `f`, H
+			return `f`, H
 		case r < 106:
-			return seed + `m`, H
+			return `m`, H
 		case r < 107:
-			return seed + `v`, H
+			return `v`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -8710,39 +8712,39 @@ retry:
 		r := rng.IntN(214)
 		switch {
 		case r < 48:
-			return seed + `r`, H
+			return `r`, H
 		case r < 74:
-			return seed + `n`, H
+			return `n`, H
 		case r < 99:
-			return seed + `s`, H
+			return `s`, H
 		case r < 120:
-			return seed + `c`, H
+			return `c`, H
 		case r < 139:
-			return seed + `t`, H
+			return `t`, H
 		case r < 155:
-			return seed + `y`, H
+			return `y`, H
 		case r < 165:
-			return seed + `l`, H
+			return `l`, H
 		case r < 174:
-			return seed + `d`, H
+			return `d`, H
 		case r < 183:
-			return seed + `i`, H
+			return `i`, H
 		case r < 190:
-			return seed + `p`, H
+			return `p`, H
 		case r < 197:
-			return seed + `v`, H
+			return `v`, H
 		case r < 203:
-			return seed + `b`, H
+			return `b`, H
 		case r < 207:
-			return seed + `m`, H
+			return `m`, H
 		case r < 211:
-			return seed + `g`, H
+			return `g`, H
 		case r < 212:
-			return seed + `w`, H
+			return `w`, H
 		case r < 213:
-			return seed + `j`, H
+			return `j`, H
 		case r < 214:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -8751,39 +8753,39 @@ retry:
 		r := rng.IntN(145)
 		switch {
 		case r < 39:
-			return seed + `e`, H
+			return `e`, H
 		case r < 72:
-			return seed + `l`, H
+			return `l`, H
 		case r < 87:
-			return seed + `r`, H
+			return `r`, H
 		case r < 98:
-			return seed + `i`, H
+			return `i`, H
 		case r < 108:
-			return seed + `o`, H
+			return `o`, H
 		case r < 118:
-			return seed + `u`, H
+			return `u`, H
 		case r < 124:
-			return seed + `s`, H
+			return `s`, H
 		case r < 130:
-			return seed + `a`, H
+			return `a`, H
 		case r < 134:
-			return seed + `y`, H
+			return `y`, H
 		case r < 136:
-			return seed + `n`, H
+			return `n`, H
 		case r < 138:
-			return seed + `t`, H
+			return `t`, H
 		case r < 140:
-			return seed + `b`, H
+			return `b`, H
 		case r < 141:
-			return seed + `f`, H
+			return `f`, H
 		case r < 142:
-			return seed + `w`, H
+			return `w`, H
 		case r < 143:
-			return seed + `d`, H
+			return `d`, H
 		case r < 144:
-			return seed + `h`, H
+			return `h`, H
 		case r < 145:
-			return seed + `m`, H
+			return `m`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -8792,41 +8794,41 @@ retry:
 		r := rng.IntN(203)
 		switch {
 		case r < 41:
-			return seed + `n`, H
+			return `n`, H
 		case r < 72:
-			return seed + `r`, H
+			return `r`, H
 		case r < 92:
-			return seed + `t`, H
+			return `t`, H
 		case r < 108:
-			return seed + `o`, H
+			return `o`, H
 		case r < 124:
-			return seed + `u`, H
+			return `u`, H
 		case r < 138:
-			return seed + `v`, H
+			return `v`, H
 		case r < 150:
-			return seed + `s`, H
+			return `s`, H
 		case r < 161:
-			return seed + `l`, H
+			return `l`, H
 		case r < 171:
-			return seed + `d`, H
+			return `d`, H
 		case r < 178:
-			return seed + `c`, H
+			return `c`, H
 		case r < 183:
-			return seed + `i`, H
+			return `i`, H
 		case r < 188:
-			return seed + `k`, H
+			return `k`, H
 		case r < 193:
-			return seed + `b`, H
+			return `b`, H
 		case r < 196:
-			return seed + `m`, H
+			return `m`, H
 		case r < 198:
-			return seed + `w`, H
+			return `w`, H
 		case r < 200:
-			return seed + `a`, H
+			return `a`, H
 		case r < 202:
-			return seed + `g`, H
+			return `g`, H
 		case r < 203:
-			return seed + `p`, H
+			return `p`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -8835,41 +8837,41 @@ retry:
 		r := rng.IntN(127)
 		switch {
 		case r < 20:
-			return seed + `r`, H
+			return `r`, H
 		case r < 38:
-			return seed + `w`, H
+			return `w`, H
 		case r < 55:
-			return seed + `o`, H
+			return `o`, H
 		case r < 71:
-			return seed + `n`, H
+			return `n`, H
 		case r < 85:
-			return seed + `u`, H
+			return `u`, H
 		case r < 97:
-			return seed + `l`, H
+			return `l`, H
 		case r < 103:
-			return seed + `p`, H
+			return `p`, H
 		case r < 108:
-			return seed + `t`, H
+			return `t`, H
 		case r < 112:
-			return seed + `s`, H
+			return `s`, H
 		case r < 115:
-			return seed + `e`, H
+			return `e`, H
 		case r < 118:
-			return seed + `v`, H
+			return `v`, H
 		case r < 120:
-			return seed + `k`, H
+			return `k`, H
 		case r < 122:
-			return seed + `m`, H
+			return `m`, H
 		case r < 123:
-			return seed + `y`, H
+			return `y`, H
 		case r < 124:
-			return seed + `i`, H
+			return `i`, H
 		case r < 125:
-			return seed + `c`, H
+			return `c`, H
 		case r < 126:
-			return seed + `g`, H
+			return `g`, H
 		case r < 127:
-			return seed + `b`, H
+			return `b`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -8878,41 +8880,41 @@ retry:
 		r := rng.IntN(231)
 		switch {
 		case r < 44:
-			return seed + `e`, H
+			return `e`, H
 		case r < 88:
-			return seed + `i`, H
+			return `i`, H
 		case r < 116:
-			return seed + `l`, H
+			return `l`, H
 		case r < 138:
-			return seed + `y`, H
+			return `y`, H
 		case r < 153:
-			return seed + `d`, H
+			return `d`, H
 		case r < 168:
-			return seed + `a`, H
+			return `a`, H
 		case r < 182:
-			return seed + `o`, H
+			return `o`, H
 		case r < 191:
-			return seed + `t`, H
+			return `t`, H
 		case r < 199:
-			return seed + `f`, H
+			return `f`, H
 		case r < 207:
-			return seed + `p`, H
+			return `p`, H
 		case r < 214:
-			return seed + `u`, H
+			return `u`, H
 		case r < 220:
-			return seed + `v`, H
+			return `v`, H
 		case r < 223:
-			return seed + `s`, H
+			return `s`, H
 		case r < 225:
-			return seed + `n`, H
+			return `n`, H
 		case r < 227:
-			return seed + `c`, H
+			return `c`, H
 		case r < 229:
-			return seed + `m`, H
+			return `m`, H
 		case r < 230:
-			return seed + `k`, H
+			return `k`, H
 		case r < 231:
-			return seed + `b`, H
+			return `b`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -8921,41 +8923,41 @@ retry:
 		r := rng.IntN(102)
 		switch {
 		case r < 22:
-			return seed + `n`, H
+			return `n`, H
 		case r < 38:
-			return seed + `e`, H
+			return `e`, H
 		case r < 47:
-			return seed + `d`, H
+			return `d`, H
 		case r < 56:
-			return seed + `i`, H
+			return `i`, H
 		case r < 65:
-			return seed + `l`, H
+			return `l`, H
 		case r < 72:
-			return seed + `s`, H
+			return `s`, H
 		case r < 79:
-			return seed + `b`, H
+			return `b`, H
 		case r < 82:
-			return seed + `f`, H
+			return `f`, H
 		case r < 85:
-			return seed + `a`, H
+			return `a`, H
 		case r < 88:
-			return seed + `p`, H
+			return `p`, H
 		case r < 91:
-			return seed + `m`, H
+			return `m`, H
 		case r < 93:
-			return seed + `w`, H
+			return `w`, H
 		case r < 95:
-			return seed + `r`, H
+			return `r`, H
 		case r < 97:
-			return seed + `y`, H
+			return `y`, H
 		case r < 99:
-			return seed + `c`, H
+			return `c`, H
 		case r < 100:
-			return seed + `o`, H
+			return `o`, H
 		case r < 101:
-			return seed + `t`, H
+			return `t`, H
 		case r < 102:
-			return seed + `g`, H
+			return `g`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -8964,41 +8966,41 @@ retry:
 		r := rng.IntN(140)
 		switch {
 		case r < 33:
-			return seed + `a`, H
+			return `a`, H
 		case r < 63:
-			return seed + `l`, H
+			return `l`, H
 		case r < 81:
-			return seed + `t`, H
+			return `t`, H
 		case r < 93:
-			return seed + `e`, H
+			return `e`, H
 		case r < 101:
-			return seed + `p`, H
+			return `p`, H
 		case r < 108:
-			return seed + `s`, H
+			return `s`, H
 		case r < 114:
-			return seed + `f`, H
+			return `f`, H
 		case r < 120:
-			return seed + `i`, H
+			return `i`, H
 		case r < 123:
-			return seed + `y`, H
+			return `y`, H
 		case r < 126:
-			return seed + `k`, H
+			return `k`, H
 		case r < 129:
-			return seed + `g`, H
+			return `g`, H
 		case r < 132:
-			return seed + `b`, H
+			return `b`, H
 		case r < 134:
-			return seed + `m`, H
+			return `m`, H
 		case r < 136:
-			return seed + `u`, H
+			return `u`, H
 		case r < 137:
-			return seed + `d`, H
+			return `d`, H
 		case r < 138:
-			return seed + `o`, H
+			return `o`, H
 		case r < 139:
-			return seed + `c`, H
+			return `c`, H
 		case r < 140:
-			return seed + `v`, H
+			return `v`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -9007,41 +9009,41 @@ retry:
 		r := rng.IntN(138)
 		switch {
 		case r < 27:
-			return seed + `i`, H
+			return `i`, H
 		case r < 50:
-			return seed + `e`, H
+			return `e`, H
 		case r < 70:
-			return seed + `h`, H
+			return `h`, H
 		case r < 90:
-			return seed + `t`, H
+			return `t`, H
 		case r < 100:
-			return seed + `a`, H
+			return `a`, H
 		case r < 109:
-			return seed + `o`, H
+			return `o`, H
 		case r < 114:
-			return seed + `l`, H
+			return `l`, H
 		case r < 118:
-			return seed + `s`, H
+			return `s`, H
 		case r < 121:
-			return seed + `r`, H
+			return `r`, H
 		case r < 124:
-			return seed + `c`, H
+			return `c`, H
 		case r < 127:
-			return seed + `p`, H
+			return `p`, H
 		case r < 130:
-			return seed + `b`, H
+			return `b`, H
 		case r < 132:
-			return seed + `w`, H
+			return `w`, H
 		case r < 134:
-			return seed + `y`, H
+			return `y`, H
 		case r < 135:
-			return seed + `n`, H
+			return `n`, H
 		case r < 136:
-			return seed + `m`, H
+			return `m`, H
 		case r < 137:
-			return seed + `g`, H
+			return `g`, H
 		case r < 138:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -9050,41 +9052,41 @@ retry:
 		r := rng.IntN(317)
 		switch {
 		case r < 71:
-			return seed + `r`, H
+			return `r`, H
 		case r < 126:
-			return seed + `l`, H
+			return `l`, H
 		case r < 176:
-			return seed + `t`, H
+			return `t`, H
 		case r < 210:
-			return seed + `n`, H
+			return `n`, H
 		case r < 236:
-			return seed + `p`, H
+			return `p`, H
 		case r < 255:
-			return seed + `s`, H
+			return `s`, H
 		case r < 267:
-			return seed + `m`, H
+			return `m`, H
 		case r < 277:
-			return seed + `b`, H
+			return `b`, H
 		case r < 286:
-			return seed + `u`, H
+			return `u`, H
 		case r < 294:
-			return seed + `d`, H
+			return `d`, H
 		case r < 302:
-			return seed + `v`, H
+			return `v`, H
 		case r < 307:
-			return seed + `c`, H
+			return `c`, H
 		case r < 311:
-			return seed + `k`, H
+			return `k`, H
 		case r < 313:
-			return seed + `g`, H
+			return `g`, H
 		case r < 314:
-			return seed + `f`, H
+			return `f`, H
 		case r < 315:
-			return seed + `w`, H
+			return `w`, H
 		case r < 316:
-			return seed + `h`, H
+			return `h`, H
 		case r < 317:
-			return seed + `y`, H
+			return `y`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -9093,41 +9095,41 @@ retry:
 		r := rng.IntN(189)
 		switch {
 		case r < 47:
-			return seed + `s`, H
+			return `s`, H
 		case r < 77:
-			return seed + `r`, H
+			return `r`, H
 		case r < 94:
-			return seed + `i`, H
+			return `i`, H
 		case r < 110:
-			return seed + `l`, H
+			return `l`, H
 		case r < 123:
-			return seed + `u`, H
+			return `u`, H
 		case r < 135:
-			return seed + `n`, H
+			return `n`, H
 		case r < 145:
-			return seed + `t`, H
+			return `t`, H
 		case r < 155:
-			return seed + `p`, H
+			return `p`, H
 		case r < 164:
-			return seed + `w`, H
+			return `w`, H
 		case r < 172:
-			return seed + `o`, H
+			return `o`, H
 		case r < 178:
-			return seed + `k`, H
+			return `k`, H
 		case r < 181:
-			return seed + `d`, H
+			return `d`, H
 		case r < 183:
-			return seed + `e`, H
+			return `e`, H
 		case r < 185:
-			return seed + `c`, H
+			return `c`, H
 		case r < 186:
-			return seed + `f`, H
+			return `f`, H
 		case r < 187:
-			return seed + `a`, H
+			return `a`, H
 		case r < 188:
-			return seed + `g`, H
+			return `g`, H
 		case r < 189:
-			return seed + `x`, H
+			return `x`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -9136,41 +9138,41 @@ retry:
 		r := rng.IntN(71)
 		switch {
 		case r < 20:
-			return seed + `c`, H
+			return `c`, H
 		case r < 30:
-			return seed + `r`, H
+			return `r`, H
 		case r < 38:
-			return seed + `l`, H
+			return `l`, H
 		case r < 43:
-			return seed + `s`, H
+			return `s`, H
 		case r < 48:
-			return seed + `p`, H
+			return `p`, H
 		case r < 52:
-			return seed + `e`, H
+			return `e`, H
 		case r < 55:
-			return seed + `a`, H
+			return `a`, H
 		case r < 58:
-			return seed + `m`, H
+			return `m`, H
 		case r < 60:
-			return seed + `i`, H
+			return `i`, H
 		case r < 62:
-			return seed + `t`, H
+			return `t`, H
 		case r < 64:
-			return seed + `b`, H
+			return `b`, H
 		case r < 65:
-			return seed + `f`, H
+			return `f`, H
 		case r < 66:
-			return seed + `d`, H
+			return `d`, H
 		case r < 67:
-			return seed + `o`, H
+			return `o`, H
 		case r < 68:
-			return seed + `h`, H
+			return `h`, H
 		case r < 69:
-			return seed + `k`, H
+			return `k`, H
 		case r < 70:
-			return seed + `g`, H
+			return `g`, H
 		case r < 71:
-			return seed + `v`, H
+			return `v`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -9179,41 +9181,41 @@ retry:
 		r := rng.IntN(135)
 		switch {
 		case r < 30:
-			return seed + `e`, H
+			return `e`, H
 		case r < 51:
-			return seed + `i`, H
+			return `i`, H
 		case r < 72:
-			return seed + `l`, H
+			return `l`, H
 		case r < 91:
-			return seed + `s`, H
+			return `s`, H
 		case r < 100:
-			return seed + `y`, H
+			return `y`, H
 		case r < 104:
-			return seed + `n`, H
+			return `n`, H
 		case r < 108:
-			return seed + `w`, H
+			return `w`, H
 		case r < 112:
-			return seed + `t`, H
+			return `t`, H
 		case r < 116:
-			return seed + `a`, H
+			return `a`, H
 		case r < 120:
-			return seed + `b`, H
+			return `b`, H
 		case r < 123:
-			return seed + `f`, H
+			return `f`, H
 		case r < 126:
-			return seed + `p`, H
+			return `p`, H
 		case r < 129:
-			return seed + `u`, H
+			return `u`, H
 		case r < 131:
-			return seed + `r`, H
+			return `r`, H
 		case r < 132:
-			return seed + `d`, H
+			return `d`, H
 		case r < 133:
-			return seed + `o`, H
+			return `o`, H
 		case r < 134:
-			return seed + `h`, H
+			return `h`, H
 		case r < 135:
-			return seed + `k`, H
+			return `k`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -9222,43 +9224,43 @@ retry:
 		r := rng.IntN(249)
 		switch {
 		case r < 57:
-			return seed + `l`, H
+			return `l`, H
 		case r < 106:
-			return seed + `y`, H
+			return `y`, H
 		case r < 147:
-			return seed + `e`, H
+			return `e`, H
 		case r < 186:
-			return seed + `i`, H
+			return `i`, H
 		case r < 201:
-			return seed + `d`, H
+			return `d`, H
 		case r < 213:
-			return seed + `t`, H
+			return `t`, H
 		case r < 225:
-			return seed + `a`, H
+			return `a`, H
 		case r < 235:
-			return seed + `o`, H
+			return `o`, H
 		case r < 237:
-			return seed + `s`, H
+			return `s`, H
 		case r < 239:
-			return seed + `u`, H
+			return `u`, H
 		case r < 241:
-			return seed + `b`, H
+			return `b`, H
 		case r < 242:
-			return seed + `n`, H
+			return `n`, H
 		case r < 243:
-			return seed + `w`, H
+			return `w`, H
 		case r < 244:
-			return seed + `h`, H
+			return `h`, H
 		case r < 245:
-			return seed + `r`, H
+			return `r`, H
 		case r < 246:
-			return seed + `k`, H
+			return `k`, H
 		case r < 247:
-			return seed + `c`, H
+			return `c`, H
 		case r < 248:
-			return seed + `m`, H
+			return `m`, H
 		case r < 249:
-			return seed + `v`, H
+			return `v`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -9267,43 +9269,43 @@ retry:
 		r := rng.IntN(202)
 		switch {
 		case r < 52:
-			return seed + `n`, H
+			return `n`, H
 		case r < 80:
-			return seed + `s`, H
+			return `s`, H
 		case r < 104:
-			return seed + `t`, H
+			return `t`, H
 		case r < 125:
-			return seed + `c`, H
+			return `c`, H
 		case r < 137:
-			return seed + `f`, H
+			return `f`, H
 		case r < 148:
-			return seed + `m`, H
+			return `m`, H
 		case r < 158:
-			return seed + `a`, H
+			return `a`, H
 		case r < 167:
-			return seed + `o`, H
+			return `o`, H
 		case r < 176:
-			return seed + `z`, H
+			return `z`, H
 		case r < 181:
-			return seed + `p`, H
+			return `p`, H
 		case r < 186:
-			return seed + `v`, H
+			return `v`, H
 		case r < 191:
-			return seed + `u`, H
+			return `u`, H
 		case r < 195:
-			return seed + `l`, H
+			return `l`, H
 		case r < 197:
-			return seed + `g`, H
+			return `g`, H
 		case r < 198:
-			return seed + `d`, H
+			return `d`, H
 		case r < 199:
-			return seed + `e`, H
+			return `e`, H
 		case r < 200:
-			return seed + `q`, H
+			return `q`, H
 		case r < 201:
-			return seed + `x`, H
+			return `x`, H
 		case r < 202:
-			return seed + `b`, H
+			return `b`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -9312,43 +9314,43 @@ retry:
 		r := rng.IntN(290)
 		switch {
 		case r < 50:
-			return seed + `t`, H
+			return `t`, H
 		case r < 86:
-			return seed + `e`, H
+			return `e`, H
 		case r < 113:
-			return seed + `i`, H
+			return `i`, H
 		case r < 139:
-			return seed + `n`, H
+			return `n`, H
 		case r < 164:
-			return seed + `a`, H
+			return `a`, H
 		case r < 187:
-			return seed + `m`, H
+			return `m`, H
 		case r < 204:
-			return seed + `k`, H
+			return `k`, H
 		case r < 219:
-			return seed + `r`, H
+			return `r`, H
 		case r < 232:
-			return seed + `d`, H
+			return `d`, H
 		case r < 244:
-			return seed + `y`, H
+			return `y`, H
 		case r < 256:
-			return seed + `s`, H
+			return `s`, H
 		case r < 264:
-			return seed + `o`, H
+			return `o`, H
 		case r < 271:
-			return seed + `c`, H
+			return `c`, H
 		case r < 278:
-			return seed + `p`, H
+			return `p`, H
 		case r < 282:
-			return seed + `b`, H
+			return `b`, H
 		case r < 285:
-			return seed + `g`, H
+			return `g`, H
 		case r < 287:
-			return seed + `f`, H
+			return `f`, H
 		case r < 289:
-			return seed + `l`, H
+			return `l`, H
 		case r < 290:
-			return seed + `w`, H
+			return `w`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -9357,43 +9359,43 @@ retry:
 		r := rng.IntN(257)
 		switch {
 		case r < 66:
-			return seed + `n`, H
+			return `n`, H
 		case r < 119:
-			return seed + `r`, H
+			return `r`, H
 		case r < 138:
-			return seed + `t`, H
+			return `t`, H
 		case r < 155:
-			return seed + `p`, H
+			return `p`, H
 		case r < 171:
-			return seed + `s`, H
+			return `s`, H
 		case r < 186:
-			return seed + `m`, H
+			return `m`, H
 		case r < 197:
-			return seed + `l`, H
+			return `l`, H
 		case r < 207:
-			return seed + `b`, H
+			return `b`, H
 		case r < 215:
-			return seed + `c`, H
+			return `c`, H
 		case r < 222:
-			return seed + `d`, H
+			return `d`, H
 		case r < 229:
-			return seed + `k`, H
+			return `k`, H
 		case r < 236:
-			return seed + `z`, H
+			return `z`, H
 		case r < 242:
-			return seed + `i`, H
+			return `i`, H
 		case r < 245:
-			return seed + `f`, H
+			return `f`, H
 		case r < 248:
-			return seed + `w`, H
+			return `w`, H
 		case r < 251:
-			return seed + `v`, H
+			return `v`, H
 		case r < 254:
-			return seed + `u`, H
+			return `u`, H
 		case r < 256:
-			return seed + `g`, H
+			return `g`, H
 		case r < 257:
-			return seed + `o`, H
+			return `o`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -9402,43 +9404,43 @@ retry:
 		r := rng.IntN(484)
 		switch {
 		case r < 94:
-			return seed + `n`, H
+			return `n`, H
 		case r < 146:
-			return seed + `c`, H
+			return `c`, H
 		case r < 193:
-			return seed + `t`, H
+			return `t`, H
 		case r < 236:
-			return seed + `s`, H
+			return `s`, H
 		case r < 269:
-			return seed + `e`, H
+			return `e`, H
 		case r < 299:
-			return seed + `v`, H
+			return `v`, H
 		case r < 325:
-			return seed + `m`, H
+			return `m`, H
 		case r < 349:
-			return seed + `d`, H
+			return `d`, H
 		case r < 369:
-			return seed + `l`, H
+			return `l`, H
 		case r < 387:
-			return seed + `a`, H
+			return `a`, H
 		case r < 405:
-			return seed + `g`, H
+			return `g`, H
 		case r < 422:
-			return seed + `p`, H
+			return `p`, H
 		case r < 438:
-			return seed + `f`, H
+			return `f`, H
 		case r < 454:
-			return seed + `b`, H
+			return `b`, H
 		case r < 467:
-			return seed + `o`, H
+			return `o`, H
 		case r < 475:
-			return seed + `z`, H
+			return `z`, H
 		case r < 480:
-			return seed + `u`, H
+			return `u`, H
 		case r < 483:
-			return seed + `k`, H
+			return `k`, H
 		case r < 484:
-			return seed + `x`, H
+			return `x`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -9447,43 +9449,43 @@ retry:
 		r := rng.IntN(246)
 		switch {
 		case r < 87:
-			return seed + `v`, H
+			return `v`, H
 		case r < 140:
-			return seed + `u`, H
+			return `u`, H
 		case r < 167:
-			return seed + `b`, H
+			return `b`, H
 		case r < 186:
-			return seed + `p`, H
+			return `p`, H
 		case r < 201:
-			return seed + `n`, H
+			return `n`, H
 		case r < 212:
-			return seed + `c`, H
+			return `c`, H
 		case r < 219:
-			return seed + `x`, H
+			return `x`, H
 		case r < 225:
-			return seed + `m`, H
+			return `m`, H
 		case r < 229:
-			return seed + `a`, H
+			return `a`, H
 		case r < 232:
-			return seed + `o`, H
+			return `o`, H
 		case r < 235:
-			return seed + `i`, H
+			return `i`, H
 		case r < 238:
-			return seed + `l`, H
+			return `l`, H
 		case r < 240:
-			return seed + `t`, H
+			return `t`, H
 		case r < 241:
-			return seed + `w`, H
+			return `w`, H
 		case r < 242:
-			return seed + `s`, H
+			return `s`, H
 		case r < 243:
-			return seed + `k`, H
+			return `k`, H
 		case r < 244:
-			return seed + `y`, H
+			return `y`, H
 		case r < 245:
-			return seed + `z`, H
+			return `z`, H
 		case r < 246:
-			return seed + `g`, H
+			return `g`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -9492,43 +9494,43 @@ retry:
 		r := rng.IntN(500)
 		switch {
 		case r < 118:
-			return seed + `n`, H
+			return `n`, H
 		case r < 208:
-			return seed + `o`, H
+			return `o`, H
 		case r < 273:
-			return seed + `c`, H
+			return `c`, H
 		case r < 313:
-			return seed + `v`, H
+			return `v`, H
 		case r < 337:
-			return seed + `t`, H
+			return `t`, H
 		case r < 361:
-			return seed + `l`, H
+			return `l`, H
 		case r < 384:
-			return seed + `f`, H
+			return `f`, H
 		case r < 405:
-			return seed + `m`, H
+			return `m`, H
 		case r < 425:
-			return seed + `s`, H
+			return `s`, H
 		case r < 437:
-			return seed + `g`, H
+			return `g`, H
 		case r < 448:
-			return seed + `e`, H
+			return `e`, H
 		case r < 459:
-			return seed + `r`, H
+			return `r`, H
 		case r < 470:
-			return seed + `p`, H
+			return `p`, H
 		case r < 480:
-			return seed + `z`, H
+			return `z`, H
 		case r < 488:
-			return seed + `d`, H
+			return `d`, H
 		case r < 494:
-			return seed + `a`, H
+			return `a`, H
 		case r < 497:
-			return seed + `q`, H
+			return `q`, H
 		case r < 499:
-			return seed + `b`, H
+			return `b`, H
 		case r < 500:
-			return seed + `h`, H
+			return `h`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -9537,43 +9539,43 @@ retry:
 		r := rng.IntN(246)
 		switch {
 		case r < 43:
-			return seed + `n`, H
+			return `n`, H
 		case r < 75:
-			return seed + `o`, H
+			return `o`, H
 		case r < 100:
-			return seed + `t`, H
+			return `t`, H
 		case r < 122:
-			return seed + `v`, H
+			return `v`, H
 		case r < 143:
-			return seed + `d`, H
+			return `d`, H
 		case r < 164:
-			return seed + `l`, H
+			return `l`, H
 		case r < 180:
-			return seed + `s`, H
+			return `s`, H
 		case r < 191:
-			return seed + `z`, H
+			return `z`, H
 		case r < 202:
-			return seed + `g`, H
+			return `g`, H
 		case r < 212:
-			return seed + `b`, H
+			return `b`, H
 		case r < 221:
-			return seed + `m`, H
+			return `m`, H
 		case r < 227:
-			return seed + `x`, H
+			return `x`, H
 		case r < 232:
-			return seed + `e`, H
+			return `e`, H
 		case r < 237:
-			return seed + `c`, H
+			return `c`, H
 		case r < 239:
-			return seed + `f`, H
+			return `f`, H
 		case r < 241:
-			return seed + `r`, H
+			return `r`, H
 		case r < 243:
-			return seed + `a`, H
+			return `a`, H
 		case r < 245:
-			return seed + `p`, H
+			return `p`, H
 		case r < 246:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -9582,43 +9584,43 @@ retry:
 		r := rng.IntN(393)
 		switch {
 		case r < 68:
-			return seed + `t`, H
+			return `t`, H
 		case r < 132:
-			return seed + `n`, H
+			return `n`, H
 		case r < 174:
-			return seed + `r`, H
+			return `r`, H
 		case r < 212:
-			return seed + `s`, H
+			return `s`, H
 		case r < 236:
-			return seed + `y`, H
+			return `y`, H
 		case r < 257:
-			return seed + `c`, H
+			return `c`, H
 		case r < 277:
-			return seed + `m`, H
+			return `m`, H
 		case r < 295:
-			return seed + `p`, H
+			return `p`, H
 		case r < 312:
-			return seed + `d`, H
+			return `d`, H
 		case r < 326:
-			return seed + `i`, H
+			return `i`, H
 		case r < 338:
-			return seed + `u`, H
+			return `u`, H
 		case r < 350:
-			return seed + `b`, H
+			return `b`, H
 		case r < 361:
-			return seed + `g`, H
+			return `g`, H
 		case r < 371:
-			return seed + `z`, H
+			return `z`, H
 		case r < 378:
-			return seed + `v`, H
+			return `v`, H
 		case r < 384:
-			return seed + `w`, H
+			return `w`, H
 		case r < 389:
-			return seed + `k`, H
+			return `k`, H
 		case r < 392:
-			return seed + `x`, H
+			return `x`, H
 		case r < 393:
-			return seed + `h`, H
+			return `h`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -9627,43 +9629,43 @@ retry:
 		r := rng.IntN(98)
 		switch {
 		case r < 18:
-			return seed + `t`, H
+			return `t`, H
 		case r < 35:
-			return seed + `l`, H
+			return `l`, H
 		case r < 50:
-			return seed + `r`, H
+			return `r`, H
 		case r < 62:
-			return seed + `n`, H
+			return `n`, H
 		case r < 69:
-			return seed + `m`, H
+			return `m`, H
 		case r < 75:
-			return seed + `g`, H
+			return `g`, H
 		case r < 79:
-			return seed + `i`, H
+			return `i`, H
 		case r < 82:
-			return seed + `z`, H
+			return `z`, H
 		case r < 85:
-			return seed + `u`, H
+			return `u`, H
 		case r < 88:
-			return seed + `b`, H
+			return `b`, H
 		case r < 90:
-			return seed + `d`, H
+			return `d`, H
 		case r < 91:
-			return seed + `f`, H
+			return `f`, H
 		case r < 92:
-			return seed + `w`, H
+			return `w`, H
 		case r < 93:
-			return seed + `e`, H
+			return `e`, H
 		case r < 94:
-			return seed + `h`, H
+			return `h`, H
 		case r < 95:
-			return seed + `s`, H
+			return `s`, H
 		case r < 96:
-			return seed + `c`, H
+			return `c`, H
 		case r < 97:
-			return seed + `p`, H
+			return `p`, H
 		case r < 98:
-			return seed + `v`, H
+			return `v`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -9672,43 +9674,43 @@ retry:
 		r := rng.IntN(159)
 		switch {
 		case r < 30:
-			return seed + `l`, H
+			return `l`, H
 		case r < 56:
-			return seed + `n`, H
+			return `n`, H
 		case r < 73:
-			return seed + `b`, H
+			return `b`, H
 		case r < 84:
-			return seed + `t`, H
+			return `t`, H
 		case r < 94:
-			return seed + `g`, H
+			return `g`, H
 		case r < 102:
-			return seed + `d`, H
+			return `d`, H
 		case r < 110:
-			return seed + `v`, H
+			return `v`, H
 		case r < 117:
-			return seed + `f`, H
+			return `f`, H
 		case r < 123:
-			return seed + `i`, H
+			return `i`, H
 		case r < 129:
-			return seed + `r`, H
+			return `r`, H
 		case r < 135:
-			return seed + `m`, H
+			return `m`, H
 		case r < 140:
-			return seed + `c`, H
+			return `c`, H
 		case r < 145:
-			return seed + `u`, H
+			return `u`, H
 		case r < 149:
-			return seed + `s`, H
+			return `s`, H
 		case r < 152:
-			return seed + `w`, H
+			return `w`, H
 		case r < 155:
-			return seed + `p`, H
+			return `p`, H
 		case r < 157:
-			return seed + `y`, H
+			return `y`, H
 		case r < 158:
-			return seed + `k`, H
+			return `k`, H
 		case r < 159:
-			return seed + `x`, H
+			return `x`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -9717,43 +9719,43 @@ retry:
 		r := rng.IntN(161)
 		switch {
 		case r < 30:
-			return seed + `t`, H
+			return `t`, H
 		case r < 53:
-			return seed + `l`, H
+			return `l`, H
 		case r < 70:
-			return seed + `n`, H
+			return `n`, H
 		case r < 84:
-			return seed + `r`, H
+			return `r`, H
 		case r < 96:
-			return seed + `m`, H
+			return `m`, H
 		case r < 107:
-			return seed + `p`, H
+			return `p`, H
 		case r < 117:
-			return seed + `g`, H
+			return `g`, H
 		case r < 126:
-			return seed + `b`, H
+			return `b`, H
 		case r < 134:
-			return seed + `c`, H
+			return `c`, H
 		case r < 140:
-			return seed + `s`, H
+			return `s`, H
 		case r < 144:
-			return seed + `d`, H
+			return `d`, H
 		case r < 148:
-			return seed + `i`, H
+			return `i`, H
 		case r < 151:
-			return seed + `v`, H
+			return `v`, H
 		case r < 154:
-			return seed + `u`, H
+			return `u`, H
 		case r < 156:
-			return seed + `w`, H
+			return `w`, H
 		case r < 158:
-			return seed + `e`, H
+			return `e`, H
 		case r < 159:
-			return seed + `f`, H
+			return `f`, H
 		case r < 160:
-			return seed + `k`, H
+			return `k`, H
 		case r < 161:
-			return seed + `z`, H
+			return `z`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -9762,43 +9764,43 @@ retry:
 		r := rng.IntN(149)
 		switch {
 		case r < 40:
-			return seed + `e`, H
+			return `e`, H
 		case r < 69:
-			return seed + `i`, H
+			return `i`, H
 		case r < 87:
-			return seed + `d`, H
+			return `d`, H
 		case r < 100:
-			return seed + `l`, H
+			return `l`, H
 		case r < 106:
-			return seed + `s`, H
+			return `s`, H
 		case r < 112:
-			return seed + `y`, H
+			return `y`, H
 		case r < 117:
-			return seed + `o`, H
+			return `o`, H
 		case r < 122:
-			return seed + `a`, H
+			return `a`, H
 		case r < 125:
-			return seed + `n`, H
+			return `n`, H
 		case r < 128:
-			return seed + `f`, H
+			return `f`, H
 		case r < 131:
-			return seed + `w`, H
+			return `w`, H
 		case r < 134:
-			return seed + `r`, H
+			return `r`, H
 		case r < 137:
-			return seed + `p`, H
+			return `p`, H
 		case r < 140:
-			return seed + `b`, H
+			return `b`, H
 		case r < 142:
-			return seed + `c`, H
+			return `c`, H
 		case r < 144:
-			return seed + `m`, H
+			return `m`, H
 		case r < 146:
-			return seed + `g`, H
+			return `g`, H
 		case r < 148:
-			return seed + `u`, H
+			return `u`, H
 		case r < 149:
-			return seed + `v`, H
+			return `v`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -9807,45 +9809,45 @@ retry:
 		r := rng.IntN(89)
 		switch {
 		case r < 21:
-			return seed + `b`, H
+			return `b`, H
 		case r < 33:
-			return seed + `s`, H
+			return `s`, H
 		case r < 43:
-			return seed + `l`, H
+			return `l`, H
 		case r < 51:
-			return seed + `t`, H
+			return `t`, H
 		case r < 56:
-			return seed + `i`, H
+			return `i`, H
 		case r < 61:
-			return seed + `m`, H
+			return `m`, H
 		case r < 65:
-			return seed + `d`, H
+			return `d`, H
 		case r < 69:
-			return seed + `p`, H
+			return `p`, H
 		case r < 72:
-			return seed + `e`, H
+			return `e`, H
 		case r < 75:
-			return seed + `a`, H
+			return `a`, H
 		case r < 77:
-			return seed + `w`, H
+			return `w`, H
 		case r < 79:
-			return seed + `h`, H
+			return `h`, H
 		case r < 81:
-			return seed + `r`, H
+			return `r`, H
 		case r < 83:
-			return seed + `u`, H
+			return `u`, H
 		case r < 84:
-			return seed + `f`, H
+			return `f`, H
 		case r < 85:
-			return seed + `y`, H
+			return `y`, H
 		case r < 86:
-			return seed + `j`, H
+			return `j`, H
 		case r < 87:
-			return seed + `c`, H
+			return `c`, H
 		case r < 88:
-			return seed + `z`, H
+			return `z`, H
 		case r < 89:
-			return seed + `g`, H
+			return `g`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -9854,45 +9856,45 @@ retry:
 		r := rng.IntN(153)
 		switch {
 		case r < 26:
-			return seed + `o`, H
+			return `o`, H
 		case r < 46:
-			return seed + `n`, H
+			return `n`, H
 		case r < 64:
-			return seed + `a`, H
+			return `a`, H
 		case r < 80:
-			return seed + `x`, H
+			return `x`, H
 		case r < 94:
-			return seed + `r`, H
+			return `r`, H
 		case r < 106:
-			return seed + `u`, H
+			return `u`, H
 		case r < 116:
-			return seed + `t`, H
+			return `t`, H
 		case r < 123:
-			return seed + `d`, H
+			return `d`, H
 		case r < 130:
-			return seed + `b`, H
+			return `b`, H
 		case r < 136:
-			return seed + `l`, H
+			return `l`, H
 		case r < 139:
-			return seed + `w`, H
+			return `w`, H
 		case r < 142:
-			return seed + `s`, H
+			return `s`, H
 		case r < 145:
-			return seed + `g`, H
+			return `g`, H
 		case r < 147:
-			return seed + `y`, H
+			return `y`, H
 		case r < 148:
-			return seed + `f`, H
+			return `f`, H
 		case r < 149:
-			return seed + `e`, H
+			return `e`, H
 		case r < 150:
-			return seed + `j`, H
+			return `j`, H
 		case r < 151:
-			return seed + `i`, H
+			return `i`, H
 		case r < 152:
-			return seed + `k`, H
+			return `k`, H
 		case r < 153:
-			return seed + `v`, H
+			return `v`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -9901,45 +9903,45 @@ retry:
 		r := rng.IntN(324)
 		switch {
 		case r < 45:
-			return seed + `r`, H
+			return `r`, H
 		case r < 87:
-			return seed + `l`, H
+			return `l`, H
 		case r < 126:
-			return seed + `b`, H
+			return `b`, H
 		case r < 162:
-			return seed + `t`, H
+			return `t`, H
 		case r < 195:
-			return seed + `n`, H
+			return `n`, H
 		case r < 224:
-			return seed + `i`, H
+			return `i`, H
 		case r < 246:
-			return seed + `g`, H
+			return `g`, H
 		case r < 267:
-			return seed + `c`, H
+			return `c`, H
 		case r < 279:
-			return seed + `s`, H
+			return `s`, H
 		case r < 290:
-			return seed + `p`, H
+			return `p`, H
 		case r < 300:
-			return seed + `k`, H
+			return `k`, H
 		case r < 310:
-			return seed + `m`, H
+			return `m`, H
 		case r < 314:
-			return seed + `d`, H
+			return `d`, H
 		case r < 316:
-			return seed + `f`, H
+			return `f`, H
 		case r < 318:
-			return seed + `y`, H
+			return `y`, H
 		case r < 320:
-			return seed + `u`, H
+			return `u`, H
 		case r < 321:
-			return seed + `w`, H
+			return `w`, H
 		case r < 322:
-			return seed + `e`, H
+			return `e`, H
 		case r < 323:
-			return seed + `v`, H
+			return `v`, H
 		case r < 324:
-			return seed + `x`, H
+			return `x`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -9948,45 +9950,45 @@ retry:
 		r := rng.IntN(288)
 		switch {
 		case r < 71:
-			return seed + `s`, H
+			return `s`, H
 		case r < 134:
-			return seed + `n`, H
+			return `n`, H
 		case r < 158:
-			return seed + `a`, H
+			return `a`, H
 		case r < 178:
-			return seed + `t`, H
+			return `t`, H
 		case r < 195:
-			return seed + `c`, H
+			return `c`, H
 		case r < 211:
-			return seed + `v`, H
+			return `v`, H
 		case r < 225:
-			return seed + `l`, H
+			return `l`, H
 		case r < 234:
-			return seed + `e`, H
+			return `e`, H
 		case r < 243:
-			return seed + `m`, H
+			return `m`, H
 		case r < 250:
-			return seed + `f`, H
+			return `f`, H
 		case r < 257:
-			return seed + `o`, H
+			return `o`, H
 		case r < 264:
-			return seed + `r`, H
+			return `r`, H
 		case r < 270:
-			return seed + `z`, H
+			return `z`, H
 		case r < 276:
-			return seed + `g`, H
+			return `g`, H
 		case r < 280:
-			return seed + `p`, H
+			return `p`, H
 		case r < 284:
-			return seed + `b`, H
+			return `b`, H
 		case r < 285:
-			return seed + `w`, H
+			return `w`, H
 		case r < 286:
-			return seed + `d`, H
+			return `d`, H
 		case r < 287:
-			return seed + `x`, H
+			return `x`, H
 		case r < 288:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -9995,45 +9997,45 @@ retry:
 		r := rng.IntN(199)
 		switch {
 		case r < 32:
-			return seed + `d`, H
+			return `d`, H
 		case r < 60:
-			return seed + `r`, H
+			return `r`, H
 		case r < 86:
-			return seed + `l`, H
+			return `l`, H
 		case r < 111:
-			return seed + `n`, H
+			return `n`, H
 		case r < 127:
-			return seed + `s`, H
+			return `s`, H
 		case r < 142:
-			return seed + `c`, H
+			return `c`, H
 		case r < 156:
-			return seed + `t`, H
+			return `t`, H
 		case r < 165:
-			return seed + `m`, H
+			return `m`, H
 		case r < 171:
-			return seed + `a`, H
+			return `a`, H
 		case r < 177:
-			return seed + `v`, H
+			return `v`, H
 		case r < 182:
-			return seed + `e`, H
+			return `e`, H
 		case r < 186:
-			return seed + `p`, H
+			return `p`, H
 		case r < 189:
-			return seed + `q`, H
+			return `q`, H
 		case r < 191:
-			return seed + `y`, H
+			return `y`, H
 		case r < 193:
-			return seed + `i`, H
+			return `i`, H
 		case r < 195:
-			return seed + `u`, H
+			return `u`, H
 		case r < 196:
-			return seed + `f`, H
+			return `f`, H
 		case r < 197:
-			return seed + `w`, H
+			return `w`, H
 		case r < 198:
-			return seed + `g`, H
+			return `g`, H
 		case r < 199:
-			return seed + `x`, H
+			return `x`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -10042,45 +10044,45 @@ retry:
 		r := rng.IntN(244)
 		switch {
 		case r < 63:
-			return seed + `e`, H
+			return `e`, H
 		case r < 90:
-			return seed + `i`, H
+			return `i`, H
 		case r < 110:
-			return seed + `a`, H
+			return `a`, H
 		case r < 125:
-			return seed + `s`, H
+			return `s`, H
 		case r < 139:
-			return seed + `r`, H
+			return `r`, H
 		case r < 152:
-			return seed + `g`, H
+			return `g`, H
 		case r < 162:
-			return seed + `n`, H
+			return `n`, H
 		case r < 172:
-			return seed + `v`, H
+			return `v`, H
 		case r < 181:
-			return seed + `l`, H
+			return `l`, H
 		case r < 190:
-			return seed + `b`, H
+			return `b`, H
 		case r < 198:
-			return seed + `o`, H
+			return `o`, H
 		case r < 206:
-			return seed + `t`, H
+			return `t`, H
 		case r < 214:
-			return seed + `p`, H
+			return `p`, H
 		case r < 221:
-			return seed + `f`, H
+			return `f`, H
 		case r < 227:
-			return seed + `d`, H
+			return `d`, H
 		case r < 233:
-			return seed + `c`, H
+			return `c`, H
 		case r < 237:
-			return seed + `k`, H
+			return `k`, H
 		case r < 240:
-			return seed + `y`, H
+			return `y`, H
 		case r < 242:
-			return seed + `m`, H
+			return `m`, H
 		case r < 244:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -10089,45 +10091,45 @@ retry:
 		r := rng.IntN(103)
 		switch {
 		case r < 15:
-			return seed + `r`, H
+			return `r`, H
 		case r < 29:
-			return seed + `w`, H
+			return `w`, H
 		case r < 43:
-			return seed + `o`, H
+			return `o`, H
 		case r < 56:
-			return seed + `m`, H
+			return `m`, H
 		case r < 65:
-			return seed + `n`, H
+			return `n`, H
 		case r < 73:
-			return seed + `l`, H
+			return `l`, H
 		case r < 80:
-			return seed + `c`, H
+			return `c`, H
 		case r < 83:
-			return seed + `s`, H
+			return `s`, H
 		case r < 86:
-			return seed + `i`, H
+			return `i`, H
 		case r < 89:
-			return seed + `g`, H
+			return `g`, H
 		case r < 91:
-			return seed + `d`, H
+			return `d`, H
 		case r < 93:
-			return seed + `t`, H
+			return `t`, H
 		case r < 95:
-			return seed + `z`, H
+			return `z`, H
 		case r < 97:
-			return seed + `u`, H
+			return `u`, H
 		case r < 98:
-			return seed + `f`, H
+			return `f`, H
 		case r < 99:
-			return seed + `e`, H
+			return `e`, H
 		case r < 100:
-			return seed + `k`, H
+			return `k`, H
 		case r < 101:
-			return seed + `a`, H
+			return `a`, H
 		case r < 102:
-			return seed + `v`, H
+			return `v`, H
 		case r < 103:
-			return seed + `x`, H
+			return `x`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -10136,45 +10138,45 @@ retry:
 		r := rng.IntN(152)
 		switch {
 		case r < 27:
-			return seed + `e`, H
+			return `e`, H
 		case r < 49:
-			return seed + `i`, H
+			return `i`, H
 		case r < 64:
-			return seed + `t`, H
+			return `t`, H
 		case r < 76:
-			return seed + `s`, H
+			return `s`, H
 		case r < 86:
-			return seed + `o`, H
+			return `o`, H
 		case r < 95:
-			return seed + `a`, H
+			return `a`, H
 		case r < 103:
-			return seed + `h`, H
+			return `h`, H
 		case r < 111:
-			return seed + `l`, H
+			return `l`, H
 		case r < 117:
-			return seed + `r`, H
+			return `r`, H
 		case r < 123:
-			return seed + `b`, H
+			return `b`, H
 		case r < 128:
-			return seed + `c`, H
+			return `c`, H
 		case r < 132:
-			return seed + `p`, H
+			return `p`, H
 		case r < 136:
-			return seed + `m`, H
+			return `m`, H
 		case r < 139:
-			return seed + `f`, H
+			return `f`, H
 		case r < 142:
-			return seed + `w`, H
+			return `w`, H
 		case r < 145:
-			return seed + `d`, H
+			return `d`, H
 		case r < 147:
-			return seed + `y`, H
+			return `y`, H
 		case r < 149:
-			return seed + `g`, H
+			return `g`, H
 		case r < 151:
-			return seed + `u`, H
+			return `u`, H
 		case r < 152:
-			return seed + `n`, H
+			return `n`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -10183,45 +10185,45 @@ retry:
 		r := rng.IntN(398)
 		switch {
 		case r < 87:
-			return seed + `n`, H
+			return `n`, H
 		case r < 169:
-			return seed + `x`, H
+			return `x`, H
 		case r < 208:
-			return seed + `m`, H
+			return `m`, H
 		case r < 245:
-			return seed + `a`, H
+			return `a`, H
 		case r < 280:
-			return seed + `l`, H
+			return `l`, H
 		case r < 301:
-			return seed + `s`, H
+			return `s`, H
 		case r < 322:
-			return seed + `v`, H
+			return `v`, H
 		case r < 334:
-			return seed + `c`, H
+			return `c`, H
 		case r < 345:
-			return seed + `r`, H
+			return `r`, H
 		case r < 355:
-			return seed + `p`, H
+			return `p`, H
 		case r < 364:
-			return seed + `d`, H
+			return `d`, H
 		case r < 372:
-			return seed + `q`, H
+			return `q`, H
 		case r < 380:
-			return seed + `g`, H
+			return `g`, H
 		case r < 387:
-			return seed + `t`, H
+			return `t`, H
 		case r < 391:
-			return seed + `f`, H
+			return `f`, H
 		case r < 394:
-			return seed + `b`, H
+			return `b`, H
 		case r < 395:
-			return seed + `e`, H
+			return `e`, H
 		case r < 396:
-			return seed + `j`, H
+			return `j`, H
 		case r < 397:
-			return seed + `i`, H
+			return `i`, H
 		case r < 398:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -10230,45 +10232,45 @@ retry:
 		r := rng.IntN(267)
 		switch {
 		case r < 75:
-			return seed + `n`, H
+			return `n`, H
 		case r < 124:
-			return seed + `t`, H
+			return `t`, H
 		case r < 166:
-			return seed + `r`, H
+			return `r`, H
 		case r < 187:
-			return seed + `g`, H
+			return `g`, H
 		case r < 203:
-			return seed + `s`, H
+			return `s`, H
 		case r < 215:
-			return seed + `l`, H
+			return `l`, H
 		case r < 225:
-			return seed + `k`, H
+			return `k`, H
 		case r < 235:
-			return seed + `c`, H
+			return `c`, H
 		case r < 239:
-			return seed + `d`, H
+			return `d`, H
 		case r < 243:
-			return seed + `i`, H
+			return `i`, H
 		case r < 247:
-			return seed + `y`, H
+			return `y`, H
 		case r < 251:
-			return seed + `j`, H
+			return `j`, H
 		case r < 255:
-			return seed + `m`, H
+			return `m`, H
 		case r < 258:
-			return seed + `b`, H
+			return `b`, H
 		case r < 260:
-			return seed + `p`, H
+			return `p`, H
 		case r < 262:
-			return seed + `z`, H
+			return `z`, H
 		case r < 264:
-			return seed + `x`, H
+			return `x`, H
 		case r < 265:
-			return seed + `h`, H
+			return `h`, H
 		case r < 266:
-			return seed + `v`, H
+			return `v`, H
 		case r < 267:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -10277,45 +10279,45 @@ retry:
 		r := rng.IntN(339)
 		switch {
 		case r < 84:
-			return seed + `t`, H
+			return `t`, H
 		case r < 148:
-			return seed + `h`, H
+			return `h`, H
 		case r < 178:
-			return seed + `m`, H
+			return `m`, H
 		case r < 207:
-			return seed + `e`, H
+			return `e`, H
 		case r < 230:
-			return seed + `i`, H
+			return `i`, H
 		case r < 252:
-			return seed + `p`, H
+			return `p`, H
 		case r < 269:
-			return seed + `o`, H
+			return `o`, H
 		case r < 285:
-			return seed + `s`, H
+			return `s`, H
 		case r < 298:
-			return seed + `c`, H
+			return `c`, H
 		case r < 307:
-			return seed + `a`, H
+			return `a`, H
 		case r < 315:
-			return seed + `k`, H
+			return `k`, H
 		case r < 323:
-			return seed + `l`, H
+			return `l`, H
 		case r < 327:
-			return seed + `b`, H
+			return `b`, H
 		case r < 330:
-			return seed + `f`, H
+			return `f`, H
 		case r < 332:
-			return seed + `d`, H
+			return `d`, H
 		case r < 334:
-			return seed + `y`, H
+			return `y`, H
 		case r < 336:
-			return seed + `r`, H
+			return `r`, H
 		case r < 337:
-			return seed + `w`, H
+			return `w`, H
 		case r < 338:
-			return seed + `j`, H
+			return `j`, H
 		case r < 339:
-			return seed + `g`, H
+			return `g`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -10324,45 +10326,45 @@ retry:
 		r := rng.IntN(257)
 		switch {
 		case r < 75:
-			return seed + `e`, H
+			return `e`, H
 		case r < 103:
-			return seed + `i`, H
+			return `i`, H
 		case r < 130:
-			return seed + `l`, H
+			return `l`, H
 		case r < 151:
-			return seed + `a`, H
+			return `a`, H
 		case r < 170:
-			return seed + `o`, H
+			return `o`, H
 		case r < 183:
-			return seed + `s`, H
+			return `s`, H
 		case r < 194:
-			return seed + `r`, H
+			return `r`, H
 		case r < 204:
-			return seed + `u`, H
+			return `u`, H
 		case r < 213:
-			return seed + `b`, H
+			return `b`, H
 		case r < 219:
-			return seed + `f`, H
+			return `f`, H
 		case r < 225:
-			return seed + `w`, H
+			return `w`, H
 		case r < 231:
-			return seed + `p`, H
+			return `p`, H
 		case r < 237:
-			return seed + `m`, H
+			return `m`, H
 		case r < 242:
-			return seed + `n`, H
+			return `n`, H
 		case r < 247:
-			return seed + `y`, H
+			return `y`, H
 		case r < 252:
-			return seed + `c`, H
+			return `c`, H
 		case r < 254:
-			return seed + `g`, H
+			return `g`, H
 		case r < 255:
-			return seed + `d`, H
+			return `d`, H
 		case r < 256:
-			return seed + `h`, H
+			return `h`, H
 		case r < 257:
-			return seed + `k`, H
+			return `k`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -10371,45 +10373,45 @@ retry:
 		r := rng.IntN(126)
 		switch {
 		case r < 20:
-			return seed + `n`, H
+			return `n`, H
 		case r < 40:
-			return seed + `d`, H
+			return `d`, H
 		case r < 53:
-			return seed + `p`, H
+			return `p`, H
 		case r < 64:
-			return seed + `z`, H
+			return `z`, H
 		case r < 74:
-			return seed + `t`, H
+			return `t`, H
 		case r < 83:
-			return seed + `l`, H
+			return `l`, H
 		case r < 91:
-			return seed + `r`, H
+			return `r`, H
 		case r < 97:
-			return seed + `m`, H
+			return `m`, H
 		case r < 102:
-			return seed + `b`, H
+			return `b`, H
 		case r < 105:
-			return seed + `f`, H
+			return `f`, H
 		case r < 108:
-			return seed + `w`, H
+			return `w`, H
 		case r < 111:
-			return seed + `s`, H
+			return `s`, H
 		case r < 114:
-			return seed + `i`, H
+			return `i`, H
 		case r < 117:
-			return seed + `k`, H
+			return `k`, H
 		case r < 120:
-			return seed + `c`, H
+			return `c`, H
 		case r < 122:
-			return seed + `a`, H
+			return `a`, H
 		case r < 123:
-			return seed + `h`, H
+			return `h`, H
 		case r < 124:
-			return seed + `x`, H
+			return `x`, H
 		case r < 125:
-			return seed + `v`, H
+			return `v`, H
 		case r < 126:
-			return seed + `g`, H
+			return `g`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -10418,47 +10420,47 @@ retry:
 		r := rng.IntN(203)
 		switch {
 		case r < 26:
-			return seed + `g`, H
+			return `g`, H
 		case r < 48:
-			return seed + `r`, H
+			return `r`, H
 		case r < 67:
-			return seed + `n`, H
+			return `n`, H
 		case r < 84:
-			return seed + `a`, H
+			return `a`, H
 		case r < 100:
-			return seed + `t`, H
+			return `t`, H
 		case r < 115:
-			return seed + `w`, H
+			return `w`, H
 		case r < 128:
-			return seed + `o`, H
+			return `o`, H
 		case r < 141:
-			return seed + `c`, H
+			return `c`, H
 		case r < 152:
-			return seed + `p`, H
+			return `p`, H
 		case r < 162:
-			return seed + `s`, H
+			return `s`, H
 		case r < 172:
-			return seed + `u`, H
+			return `u`, H
 		case r < 179:
-			return seed + `v`, H
+			return `v`, H
 		case r < 185:
-			return seed + `y`, H
+			return `y`, H
 		case r < 190:
-			return seed + `b`, H
+			return `b`, H
 		case r < 194:
-			return seed + `d`, H
+			return `d`, H
 		case r < 196:
-			return seed + `i`, H
+			return `i`, H
 		case r < 198:
-			return seed + `q`, H
+			return `q`, H
 		case r < 200:
-			return seed + `m`, H
+			return `m`, H
 		case r < 201:
-			return seed + `f`, H
+			return `f`, H
 		case r < 202:
-			return seed + `e`, H
+			return `e`, H
 		case r < 203:
-			return seed + `h`, H
+			return `h`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -10467,47 +10469,47 @@ retry:
 		r := rng.IntN(407)
 		switch {
 		case r < 74:
-			return seed + `n`, H
+			return `n`, H
 		case r < 113:
-			return seed + `m`, H
+			return `m`, H
 		case r < 148:
-			return seed + `r`, H
+			return `r`, H
 		case r < 181:
-			return seed + `l`, H
+			return `l`, H
 		case r < 211:
-			return seed + `c`, H
+			return `c`, H
 		case r < 240:
-			return seed + `p`, H
+			return `p`, H
 		case r < 264:
-			return seed + `b`, H
+			return `b`, H
 		case r < 287:
-			return seed + `f`, H
+			return `f`, H
 		case r < 310:
-			return seed + `s`, H
+			return `s`, H
 		case r < 332:
-			return seed + `t`, H
+			return `t`, H
 		case r < 352:
-			return seed + `g`, H
+			return `g`, H
 		case r < 371:
-			return seed + `u`, H
+			return `u`, H
 		case r < 384:
-			return seed + `v`, H
+			return `v`, H
 		case r < 393:
-			return seed + `w`, H
+			return `w`, H
 		case r < 397:
-			return seed + `e`, H
+			return `e`, H
 		case r < 400:
-			return seed + `i`, H
+			return `i`, H
 		case r < 402:
-			return seed + `h`, H
+			return `h`, H
 		case r < 404:
-			return seed + `q`, H
+			return `q`, H
 		case r < 405:
-			return seed + `o`, H
+			return `o`, H
 		case r < 406:
-			return seed + `j`, H
+			return `j`, H
 		case r < 407:
-			return seed + `x`, H
+			return `x`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -10516,47 +10518,47 @@ retry:
 		r := rng.IntN(390)
 		switch {
 		case r < 97:
-			return seed + `r`, H
+			return `r`, H
 		case r < 138:
-			return seed + `d`, H
+			return `d`, H
 		case r < 177:
-			return seed + `n`, H
+			return `n`, H
 		case r < 211:
-			return seed + `f`, H
+			return `f`, H
 		case r < 241:
-			return seed + `c`, H
+			return `c`, H
 		case r < 267:
-			return seed + `l`, H
+			return `l`, H
 		case r < 288:
-			return seed + `s`, H
+			return `s`, H
 		case r < 305:
-			return seed + `p`, H
+			return `p`, H
 		case r < 321:
-			return seed + `a`, H
+			return `a`, H
 		case r < 336:
-			return seed + `v`, H
+			return `v`, H
 		case r < 350:
-			return seed + `t`, H
+			return `t`, H
 		case r < 361:
-			return seed + `m`, H
+			return `m`, H
 		case r < 370:
-			return seed + `b`, H
+			return `b`, H
 		case r < 376:
-			return seed + `e`, H
+			return `e`, H
 		case r < 380:
-			return seed + `o`, H
+			return `o`, H
 		case r < 384:
-			return seed + `g`, H
+			return `g`, H
 		case r < 386:
-			return seed + `x`, H
+			return `x`, H
 		case r < 387:
-			return seed + `h`, H
+			return `h`, H
 		case r < 388:
-			return seed + `j`, H
+			return `j`, H
 		case r < 389:
-			return seed + `i`, H
+			return `i`, H
 		case r < 390:
-			return seed + `u`, H
+			return `u`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -10565,47 +10567,47 @@ retry:
 		r := rng.IntN(1050)
 		switch {
 		case r < 665:
-			return seed + `g`, H
+			return `g`, H
 		case r < 813:
-			return seed + `e`, H
+			return `e`, H
 		case r < 855:
-			return seed + `t`, H
+			return `t`, H
 		case r < 888:
-			return seed + `i`, H
+			return `i`, H
 		case r < 918:
-			return seed + `k`, H
+			return `k`, H
 		case r < 944:
-			return seed + `a`, H
+			return `a`, H
 		case r < 969:
-			return seed + `d`, H
+			return `d`, H
 		case r < 984:
-			return seed + `n`, H
+			return `n`, H
 		case r < 998:
-			return seed + `s`, H
+			return `s`, H
 		case r < 1012:
-			return seed + `c`, H
+			return `c`, H
 		case r < 1021:
-			return seed + `o`, H
+			return `o`, H
 		case r < 1028:
-			return seed + `y`, H
+			return `y`, H
 		case r < 1035:
-			return seed + `l`, H
+			return `l`, H
 		case r < 1039:
-			return seed + `f`, H
+			return `f`, H
 		case r < 1042:
-			return seed + `u`, H
+			return `u`, H
 		case r < 1044:
-			return seed + `j`, H
+			return `j`, H
 		case r < 1046:
-			return seed + `x`, H
+			return `x`, H
 		case r < 1047:
-			return seed + `w`, H
+			return `w`, H
 		case r < 1048:
-			return seed + `h`, H
+			return `h`, H
 		case r < 1049:
-			return seed + `p`, H
+			return `p`, H
 		case r < 1050:
-			return seed + `v`, H
+			return `v`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -10614,47 +10616,47 @@ retry:
 		r := rng.IntN(475)
 		switch {
 		case r < 157:
-			return seed + `n`, H
+			return `n`, H
 		case r < 200:
-			return seed + `c`, H
+			return `c`, H
 		case r < 235:
-			return seed + `t`, H
+			return `t`, H
 		case r < 264:
-			return seed + `k`, H
+			return `k`, H
 		case r < 293:
-			return seed + `g`, H
+			return `g`, H
 		case r < 320:
-			return seed + `s`, H
+			return `s`, H
 		case r < 341:
-			return seed + `a`, H
+			return `a`, H
 		case r < 359:
-			return seed + `f`, H
+			return `f`, H
 		case r < 377:
-			return seed + `m`, H
+			return `m`, H
 		case r < 393:
-			return seed + `v`, H
+			return `v`, H
 		case r < 408:
-			return seed + `z`, H
+			return `z`, H
 		case r < 422:
-			return seed + `e`, H
+			return `e`, H
 		case r < 433:
-			return seed + `d`, H
+			return `d`, H
 		case r < 443:
-			return seed + `o`, H
+			return `o`, H
 		case r < 453:
-			return seed + `p`, H
+			return `p`, H
 		case r < 462:
-			return seed + `b`, H
+			return `b`, H
 		case r < 466:
-			return seed + `q`, H
+			return `q`, H
 		case r < 469:
-			return seed + `r`, H
+			return `r`, H
 		case r < 472:
-			return seed + `l`, H
+			return `l`, H
 		case r < 474:
-			return seed + `u`, H
+			return `u`, H
 		case r < 475:
-			return seed + `x`, H
+			return `x`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -10663,47 +10665,47 @@ retry:
 		r := rng.IntN(326)
 		switch {
 		case r < 133:
-			return seed + `s`, H
+			return `s`, H
 		case r < 178:
-			return seed + `r`, H
+			return `r`, H
 		case r < 217:
-			return seed + `d`, H
+			return `d`, H
 		case r < 232:
-			return seed + `t`, H
+			return `t`, H
 		case r < 247:
-			return seed + `a`, H
+			return `a`, H
 		case r < 257:
-			return seed + `n`, H
+			return `n`, H
 		case r < 267:
-			return seed + `l`, H
+			return `l`, H
 		case r < 275:
-			return seed + `w`, H
+			return `w`, H
 		case r < 283:
-			return seed + `g`, H
+			return `g`, H
 		case r < 290:
-			return seed + `e`, H
+			return `e`, H
 		case r < 297:
-			return seed + `u`, H
+			return `u`, H
 		case r < 303:
-			return seed + `y`, H
+			return `y`, H
 		case r < 308:
-			return seed + `m`, H
+			return `m`, H
 		case r < 313:
-			return seed + `x`, H
+			return `x`, H
 		case r < 316:
-			return seed + `c`, H
+			return `c`, H
 		case r < 319:
-			return seed + `v`, H
+			return `v`, H
 		case r < 322:
-			return seed + `b`, H
+			return `b`, H
 		case r < 323:
-			return seed + `o`, H
+			return `o`, H
 		case r < 324:
-			return seed + `h`, H
+			return `h`, H
 		case r < 325:
-			return seed + `q`, H
+			return `q`, H
 		case r < 326:
-			return seed + `p`, H
+			return `p`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -10712,47 +10714,47 @@ retry:
 		r := rng.IntN(302)
 		switch {
 		case r < 59:
-			return seed + `e`, H
+			return `e`, H
 		case r < 87:
-			return seed + `i`, H
+			return `i`, H
 		case r < 115:
-			return seed + `s`, H
+			return `s`, H
 		case r < 143:
-			return seed + `g`, H
+			return `g`, H
 		case r < 166:
-			return seed + `d`, H
+			return `d`, H
 		case r < 188:
-			return seed + `t`, H
+			return `t`, H
 		case r < 208:
-			return seed + `f`, H
+			return `f`, H
 		case r < 227:
-			return seed + `a`, H
+			return `a`, H
 		case r < 244:
-			return seed + `c`, H
+			return `c`, H
 		case r < 260:
-			return seed + `o`, H
+			return `o`, H
 		case r < 275:
-			return seed + `y`, H
+			return `y`, H
 		case r < 281:
-			return seed + `l`, H
+			return `l`, H
 		case r < 285:
-			return seed + `u`, H
+			return `u`, H
 		case r < 288:
-			return seed + `n`, H
+			return `n`, H
 		case r < 291:
-			return seed + `j`, H
+			return `j`, H
 		case r < 294:
-			return seed + `v`, H
+			return `v`, H
 		case r < 296:
-			return seed + `w`, H
+			return `w`, H
 		case r < 298:
-			return seed + `z`, H
+			return `z`, H
 		case r < 300:
-			return seed + `b`, H
+			return `b`, H
 		case r < 301:
-			return seed + `k`, H
+			return `k`, H
 		case r < 302:
-			return seed + `r`, H
+			return `r`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -10761,49 +10763,49 @@ retry:
 		r := rng.IntN(318)
 		switch {
 		case r < 69:
-			return seed + `s`, H
+			return `s`, H
 		case r < 115:
-			return seed + `d`, H
+			return `d`, H
 		case r < 153:
-			return seed + `r`, H
+			return `r`, H
 		case r < 182:
-			return seed + `t`, H
+			return `t`, H
 		case r < 204:
-			return seed + `n`, H
+			return `n`, H
 		case r < 225:
-			return seed + `c`, H
+			return `c`, H
 		case r < 243:
-			return seed + `a`, H
+			return `a`, H
 		case r < 260:
-			return seed + `g`, H
+			return `g`, H
 		case r < 273:
-			return seed + `v`, H
+			return `v`, H
 		case r < 283:
-			return seed + `e`, H
+			return `e`, H
 		case r < 290:
-			return seed + `m`, H
+			return `m`, H
 		case r < 296:
-			return seed + `x`, H
+			return `x`, H
 		case r < 301:
-			return seed + `y`, H
+			return `y`, H
 		case r < 305:
-			return seed + `p`, H
+			return `p`, H
 		case r < 308:
-			return seed + `f`, H
+			return `f`, H
 		case r < 311:
-			return seed + `u`, H
+			return `u`, H
 		case r < 313:
-			return seed + `b`, H
+			return `b`, H
 		case r < 314:
-			return seed + `w`, H
+			return `w`, H
 		case r < 315:
-			return seed + `o`, H
+			return `o`, H
 		case r < 316:
-			return seed + `h`, H
+			return `h`, H
 		case r < 317:
-			return seed + `i`, H
+			return `i`, H
 		case r < 318:
-			return seed + `l`, H
+			return `l`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -10812,49 +10814,49 @@ retry:
 		r := rng.IntN(250)
 		switch {
 		case r < 55:
-			return seed + `l`, H
+			return `l`, H
 		case r < 102:
-			return seed + `i`, H
+			return `i`, H
 		case r < 123:
-			return seed + `a`, H
+			return `a`, H
 		case r < 140:
-			return seed + `e`, H
+			return `e`, H
 		case r < 156:
-			return seed + `o`, H
+			return `o`, H
 		case r < 172:
-			return seed + `t`, H
+			return `t`, H
 		case r < 183:
-			return seed + `u`, H
+			return `u`, H
 		case r < 192:
-			return seed + `k`, H
+			return `k`, H
 		case r < 201:
-			return seed + `m`, H
+			return `m`, H
 		case r < 208:
-			return seed + `s`, H
+			return `s`, H
 		case r < 214:
-			return seed + `y`, H
+			return `y`, H
 		case r < 220:
-			return seed + `c`, H
+			return `c`, H
 		case r < 226:
-			return seed + `v`, H
+			return `v`, H
 		case r < 230:
-			return seed + `f`, H
+			return `f`, H
 		case r < 234:
-			return seed + `d`, H
+			return `d`, H
 		case r < 238:
-			return seed + `r`, H
+			return `r`, H
 		case r < 242:
-			return seed + `p`, H
+			return `p`, H
 		case r < 244:
-			return seed + `n`, H
+			return `n`, H
 		case r < 246:
-			return seed + `g`, H
+			return `g`, H
 		case r < 248:
-			return seed + `b`, H
+			return `b`, H
 		case r < 249:
-			return seed + `w`, H
+			return `w`, H
 		case r < 250:
-			return seed + `z`, H
+			return `z`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -10863,49 +10865,49 @@ retry:
 		r := rng.IntN(471)
 		switch {
 		case r < 69:
-			return seed + `n`, H
+			return `n`, H
 		case r < 125:
-			return seed + `t`, H
+			return `t`, H
 		case r < 161:
-			return seed + `c`, H
+			return `c`, H
 		case r < 195:
-			return seed + `i`, H
+			return `i`, H
 		case r < 228:
-			return seed + `d`, H
+			return `d`, H
 		case r < 260:
-			return seed + `m`, H
+			return `m`, H
 		case r < 291:
-			return seed + `l`, H
+			return `l`, H
 		case r < 321:
-			return seed + `g`, H
+			return `g`, H
 		case r < 346:
-			return seed + `v`, H
+			return `v`, H
 		case r < 369:
-			return seed + `p`, H
+			return `p`, H
 		case r < 391:
-			return seed + `s`, H
+			return `s`, H
 		case r < 410:
-			return seed + `b`, H
+			return `b`, H
 		case r < 425:
-			return seed + `y`, H
+			return `y`, H
 		case r < 439:
-			return seed + `f`, H
+			return `f`, H
 		case r < 448:
-			return seed + `r`, H
+			return `r`, H
 		case r < 456:
-			return seed + `w`, H
+			return `w`, H
 		case r < 462:
-			return seed + `z`, H
+			return `z`, H
 		case r < 466:
-			return seed + `k`, H
+			return `k`, H
 		case r < 468:
-			return seed + `u`, H
+			return `u`, H
 		case r < 469:
-			return seed + `e`, H
+			return `e`, H
 		case r < 470:
-			return seed + `o`, H
+			return `o`, H
 		case r < 471:
-			return seed + `x`, H
+			return `x`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -10914,49 +10916,49 @@ retry:
 		r := rng.IntN(513)
 		switch {
 		case r < 79:
-			return seed + `d`, H
+			return `d`, H
 		case r < 132:
-			return seed + `t`, H
+			return `t`, H
 		case r < 174:
-			return seed + `i`, H
+			return `i`, H
 		case r < 215:
-			return seed + `m`, H
+			return `m`, H
 		case r < 251:
-			return seed + `e`, H
+			return `e`, H
 		case r < 284:
-			return seed + `r`, H
+			return `r`, H
 		case r < 316:
-			return seed + `a`, H
+			return `a`, H
 		case r < 346:
-			return seed + `y`, H
+			return `y`, H
 		case r < 371:
-			return seed + `g`, H
+			return `g`, H
 		case r < 392:
-			return seed + `l`, H
+			return `l`, H
 		case r < 409:
-			return seed + `n`, H
+			return `n`, H
 		case r < 426:
-			return seed + `c`, H
+			return `c`, H
 		case r < 442:
-			return seed + `b`, H
+			return `b`, H
 		case r < 457:
-			return seed + `k`, H
+			return `k`, H
 		case r < 470:
-			return seed + `p`, H
+			return `p`, H
 		case r < 482:
-			return seed + `o`, H
+			return `o`, H
 		case r < 493:
-			return seed + `s`, H
+			return `s`, H
 		case r < 501:
-			return seed + `f`, H
+			return `f`, H
 		case r < 508:
-			return seed + `v`, H
+			return `v`, H
 		case r < 511:
-			return seed + `w`, H
+			return `w`, H
 		case r < 512:
-			return seed + `h`, H
+			return `h`, H
 		case r < 513:
-			return seed + `x`, H
+			return `x`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -10965,49 +10967,49 @@ retry:
 		r := rng.IntN(200)
 		switch {
 		case r < 82:
-			return seed + `r`, H
+			return `r`, H
 		case r < 116:
-			return seed + `n`, H
+			return `n`, H
 		case r < 136:
-			return seed + `p`, H
+			return `p`, H
 		case r < 154:
-			return seed + `m`, H
+			return `m`, H
 		case r < 164:
-			return seed + `o`, H
+			return `o`, H
 		case r < 170:
-			return seed + `u`, H
+			return `u`, H
 		case r < 175:
-			return seed + `c`, H
+			return `c`, H
 		case r < 179:
-			return seed + `w`, H
+			return `w`, H
 		case r < 183:
-			return seed + `l`, H
+			return `l`, H
 		case r < 185:
-			return seed + `d`, H
+			return `d`, H
 		case r < 187:
-			return seed + `i`, H
+			return `i`, H
 		case r < 189:
-			return seed + `t`, H
+			return `t`, H
 		case r < 191:
-			return seed + `x`, H
+			return `x`, H
 		case r < 192:
-			return seed + `f`, H
+			return `f`, H
 		case r < 193:
-			return seed + `e`, H
+			return `e`, H
 		case r < 194:
-			return seed + `s`, H
+			return `s`, H
 		case r < 195:
-			return seed + `k`, H
+			return `k`, H
 		case r < 196:
-			return seed + `a`, H
+			return `a`, H
 		case r < 197:
-			return seed + `z`, H
+			return `z`, H
 		case r < 198:
-			return seed + `g`, H
+			return `g`, H
 		case r < 199:
-			return seed + `v`, H
+			return `v`, H
 		case r < 200:
-			return seed + `b`, H
+			return `b`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -11016,49 +11018,49 @@ retry:
 		r := rng.IntN(441)
 		switch {
 		case r < 148:
-			return seed + `t`, H
+			return `t`, H
 		case r < 217:
-			return seed + `d`, H
+			return `d`, H
 		case r < 268:
-			return seed + `c`, H
+			return `c`, H
 		case r < 306:
-			return seed + `e`, H
+			return `e`, H
 		case r < 331:
-			return seed + `s`, H
+			return `s`, H
 		case r < 351:
-			return seed + `g`, H
+			return `g`, H
 		case r < 368:
-			return seed + `a`, H
+			return `a`, H
 		case r < 384:
-			return seed + `i`, H
+			return `i`, H
 		case r < 392:
-			return seed + `n`, H
+			return `n`, H
 		case r < 400:
-			return seed + `v`, H
+			return `v`, H
 		case r < 407:
-			return seed + `o`, H
+			return `o`, H
 		case r < 414:
-			return seed + `u`, H
+			return `u`, H
 		case r < 419:
-			return seed + `j`, H
+			return `j`, H
 		case r < 424:
-			return seed + `l`, H
+			return `l`, H
 		case r < 428:
-			return seed + `r`, H
+			return `r`, H
 		case r < 431:
-			return seed + `f`, H
+			return `f`, H
 		case r < 434:
-			return seed + `z`, H
+			return `z`, H
 		case r < 436:
-			return seed + `h`, H
+			return `h`, H
 		case r < 438:
-			return seed + `y`, H
+			return `y`, H
 		case r < 439:
-			return seed + `q`, H
+			return `q`, H
 		case r < 440:
-			return seed + `k`, H
+			return `k`, H
 		case r < 441:
-			return seed + `p`, H
+			return `p`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -11067,51 +11069,51 @@ retry:
 		r := rng.IntN(553)
 		switch {
 		case r < 125:
-			return seed + `d`, H
+			return `d`, H
 		case r < 238:
-			return seed + `t`, H
+			return `t`, H
 		case r < 294:
-			return seed + `c`, H
+			return `c`, H
 		case r < 347:
-			return seed + `g`, H
+			return `g`, H
 		case r < 386:
-			return seed + `k`, H
+			return `k`, H
 		case r < 422:
-			return seed + `i`, H
+			return `i`, H
 		case r < 454:
-			return seed + `n`, H
+			return `n`, H
 		case r < 473:
-			return seed + `a`, H
+			return `a`, H
 		case r < 489:
-			return seed + `y`, H
+			return `y`, H
 		case r < 503:
-			return seed + `e`, H
+			return `e`, H
 		case r < 516:
-			return seed + `o`, H
+			return `o`, H
 		case r < 528:
-			return seed + `s`, H
+			return `s`, H
 		case r < 535:
-			return seed + `l`, H
+			return `l`, H
 		case r < 541:
-			return seed + `h`, H
+			return `h`, H
 		case r < 544:
-			return seed + `u`, H
+			return `u`, H
 		case r < 546:
-			return seed + `q`, H
+			return `q`, H
 		case r < 547:
-			return seed + `f`, H
+			return `f`, H
 		case r < 548:
-			return seed + `j`, H
+			return `j`, H
 		case r < 549:
-			return seed + `p`, H
+			return `p`, H
 		case r < 550:
-			return seed + `m`, H
+			return `m`, H
 		case r < 551:
-			return seed + `z`, H
+			return `z`, H
 		case r < 552:
-			return seed + `v`, H
+			return `v`, H
 		case r < 553:
-			return seed + `b`, H
+			return `b`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -11120,51 +11122,51 @@ retry:
 		r := rng.IntN(349)
 		switch {
 		case r < 93:
-			return seed + `n`, H
+			return `n`, H
 		case r < 145:
-			return seed + `m`, H
+			return `m`, H
 		case r < 196:
-			return seed + `r`, H
+			return `r`, H
 		case r < 224:
-			return seed + `u`, H
+			return `u`, H
 		case r < 252:
-			return seed + `l`, H
+			return `l`, H
 		case r < 268:
-			return seed + `a`, H
+			return `a`, H
 		case r < 281:
-			return seed + `p`, H
+			return `p`, H
 		case r < 291:
-			return seed + `s`, H
+			return `s`, H
 		case r < 299:
-			return seed + `o`, H
+			return `o`, H
 		case r < 307:
-			return seed + `t`, H
+			return `t`, H
 		case r < 315:
-			return seed + `v`, H
+			return `v`, H
 		case r < 320:
-			return seed + `d`, H
+			return `d`, H
 		case r < 324:
-			return seed + `g`, H
+			return `g`, H
 		case r < 328:
-			return seed + `b`, H
+			return `b`, H
 		case r < 331:
-			return seed + `f`, H
+			return `f`, H
 		case r < 334:
-			return seed + `e`, H
+			return `e`, H
 		case r < 337:
-			return seed + `h`, H
+			return `h`, H
 		case r < 340:
-			return seed + `i`, H
+			return `i`, H
 		case r < 343:
-			return seed + `z`, H
+			return `z`, H
 		case r < 345:
-			return seed + `y`, H
+			return `y`, H
 		case r < 347:
-			return seed + `c`, H
+			return `c`, H
 		case r < 348:
-			return seed + `w`, H
+			return `w`, H
 		case r < 349:
-			return seed + `k`, H
+			return `k`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -11173,51 +11175,51 @@ retry:
 		r := rng.IntN(466)
 		switch {
 		case r < 48:
-			return seed + `s`, H
+			return `s`, H
 		case r < 96:
-			return seed + `i`, H
+			return `i`, H
 		case r < 134:
-			return seed + `e`, H
+			return `e`, H
 		case r < 172:
-			return seed + `a`, H
+			return `a`, H
 		case r < 205:
-			return seed + `t`, H
+			return `t`, H
 		case r < 233:
-			return seed + `y`, H
+			return `y`, H
 		case r < 256:
-			return seed + `o`, H
+			return `o`, H
 		case r < 279:
-			return seed + `r`, H
+			return `r`, H
 		case r < 301:
-			return seed + `b`, H
+			return `b`, H
 		case r < 319:
-			return seed + `n`, H
+			return `n`, H
 		case r < 337:
-			return seed + `m`, H
+			return `m`, H
 		case r < 355:
-			return seed + `g`, H
+			return `g`, H
 		case r < 372:
-			return seed + `c`, H
+			return `c`, H
 		case r < 389:
-			return seed + `v`, H
+			return `v`, H
 		case r < 405:
-			return seed + `l`, H
+			return `l`, H
 		case r < 418:
-			return seed + `p`, H
+			return `p`, H
 		case r < 430:
-			return seed + `f`, H
+			return `f`, H
 		case r < 440:
-			return seed + `d`, H
+			return `d`, H
 		case r < 449:
-			return seed + `h`, H
+			return `h`, H
 		case r < 454:
-			return seed + `u`, H
+			return `u`, H
 		case r < 458:
-			return seed + `w`, H
+			return `w`, H
 		case r < 462:
-			return seed + `k`, H
+			return `k`, H
 		case r < 466:
-			return seed + `j`, H
+			return `j`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -11226,51 +11228,51 @@ retry:
 		r := rng.IntN(388)
 		switch {
 		case r < 45:
-			return seed + `u`, H
+			return `u`, H
 		case r < 84:
-			return seed + `n`, H
+			return `n`, H
 		case r < 115:
-			return seed + `w`, H
+			return `w`, H
 		case r < 146:
-			return seed + `o`, H
+			return `o`, H
 		case r < 172:
-			return seed + `p`, H
+			return `p`, H
 		case r < 196:
-			return seed + `v`, H
+			return `v`, H
 		case r < 218:
-			return seed + `c`, H
+			return `c`, H
 		case r < 239:
-			return seed + `s`, H
+			return `s`, H
 		case r < 259:
-			return seed + `a`, H
+			return `a`, H
 		case r < 278:
-			return seed + `l`, H
+			return `l`, H
 		case r < 296:
-			return seed + `b`, H
+			return `b`, H
 		case r < 313:
-			return seed + `t`, H
+			return `t`, H
 		case r < 329:
-			return seed + `m`, H
+			return `m`, H
 		case r < 343:
-			return seed + `g`, H
+			return `g`, H
 		case r < 353:
-			return seed + `d`, H
+			return `d`, H
 		case r < 361:
-			return seed + `f`, H
+			return `f`, H
 		case r < 369:
-			return seed + `i`, H
+			return `i`, H
 		case r < 374:
-			return seed + `r`, H
+			return `r`, H
 		case r < 379:
-			return seed + `x`, H
+			return `x`, H
 		case r < 383:
-			return seed + `k`, H
+			return `k`, H
 		case r < 386:
-			return seed + `z`, H
+			return `z`, H
 		case r < 387:
-			return seed + `j`, H
+			return `j`, H
 		case r < 388:
-			return seed + `y`, H
+			return `y`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -11279,53 +11281,53 @@ retry:
 		r := rng.IntN(583)
 		switch {
 		case r < 92:
-			return seed + `d`, H
+			return `d`, H
 		case r < 160:
-			return seed + `c`, H
+			return `c`, H
 		case r < 227:
-			return seed + `t`, H
+			return `t`, H
 		case r < 281:
-			return seed + `s`, H
+			return `s`, H
 		case r < 312:
-			return seed + `i`, H
+			return `i`, H
 		case r < 338:
-			return seed + `l`, H
+			return `l`, H
 		case r < 362:
-			return seed + `w`, H
+			return `w`, H
 		case r < 385:
-			return seed + `g`, H
+			return `g`, H
 		case r < 407:
-			return seed + `e`, H
+			return `e`, H
 		case r < 429:
-			return seed + `r`, H
+			return `r`, H
 		case r < 449:
-			return seed + `f`, H
+			return `f`, H
 		case r < 469:
-			return seed + `b`, H
+			return `b`, H
 		case r < 487:
-			return seed + `k`, H
+			return `k`, H
 		case r < 505:
-			return seed + `a`, H
+			return `a`, H
 		case r < 523:
-			return seed + `p`, H
+			return `p`, H
 		case r < 539:
-			return seed + `m`, H
+			return `m`, H
 		case r < 553:
-			return seed + `n`, H
+			return `n`, H
 		case r < 566:
-			return seed + `h`, H
+			return `h`, H
 		case r < 575:
-			return seed + `v`, H
+			return `v`, H
 		case r < 578:
-			return seed + `u`, H
+			return `u`, H
 		case r < 580:
-			return seed + `o`, H
+			return `o`, H
 		case r < 581:
-			return seed + `j`, H
+			return `j`, H
 		case r < 582:
-			return seed + `q`, H
+			return `q`, H
 		case r < 583:
-			return seed + `z`, H
+			return `z`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -11334,55 +11336,55 @@ retry:
 		r := rng.IntN(744)
 		switch {
 		case r < 88:
-			return seed + `a`, H
+			return `a`, H
 		case r < 173:
-			return seed + `s`, H
+			return `s`, H
 		case r < 232:
-			return seed + `c`, H
+			return `c`, H
 		case r < 290:
-			return seed + `e`, H
+			return `e`, H
 		case r < 346:
-			return seed + `d`, H
+			return `d`, H
 		case r < 397:
-			return seed + `t`, H
+			return `t`, H
 		case r < 441:
-			return seed + `p`, H
+			return `p`, H
 		case r < 484:
-			return seed + `n`, H
+			return `n`, H
 		case r < 527:
-			return seed + `l`, H
+			return `l`, H
 		case r < 567:
-			return seed + `f`, H
+			return `f`, H
 		case r < 600:
-			return seed + `v`, H
+			return `v`, H
 		case r < 631:
-			return seed + `m`, H
+			return `m`, H
 		case r < 653:
-			return seed + `g`, H
+			return `g`, H
 		case r < 674:
-			return seed + `w`, H
+			return `w`, H
 		case r < 694:
-			return seed + `r`, H
+			return `r`, H
 		case r < 710:
-			return seed + `b`, H
+			return `b`, H
 		case r < 718:
-			return seed + `o`, H
+			return `o`, H
 		case r < 724:
-			return seed + `h`, H
+			return `h`, H
 		case r < 729:
-			return seed + `q`, H
+			return `q`, H
 		case r < 733:
-			return seed + `i`, H
+			return `i`, H
 		case r < 737:
-			return seed + `u`, H
+			return `u`, H
 		case r < 740:
-			return seed + `j`, H
+			return `j`, H
 		case r < 742:
-			return seed + `k`, H
+			return `k`, H
 		case r < 743:
-			return seed + `y`, H
+			return `y`, H
 		case r < 744:
-			return seed + `x`, H
+			return `x`, H
 		default:
 			panic("unexpected rand num")
 		}
@@ -11391,57 +11393,57 @@ retry:
 		r := rng.IntN(7776)
 		switch {
 		case r < 1087:
-			return seed + `s`, H
+			return `s`, H
 		case r < 1838:
-			return seed + `c`, H
+			return `c`, H
 		case r < 2416:
-			return seed + `p`, H
+			return `p`, H
 		case r < 2963:
-			return seed + `d`, H
+			return `d`, H
 		case r < 3476:
-			return seed + `r`, H
+			return `r`, H
 		case r < 3952:
-			return seed + `u`, H
+			return `u`, H
 		case r < 4359:
-			return seed + `a`, H
+			return `a`, H
 		case r < 4757:
-			return seed + `e`, H
+			return `e`, H
 		case r < 5119:
-			return seed + `b`, H
+			return `b`, H
 		case r < 5442:
-			return seed + `t`, H
+			return `t`, H
 		case r < 5750:
-			return seed + `f`, H
+			return `f`, H
 		case r < 6054:
-			return seed + `g`, H
+			return `g`, H
 		case r < 6349:
-			return seed + `m`, H
+			return `m`, H
 		case r < 6598:
-			return seed + `h`, H
+			return `h`, H
 		case r < 6844:
-			return seed + `o`, H
+			return `o`, H
 		case r < 7038:
-			return seed + `l`, H
+			return `l`, H
 		case r < 7193:
-			return seed + `w`, H
+			return `w`, H
 		case r < 7325:
-			return seed + `v`, H
+			return `v`, H
 		case r < 7440:
-			return seed + `i`, H
+			return `i`, H
 		case r < 7537:
-			return seed + `n`, H
+			return `n`, H
 		case r < 7633:
-			return seed + `j`, H
+			return `j`, H
 		case r < 7688:
-			return seed + `k`, H
+			return `k`, H
 		case r < 7725:
-			return seed + `q`, H
+			return `q`, H
 		case r < 7752:
-			return seed + `y`, H
+			return `y`, H
 		case r < 7774:
-			return seed + `z`, H
+			return `z`, H
 		case r < 7776:
-			return seed + `x`, H
+			return `x`, H
 		default:
 			panic("unexpected rand num")
 		}

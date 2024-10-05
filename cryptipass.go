@@ -4,7 +4,9 @@ package cryptipass
 
 import (
 	cr "crypto/rand"
+	"fmt"
 	"log"
+	"math"
 	"math/rand/v2"
 	"strings"
 )
@@ -21,8 +23,6 @@ func init() {
 		log.Fatal(n, err, seed)
 	}
 	rng = rand.New(rand.NewChaCha8(seed))
-	// Faster but non-cryptographic alternative:
-	// rng = rand.New(rand.NewPCG(rng.Uint64(), rng.Uint64()))
 }
 
 // NewPassphrase generates a passphrase consisting of the specified number of random words.
@@ -30,52 +30,104 @@ func init() {
 // is calculated and returned along with the passphrase.
 //
 //   - Parameters:
+//
 //     words (uint64): The number of words to include in the passphrase.
 //
 //   - Return values:
+//
 //     string: The generated passphrase, with words joined by periods.
+//
 //     float64: The total entropy (in bits) of the passphrase, indicating its strength.
-func NewPassphrase(words uint64) (string, float64) {
+func GenPassphrase(words uint64) (string, float64) {
 	wordvec := []string{}
 	total_entropy := 0.0
 	for range words {
-		tok, h := GenMixWord()
+		tok, h := GenFromPattern("w")
 		wordvec = append(wordvec, tok)
 		total_entropy += h
 	}
 	return strings.Join(wordvec, "."), total_entropy
 }
 
-// GenMixWord generates a single word of random length and returns it along with its entropy.
-// The word length is determined by the PickLength function, and the word itself is generated
-// by the GenWord function.
+// GenFromPattern generates a passphrase based on a specified pattern.
+// The pattern dictates the structure of the generated passphrase, with the following
+// format options:
 //
-//   - Return values:
-//     string: The generated word of random length.
-//     float64: The entropy contributed by both the word length and the word itself.
-func GenMixWord() (string, float64) {
-	l, entropy_l := PickLength()
-	w, entropy_w := GenWord(l)
-	return w, entropy_l + entropy_w
-}
-
-// GenWord generates a word of exactly n characters and returns it along with the entropy
-// associated with the process. The characters are selected by calling PickNext iteratively
-// until the word reaches the desired length.
+// - `w`: Lowercase word generated via GenMixWord.
+//
+// - `W`: Capitalized word generated via GenMixWord (first letter uppercased).
+//
+// - `d`: Random digit (0-9).
+//
+// - `s`: Random symbol from a predefined set (@#!$%&=?^+-*").
+//
+// Any other characters in the pattern are appended as-is.
 //
 //   - Parameters:
-//     n (int): The number of characters to include in the generated word.
+//
+//     pattern (string): A string pattern that specifies the structure of the passphrase.
 //
 //   - Return values:
-//     string: The generated word consisting of n characters.
-//     float64: The total entropy contributed by the character selection process.
-func GenWord(n int) (string, float64) {
-	s := ""
-	total_entropy := 0.0
-	h := 0.0
-	for len(s) < n {
-		s, h = PickNext(s)
-		total_entropy += h
+//
+//     string: The generated passphrase based on the given pattern.
+//
+//     float64: The total entropy (in bits) of the generated passphrase.
+
+func GenFromPattern(pattern string) (string, float64) {
+	passphrase := ""
+	entropy := 0.0
+	pushnext := false
+	for _, c := range pattern {
+		if pushnext {
+			pushnext = false
+			passphrase += string(c)
+			continue
+		}
+		switch c {
+		case '\\':
+			pushnext = true
+			continue
+		case 'w', 'W':
+			head, h_head := GenWord(c)
+			passphrase = passphrase + head
+			entropy = entropy + h_head
+		case 'd':
+			d := rng.IntN(10)
+			H := math.Log2(10.0)
+			passphrase += fmt.Sprint(d)
+			entropy += H
+		case 's':
+			symbols := "@#!$%&=?^+-*\""
+			d := rng.IntN(len(symbols))
+			H := math.Log2(float64(len(symbols)))
+			passphrase += string(symbols[d])
+			entropy += H
+		case 'c', 'C':
+			runc, dH := PickNext(strings.ToLower(passphrase))
+			if c == 'C' {
+				runc = strings.ToUpper(runc)
+			}
+			passphrase += string(runc)
+			entropy += dH
+		default:
+			passphrase += string(c)
+			entropy += 0.0
+		}
 	}
-	return s, total_entropy
+	return passphrase, entropy
+}
+
+func GenWord(c rune) (string, float64) {
+	head, h_head := PickNext("")
+	leng, h_leng := PickLength()
+	if c == 'W' {
+		head = strings.ToUpper(head)
+	}
+	for len(head) < leng {
+		c, h := PickNext(strings.ToLower(head))
+		head += c
+		h_head += h
+	}
+	h_head += h_leng
+	return head, h_head
 }

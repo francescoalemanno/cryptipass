@@ -27,7 +27,7 @@ import "github.com/francescoalemanno/cryptipass"
 
 ### Generate a Passphrase
 
-The primary function of the `cryptipass` package is to generate secure passphrases. You can generate a new passphrase using the `NewPassphrase` function. You can specify how many words you want in the passphrase, and the function returns the passphrase and its total entropy.
+The primary function of the `cryptipass` package is to generate secure passphrases. You can generate a new passphrase using the `GenPassphrase` function. You can specify how many words you want in the passphrase, and the function returns the passphrase and its total entropy.
 
 Example:
 
@@ -36,11 +36,11 @@ package main
 
 import (
 	"fmt"
-	"cryptipass"
+	"github.com/francescoalemanno/cryptipass"
 )
 
 func main() {
-	passphrase, entropy := cryptipass.NewPassphrase(5)
+	passphrase, entropy := cryptipass.GenPassphrase(5)
 	fmt.Printf("Passphrase: %s\n", passphrase)
 	fmt.Printf("Entropy: %.2f bits\n", entropy)
 }
@@ -53,6 +53,35 @@ Passphrase: jesside.flyperm.aunsis.dertsy
 Entropy: 97.63 bits
 ```
 
+### Generate a Password according to a pattern
+
+You can generate a new password using the `GenFromPattern` function. You can specify how many words you want in the passphrase, and the function returns the passphrase and its total entropy.
+
+Example:
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/francescoalemanno/cryptipass"
+)
+
+func main() {
+	passphrase, entropy := cryptipass.GenFromPattern("W-w.cccc.CCCC(ss)[20dd]")
+	fmt.Printf("Passphrase: %s\n", passphrase)
+	fmt.Printf("Entropy: %.2f bits\n", entropy)
+}
+```
+
+### Example Output:
+
+```
+// pattern     W   -    w   .cccc.CCCC(ss)[20dd]
+Passphrase: Storegu-dedudend.skin.EALR(=*)[2045]
+Entropy: 96.41 bits
+```
+
 ### Word Generation
 
 Internally, the package uses a series of functions to generate words of varying lengths. Each word contributes a certain amount of entropy, calculated during the generation process.
@@ -60,11 +89,11 @@ Internally, the package uses a series of functions to generate words of varying 
 - `GenMixWord()`: Generates a random word of mixed length, returning both the word and its entropy.
 - `GenWord(n int)`: Generates a word of exactly `n` characters.
 - `PickLength()`: Picks a random length for a word.
-- `PickNext()`: Generates the next part of a word based on the current string.
+- `PickNext(seed string)`: Generates the next part of a word based on the current string.
 
 ## Notes
 
-- The package seeds the random number generator with `crypto/rand`, making it cryptographically secure. In scenarios where cryptographic security is not necessary and faster execution is preferred, the package also provides an alternative (commented out) `PCG` random number generator.
+- The package seeds the random number generator with `crypto/rand`, making it cryptographically secure.
 - The entropy provided in the output is a measure of how unpredictable the passphrase is. The higher the entropy, the more secure the passphrase is.
 
 ## Contributing
