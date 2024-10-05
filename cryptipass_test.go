@@ -1,6 +1,9 @@
 package cryptipass_test
 
 import (
+	"fmt"
+	"math"
+	"math/rand/v2"
 	"strings"
 	"testing"
 
@@ -10,6 +13,7 @@ import (
 func TestBasic(t *testing.T) {
 	g := cryptipass.NewInstance()
 	pw, H := g.GenPassphrase(4)
+
 	if len(pw) < 15 {
 		t.Fatalf(`Wrong length "%s"`, pw)
 	}
@@ -17,6 +21,45 @@ func TestBasic(t *testing.T) {
 		// this event is so unlikely (p = 9.86588*10^-10) it must not happen.
 		t.Fatalf(`Wrong entropy "%s"`, pw)
 	}
+}
+
+func TestCert(t *testing.T) {
+	g := cryptipass.Generator{}
+	g.Rng = rand.New(rand.NewPCG(37512033, 27996124))
+
+	type FN func() (string, float64)
+	funcs := []FN{
+		func() (string, float64) {
+			return g.GenFromPattern("Cccs")
+		},
+		func() (string, float64) {
+			return g.GenFromPattern("ddss")
+		},
+		func() (string, float64) {
+			return g.GenFromPattern("Cdd")
+		},
+		func() (string, float64) {
+			r := g.Rng.IntN(2)
+			s, h := g.GenFromPattern(strings.Repeat("cs", 1+r))
+			h += 1
+			return s, h
+		},
+		func() (string, float64) {
+			r, h := g.PickLength()
+			r2, h2 := g.PickLength()
+			return fmt.Sprint(r, r2), h + h2
+		},
+	}
+
+	for i, x := range funcs {
+		X := cryptipass.Certify(x)
+		if math.Abs(X.Gap) >= 0.5 {
+			t.Fatal("failed certification of function", i, X)
+		} else {
+			t.Log("passed certification of function", i, X, ", OK!")
+		}
+	}
+
 }
 
 // TestGenPassphrase tests the GenPassphrase function for generating a passphrase and validating its length.

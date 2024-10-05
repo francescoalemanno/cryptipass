@@ -17,8 +17,6 @@ type Passphrase struct {
 
 func main() {
 	g := cp.NewInstance()
-	cert := flag.Bool("c", false, "run entropy certification algorithm\nusers not necessarily need to concern with this detail.")
-	depth := flag.Uint64("cd", 1, "certification effort.\nA larger number leads to more accurate results\nat the expense of exponentially longer completion times.")
 	f_pattern := flag.String("p", "W.w.w",
 		`pattern used to generate passphrase e.g. try:
 	-p WWW20dd
@@ -33,9 +31,6 @@ func main() {
 	passwords := flag.Uint64("n", 6, "number of passwords to generate")
 	flag.Parse()
 	pattern := *f_pattern
-	if *cert {
-		certify(pattern, *depth)
-	}
 
 	pws := []Passphrase{}
 	for range *passwords {
@@ -63,51 +58,5 @@ func main() {
 	for _, p := range pws {
 		padding := strings.Repeat(" ", pad+maxlen-len(p.F))
 		fmt.Printf("%s%s%.2f              %.2f\n", p.F, padding, (p.H-1)/math.Log2(10), p.H)
-	}
-}
-
-func certify(pattern string, udepth uint64) {
-	g := cp.NewInstance()
-	cnt := make(map[string]int)
-	iN := 0
-	Q := 128
-	nominal_H := 0.0
-	nominal_H2 := 0.0
-	cnt_nom_H := 0.0
-	for {
-		Q += Q / 14
-		for range Q {
-			w, nh := g.GenFromPattern(pattern)
-			nominal_H += nh
-			nominal_H2 += nh * nh
-			cnt_nom_H++
-			cnt[w]++
-			iN++
-		}
-
-		n := float64(iN)
-		m := float64(len(cnt))
-		H := 0.0
-		for _, iC := range cnt {
-			c := float64(iC)
-			p := (c / n)
-			H -= p * math.Log2(p)
-		}
-		H += (m - 1) / (2 * n)
-		fmt.Print("\r")
-		CH := int(2 * H)
-		for i := 0; i <= CH; i++ {
-			fmt.Print("|")
-		}
-		nomH := nominal_H / cnt_nom_H
-		nomH2 := nominal_H2 / cnt_nom_H
-		stddev := math.Sqrt(max(nomH2-nomH*nomH, 0.0001))
-		gap := nomH - H
-		fmt.Printf("%v | E[H]-E=%.2f E[H] = %.2f ∂E[H] = %.2f  ", strings.Repeat(" ", 60-CH), gap, nomH, stddev)
-		if gap < stddev/(1+float64(udepth)) {
-			fmt.Print("\n")
-			fmt.Println(H)
-			break
-		}
 	}
 }
