@@ -16,6 +16,7 @@ type Passphrase struct {
 }
 
 func main() {
+	g := cp.NewInstance()
 	cert := flag.Bool("c", false, "run entropy certification algorithm\nusers not necessarily need to concern with this detail.")
 	depth := flag.Uint64("cd", 1, "certification effort.\nA larger number leads to more accurate results\nat the expense of exponentially longer completion times.")
 	f_pattern := flag.String("p", "W.w.w",
@@ -38,7 +39,7 @@ func main() {
 
 	pws := []Passphrase{}
 	for range *passwords {
-		F, H := cp.GenFromPattern(pattern)
+		F, H := g.GenFromPattern(pattern)
 		pws = append(pws, Passphrase{F: F, H: H})
 	}
 	slices.SortFunc(pws, func(a, b Passphrase) int {
@@ -66,6 +67,7 @@ func main() {
 }
 
 func certify(pattern string, udepth uint64) {
+	g := cp.NewInstance()
 	cnt := make(map[string]int)
 	iN := 0
 	Q := 128
@@ -75,7 +77,7 @@ func certify(pattern string, udepth uint64) {
 	for {
 		Q += Q / 14
 		for range Q {
-			w, nh := cp.GenFromPattern(pattern)
+			w, nh := g.GenFromPattern(pattern)
 			nominal_H += nh
 			nominal_H2 += nh * nh
 			cnt_nom_H++

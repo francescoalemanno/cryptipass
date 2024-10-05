@@ -27,7 +27,7 @@ function makesampler(io, rawV)
         H -= log2(c / nor) * c / nor
     end
     println(io, sep^2, "H := ", H)
-    println(io, sep^2, "r := rng.IntN(", sum(C), ")")
+    println(io, sep^2, "r := g.Rng.IntN(", sum(C), ")")
     println(io, sep^2, "switch {")
     cum = 0
     for (s, c) in zip(S, C)
@@ -58,7 +58,7 @@ function whole_sampler(data)
 //   string: The updated string after appending the next character.
 //   float64: The entropy contributed by the character selection process."""
     )
-    println(io, "func PickNext(seed string) (string, float64) {")
+    println(io, "func (g *Generator) PickNext(seed string) (string, float64) {")
     println(io, sep, "L := min(len(seed),2)")
     println(io, sep, "tok := strings.ToLower(seed[len(seed)-L:])")
     println(io, sep, "retry:")
@@ -102,8 +102,8 @@ function makegensampler(rawV)
     )
     cum = 0
     ifs = "if"
-    println(io, "func PickLength() (int, float64) {")
-    println(io, "   ", "r := rng.IntN(", sum(C), ")")
+    println(io, "func (g *Generator) PickLength() (int, float64) {")
+    println(io, "   ", "r := g.Rng.IntN(", sum(C), ")")
     println(io, "   ", "H := ", H)
     for (s, c) in zip(S, C)
         println(io, "   ", ifs, " r < ", cum + c, " {\n      return ", s, ", H")

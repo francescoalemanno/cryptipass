@@ -15,7 +15,7 @@ import "strings"
 //   - Return values:
 //     string: The updated string after appending the next character.
 //     float64: The entropy contributed by the character selection process.
-func PickNext(seed string) (string, float64) {
+func (g *Generator) PickNext(seed string) (string, float64) {
 	L := min(len(seed), 2)
 	tok := strings.ToLower(seed[len(seed)-L:])
 retry:
@@ -156,7 +156,7 @@ retry:
 		return `u`, 0.0
 	case `hm`:
 		H := 1.0
-		r := rng.IntN(2)
+		r := g.Rng.IntN(2)
 		switch {
 		case r < 1:
 			return `a`, H
@@ -167,7 +167,7 @@ retry:
 		}
 	case `ej`:
 		H := 0.9709505944546686
-		r := rng.IntN(5)
+		r := g.Rng.IntN(5)
 		switch {
 		case r < 3:
 			return `o`, H
@@ -178,7 +178,7 @@ retry:
 		}
 	case `uz`:
 		H := 0.5916727785823275
-		r := rng.IntN(7)
+		r := g.Rng.IntN(7)
 		switch {
 		case r < 6:
 			return `z`, H
@@ -189,7 +189,7 @@ retry:
 		}
 	case `hn`:
 		H := 0.9182958340544896
-		r := rng.IntN(3)
+		r := g.Rng.IntN(3)
 		switch {
 		case r < 2:
 			return `e`, H
@@ -200,7 +200,7 @@ retry:
 		}
 	case `my`:
 		H := 0.6500224216483541
-		r := rng.IntN(6)
+		r := g.Rng.IntN(6)
 		switch {
 		case r < 5:
 			return `s`, H
@@ -211,7 +211,7 @@ retry:
 		}
 	case `kh`:
 		H := 0.9182958340544896
-		r := rng.IntN(3)
+		r := g.Rng.IntN(3)
 		switch {
 		case r < 2:
 			return `o`, H
@@ -222,7 +222,7 @@ retry:
 		}
 	case `hp`:
 		H := 1.0
-		r := rng.IntN(2)
+		r := g.Rng.IntN(2)
 		switch {
 		case r < 1:
 			return `i`, H
@@ -233,7 +233,7 @@ retry:
 		}
 	case `pw`:
 		H := 0.9182958340544896
-		r := rng.IntN(3)
+		r := g.Rng.IntN(3)
 		switch {
 		case r < 2:
 			return `a`, H
@@ -244,7 +244,7 @@ retry:
 		}
 	case `kk`:
 		H := 1.0
-		r := rng.IntN(2)
+		r := g.Rng.IntN(2)
 		switch {
 		case r < 1:
 			return `n`, H
@@ -255,7 +255,7 @@ retry:
 		}
 	case `by`:
 		H := 0.9182958340544896
-		r := rng.IntN(3)
+		r := g.Rng.IntN(3)
 		switch {
 		case r < 2:
 			return `t`, H
@@ -266,7 +266,7 @@ retry:
 		}
 	case `bh`:
 		H := 1.0
-		r := rng.IntN(2)
+		r := g.Rng.IntN(2)
 		switch {
 		case r < 1:
 			return `e`, H
@@ -277,7 +277,7 @@ retry:
 		}
 	case `gy`:
 		H := 1.0
-		r := rng.IntN(2)
+		r := g.Rng.IntN(2)
 		switch {
 		case r < 1:
 			return `r`, H
@@ -288,7 +288,7 @@ retry:
 		}
 	case `xy`:
 		H := 1.0
-		r := rng.IntN(2)
+		r := g.Rng.IntN(2)
 		switch {
 		case r < 1:
 			return `g`, H
@@ -299,7 +299,7 @@ retry:
 		}
 	case `ln`:
 		H := 0.9182958340544896
-		r := rng.IntN(6)
+		r := g.Rng.IntN(6)
 		switch {
 		case r < 4:
 			return `e`, H
@@ -310,7 +310,7 @@ retry:
 		}
 	case `lw`:
 		H := 0.9182958340544896
-		r := rng.IntN(3)
+		r := g.Rng.IntN(3)
 		switch {
 		case r < 2:
 			return `a`, H
@@ -321,7 +321,7 @@ retry:
 		}
 	case `uo`:
 		H := 0.9910760598382222
-		r := rng.IntN(9)
+		r := g.Rng.IntN(9)
 		switch {
 		case r < 5:
 			return `u`, H
@@ -332,7 +332,7 @@ retry:
 		}
 	case `gm`:
 		H := 1.0
-		r := rng.IntN(8)
+		r := g.Rng.IntN(8)
 		switch {
 		case r < 4:
 			return `a`, H
@@ -343,7 +343,7 @@ retry:
 		}
 	case `pn`:
 		H := 0.9940302114769566
-		r := rng.IntN(11)
+		r := g.Rng.IntN(11)
 		switch {
 		case r < 6:
 			return `o`, H
@@ -354,7 +354,7 @@ retry:
 		}
 	case `tz`:
 		H := 0.9709505944546686
-		r := rng.IntN(5)
+		r := g.Rng.IntN(5)
 		switch {
 		case r < 3:
 			return `y`, H
@@ -365,7 +365,7 @@ retry:
 		}
 	case `wl`:
 		H := 0.9709505944546686
-		r := rng.IntN(10)
+		r := g.Rng.IntN(10)
 		switch {
 		case r < 6:
 			return `e`, H
@@ -376,7 +376,7 @@ retry:
 		}
 	case `sd`:
 		H := 0.8112781244591328
-		r := rng.IntN(4)
+		r := g.Rng.IntN(4)
 		switch {
 		case r < 3:
 			return `a`, H
@@ -387,7 +387,7 @@ retry:
 		}
 	case `sr`:
 		H := 1.0
-		r := rng.IntN(2)
+		r := g.Rng.IntN(2)
 		switch {
 		case r < 1:
 			return `u`, H
@@ -398,7 +398,7 @@ retry:
 		}
 	case `xh`:
 		H := 0.9182958340544896
-		r := rng.IntN(3)
+		r := g.Rng.IntN(3)
 		switch {
 		case r < 2:
 			return `a`, H
@@ -409,7 +409,7 @@ retry:
 		}
 	case `lk`:
 		H := 0.8112781244591328
-		r := rng.IntN(4)
+		r := g.Rng.IntN(4)
 		switch {
 		case r < 3:
 			return `a`, H
@@ -420,7 +420,7 @@ retry:
 		}
 	case `x`:
 		H := 1.0
-		r := rng.IntN(2)
+		r := g.Rng.IntN(2)
 		switch {
 		case r < 1:
 			return `e`, H
@@ -431,7 +431,7 @@ retry:
 		}
 	case `bn`:
 		H := 0.9182958340544896
-		r := rng.IntN(3)
+		r := g.Rng.IntN(3)
 		switch {
 		case r < 2:
 			return `o`, H
@@ -442,7 +442,7 @@ retry:
 		}
 	case `dn`:
 		H := 0.41381685030363374
-		r := rng.IntN(12)
+		r := g.Rng.IntN(12)
 		switch {
 		case r < 11:
 			return `e`, H
@@ -453,7 +453,7 @@ retry:
 		}
 	case `ae`:
 		H := 0.6500224216483541
-		r := rng.IntN(6)
+		r := g.Rng.IntN(6)
 		switch {
 		case r < 5:
 			return `r`, H
@@ -464,7 +464,7 @@ retry:
 		}
 	case `ux`:
 		H := 0.9182958340544896
-		r := rng.IntN(3)
+		r := g.Rng.IntN(3)
 		switch {
 		case r < 2:
 			return `u`, H
@@ -475,7 +475,7 @@ retry:
 		}
 	case `fb`:
 		H := 1.0
-		r := rng.IntN(2)
+		r := g.Rng.IntN(2)
 		switch {
 		case r < 1:
 			return `a`, H
@@ -486,7 +486,7 @@ retry:
 		}
 	case `hw`:
 		H := 0.9182958340544896
-		r := rng.IntN(3)
+		r := g.Rng.IntN(3)
 		switch {
 		case r < 2:
 			return `o`, H
@@ -497,7 +497,7 @@ retry:
 		}
 	case `wm`:
 		H := 0.7219280948873623
-		r := rng.IntN(5)
+		r := g.Rng.IntN(5)
 		switch {
 		case r < 4:
 			return `a`, H
@@ -508,7 +508,7 @@ retry:
 		}
 	case `pd`:
 		H := 0.8112781244591328
-		r := rng.IntN(4)
+		r := g.Rng.IntN(4)
 		switch {
 		case r < 3:
 			return `o`, H
@@ -519,7 +519,7 @@ retry:
 		}
 	case `td`:
 		H := 0.7219280948873623
-		r := rng.IntN(5)
+		r := g.Rng.IntN(5)
 		switch {
 		case r < 4:
 			return `o`, H
@@ -530,7 +530,7 @@ retry:
 		}
 	case `iw`:
 		H := 1.0
-		r := rng.IntN(2)
+		r := g.Rng.IntN(2)
 		switch {
 		case r < 1:
 			return `i`, H
@@ -541,7 +541,7 @@ retry:
 		}
 	case `ih`:
 		H := 1.0
-		r := rng.IntN(2)
+		r := g.Rng.IntN(2)
 		switch {
 		case r < 1:
 			return `u`, H
@@ -552,7 +552,7 @@ retry:
 		}
 	case `rj`:
 		H := 1.5
-		r := rng.IntN(4)
+		r := g.Rng.IntN(4)
 		switch {
 		case r < 2:
 			return `u`, H
@@ -565,7 +565,7 @@ retry:
 		}
 	case `kr`:
 		H := 1.3709505944546687
-		r := rng.IntN(5)
+		r := g.Rng.IntN(5)
 		switch {
 		case r < 3:
 			return `o`, H
@@ -578,7 +578,7 @@ retry:
 		}
 	case `ko`:
 		H := 1.584962500721156
-		r := rng.IntN(3)
+		r := g.Rng.IntN(3)
 		switch {
 		case r < 1:
 			return `a`, H
@@ -591,7 +591,7 @@ retry:
 		}
 	case `mc`:
 		H := 1.584962500721156
-		r := rng.IntN(3)
+		r := g.Rng.IntN(3)
 		switch {
 		case r < 1:
 			return `h`, H
@@ -604,7 +604,7 @@ retry:
 		}
 	case `kw`:
 		H := 1.2987949406953985
-		r := rng.IntN(8)
+		r := g.Rng.IntN(8)
 		switch {
 		case r < 5:
 			return `a`, H
@@ -617,7 +617,7 @@ retry:
 		}
 	case `oh`:
 		H := 1.3709505944546687
-		r := rng.IntN(5)
+		r := g.Rng.IntN(5)
 		switch {
 		case r < 3:
 			return `e`, H
@@ -630,7 +630,7 @@ retry:
 		}
 	case `bm`:
 		H := 1.4591479170272448
-		r := rng.IntN(6)
+		r := g.Rng.IntN(6)
 		switch {
 		case r < 3:
 			return `e`, H
@@ -643,7 +643,7 @@ retry:
 		}
 	case `hb`:
 		H := 1.3485878960124222
-		r := rng.IntN(11)
+		r := g.Rng.IntN(11)
 		switch {
 		case r < 5:
 			return `a`, H
@@ -656,7 +656,7 @@ retry:
 		}
 	case `gb`:
 		H := 1.5
-		r := rng.IntN(4)
+		r := g.Rng.IntN(4)
 		switch {
 		case r < 2:
 			return `o`, H
@@ -669,7 +669,7 @@ retry:
 		}
 	case `lv`:
 		H := 1.2467052127325735
-		r := rng.IntN(21)
+		r := g.Rng.IntN(21)
 		switch {
 		case r < 14:
 			return `e`, H
@@ -682,7 +682,7 @@ retry:
 		}
 	case `hc`:
 		H := 1.5
-		r := rng.IntN(4)
+		r := g.Rng.IntN(4)
 		switch {
 		case r < 2:
 			return `a`, H
@@ -695,7 +695,7 @@ retry:
 		}
 	case `aj`:
 		H := 1.584962500721156
-		r := rng.IntN(6)
+		r := g.Rng.IntN(6)
 		switch {
 		case r < 2:
 			return `a`, H
@@ -708,7 +708,7 @@ retry:
 		}
 	case `mr`:
 		H := 1.5
-		r := rng.IntN(4)
+		r := g.Rng.IntN(4)
 		switch {
 		case r < 2:
 			return `o`, H
@@ -721,7 +721,7 @@ retry:
 		}
 	case `nj`:
 		H := 1.280672129520887
-		r := rng.IntN(12)
+		r := g.Rng.IntN(12)
 		switch {
 		case r < 7:
 			return `o`, H
@@ -734,7 +734,7 @@ retry:
 		}
 	case `bp`:
 		H := 1.5
-		r := rng.IntN(4)
+		r := g.Rng.IntN(4)
 		switch {
 		case r < 2:
 			return `a`, H
@@ -747,7 +747,7 @@ retry:
 		}
 	case `mn`:
 		H := 1.4056390622295665
-		r := rng.IntN(8)
+		r := g.Rng.IntN(8)
 		switch {
 		case r < 4:
 			return `e`, H
@@ -760,7 +760,7 @@ retry:
 		}
 	case `py`:
 		H := 1.3709505944546687
-		r := rng.IntN(5)
+		r := g.Rng.IntN(5)
 		switch {
 		case r < 3:
 			return `r`, H
@@ -773,7 +773,7 @@ retry:
 		}
 	case `yd`:
 		H := 1.1887218755408673
-		r := rng.IntN(12)
+		r := g.Rng.IntN(12)
 		switch {
 		case r < 8:
 			return `r`, H
@@ -786,7 +786,7 @@ retry:
 		}
 	case `tg`:
 		H := 1.584962500721156
-		r := rng.IntN(3)
+		r := g.Rng.IntN(3)
 		switch {
 		case r < 1:
 			return `e`, H
@@ -799,7 +799,7 @@ retry:
 		}
 	case `pb`:
 		H := 1.5
-		r := rng.IntN(4)
+		r := g.Rng.IntN(4)
 		switch {
 		case r < 2:
 			return `e`, H
@@ -812,7 +812,7 @@ retry:
 		}
 	case `mf`:
 		H := 1.5
-		r := rng.IntN(4)
+		r := g.Rng.IntN(4)
 		switch {
 		case r < 2:
 			return `u`, H
@@ -825,7 +825,7 @@ retry:
 		}
 	case `ao`:
 		H := 1.584962500721156
-		r := rng.IntN(3)
+		r := g.Rng.IntN(3)
 		switch {
 		case r < 1:
 			return `s`, H
@@ -838,7 +838,7 @@ retry:
 		}
 	case `kp`:
 		H := 1.584962500721156
-		r := rng.IntN(3)
+		r := g.Rng.IntN(3)
 		switch {
 		case r < 1:
 			return `a`, H
@@ -851,7 +851,7 @@ retry:
 		}
 	case `gp`:
 		H := 1.584962500721156
-		r := rng.IntN(3)
+		r := g.Rng.IntN(3)
 		switch {
 		case r < 1:
 			return `i`, H
@@ -864,7 +864,7 @@ retry:
 		}
 	case `zl`:
 		H := 1.1401156785146092
-		r := rng.IntN(13)
+		r := g.Rng.IntN(13)
 		switch {
 		case r < 9:
 			return `e`, H
@@ -877,7 +877,7 @@ retry:
 		}
 	case `pc`:
 		H := 1.2516291673878228
-		r := rng.IntN(6)
+		r := g.Rng.IntN(6)
 		switch {
 		case r < 4:
 			return `o`, H
@@ -890,7 +890,7 @@ retry:
 		}
 	case `pf`:
 		H := 1.5219280948873621
-		r := rng.IntN(5)
+		r := g.Rng.IntN(5)
 		switch {
 		case r < 2:
 			return `i`, H
@@ -903,7 +903,7 @@ retry:
 		}
 	case `ek`:
 		H := 1.584962500721156
-		r := rng.IntN(3)
+		r := g.Rng.IntN(3)
 		switch {
 		case r < 1:
 			return `w`, H
@@ -916,7 +916,7 @@ retry:
 		}
 	case `ah`:
 		H := 1.3787834934861756
-		r := rng.IntN(7)
+		r := g.Rng.IntN(7)
 		switch {
 		case r < 4:
 			return `o`, H
@@ -929,7 +929,7 @@ retry:
 		}
 	case `xu`:
 		H := 1.5
-		r := rng.IntN(4)
+		r := g.Rng.IntN(4)
 		switch {
 		case r < 2:
 			return `r`, H
@@ -942,7 +942,7 @@ retry:
 		}
 	case `bw`:
 		H := 1.584962500721156
-		r := rng.IntN(3)
+		r := g.Rng.IntN(3)
 		switch {
 		case r < 1:
 			return `a`, H
@@ -955,7 +955,7 @@ retry:
 		}
 	case `kt`:
 		H := 1.5219280948873621
-		r := rng.IntN(5)
+		r := g.Rng.IntN(5)
 		switch {
 		case r < 2:
 			return `a`, H
@@ -968,7 +968,7 @@ retry:
 		}
 	case `wp`:
 		H := 1.5
-		r := rng.IntN(4)
+		r := g.Rng.IntN(4)
 		switch {
 		case r < 2:
 			return `l`, H
@@ -981,7 +981,7 @@ retry:
 		}
 	case `dm`:
 		H := 1.3921472236645345
-		r := rng.IntN(9)
+		r := g.Rng.IntN(9)
 		switch {
 		case r < 4:
 			return `a`, H
@@ -994,7 +994,7 @@ retry:
 		}
 	case `sb`:
 		H := 1.9182958340544893
-		r := rng.IntN(6)
+		r := g.Rng.IntN(6)
 		switch {
 		case r < 2:
 			return `a`, H
@@ -1009,7 +1009,7 @@ retry:
 		}
 	case `cy`:
 		H := 1.3520301017579528
-		r := rng.IntN(13)
+		r := g.Rng.IntN(13)
 		switch {
 		case r < 9:
 			return `c`, H
@@ -1024,7 +1024,7 @@ retry:
 		}
 	case `lr`:
 		H := 1.9182958340544893
-		r := rng.IntN(6)
+		r := g.Rng.IntN(6)
 		switch {
 		case r < 2:
 			return `y`, H
@@ -1039,7 +1039,7 @@ retry:
 		}
 	case `yf`:
 		H := 1.9219280948873623
-		r := rng.IntN(5)
+		r := g.Rng.IntN(5)
 		switch {
 		case r < 2:
 			return `u`, H
@@ -1054,7 +1054,7 @@ retry:
 		}
 	case `df`:
 		H := 1.7841591278514217
-		r := rng.IntN(12)
+		r := g.Rng.IntN(12)
 		switch {
 		case r < 5:
 			return `i`, H
@@ -1069,7 +1069,7 @@ retry:
 		}
 	case `wb`:
 		H := 1.9502120649147472
-		r := rng.IntN(7)
+		r := g.Rng.IntN(7)
 		switch {
 		case r < 2:
 			return `a`, H
@@ -1084,7 +1084,7 @@ retry:
 		}
 	case `yg`:
 		H := 1.9219280948873623
-		r := rng.IntN(5)
+		r := g.Rng.IntN(5)
 		switch {
 		case r < 2:
 			return `r`, H
@@ -1099,7 +1099,7 @@ retry:
 		}
 	case `gh`:
 		H := 0.44363159167676336
-		r := rng.IntN(47)
+		r := g.Rng.IntN(47)
 		switch {
 		case r < 44:
 			return `t`, H
@@ -1114,7 +1114,7 @@ retry:
 		}
 	case `z`:
 		H := 1.7702834614222898
-		r := rng.IntN(22)
+		r := g.Rng.IntN(22)
 		switch {
 		case r < 8:
 			return `o`, H
@@ -1129,7 +1129,7 @@ retry:
 		}
 	case `yi`:
 		H := 0.719556365373903
-		r := rng.IntN(25)
+		r := g.Rng.IntN(25)
 		switch {
 		case r < 22:
 			return `n`, H
@@ -1144,7 +1144,7 @@ retry:
 		}
 	case `zz`:
 		H := 1.478897902987479
-		r := rng.IntN(20)
+		r := g.Rng.IntN(20)
 		switch {
 		case r < 13:
 			return `l`, H
@@ -1159,7 +1159,7 @@ retry:
 		}
 	case `gn`:
 		H := 1.9584661817581863
-		r := rng.IntN(37)
+		r := g.Rng.IntN(37)
 		switch {
 		case r < 13:
 			return `e`, H
@@ -1174,7 +1174,7 @@ retry:
 		}
 	case `ak`:
 		H := 1.0592982590819013
-		r := rng.IntN(55)
+		r := g.Rng.IntN(55)
 		switch {
 		case r < 41:
 			return `e`, H
@@ -1189,7 +1189,7 @@ retry:
 		}
 	case `kn`:
 		H := 1.8412501702815551
-		r := rng.IntN(18)
+		r := g.Rng.IntN(18)
 		switch {
 		case r < 7:
 			return `e`, H
@@ -1204,7 +1204,7 @@ retry:
 		}
 	case `yc`:
 		H := 1.4838317068446891
-		r := rng.IntN(14)
+		r := g.Rng.IntN(14)
 		switch {
 		case r < 9:
 			return `l`, H
@@ -1219,7 +1219,7 @@ retry:
 		}
 	case `m`:
 		H := 1.596319592368159
-		r := rng.IntN(295)
+		r := g.Rng.IntN(295)
 		switch {
 		case r < 130:
 			return `a`, H
@@ -1234,7 +1234,7 @@ retry:
 		}
 	case `yw`:
 		H := 1.6644977792004614
-		r := rng.IntN(7)
+		r := g.Rng.IntN(7)
 		switch {
 		case r < 4:
 			return `a`, H
@@ -1249,7 +1249,7 @@ retry:
 		}
 	case `gs`:
 		H := 1.811278124459133
-		r := rng.IntN(8)
+		r := g.Rng.IntN(8)
 		switch {
 		case r < 3:
 			return `h`, H
@@ -1264,7 +1264,7 @@ retry:
 		}
 	case `qu`:
 		H := 1.7428655983817265
-		r := rng.IntN(99)
+		r := g.Rng.IntN(99)
 		switch {
 		case r < 37:
 			return `i`, H
@@ -1279,7 +1279,7 @@ retry:
 		}
 	case `xo`:
 		H := 1.9219280948873623
-		r := rng.IntN(5)
+		r := g.Rng.IntN(5)
 		switch {
 		case r < 2:
 			return `r`, H
@@ -1294,7 +1294,7 @@ retry:
 		}
 	case `h`:
 		H := 1.7259650053109339
-		r := rng.IntN(249)
+		r := g.Rng.IntN(249)
 		switch {
 		case r < 122:
 			return `a`, H
@@ -1309,7 +1309,7 @@ retry:
 		}
 	case `kb`:
 		H := 1.6644977792004614
-		r := rng.IntN(7)
+		r := g.Rng.IntN(7)
 		switch {
 		case r < 4:
 			return `o`, H
@@ -1324,7 +1324,7 @@ retry:
 		}
 	case `tm`:
 		H := 1.9056390622295665
-		r := rng.IntN(8)
+		r := g.Rng.IntN(8)
 		switch {
 		case r < 3:
 			return `e`, H
@@ -1339,7 +1339,7 @@ retry:
 		}
 	case `lg`:
 		H := 1.9219280948873623
-		r := rng.IntN(5)
+		r := g.Rng.IntN(5)
 		switch {
 		case r < 2:
 			return `e`, H
@@ -1354,7 +1354,7 @@ retry:
 		}
 	case `yl`:
 		H := 1.4516607643577668
-		r := rng.IntN(17)
+		r := g.Rng.IntN(17)
 		switch {
 		case r < 11:
 			return `i`, H
@@ -1369,7 +1369,7 @@ retry:
 		}
 	case `ik`:
 		H := 1.0174051189440556
-		r := rng.IntN(34)
+		r := g.Rng.IntN(34)
 		switch {
 		case r < 27:
 			return `e`, H
@@ -1384,7 +1384,7 @@ retry:
 		}
 	case `yt`:
 		H := 1.9362600275315274
-		r := rng.IntN(11)
+		r := g.Rng.IntN(11)
 		switch {
 		case r < 4:
 			return `h`, H
@@ -1399,7 +1399,7 @@ retry:
 		}
 	case `wd`:
 		H := 1.8365916681089791
-		r := rng.IntN(9)
+		r := g.Rng.IntN(9)
 		switch {
 		case r < 4:
 			return `e`, H
@@ -1414,7 +1414,7 @@ retry:
 		}
 	case `ls`:
 		H := 1.8828560636920488
-		r := rng.IntN(16)
+		r := g.Rng.IntN(16)
 		switch {
 		case r < 6:
 			return `i`, H
@@ -1429,7 +1429,7 @@ retry:
 		}
 	case `dh`:
 		H := 1.9182958340544893
-		r := rng.IntN(6)
+		r := g.Rng.IntN(6)
 		switch {
 		case r < 2:
 			return `i`, H
@@ -1444,7 +1444,7 @@ retry:
 		}
 	case `yr`:
 		H := 1.8631205685666312
-		r := rng.IntN(14)
+		r := g.Rng.IntN(14)
 		switch {
 		case r < 5:
 			return `i`, H
@@ -1459,7 +1459,7 @@ retry:
 		}
 	case `rh`:
 		H := 1.676737030052133
-		r := rng.IntN(11)
+		r := g.Rng.IntN(11)
 		switch {
 		case r < 5:
 			return `e`, H
@@ -1474,7 +1474,7 @@ retry:
 		}
 	case `nz`:
 		H := 1.8423709931771088
-		r := rng.IntN(7)
+		r := g.Rng.IntN(7)
 		switch {
 		case r < 3:
 			return `i`, H
@@ -1489,7 +1489,7 @@ retry:
 		}
 	case `wn`:
 		H := 2.0
-		r := rng.IntN(4)
+		r := g.Rng.IntN(4)
 		switch {
 		case r < 1:
 			return `n`, H
@@ -1504,7 +1504,7 @@ retry:
 		}
 	case `wf`:
 		H := 1.9219280948873623
-		r := rng.IntN(5)
+		r := g.Rng.IntN(5)
 		switch {
 		case r < 2:
 			return `i`, H
@@ -1519,7 +1519,7 @@ retry:
 		}
 	case `tf`:
 		H := 1.6589797521242051
-		r := rng.IntN(17)
+		r := g.Rng.IntN(17)
 		switch {
 		case r < 9:
 			return `u`, H
@@ -1534,7 +1534,7 @@ retry:
 		}
 	case `rw`:
 		H := 1.9056390622295665
-		r := rng.IntN(8)
+		r := g.Rng.IntN(8)
 		switch {
 		case r < 3:
 			return `i`, H
@@ -1549,7 +1549,7 @@ retry:
 		}
 	case `gw`:
 		H := 1.9219280948873623
-		r := rng.IntN(5)
+		r := g.Rng.IntN(5)
 		switch {
 		case r < 2:
 			return `a`, H
@@ -1564,7 +1564,7 @@ retry:
 		}
 	case `bd`:
 		H := 1.8423709931771088
-		r := rng.IntN(7)
+		r := g.Rng.IntN(7)
 		switch {
 		case r < 3:
 			return `o`, H
@@ -1579,7 +1579,7 @@ retry:
 		}
 	case `v`:
 		H := 1.919393986516576
-		r := rng.IntN(132)
+		r := g.Rng.IntN(132)
 		switch {
 		case r < 47:
 			return `i`, H
@@ -1594,7 +1594,7 @@ retry:
 		}
 	case `ku`:
 		H := 1.9219280948873623
-		r := rng.IntN(5)
+		r := g.Rng.IntN(5)
 		switch {
 		case r < 2:
 			return `p`, H
@@ -1609,7 +1609,7 @@ retry:
 		}
 	case `nm`:
 		H := 1.6758220575766962
-		r := rng.IntN(18)
+		r := g.Rng.IntN(18)
 		switch {
 		case r < 9:
 			return `a`, H
@@ -1624,7 +1624,7 @@ retry:
 		}
 	case `tw`:
 		H := 1.8832406052365576
-		r := rng.IntN(39)
+		r := g.Rng.IntN(39)
 		switch {
 		case r < 18:
 			return `i`, H
@@ -1641,7 +1641,7 @@ retry:
 		}
 	case `tl`:
 		H := 1.7570627627948316
-		r := rng.IntN(95)
+		r := g.Rng.IntN(95)
 		switch {
 		case r < 39:
 			return `e`, H
@@ -1658,7 +1658,7 @@ retry:
 		}
 	case `br`:
 		H := 2.2142644095851374
-		r := rng.IntN(87)
+		r := g.Rng.IntN(87)
 		switch {
 		case r < 26:
 			return `o`, H
@@ -1675,7 +1675,7 @@ retry:
 		}
 	case `nh`:
 		H := 2.2068570640942182
-		r := rng.IntN(23)
+		r := g.Rng.IntN(23)
 		switch {
 		case r < 6:
 			return `a`, H
@@ -1692,7 +1692,7 @@ retry:
 		}
 	case `y`:
 		H := 2.0793752444772653
-		r := rng.IntN(27)
+		r := g.Rng.IntN(27)
 		switch {
 		case r < 10:
 			return `e`, H
@@ -1709,7 +1709,7 @@ retry:
 		}
 	case `tp`:
 		H := 2.235926350629033
-		r := rng.IntN(7)
+		r := g.Rng.IntN(7)
 		switch {
 		case r < 2:
 			return `a`, H
@@ -1726,7 +1726,7 @@ retry:
 		}
 	case `rv`:
 		H := 1.915924784727185
-		r := rng.IntN(34)
+		r := g.Rng.IntN(34)
 		switch {
 		case r < 14:
 			return `i`, H
@@ -1743,7 +1743,7 @@ retry:
 		}
 	case `tc`:
 		H := 0.9954758876481817
-		r := rng.IntN(59)
+		r := g.Rng.IntN(59)
 		switch {
 		case r < 48:
 			return `h`, H
@@ -1760,7 +1760,7 @@ retry:
 		}
 	case `ix`:
 		H := 2.054585169337799
-		r := rng.IntN(12)
+		r := g.Rng.IntN(12)
 		switch {
 		case r < 5:
 			return `t`, H
@@ -1777,7 +1777,7 @@ retry:
 		}
 	case `ji`:
 		H := 2.113283334294875
-		r := rng.IntN(9)
+		r := g.Rng.IntN(9)
 		switch {
 		case r < 3:
 			return `n`, H
@@ -1794,7 +1794,7 @@ retry:
 		}
 	case `j`:
 		H := 2.077766251414667
-		r := rng.IntN(96)
+		r := g.Rng.IntN(96)
 		switch {
 		case r < 36:
 			return `u`, H
@@ -1811,7 +1811,7 @@ retry:
 		}
 	case `nv`:
 		H := 1.962354483657865
-		r := rng.IntN(22)
+		r := g.Rng.IntN(22)
 		switch {
 		case r < 9:
 			return `i`, H
@@ -1828,7 +1828,7 @@ retry:
 		}
 	case `xe`:
 		H := 2.0419460322060456
-		r := rng.IntN(15)
+		r := g.Rng.IntN(15)
 		switch {
 		case r < 5:
 			return `d`, H
@@ -1845,7 +1845,7 @@ retry:
 		}
 	case `sn`:
 		H := 1.9664658234492332
-		r := rng.IntN(48)
+		r := g.Rng.IntN(48)
 		switch {
 		case r < 24:
 			return `o`, H
@@ -1862,7 +1862,7 @@ retry:
 		}
 	case `dg`:
 		H := 1.3957137264520418
-		r := rng.IntN(33)
+		r := g.Rng.IntN(33)
 		switch {
 		case r < 23:
 			return `e`, H
@@ -1879,7 +1879,7 @@ retry:
 		}
 	case `dp`:
 		H := 2.197159723424149
-		r := rng.IntN(9)
+		r := g.Rng.IntN(9)
 		switch {
 		case r < 3:
 			return `i`, H
@@ -1896,7 +1896,7 @@ retry:
 		}
 	case `b`:
 		H := 2.2296839672243163
-		r := rng.IntN(362)
+		r := g.Rng.IntN(362)
 		switch {
 		case r < 126:
 			return `a`, H
@@ -1913,7 +1913,7 @@ retry:
 		}
 	case `dc`:
 		H := 2.038159681645953
-		r := rng.IntN(13)
+		r := g.Rng.IntN(13)
 		switch {
 		case r < 5:
 			return `a`, H
@@ -1930,7 +1930,7 @@ retry:
 		}
 	case `lm`:
 		H := 2.197159723424149
-		r := rng.IntN(9)
+		r := g.Rng.IntN(9)
 		switch {
 		case r < 3:
 			return `a`, H
@@ -1947,7 +1947,7 @@ retry:
 		}
 	case `ok`:
 		H := 1.546361197390146
-		r := rng.IntN(36)
+		r := g.Rng.IntN(36)
 		switch {
 		case r < 23:
 			return `e`, H
@@ -1964,7 +1964,7 @@ retry:
 		}
 	case `n`:
 		H := 1.9834964157590933
-		r := rng.IntN(97)
+		r := g.Rng.IntN(97)
 		switch {
 		case r < 33:
 			return `e`, H
@@ -1981,7 +1981,7 @@ retry:
 		}
 	case `yn`:
 		H := 2.1867043459100244
-		r := rng.IntN(11)
+		r := g.Rng.IntN(11)
 		switch {
 		case r < 4:
 			return `a`, H
@@ -1998,7 +1998,7 @@ retry:
 		}
 	case `hr`:
 		H := 2.2129220962815555
-		r := rng.IntN(43)
+		r := g.Rng.IntN(43)
 		switch {
 		case r < 14:
 			return `o`, H
@@ -2015,7 +2015,7 @@ retry:
 		}
 	case `ov`:
 		H := 1.1045475199265447
-		r := rng.IntN(160)
+		r := g.Rng.IntN(160)
 		switch {
 		case r < 125:
 			return `e`, H
@@ -2032,7 +2032,7 @@ retry:
 		}
 	case `ax`:
 		H := 2.1280852788913944
-		r := rng.IntN(7)
+		r := g.Rng.IntN(7)
 		switch {
 		case r < 3:
 			return `i`, H
@@ -2049,7 +2049,7 @@ retry:
 		}
 	case `wh`:
 		H := 2.131346433249389
-		r := rng.IntN(25)
+		r := g.Rng.IntN(25)
 		switch {
 		case r < 7:
 			return `i`, H
@@ -2066,7 +2066,7 @@ retry:
 		}
 	case `ws`:
 		H := 2.2516291673878226
-		r := rng.IntN(6)
+		r := g.Rng.IntN(6)
 		switch {
 		case r < 2:
 			return `i`, H
@@ -2083,7 +2083,7 @@ retry:
 		}
 	case `oz`:
 		H := 2.0550365325772657
-		r := rng.IntN(16)
+		r := g.Rng.IntN(16)
 		switch {
 		case r < 6:
 			return `e`, H
@@ -2100,7 +2100,7 @@ retry:
 		}
 	case `ym`:
 		H := 2.104292989590925
-		r := rng.IntN(19)
+		r := g.Rng.IntN(19)
 		switch {
 		case r < 6:
 			return `e`, H
@@ -2117,7 +2117,7 @@ retry:
 		}
 	case `lf`:
 		H := 2.075869296697727
-		r := rng.IntN(13)
+		r := g.Rng.IntN(13)
 		switch {
 		case r < 5:
 			return `i`, H
@@ -2134,7 +2134,7 @@ retry:
 		}
 	case `dw`:
 		H := 2.1645691489449588
-		r := rng.IntN(19)
+		r := g.Rng.IntN(19)
 		switch {
 		case r < 5:
 			return `a`, H
@@ -2151,7 +2151,7 @@ retry:
 		}
 	case `eh`:
 		H := 2.2577560641285177
-		r := rng.IntN(13)
+		r := g.Rng.IntN(13)
 		switch {
 		case r < 4:
 			return `e`, H
@@ -2168,7 +2168,7 @@ retry:
 		}
 	case `nw`:
 		H := 2.17675266977692
-		r := rng.IntN(27)
+		r := g.Rng.IntN(27)
 		switch {
 		case r < 8:
 			return `a`, H
@@ -2185,7 +2185,7 @@ retry:
 		}
 	case `sw`:
 		H := 2.046381112945884
-		r := rng.IntN(42)
+		r := g.Rng.IntN(42)
 		switch {
 		case r < 16:
 			return `i`, H
@@ -2202,7 +2202,7 @@ retry:
 		}
 	case `db`:
 		H := 1.8322488896002307
-		r := rng.IntN(14)
+		r := g.Rng.IntN(14)
 		switch {
 		case r < 7:
 			return `a`, H
@@ -2219,7 +2219,7 @@ retry:
 		}
 	case `l`:
 		H := 2.0699571885736554
-		r := rng.IntN(194)
+		r := g.Rng.IntN(194)
 		switch {
 		case r < 63:
 			return `a`, H
@@ -2236,7 +2236,7 @@ retry:
 		}
 	case `nr`:
 		H := 2.1468032139556708
-		r := rng.IntN(27)
+		r := g.Rng.IntN(27)
 		switch {
 		case r < 11:
 			return `e`, H
@@ -2253,7 +2253,7 @@ retry:
 		}
 	case `za`:
 		H := 1.896240625180289
-		r := rng.IntN(12)
+		r := g.Rng.IntN(12)
 		switch {
 		case r < 6:
 			return `r`, H
@@ -2270,7 +2270,7 @@ retry:
 		}
 	case `iz`:
 		H := 1.3054506823200551
-		r := rng.IntN(69)
+		r := g.Rng.IntN(69)
 		switch {
 		case r < 50:
 			return `e`, H
@@ -2287,7 +2287,7 @@ retry:
 		}
 	case `wr`:
 		H := 2.1229853836154926
-		r := rng.IntN(29)
+		r := g.Rng.IntN(29)
 		switch {
 		case r < 11:
 			return `i`, H
@@ -2304,7 +2304,7 @@ retry:
 		}
 	case `iv`:
 		H := 1.5989577717916381
-		r := rng.IntN(161)
+		r := g.Rng.IntN(161)
 		switch {
 		case r < 91:
 			return `e`, H
@@ -2321,7 +2321,7 @@ retry:
 		}
 	case `hy`:
 		H := 1.6444492199495462
-		r := rng.IntN(21)
+		r := g.Rng.IntN(21)
 		switch {
 		case r < 11:
 			return `p`, H
@@ -2338,7 +2338,7 @@ retry:
 		}
 	case `tn`:
 		H := 1.3862740938959681
-		r := rng.IntN(18)
+		r := g.Rng.IntN(18)
 		switch {
 		case r < 13:
 			return `e`, H
@@ -2355,7 +2355,7 @@ retry:
 		}
 	case `cl`:
 		H := 2.273319510050957
-		r := rng.IntN(123)
+		r := g.Rng.IntN(123)
 		switch {
 		case r < 36:
 			return `a`, H
@@ -2372,7 +2372,7 @@ retry:
 		}
 	case `av`:
 		H := 1.9476716502007156
-		r := rng.IntN(96)
+		r := g.Rng.IntN(96)
 		switch {
 		case r < 41:
 			return `e`, H
@@ -2389,7 +2389,7 @@ retry:
 		}
 	case `w`:
 		H := 2.220342743810504
-		r := rng.IntN(155)
+		r := g.Rng.IntN(155)
 		switch {
 		case r < 47:
 			return `i`, H
@@ -2406,7 +2406,7 @@ retry:
 		}
 	case `dl`:
 		H := 1.9282661532133314
-		r := rng.IntN(82)
+		r := g.Rng.IntN(82)
 		switch {
 		case r < 37:
 			return `e`, H
@@ -2423,7 +2423,7 @@ retry:
 		}
 	case `hl`:
 		H := 1.9986525468781666
-		r := rng.IntN(17)
+		r := g.Rng.IntN(17)
 		switch {
 		case r < 8:
 			return `y`, H
@@ -2440,7 +2440,7 @@ retry:
 		}
 	case `kl`:
 		H := 1.710053567474341
-		r := rng.IntN(31)
+		r := g.Rng.IntN(31)
 		switch {
 		case r < 18:
 			return `e`, H
@@ -2457,7 +2457,7 @@ retry:
 		}
 	case `ys`:
 		H := 1.7688538376160001
-		r := rng.IntN(18)
+		r := g.Rng.IntN(18)
 		switch {
 		case r < 10:
 			return `t`, H
@@ -2474,7 +2474,7 @@ retry:
 		}
 	case `ml`:
 		H := 1.987773371487984
-		r := rng.IntN(13)
+		r := g.Rng.IntN(13)
 		switch {
 		case r < 6:
 			return `e`, H
@@ -2491,7 +2491,7 @@ retry:
 		}
 	case `sm`:
 		H := 2.1119613706025886
-		r := rng.IntN(53)
+		r := g.Rng.IntN(53)
 		switch {
 		case r < 18:
 			return `a`, H
@@ -2508,7 +2508,7 @@ retry:
 		}
 	case `r`:
 		H := 1.5668118547237875
-		r := rng.IntN(513)
+		r := g.Rng.IntN(513)
 		switch {
 		case r < 345:
 			return `e`, H
@@ -2527,7 +2527,7 @@ retry:
 		}
 	case `cr`:
 		H := 2.394320692780727
-		r := rng.IntN(168)
+		r := g.Rng.IntN(168)
 		switch {
 		case r < 42:
 			return `a`, H
@@ -2546,7 +2546,7 @@ retry:
 		}
 	case `lc`:
 		H := 2.3709505944546683
-		r := rng.IntN(10)
+		r := g.Rng.IntN(10)
 		switch {
 		case r < 3:
 			return `u`, H
@@ -2565,7 +2565,7 @@ retry:
 		}
 	case `gl`:
 		H := 2.4463501798243668
-		r := rng.IntN(112)
+		r := g.Rng.IntN(112)
 		switch {
 		case r < 35:
 			return `e`, H
@@ -2584,7 +2584,7 @@ retry:
 		}
 	case `sy`:
 		H := 2.2584598927441624
-		r := rng.IntN(18)
+		r := g.Rng.IntN(18)
 		switch {
 		case r < 7:
 			return `n`, H
@@ -2603,7 +2603,7 @@ retry:
 		}
 	case `bl`:
 		H := 1.8303332451927128
-		r := rng.IntN(293)
+		r := g.Rng.IntN(293)
 		switch {
 		case r < 177:
 			return `e`, H
@@ -2622,7 +2622,7 @@ retry:
 		}
 	case `zo`:
 		H := 2.1920058354921066
-		r := rng.IntN(13)
+		r := g.Rng.IntN(13)
 		switch {
 		case r < 5:
 			return `o`, H
@@ -2641,7 +2641,7 @@ retry:
 		}
 	case `pl`:
 		H := 2.3540218435644924
-		r := rng.IntN(178)
+		r := g.Rng.IntN(178)
 		switch {
 		case r < 63:
 			return `a`, H
@@ -2660,7 +2660,7 @@ retry:
 		}
 	case `fr`:
 		H := 2.200881953295572
-		r := rng.IntN(98)
+		r := g.Rng.IntN(98)
 		switch {
 		case r < 33:
 			return `e`, H
@@ -2679,7 +2679,7 @@ retry:
 		}
 	case `ez`:
 		H := 2.064042639445697
-		r := rng.IntN(14)
+		r := g.Rng.IntN(14)
 		switch {
 		case r < 7:
 			return `e`, H
@@ -2698,7 +2698,7 @@ retry:
 		}
 	case `lb`:
 		H := 2.5216406363433186
-		r := rng.IntN(7)
+		r := g.Rng.IntN(7)
 		switch {
 		case r < 2:
 			return `i`, H
@@ -2717,7 +2717,7 @@ retry:
 		}
 	case `ky`:
 		H := 2.5
-		r := rng.IntN(8)
+		r := g.Rng.IntN(8)
 		switch {
 		case r < 2:
 			return `a`, H
@@ -2736,7 +2736,7 @@ retry:
 		}
 	case `rl`:
 		H := 2.317113611025748
-		r := rng.IntN(47)
+		r := g.Rng.IntN(47)
 		switch {
 		case r < 15:
 			return `i`, H
@@ -2755,7 +2755,7 @@ retry:
 		}
 	case `f`:
 		H := 2.5255137638602134
-		r := rng.IntN(308)
+		r := g.Rng.IntN(308)
 		switch {
 		case r < 76:
 			return `r`, H
@@ -2774,7 +2774,7 @@ retry:
 		}
 	case `np`:
 		H := 2.2417812580773235
-		r := rng.IntN(21)
+		r := g.Rng.IntN(21)
 		switch {
 		case r < 7:
 			return `a`, H
@@ -2793,7 +2793,7 @@ retry:
 		}
 	case `fl`:
 		H := 2.1729752291612567
-		r := rng.IntN(104)
+		r := g.Rng.IntN(104)
 		switch {
 		case r < 47:
 			return `a`, H
@@ -2812,7 +2812,7 @@ retry:
 		}
 	case `pr`:
 		H := 1.9672224968373695
-		r := rng.IntN(239)
+		r := g.Rng.IntN(239)
 		switch {
 		case r < 99:
 			return `o`, H
@@ -2831,7 +2831,7 @@ retry:
 		}
 	case `tb`:
 		H := 2.1309260807303376
-		r := rng.IntN(17)
+		r := g.Rng.IntN(17)
 		switch {
 		case r < 7:
 			return `o`, H
@@ -2850,7 +2850,7 @@ retry:
 		}
 	case `yb`:
 		H := 2.4591479170272446
-		r := rng.IntN(12)
+		r := g.Rng.IntN(12)
 		switch {
 		case r < 3:
 			return `a`, H
@@ -2869,7 +2869,7 @@ retry:
 		}
 	case `sf`:
 		H := 2.5216406363433186
-		r := rng.IntN(7)
+		r := g.Rng.IntN(7)
 		switch {
 		case r < 2:
 			return `i`, H
@@ -2888,7 +2888,7 @@ retry:
 		}
 	case `bb`:
 		H := 2.1580708663986847
-		r := rng.IntN(52)
+		r := g.Rng.IntN(52)
 		switch {
 		case r < 20:
 			return `l`, H
@@ -2907,7 +2907,7 @@ retry:
 		}
 	case `ms`:
 		H := 2.4193819456463714
-		r := rng.IntN(9)
+		r := g.Rng.IntN(9)
 		switch {
 		case r < 3:
 			return `t`, H
@@ -2926,7 +2926,7 @@ retry:
 		}
 	case `nn`:
 		H := 2.203360784206382
-		r := rng.IntN(74)
+		r := g.Rng.IntN(74)
 		switch {
 		case r < 31:
 			return `e`, H
@@ -2945,7 +2945,7 @@ retry:
 		}
 	case `rr`:
 		H := 2.4052364684207306
-		r := rng.IntN(91)
+		r := g.Rng.IntN(91)
 		switch {
 		case r < 27:
 			return `i`, H
@@ -2964,7 +2964,7 @@ retry:
 		}
 	case `az`:
 		H := 2.212331758086258
-		r := rng.IntN(34)
+		r := g.Rng.IntN(34)
 		switch {
 		case r < 13:
 			return `i`, H
@@ -2983,7 +2983,7 @@ retry:
 		}
 	case `gr`:
 		H := 2.042551738105775
-		r := rng.IntN(159)
+		r := g.Rng.IntN(159)
 		switch {
 		case r < 76:
 			return `a`, H
@@ -3002,7 +3002,7 @@ retry:
 		}
 	case `je`:
 		H := 2.4300365325772657
-		r := rng.IntN(16)
+		r := g.Rng.IntN(16)
 		switch {
 		case r < 5:
 			return `c`, H
@@ -3021,7 +3021,7 @@ retry:
 		}
 	case `xa`:
 		H := 2.5032583347756456
-		r := rng.IntN(9)
+		r := g.Rng.IntN(9)
 		switch {
 		case r < 2:
 			return `g`, H
@@ -3040,7 +3040,7 @@ retry:
 		}
 	case `nl`:
 		H := 2.3212021480233496
-		r := rng.IntN(52)
+		r := g.Rng.IntN(52)
 		switch {
 		case r < 19:
 			return `i`, H
@@ -3059,7 +3059,7 @@ retry:
 		}
 	case `sl`:
 		H := 2.314430867489686
-		r := rng.IntN(85)
+		r := g.Rng.IntN(85)
 		switch {
 		case r < 26:
 			return `i`, H
@@ -3078,7 +3078,7 @@ retry:
 		}
 	case `cc`:
 		H := 1.9268680175017443
-		r := rng.IntN(21)
+		r := g.Rng.IntN(21)
 		switch {
 		case r < 12:
 			return `u`, H
@@ -3097,7 +3097,7 @@ retry:
 		}
 	case `ox`:
 		H := 1.8182626942811975
-		r := rng.IntN(22)
+		r := g.Rng.IntN(22)
 		switch {
 		case r < 13:
 			return `i`, H
@@ -3116,7 +3116,7 @@ retry:
 		}
 	case `mm`:
 		H := 2.4645728472008237
-		r := rng.IntN(69)
+		r := g.Rng.IntN(69)
 		switch {
 		case r < 19:
 			return `e`, H
@@ -3135,7 +3135,7 @@ retry:
 		}
 	case `dr`:
 		H := 2.258664230601291
-		r := rng.IntN(97)
+		r := g.Rng.IntN(97)
 		switch {
 		case r < 27:
 			return `a`, H
@@ -3154,7 +3154,7 @@ retry:
 		}
 	case `tr`:
 		H := 2.3991891290867966
-		r := rng.IntN(267)
+		r := g.Rng.IntN(267)
 		switch {
 		case r < 75:
 			return `a`, H
@@ -3173,7 +3173,7 @@ retry:
 		}
 	case `dy`:
 		H := 2.446439344671015
-		r := rng.IntN(10)
+		r := g.Rng.IntN(10)
 		switch {
 		case r < 3:
 			return `n`, H
@@ -3192,7 +3192,7 @@ retry:
 		}
 	case `xt`:
 		H := 2.077235445408308
-		r := rng.IntN(20)
+		r := g.Rng.IntN(20)
 		switch {
 		case r < 9:
 			return `e`, H
@@ -3211,7 +3211,7 @@ retry:
 		}
 	case `ev`:
 		H := 1.9942008615410574
-		r := rng.IntN(106)
+		r := g.Rng.IntN(106)
 		switch {
 		case r < 42:
 			return `e`, H
@@ -3230,7 +3230,7 @@ retry:
 		}
 	case `ry`:
 		H := 2.5220552088742005
-		r := rng.IntN(12)
+		r := g.Rng.IntN(12)
 		switch {
 		case r < 4:
 			return `i`, H
@@ -3251,7 +3251,7 @@ retry:
 		}
 	case `nf`:
 		H := 2.585460534063065
-		r := rng.IntN(51)
+		r := g.Rng.IntN(51)
 		switch {
 		case r < 17:
 			return `i`, H
@@ -3272,7 +3272,7 @@ retry:
 		}
 	case `oi`:
 		H := 2.2369637280222663
-		r := rng.IntN(66)
+		r := g.Rng.IntN(66)
 		switch {
 		case r < 24:
 			return `n`, H
@@ -3293,7 +3293,7 @@ retry:
 		}
 	case `nb`:
 		H := 2.759079570624175
-		r := rng.IntN(25)
+		r := g.Rng.IntN(25)
 		switch {
 		case r < 5:
 			return `e`, H
@@ -3314,7 +3314,7 @@ retry:
 		}
 	case `xp`:
 		H := 2.5096856969120642
-		r := rng.IntN(30)
+		r := g.Rng.IntN(30)
 		switch {
 		case r < 8:
 			return `e`, H
@@ -3335,7 +3335,7 @@ retry:
 		}
 	case `ty`:
 		H := 2.3261207468426806
-		r := rng.IntN(20)
+		r := g.Rng.IntN(20)
 		switch {
 		case r < 7:
 			return `l`, H
@@ -3356,7 +3356,7 @@ retry:
 		}
 	case `ks`:
 		H := 2.460904932167797
-		r := rng.IntN(17)
+		r := g.Rng.IntN(17)
 		switch {
 		case r < 7:
 			return `t`, H
@@ -3377,7 +3377,7 @@ retry:
 		}
 	case `eu`:
 		H := 2.501609497059027
-		r := rng.IntN(20)
+		r := g.Rng.IntN(20)
 		switch {
 		case r < 7:
 			return `r`, H
@@ -3398,7 +3398,7 @@ retry:
 		}
 	case `fu`:
 		H := 1.5921871522135118
-		r := rng.IntN(61)
+		r := g.Rng.IntN(61)
 		switch {
 		case r < 40:
 			return `l`, H
@@ -3419,7 +3419,7 @@ retry:
 		}
 	case `zi`:
 		H := 1.8308122292922697
-		r := rng.IntN(33)
+		r := g.Rng.IntN(33)
 		switch {
 		case r < 20:
 			return `n`, H
@@ -3440,7 +3440,7 @@ retry:
 		}
 	case `rk`:
 		H := 2.4863286677871854
-		r := rng.IntN(17)
+		r := g.Rng.IntN(17)
 		switch {
 		case r < 5:
 			return `i`, H
@@ -3461,7 +3461,7 @@ retry:
 		}
 	case `xc`:
 		H := 2.6659573209491745
-		r := rng.IntN(20)
+		r := g.Rng.IntN(20)
 		switch {
 		case r < 5:
 			return `l`, H
@@ -3482,7 +3482,7 @@ retry:
 		}
 	case `dd`:
 		H := 2.279251222260265
-		r := rng.IntN(48)
+		r := g.Rng.IntN(48)
 		switch {
 		case r < 18:
 			return `l`, H
@@ -3503,7 +3503,7 @@ retry:
 		}
 	case `ye`:
 		H := 2.5365766899407323
-		r := rng.IntN(24)
+		r := g.Rng.IntN(24)
 		switch {
 		case r < 7:
 			return `r`, H
@@ -3524,7 +3524,7 @@ retry:
 		}
 	case `pp`:
 		H := 2.4303217508328046
-		r := rng.IntN(114)
+		r := g.Rng.IntN(114)
 		switch {
 		case r < 43:
 			return `e`, H
@@ -3547,7 +3547,7 @@ retry:
 		}
 	case `ka`:
 		H := 2.7744019192887706
-		r := rng.IntN(18)
+		r := g.Rng.IntN(18)
 		switch {
 		case r < 5:
 			return `b`, H
@@ -3570,7 +3570,7 @@ retry:
 		}
 	case `bs`:
 		H := 2.615277848886663
-		r := rng.IntN(35)
+		r := g.Rng.IntN(35)
 		switch {
 		case r < 10:
 			return `e`, H
@@ -3593,7 +3593,7 @@ retry:
 		}
 	case `if`:
 		H := 2.5951312665142345
-		r := rng.IntN(106)
+		r := g.Rng.IntN(106)
 		switch {
 		case r < 27:
 			return `t`, H
@@ -3616,7 +3616,7 @@ retry:
 		}
 	case `ze`:
 		H := 2.471058306628392
-		r := rng.IntN(27)
+		r := g.Rng.IntN(27)
 		switch {
 		case r < 11:
 			return `r`, H
@@ -3639,7 +3639,7 @@ retry:
 		}
 	case `ud`:
 		H := 2.436743733204307
-		r := rng.IntN(67)
+		r := g.Rng.IntN(67)
 		switch {
 		case r < 22:
 			return `e`, H
@@ -3662,7 +3662,7 @@ retry:
 		}
 	case `d`:
 		H := 2.414563621434015
-		r := rng.IntN(547)
+		r := g.Rng.IntN(547)
 		switch {
 		case r < 200:
 			return `e`, H
@@ -3685,7 +3685,7 @@ retry:
 		}
 	case `ei`:
 		H := 2.8559049224696933
-		r := rng.IntN(21)
+		r := g.Rng.IntN(21)
 		switch {
 		case r < 4:
 			return `n`, H
@@ -3708,7 +3708,7 @@ retry:
 		}
 	case `ey`:
 		H := 2.94770277922009
-		r := rng.IntN(9)
+		r := g.Rng.IntN(9)
 		switch {
 		case r < 2:
 			return `a`, H
@@ -3731,7 +3731,7 @@ retry:
 		}
 	case `rg`:
 		H := 2.6225466508345625
-		r := rng.IntN(59)
+		r := g.Rng.IntN(59)
 		switch {
 		case r < 23:
 			return `e`, H
@@ -3754,7 +3754,7 @@ retry:
 		}
 	case `t`:
 		H := 2.467515412367413
-		r := rng.IntN(323)
+		r := g.Rng.IntN(323)
 		switch {
 		case r < 105:
 			return `r`, H
@@ -3777,7 +3777,7 @@ retry:
 		}
 	case `bt`:
 		H := 2.8073549220576046
-		r := rng.IntN(14)
+		r := g.Rng.IntN(14)
 		switch {
 		case r < 4:
 			return `l`, H
@@ -3800,7 +3800,7 @@ retry:
 		}
 	case `yo`:
 		H := 2.692380602454975
-		r := rng.IntN(14)
+		r := g.Rng.IntN(14)
 		switch {
 		case r < 5:
 			return `n`, H
@@ -3823,7 +3823,7 @@ retry:
 		}
 	case `u`:
 		H := 0.8648744526550217
-		r := rng.IntN(476)
+		r := g.Rng.IntN(476)
 		switch {
 		case r < 410:
 			return `n`, H
@@ -3846,7 +3846,7 @@ retry:
 		}
 	case `ps`:
 		H := 2.489655670358648
-		r := rng.IntN(27)
+		r := g.Rng.IntN(27)
 		switch {
 		case r < 8:
 			return `t`, H
@@ -3869,7 +3869,7 @@ retry:
 		}
 	case `pt`:
 		H := 2.3129328787410666
-		r := rng.IntN(45)
+		r := g.Rng.IntN(45)
 		switch {
 		case r < 21:
 			return `i`, H
@@ -3892,7 +3892,7 @@ retry:
 		}
 	case `af`:
 		H := 2.1819962604162924
-		r := rng.IntN(59)
+		r := g.Rng.IntN(59)
 		switch {
 		case r < 25:
 			return `f`, H
@@ -3915,7 +3915,7 @@ retry:
 		}
 	case `rf`:
 		H := 2.5833333333333335
-		r := rng.IntN(24)
+		r := g.Rng.IntN(24)
 		switch {
 		case r < 9:
 			return `e`, H
@@ -3938,7 +3938,7 @@ retry:
 		}
 	case `k`:
 		H := 2.2102710078071865
-		r := rng.IntN(55)
+		r := g.Rng.IntN(55)
 		switch {
 		case r < 27:
 			return `i`, H
@@ -3961,7 +3961,7 @@ retry:
 		}
 	case `mb`:
 		H := 2.4620228668017208
-		r := rng.IntN(75)
+		r := g.Rng.IntN(75)
 		switch {
 		case r < 30:
 			return `l`, H
@@ -3984,7 +3984,7 @@ retry:
 		}
 	case `ph`:
 		H := 2.525379371610213
-		r := rng.IntN(56)
+		r := g.Rng.IntN(56)
 		switch {
 		case r < 17:
 			return `o`, H
@@ -4007,7 +4007,7 @@ retry:
 		}
 	case `sc`:
 		H := 2.5124428937801095
-		r := rng.IntN(134)
+		r := g.Rng.IntN(134)
 		switch {
 		case r < 40:
 			return `a`, H
@@ -4030,7 +4030,7 @@ retry:
 		}
 	case `vo`:
 		H := 2.871054088933562
-		r := rng.IntN(57)
+		r := g.Rng.IntN(57)
 		switch {
 		case r < 16:
 			return `r`, H
@@ -4055,7 +4055,7 @@ retry:
 		}
 	case `c`:
 		H := 2.671815163549163
-		r := rng.IntN(751)
+		r := g.Rng.IntN(751)
 		switch {
 		case r < 224:
 			return `o`, H
@@ -4080,7 +4080,7 @@ retry:
 		}
 	case `g`:
 		H := 2.6968078160957982
-		r := rng.IntN(304)
+		r := g.Rng.IntN(304)
 		switch {
 		case r < 97:
 			return `r`, H
@@ -4105,7 +4105,7 @@ retry:
 		}
 	case `sk`:
 		H := 2.0077378472545835
-		r := rng.IntN(61)
+		r := g.Rng.IntN(61)
 		switch {
 		case r < 32:
 			return `i`, H
@@ -4130,7 +4130,7 @@ retry:
 		}
 	case `lp`:
 		H := 3.0503018554349826
-		r := rng.IntN(19)
+		r := g.Rng.IntN(19)
 		switch {
 		case r < 4:
 			return `h`, H
@@ -4155,7 +4155,7 @@ retry:
 		}
 	case `ya`:
 		H := 2.7153266987718103
-		r := rng.IntN(19)
+		r := g.Rng.IntN(19)
 		switch {
 		case r < 6:
 			return `r`, H
@@ -4180,7 +4180,7 @@ retry:
 		}
 	case `ny`:
 		H := 3.039148671903072
-		r := rng.IntN(14)
+		r := g.Rng.IntN(14)
 		switch {
 		case r < 3:
 			return `m`, H
@@ -4205,7 +4205,7 @@ retry:
 		}
 	case `yp`:
 		H := 2.7132696895151076
-		r := rng.IntN(25)
+		r := g.Rng.IntN(25)
 		switch {
 		case r < 8:
 			return `e`, H
@@ -4230,7 +4230,7 @@ retry:
 		}
 	case `ht`:
 		H := 2.6292492238560348
-		r := rng.IntN(19)
+		r := g.Rng.IntN(19)
 		switch {
 		case r < 8:
 			return `e`, H
@@ -4255,7 +4255,7 @@ retry:
 		}
 	case `rc`:
 		H := 2.8029839504926644
-		r := rng.IntN(53)
+		r := g.Rng.IntN(53)
 		switch {
 		case r < 15:
 			return `h`, H
@@ -4280,7 +4280,7 @@ retry:
 		}
 	case `ai`:
 		H := 2.315377442431913
-		r := rng.IntN(132)
+		r := g.Rng.IntN(132)
 		switch {
 		case r < 56:
 			return `n`, H
@@ -4305,7 +4305,7 @@ retry:
 		}
 	case `rb`:
 		H := 2.7675793883891737
-		r := rng.IntN(47)
+		r := g.Rng.IntN(47)
 		switch {
 		case r < 12:
 			return `o`, H
@@ -4330,7 +4330,7 @@ retry:
 		}
 	case `ft`:
 		H := 2.4952508233936745
-		r := rng.IntN(33)
+		r := g.Rng.IntN(33)
 		switch {
 		case r < 13:
 			return `e`, H
@@ -4355,7 +4355,7 @@ retry:
 		}
 	case `ff`:
 		H := 2.723780466448913
-		r := rng.IntN(63)
+		r := g.Rng.IntN(63)
 		switch {
 		case r < 16:
 			return `e`, H
@@ -4380,7 +4380,7 @@ retry:
 		}
 	case `p`:
 		H := 2.5923931878457345
-		r := rng.IntN(578)
+		r := g.Rng.IntN(578)
 		switch {
 		case r < 166:
 			return `r`, H
@@ -4405,7 +4405,7 @@ retry:
 		}
 	case `eb`:
 		H := 2.887941726415332
-		r := rng.IntN(47)
+		r := g.Rng.IntN(47)
 		switch {
 		case r < 10:
 			return `a`, H
@@ -4430,7 +4430,7 @@ retry:
 		}
 	case `tt`:
 		H := 2.3319551423402523
-		r := rng.IntN(127)
+		r := g.Rng.IntN(127)
 		switch {
 		case r < 59:
 			return `e`, H
@@ -4455,7 +4455,7 @@ retry:
 		}
 	case `rp`:
 		H := 2.9031815050305063
-		r := rng.IntN(41)
+		r := g.Rng.IntN(41)
 		switch {
 		case r < 8:
 			return `l`, H
@@ -4480,7 +4480,7 @@ retry:
 		}
 	case `od`:
 		H := 2.7181256737103596
-		r := rng.IntN(50)
+		r := g.Rng.IntN(50)
 		switch {
 		case r < 13:
 			return `e`, H
@@ -4505,7 +4505,7 @@ retry:
 		}
 	case `io`:
 		H := 1.3890034152520174
-		r := rng.IntN(187)
+		r := g.Rng.IntN(187)
 		switch {
 		case r < 140:
 			return `n`, H
@@ -4530,7 +4530,7 @@ retry:
 		}
 	case `ib`:
 		H := 2.5862770862160236
-		r := rng.IntN(51)
+		r := g.Rng.IntN(51)
 		switch {
 		case r < 19:
 			return `l`, H
@@ -4555,7 +4555,7 @@ retry:
 		}
 	case `sp`:
 		H := 2.8235716352955578
-		r := rng.IntN(160)
+		r := g.Rng.IntN(160)
 		switch {
 		case r < 38:
 			return `o`, H
@@ -4582,7 +4582,7 @@ retry:
 		}
 	case `oy`:
 		H := 2.9638096525384383
-		r := rng.IntN(23)
+		r := g.Rng.IntN(23)
 		switch {
 		case r < 6:
 			return `e`, H
@@ -4609,7 +4609,7 @@ retry:
 		}
 	case `ts`:
 		H := 3.135821824148036
-		r := rng.IntN(22)
+		r := g.Rng.IntN(22)
 		switch {
 		case r < 5:
 			return `h`, H
@@ -4636,7 +4636,7 @@ retry:
 		}
 	case `ct`:
 		H := 2.5852558586975434
-		r := rng.IntN(118)
+		r := g.Rng.IntN(118)
 		switch {
 		case r < 44:
 			return `i`, H
@@ -4663,7 +4663,7 @@ retry:
 		}
 	case `we`:
 		H := 2.748621296142989
-		r := rng.IntN(58)
+		r := g.Rng.IntN(58)
 		switch {
 		case r < 18:
 			return `r`, H
@@ -4690,7 +4690,7 @@ retry:
 		}
 	case `ds`:
 		H := 3.0464393446710147
-		r := rng.IntN(20)
+		r := g.Rng.IntN(20)
 		switch {
 		case r < 6:
 			return `t`, H
@@ -4717,7 +4717,7 @@ retry:
 		}
 	case `oe`:
 		H := 3.2516291673878226
-		r := rng.IntN(12)
+		r := g.Rng.IntN(12)
 		switch {
 		case r < 2:
 			return `s`, H
@@ -4744,7 +4744,7 @@ retry:
 		}
 	case `nc`:
 		H := 2.8557990432188514
-		r := rng.IntN(207)
+		r := g.Rng.IntN(207)
 		switch {
 		case r < 66:
 			return `e`, H
@@ -4771,7 +4771,7 @@ retry:
 		}
 	case `ia`:
 		H := 2.7871615786315345
-		r := rng.IntN(106)
+		r := g.Rng.IntN(106)
 		switch {
 		case r < 26:
 			return `l`, H
@@ -4798,7 +4798,7 @@ retry:
 		}
 	case `lt`:
 		H := 2.9388580483450712
-		r := rng.IntN(36)
+		r := g.Rng.IntN(36)
 		switch {
 		case r < 11:
 			return `i`, H
@@ -4825,7 +4825,7 @@ retry:
 		}
 	case `ef`:
 		H := 3.1182289091344035
-		r := rng.IntN(91)
+		r := g.Rng.IntN(91)
 		switch {
 		case r < 17:
 			return `u`, H
@@ -4852,7 +4852,7 @@ retry:
 		}
 	case `ou`:
 		H := 2.433480709472623
-		r := rng.IntN(258)
+		r := g.Rng.IntN(258)
 		switch {
 		case r < 73:
 			return `s`, H
@@ -4879,7 +4879,7 @@ retry:
 		}
 	case `nk`:
 		H := 2.955870327431456
-		r := rng.IntN(61)
+		r := g.Rng.IntN(61)
 		switch {
 		case r < 17:
 			return `i`, H
@@ -4908,7 +4908,7 @@ retry:
 		}
 	case `ly`:
 		H := 3.272769892034794
-		r := rng.IntN(26)
+		r := g.Rng.IntN(26)
 		switch {
 		case r < 5:
 			return `i`, H
@@ -4937,7 +4937,7 @@ retry:
 		}
 	case `um`:
 		H := 2.7569798111220467
-		r := rng.IntN(99)
+		r := g.Rng.IntN(99)
 		switch {
 		case r < 29:
 			return `b`, H
@@ -4966,7 +4966,7 @@ retry:
 		}
 	case `eo`:
 		H := 3.1748858687242363
-		r := rng.IntN(23)
+		r := g.Rng.IntN(23)
 		switch {
 		case r < 6:
 			return `l`, H
@@ -4995,7 +4995,7 @@ retry:
 		}
 	case `gg`:
 		H := 2.5365464726603135
-		r := rng.IntN(59)
+		r := g.Rng.IntN(59)
 		switch {
 		case r < 19:
 			return `l`, H
@@ -5024,7 +5024,7 @@ retry:
 		}
 	case `be`:
 		H := 2.6259431593969045
-		r := rng.IntN(69)
+		r := g.Rng.IntN(69)
 		switch {
 		case r < 27:
 			return `r`, H
@@ -5053,7 +5053,7 @@ retry:
 		}
 	case `jo`:
 		H := 2.9275496777656036
-		r := rng.IntN(32)
+		r := g.Rng.IntN(32)
 		switch {
 		case r < 11:
 			return `y`, H
@@ -5082,7 +5082,7 @@ retry:
 		}
 	case `ug`:
 		H := 2.8739810481273578
-		r := rng.IntN(34)
+		r := g.Rng.IntN(34)
 		switch {
 		case r < 10:
 			return `g`, H
@@ -5111,7 +5111,7 @@ retry:
 		}
 	case `ex`:
 		H := 2.823204116207561
-		r := rng.IntN(102)
+		r := g.Rng.IntN(102)
 		switch {
 		case r < 30:
 			return `p`, H
@@ -5140,7 +5140,7 @@ retry:
 		}
 	case `va`:
 		H := 3.0359223229700754
-		r := rng.IntN(108)
+		r := g.Rng.IntN(108)
 		switch {
 		case r < 28:
 			return `l`, H
@@ -5169,7 +5169,7 @@ retry:
 		}
 	case `ed`:
 		H := 2.9112023765018518
-		r := rng.IntN(74)
+		r := g.Rng.IntN(74)
 		switch {
 		case r < 25:
 			return `i`, H
@@ -5198,7 +5198,7 @@ retry:
 		}
 	case `ss`:
 		H := 2.826274120140731
-		r := rng.IntN(71)
+		r := g.Rng.IntN(71)
 		switch {
 		case r < 19:
 			return `e`, H
@@ -5227,7 +5227,7 @@ retry:
 		}
 	case `ue`:
 		H := 3.066701577503766
-		r := rng.IntN(39)
+		r := g.Rng.IntN(39)
 		switch {
 		case r < 9:
 			return `l`, H
@@ -5256,7 +5256,7 @@ retry:
 		}
 	case `of`:
 		H := 3.1173143543437773
-		r := rng.IntN(26)
+		r := g.Rng.IntN(26)
 		switch {
 		case r < 7:
 			return `f`, H
@@ -5285,7 +5285,7 @@ retry:
 		}
 	case `wo`:
 		H := 2.4661778189349435
-		r := rng.IntN(67)
+		r := g.Rng.IntN(67)
 		switch {
 		case r < 33:
 			return `r`, H
@@ -5314,7 +5314,7 @@ retry:
 		}
 	case `me`:
 		H := 2.700171980219928
-		r := rng.IntN(131)
+		r := g.Rng.IntN(131)
 		switch {
 		case r < 38:
 			return `n`, H
@@ -5343,7 +5343,7 @@ retry:
 		}
 	case `og`:
 		H := 3.2145272645029523
-		r := rng.IntN(60)
+		r := g.Rng.IntN(60)
 		switch {
 		case r < 10:
 			return `y`, H
@@ -5372,7 +5372,7 @@ retry:
 		}
 	case `bi`:
 		H := 3.167327740603032
-		r := rng.IntN(72)
+		r := g.Rng.IntN(72)
 		switch {
 		case r < 15:
 			return `l`, H
@@ -5403,7 +5403,7 @@ retry:
 		}
 	case `em`:
 		H := 2.909604688717815
-		r := rng.IntN(135)
+		r := g.Rng.IntN(135)
 		switch {
 		case r < 28:
 			return `i`, H
@@ -5434,7 +5434,7 @@ retry:
 		}
 	case `au`:
 		H := 3.046087347807784
-		r := rng.IntN(69)
+		r := g.Rng.IntN(69)
 		switch {
 		case r < 15:
 			return `t`, H
@@ -5465,7 +5465,7 @@ retry:
 		}
 	case `aw`:
 		H := 2.978305516512272
-		r := rng.IntN(35)
+		r := g.Rng.IntN(35)
 		switch {
 		case r < 12:
 			return `a`, H
@@ -5496,7 +5496,7 @@ retry:
 		}
 	case `ew`:
 		H := 2.8625074707625155
-		r := rng.IntN(44)
+		r := g.Rng.IntN(44)
 		switch {
 		case r < 16:
 			return `a`, H
@@ -5527,7 +5527,7 @@ retry:
 		}
 	case `ec`:
 		H := 3.0339701786495312
-		r := rng.IntN(189)
+		r := g.Rng.IntN(189)
 		switch {
 		case r < 64:
 			return `t`, H
@@ -5558,7 +5558,7 @@ retry:
 		}
 	case `oc`:
 		H := 2.8369155250951916
-		r := rng.IntN(91)
+		r := g.Rng.IntN(91)
 		switch {
 		case r < 37:
 			return `k`, H
@@ -5589,7 +5589,7 @@ retry:
 		}
 	case `mu`:
 		H := 3.0506400538703033
-		r := rng.IntN(80)
+		r := g.Rng.IntN(80)
 		switch {
 		case r < 22:
 			return `s`, H
@@ -5620,7 +5620,7 @@ retry:
 		}
 	case `uc`:
 		H := 2.8631704063613026
-		r := rng.IntN(87)
+		r := g.Rng.IntN(87)
 		switch {
 		case r < 31:
 			return `k`, H
@@ -5651,7 +5651,7 @@ retry:
 		}
 	case `os`:
 		H := 2.8544000807530825
-		r := rng.IntN(128)
+		r := g.Rng.IntN(128)
 		switch {
 		case r < 33:
 			return `e`, H
@@ -5682,7 +5682,7 @@ retry:
 		}
 	case `xi`:
 		H := 3.1329440449809582
-		r := rng.IntN(26)
+		r := g.Rng.IntN(26)
 		switch {
 		case r < 8:
 			return `d`, H
@@ -5713,7 +5713,7 @@ retry:
 		}
 	case `ju`:
 		H := 3.2165060421774707
-		r := rng.IntN(42)
+		r := g.Rng.IntN(42)
 		switch {
 		case r < 8:
 			return `n`, H
@@ -5744,7 +5744,7 @@ retry:
 		}
 	case `th`:
 		H := 2.880261933124179
-		r := rng.IntN(129)
+		r := g.Rng.IntN(129)
 		switch {
 		case r < 34:
 			return `e`, H
@@ -5775,7 +5775,7 @@ retry:
 		}
 	case `cu`:
 		H := 2.8392825556691563
-		r := rng.IntN(124)
+		r := g.Rng.IntN(124)
 		switch {
 		case r < 38:
 			return `r`, H
@@ -5806,7 +5806,7 @@ retry:
 		}
 	case `ld`:
 		H := 3.133525936753556
-		r := rng.IntN(33)
+		r := g.Rng.IntN(33)
 		switch {
 		case r < 9:
 			return `e`, H
@@ -5837,7 +5837,7 @@ retry:
 		}
 	case `ki`:
 		H := 2.1171650938789814
-		r := rng.IntN(129)
+		r := g.Rng.IntN(129)
 		switch {
 		case r < 79:
 			return `n`, H
@@ -5868,7 +5868,7 @@ retry:
 		}
 	case `i`:
 		H := 2.5497605472988316
-		r := rng.IntN(115)
+		r := g.Rng.IntN(115)
 		switch {
 		case r < 59:
 			return `m`, H
@@ -5899,7 +5899,7 @@ retry:
 		}
 	case `ui`:
 		H := 3.141352734607186
-		r := rng.IntN(73)
+		r := g.Rng.IntN(73)
 		switch {
 		case r < 17:
 			return `t`, H
@@ -5930,7 +5930,7 @@ retry:
 		}
 	case `om`:
 		H := 2.9118142888347975
-		r := rng.IntN(122)
+		r := g.Rng.IntN(122)
 		switch {
 		case r < 29:
 			return `p`, H
@@ -5961,7 +5961,7 @@ retry:
 		}
 	case `ep`:
 		H := 3.292881430273992
-		r := rng.IntN(93)
+		r := g.Rng.IntN(93)
 		switch {
 		case r < 16:
 			return `t`, H
@@ -5992,7 +5992,7 @@ retry:
 		}
 	case `ic`:
 		H := 3.0986089299037656
-		r := rng.IntN(198)
+		r := g.Rng.IntN(198)
 		switch {
 		case r < 41:
 			return `a`, H
@@ -6023,7 +6023,7 @@ retry:
 		}
 	case `us`:
 		H := 2.823674243280801
-		r := rng.IntN(187)
+		r := g.Rng.IntN(187)
 		switch {
 		case r < 52:
 			return `t`, H
@@ -6056,7 +6056,7 @@ retry:
 		}
 	case `ja`:
 		H := 3.494680368408909
-		r := rng.IntN(28)
+		r := g.Rng.IntN(28)
 		switch {
 		case r < 4:
 			return `w`, H
@@ -6089,7 +6089,7 @@ retry:
 		}
 	case `rm`:
 		H := 2.9183678050834025
-		r := rng.IntN(67)
+		r := g.Rng.IntN(67)
 		switch {
 		case r < 17:
 			return `a`, H
@@ -6122,7 +6122,7 @@ retry:
 		}
 	case `eg`:
 		H := 3.2163328922854326
-		r := rng.IntN(70)
+		r := g.Rng.IntN(70)
 		switch {
 		case r < 17:
 			return `a`, H
@@ -6155,7 +6155,7 @@ retry:
 		}
 	case `ua`:
 		H := 2.9201179414976686
-		r := rng.IntN(77)
+		r := g.Rng.IntN(77)
 		switch {
 		case r < 25:
 			return `l`, H
@@ -6188,7 +6188,7 @@ retry:
 		}
 	case `oa`:
 		H := 3.0807669557620305
-		r := rng.IntN(86)
+		r := g.Rng.IntN(86)
 		switch {
 		case r < 18:
 			return `d`, H
@@ -6221,7 +6221,7 @@ retry:
 		}
 	case `ip`:
 		H := 2.9084361115661546
-		r := rng.IntN(58)
+		r := g.Rng.IntN(58)
 		switch {
 		case r < 20:
 			return `p`, H
@@ -6254,7 +6254,7 @@ retry:
 		}
 	case `id`:
 		H := 2.437836737262423
-		r := rng.IntN(149)
+		r := g.Rng.IntN(149)
 		switch {
 		case r < 78:
 			return `e`, H
@@ -6287,7 +6287,7 @@ retry:
 		}
 	case `hu`:
 		H := 3.2003975417055566
-		r := rng.IntN(80)
+		r := g.Rng.IntN(80)
 		switch {
 		case r < 21:
 			return `m`, H
@@ -6320,7 +6320,7 @@ retry:
 		}
 	case `gu`:
 		H := 3.2352429992546594
-		r := rng.IntN(69)
+		r := g.Rng.IntN(69)
 		switch {
 		case r < 13:
 			return `l`, H
@@ -6353,7 +6353,7 @@ retry:
 		}
 	case `pu`:
 		H := 2.953209386359383
-		r := rng.IntN(89)
+		r := g.Rng.IntN(89)
 		switch {
 		case r < 26:
 			return `r`, H
@@ -6386,7 +6386,7 @@ retry:
 		}
 	case `im`:
 		H := 2.9007368337224446
-		r := rng.IntN(181)
+		r := g.Rng.IntN(181)
 		switch {
 		case r < 55:
 			return `p`, H
@@ -6419,7 +6419,7 @@ retry:
 		}
 	case `nt`:
 		H := 3.0811605328891254
-		r := rng.IntN(219)
+		r := g.Rng.IntN(219)
 		switch {
 		case r < 52:
 			return `i`, H
@@ -6452,7 +6452,7 @@ retry:
 		}
 	case `pi`:
 		H := 2.9688147163910608
-		r := rng.IntN(129)
+		r := g.Rng.IntN(129)
 		switch {
 		case r < 49:
 			return `n`, H
@@ -6485,7 +6485,7 @@ retry:
 		}
 	case `mp`:
 		H := 3.2580382343434384
-		r := rng.IntN(143)
+		r := g.Rng.IntN(143)
 		switch {
 		case r < 29:
 			return `l`, H
@@ -6518,7 +6518,7 @@ retry:
 		}
 	case `st`:
 		H := 2.956505271065868
-		r := rng.IntN(496)
+		r := g.Rng.IntN(496)
 		switch {
 		case r < 106:
 			return `a`, H
@@ -6551,7 +6551,7 @@ retry:
 		}
 	case `ie`:
 		H := 3.0687146768399054
-		r := rng.IntN(136)
+		r := g.Rng.IntN(136)
 		switch {
 		case r < 37:
 			return `d`, H
@@ -6584,7 +6584,7 @@ retry:
 		}
 	case `rs`:
 		H := 2.9825091489647586
-		r := rng.IntN(79)
+		r := g.Rng.IntN(79)
 		switch {
 		case r < 23:
 			return `e`, H
@@ -6617,7 +6617,7 @@ retry:
 		}
 	case `pe`:
 		H := 2.860807140148557
-		r := rng.IntN(243)
+		r := g.Rng.IntN(243)
 		switch {
 		case r < 85:
 			return `r`, H
@@ -6652,7 +6652,7 @@ retry:
 		}
 	case `rn`:
 		H := 2.9893847578098818
-		r := rng.IntN(49)
+		r := g.Rng.IntN(49)
 		switch {
 		case r < 14:
 			return `e`, H
@@ -6687,7 +6687,7 @@ retry:
 		}
 	case `bu`:
 		H := 3.292370012087556
-		r := rng.IntN(89)
+		r := g.Rng.IntN(89)
 		switch {
 		case r < 24:
 			return `l`, H
@@ -6722,7 +6722,7 @@ retry:
 		}
 	case `it`:
 		H := 3.0957275161189104
-		r := rng.IntN(266)
+		r := g.Rng.IntN(266)
 		switch {
 		case r < 75:
 			return `y`, H
@@ -6757,7 +6757,7 @@ retry:
 		}
 	case `ig`:
 		H := 2.973794367913592
-		r := rng.IntN(109)
+		r := g.Rng.IntN(109)
 		switch {
 		case r < 42:
 			return `h`, H
@@ -6792,7 +6792,7 @@ retry:
 		}
 	case `ch`:
 		H := 2.7422368334249807
-		r := rng.IntN(197)
+		r := g.Rng.IntN(197)
 		switch {
 		case r < 56:
 			return `e`, H
@@ -6827,7 +6827,7 @@ retry:
 		}
 	case `ac`:
 		H := 3.038335326308152
-		r := rng.IntN(278)
+		r := g.Rng.IntN(278)
 		switch {
 		case r < 81:
 			return `k`, H
@@ -6862,7 +6862,7 @@ retry:
 		}
 	case `ce`:
 		H := 3.3511760926287546
-		r := rng.IntN(88)
+		r := g.Rng.IntN(88)
 		switch {
 		case r < 17:
 			return `r`, H
@@ -6897,7 +6897,7 @@ retry:
 		}
 	case `ol`:
 		H := 3.263456186229182
-		r := rng.IntN(174)
+		r := g.Rng.IntN(174)
 		switch {
 		case r < 31:
 			return `o`, H
@@ -6932,7 +6932,7 @@ retry:
 		}
 	case `su`:
 		H := 3.1629317012719462
-		r := rng.IntN(166)
+		r := g.Rng.IntN(166)
 		switch {
 		case r < 45:
 			return `b`, H
@@ -6967,7 +6967,7 @@ retry:
 		}
 	case `fa`:
 		H := 3.2099575789421095
-		r := rng.IntN(80)
+		r := g.Rng.IntN(80)
 		switch {
 		case r < 23:
 			return `c`, H
@@ -7002,7 +7002,7 @@ retry:
 		}
 	case `ab`:
 		H := 2.0438133422038423
-		r := rng.IntN(220)
+		r := g.Rng.IntN(220)
 		switch {
 		case r < 143:
 			return `l`, H
@@ -7037,7 +7037,7 @@ retry:
 		}
 	case `fi`:
 		H := 3.287172025028723
-		r := rng.IntN(141)
+		r := g.Rng.IntN(141)
 		switch {
 		case r < 34:
 			return `n`, H
@@ -7072,7 +7072,7 @@ retry:
 		}
 	case `et`:
 		H := 3.247370579505989
-		r := rng.IntN(156)
+		r := g.Rng.IntN(156)
 		switch {
 		case r < 32:
 			return `e`, H
@@ -7109,7 +7109,7 @@ retry:
 		}
 	case `te`:
 		H := 2.3840358108683493
-		r := rng.IntN(383)
+		r := g.Rng.IntN(383)
 		switch {
 		case r < 168:
 			return `r`, H
@@ -7146,7 +7146,7 @@ retry:
 		}
 	case `ir`:
 		H := 3.203988838355143
-		r := rng.IntN(110)
+		r := g.Rng.IntN(110)
 		switch {
 		case r < 39:
 			return `e`, H
@@ -7183,7 +7183,7 @@ retry:
 		}
 	case `s`:
 		H := 3.614984946742652
-		r := rng.IntN(1087)
+		r := g.Rng.IntN(1087)
 		switch {
 		case r < 207:
 			return `t`, H
@@ -7220,7 +7220,7 @@ retry:
 		}
 	case `wi`:
 		H := 3.2044098392197946
-		r := rng.IntN(112)
+		r := g.Rng.IntN(112)
 		switch {
 		case r < 33:
 			return `n`, H
@@ -7257,7 +7257,7 @@ retry:
 		}
 	case `ba`:
 		H := 3.20045667779631
-		r := rng.IntN(199)
+		r := g.Rng.IntN(199)
 		switch {
 		case r < 48:
 			return `c`, H
@@ -7294,7 +7294,7 @@ retry:
 		}
 	case `rt`:
 		H := 3.4318639824861625
-		r := rng.IntN(122)
+		r := g.Rng.IntN(122)
 		switch {
 		case r < 24:
 			return `e`, H
@@ -7331,7 +7331,7 @@ retry:
 		}
 	case `hi`:
 		H := 2.918107201430624
-		r := rng.IntN(129)
+		r := g.Rng.IntN(129)
 		switch {
 		case r < 54:
 			return `n`, H
@@ -7368,7 +7368,7 @@ retry:
 		}
 	case `fo`:
 		H := 2.981045025728019
-		r := rng.IntN(86)
+		r := g.Rng.IntN(86)
 		switch {
 		case r < 26:
 			return `o`, H
@@ -7405,7 +7405,7 @@ retry:
 		}
 	case `ag`:
 		H := 2.8283474600883034
-		r := rng.IntN(179)
+		r := g.Rng.IntN(179)
 		switch {
 		case r < 76:
 			return `e`, H
@@ -7442,7 +7442,7 @@ retry:
 		}
 	case `ll`:
 		H := 2.9528008740663543
-		r := rng.IntN(137)
+		r := g.Rng.IntN(137)
 		switch {
 		case r < 34:
 			return `y`, H
@@ -7479,7 +7479,7 @@ retry:
 		}
 	case `ru`:
 		H := 3.385847293011174
-		r := rng.IntN(148)
+		r := g.Rng.IntN(148)
 		switch {
 		case r < 33:
 			return `s`, H
@@ -7516,7 +7516,7 @@ retry:
 		}
 	case `am`:
 		H := 3.1846111780304867
-		r := rng.IntN(178)
+		r := g.Rng.IntN(178)
 		switch {
 		case r < 40:
 			return `e`, H
@@ -7553,7 +7553,7 @@ retry:
 		}
 	case `ge`:
 		H := 2.964543201961648
-		r := rng.IntN(132)
+		r := g.Rng.IntN(132)
 		switch {
 		case r < 34:
 			return `r`, H
@@ -7590,7 +7590,7 @@ retry:
 		}
 	case `as`:
 		H := 3.0133424407336613
-		r := rng.IntN(280)
+		r := g.Rng.IntN(280)
 		switch {
 		case r < 79:
 			return `t`, H
@@ -7627,7 +7627,7 @@ retry:
 		}
 	case `mi`:
 		H := 2.8826950013624906
-		r := rng.IntN(150)
+		r := g.Rng.IntN(150)
 		switch {
 		case r < 54:
 			return `n`, H
@@ -7664,7 +7664,7 @@ retry:
 		}
 	case `rd`:
 		H := 3.531539645867806
-		r := rng.IntN(52)
+		r := g.Rng.IntN(52)
 		switch {
 		case r < 11:
 			return `e`, H
@@ -7701,7 +7701,7 @@ retry:
 		}
 	case `ns`:
 		H := 3.452447729749734
-		r := rng.IntN(128)
+		r := g.Rng.IntN(128)
 		switch {
 		case r < 24:
 			return `e`, H
@@ -7738,7 +7738,7 @@ retry:
 		}
 	case `fe`:
 		H := 3.3380070663648165
-		r := rng.IntN(84)
+		r := g.Rng.IntN(84)
 		switch {
 		case r < 20:
 			return `r`, H
@@ -7775,7 +7775,7 @@ retry:
 		}
 	case `ve`:
 		H := 2.0357494674844125
-		r := rng.IntN(277)
+		r := g.Rng.IntN(277)
 		switch {
 		case r < 169:
 			return `r`, H
@@ -7812,7 +7812,7 @@ retry:
 		}
 	case `ke`:
 		H := 3.1007666652190577
-		r := rng.IntN(113)
+		r := g.Rng.IntN(113)
 		switch {
 		case r < 30:
 			return `r`, H
@@ -7849,7 +7849,7 @@ retry:
 		}
 	case `ap`:
 		H := 2.8684848816641035
-		r := rng.IntN(143)
+		r := g.Rng.IntN(143)
 		switch {
 		case r < 60:
 			return `p`, H
@@ -7886,7 +7886,7 @@ retry:
 		}
 	case `gi`:
 		H := 3.019193877281908
-		r := rng.IntN(102)
+		r := g.Rng.IntN(102)
 		switch {
 		case r < 43:
 			return `n`, H
@@ -7923,7 +7923,7 @@ retry:
 		}
 	case `ob`:
 		H := 3.2815794566249576
-		r := rng.IntN(69)
+		r := g.Rng.IntN(69)
 		switch {
 		case r < 14:
 			return `s`, H
@@ -7960,7 +7960,7 @@ retry:
 		}
 	case `vi`:
 		H := 3.350995470822189
-		r := rng.IntN(189)
+		r := g.Rng.IntN(189)
 		switch {
 		case r < 45:
 			return `n`, H
@@ -7997,7 +7997,7 @@ retry:
 		}
 	case `he`:
 		H := 3.1299537542181337
-		r := rng.IntN(227)
+		r := g.Rng.IntN(227)
 		switch {
 		case r < 56:
 			return `r`, H
@@ -8034,7 +8034,7 @@ retry:
 		}
 	case `nu`:
 		H := 3.4253282651341452
-		r := rng.IntN(57)
+		r := g.Rng.IntN(57)
 		switch {
 		case r < 14:
 			return `m`, H
@@ -8073,7 +8073,7 @@ retry:
 		}
 	case `lu`:
 		H := 3.5210705994541325
-		r := rng.IntN(127)
+		r := g.Rng.IntN(127)
 		switch {
 		case r < 27:
 			return `s`, H
@@ -8112,7 +8112,7 @@ retry:
 		}
 	case `so`:
 		H := 2.98458260307347
-		r := rng.IntN(58)
+		r := g.Rng.IntN(58)
 		switch {
 		case r < 16:
 			return `l`, H
@@ -8151,7 +8151,7 @@ retry:
 		}
 	case `at`:
 		H := 2.98197939609681
-		r := rng.IntN(506)
+		r := g.Rng.IntN(506)
 		switch {
 		case r < 182:
 			return `e`, H
@@ -8190,7 +8190,7 @@ retry:
 		}
 	case `op`:
 		H := 3.240850086008522
-		r := rng.IntN(106)
+		r := g.Rng.IntN(106)
 		switch {
 		case r < 29:
 			return `e`, H
@@ -8229,7 +8229,7 @@ retry:
 		}
 	case `oo`:
 		H := 3.489791824124952
-		r := rng.IntN(195)
+		r := g.Rng.IntN(195)
 		switch {
 		case r < 40:
 			return `t`, H
@@ -8268,7 +8268,7 @@ retry:
 		}
 	case `go`:
 		H := 3.4079256616775075
-		r := rng.IntN(67)
+		r := g.Rng.IntN(67)
 		switch {
 		case r < 16:
 			return `n`, H
@@ -8307,7 +8307,7 @@ retry:
 		}
 	case `es`:
 		H := 2.2514347845496214
-		r := rng.IntN(405)
+		r := g.Rng.IntN(405)
 		switch {
 		case r < 232:
 			return `s`, H
@@ -8346,7 +8346,7 @@ retry:
 		}
 	case `ci`:
 		H := 3.465666807234371
-		r := rng.IntN(132)
+		r := g.Rng.IntN(132)
 		switch {
 		case r < 31:
 			return `n`, H
@@ -8385,7 +8385,7 @@ retry:
 		}
 	case `sh`:
 		H := 3.039460068107811
-		r := rng.IntN(233)
+		r := g.Rng.IntN(233)
 		switch {
 		case r < 48:
 			return `o`, H
@@ -8424,7 +8424,7 @@ retry:
 		}
 	case `ea`:
 		H := 3.286394666608718
-		r := rng.IntN(296)
+		r := g.Rng.IntN(296)
 		switch {
 		case r < 59:
 			return `r`, H
@@ -8463,7 +8463,7 @@ retry:
 		}
 	case `wa`:
 		H := 3.402126204758526
-		r := rng.IntN(120)
+		r := g.Rng.IntN(120)
 		switch {
 		case r < 25:
 			return `r`, H
@@ -8504,7 +8504,7 @@ retry:
 		}
 	case `ay`:
 		H := 3.9021061909687025
-		r := rng.IntN(53)
+		r := g.Rng.IntN(53)
 		switch {
 		case r < 6:
 			return `e`, H
@@ -8545,7 +8545,7 @@ retry:
 		}
 	case `up`:
 		H := 3.696077868346799
-		r := rng.IntN(86)
+		r := g.Rng.IntN(86)
 		switch {
 		case r < 12:
 			return `e`, H
@@ -8586,7 +8586,7 @@ retry:
 		}
 	case `no`:
 		H := 3.578556177289845
-		r := rng.IntN(101)
+		r := g.Rng.IntN(101)
 		switch {
 		case r < 19:
 			return `w`, H
@@ -8627,7 +8627,7 @@ retry:
 		}
 	case `tu`:
 		H := 3.249185448350641
-		r := rng.IntN(135)
+		r := g.Rng.IntN(135)
 		switch {
 		case r < 50:
 			return `r`, H
@@ -8668,7 +8668,7 @@ retry:
 		}
 	case `da`:
 		H := 3.488123022570739
-		r := rng.IntN(107)
+		r := g.Rng.IntN(107)
 		switch {
 		case r < 19:
 			return `n`, H
@@ -8709,7 +8709,7 @@ retry:
 		}
 	case `pa`:
 		H := 3.51517726223104
-		r := rng.IntN(214)
+		r := g.Rng.IntN(214)
 		switch {
 		case r < 48:
 			return `r`, H
@@ -8750,7 +8750,7 @@ retry:
 		}
 	case `ng`:
 		H := 3.17500625470462
-		r := rng.IntN(145)
+		r := g.Rng.IntN(145)
 		switch {
 		case r < 39:
 			return `e`, H
@@ -8791,7 +8791,7 @@ retry:
 		}
 	case `mo`:
 		H := 3.623419066149199
-		r := rng.IntN(203)
+		r := g.Rng.IntN(203)
 		switch {
 		case r < 41:
 			return `n`, H
@@ -8834,7 +8834,7 @@ retry:
 		}
 	case `ho`:
 		H := 3.5246233511381844
-		r := rng.IntN(127)
+		r := g.Rng.IntN(127)
 		switch {
 		case r < 20:
 			return `r`, H
@@ -8877,7 +8877,7 @@ retry:
 		}
 	case `el`:
 		H := 3.4963439564868266
-		r := rng.IntN(231)
+		r := g.Rng.IntN(231)
 		switch {
 		case r < 44:
 			return `e`, H
@@ -8920,7 +8920,7 @@ retry:
 		}
 	case `ow`:
 		H := 3.593817601124209
-		r := rng.IntN(102)
+		r := g.Rng.IntN(102)
 		switch {
 		case r < 22:
 			return `n`, H
@@ -8963,7 +8963,7 @@ retry:
 		}
 	case `ul`:
 		H := 3.3475651004206015
-		r := rng.IntN(140)
+		r := g.Rng.IntN(140)
 		switch {
 		case r < 33:
 			return `a`, H
@@ -9006,7 +9006,7 @@ retry:
 		}
 	case `ot`:
 		H := 3.4151997626610338
-		r := rng.IntN(138)
+		r := g.Rng.IntN(138)
 		switch {
 		case r < 27:
 			return `i`, H
@@ -9049,7 +9049,7 @@ retry:
 		}
 	case `ca`:
 		H := 3.301798879691526
-		r := rng.IntN(317)
+		r := g.Rng.IntN(317)
 		switch {
 		case r < 71:
 			return `r`, H
@@ -9092,7 +9092,7 @@ retry:
 		}
 	case `po`:
 		H := 3.4558028582947937
-		r := rng.IntN(189)
+		r := g.Rng.IntN(189)
 		switch {
 		case r < 47:
 			return `s`, H
@@ -9135,7 +9135,7 @@ retry:
 		}
 	case `du`:
 		H := 3.4682415026057893
-		r := rng.IntN(71)
+		r := g.Rng.IntN(71)
 		switch {
 		case r < 20:
 			return `c`, H
@@ -9178,7 +9178,7 @@ retry:
 		}
 	case `ck`:
 		H := 3.3939366348296245
-		r := rng.IntN(135)
+		r := g.Rng.IntN(135)
 		switch {
 		case r < 30:
 			return `e`, H
@@ -9221,7 +9221,7 @@ retry:
 		}
 	case `il`:
 		H := 3.0714574670306756
-		r := rng.IntN(249)
+		r := g.Rng.IntN(249)
 		switch {
 		case r < 57:
 			return `l`, H
@@ -9266,7 +9266,7 @@ retry:
 		}
 	case `ni`:
 		H := 3.452831684393273
-		r := rng.IntN(202)
+		r := g.Rng.IntN(202)
 		switch {
 		case r < 52:
 			return `n`, H
@@ -9311,7 +9311,7 @@ retry:
 		}
 	case `or`:
 		H := 3.7615134537945343
-		r := rng.IntN(290)
+		r := g.Rng.IntN(290)
 		switch {
 		case r < 50:
 			return `t`, H
@@ -9356,7 +9356,7 @@ retry:
 		}
 	case `ha`:
 		H := 3.468397105262385
-		r := rng.IntN(257)
+		r := g.Rng.IntN(257)
 		switch {
 		case r < 66:
 			return `n`, H
@@ -9401,7 +9401,7 @@ retry:
 		}
 	case `ri`:
 		H := 3.8044324336764634
-		r := rng.IntN(484)
+		r := g.Rng.IntN(484)
 		switch {
 		case r < 94:
 			return `n`, H
@@ -9446,7 +9446,7 @@ retry:
 		}
 	case `o`:
 		H := 2.9453946587990396
-		r := rng.IntN(246)
+		r := g.Rng.IntN(246)
 		switch {
 		case r < 87:
 			return `v`, H
@@ -9491,7 +9491,7 @@ retry:
 		}
 	case `ti`:
 		H := 3.485360725030509
-		r := rng.IntN(500)
+		r := g.Rng.IntN(500)
 		switch {
 		case r < 118:
 			return `n`, H
@@ -9536,7 +9536,7 @@ retry:
 		}
 	case `si`:
 		H := 3.7124503830288225
-		r := rng.IntN(246)
+		r := g.Rng.IntN(246)
 		switch {
 		case r < 43:
 			return `n`, H
@@ -9581,7 +9581,7 @@ retry:
 		}
 	case `la`:
 		H := 3.734800815977329
-		r := rng.IntN(393)
+		r := g.Rng.IntN(393)
 		switch {
 		case r < 68:
 			return `t`, H
@@ -9626,7 +9626,7 @@ retry:
 		}
 	case `ga`:
 		H := 3.4964001580415376
-		r := rng.IntN(98)
+		r := g.Rng.IntN(98)
 		switch {
 		case r < 18:
 			return `t`, H
@@ -9671,7 +9671,7 @@ retry:
 		}
 	case `sa`:
 		H := 3.7462923073871974
-		r := rng.IntN(159)
+		r := g.Rng.IntN(159)
 		switch {
 		case r < 30:
 			return `l`, H
@@ -9716,7 +9716,7 @@ retry:
 		}
 	case `na`:
 		H := 3.6919110777928674
-		r := rng.IntN(161)
+		r := g.Rng.IntN(161)
 		switch {
 		case r < 30:
 			return `t`, H
@@ -9761,7 +9761,7 @@ retry:
 		}
 	case `ad`:
 		H := 3.4091611715594885
-		r := rng.IntN(149)
+		r := g.Rng.IntN(149)
 		switch {
 		case r < 40:
 			return `e`, H
@@ -9806,7 +9806,7 @@ retry:
 		}
 	case `ub`:
 		H := 3.6756598041227804
-		r := rng.IntN(89)
+		r := g.Rng.IntN(89)
 		switch {
 		case r < 21:
 			return `b`, H
@@ -9853,7 +9853,7 @@ retry:
 		}
 	case `bo`:
 		H := 3.6735456800695463
-		r := rng.IntN(153)
+		r := g.Rng.IntN(153)
 		switch {
 		case r < 26:
 			return `o`, H
@@ -9900,7 +9900,7 @@ retry:
 		}
 	case `ta`:
 		H := 3.632864868080895
-		r := rng.IntN(324)
+		r := g.Rng.IntN(324)
 		switch {
 		case r < 45:
 			return `r`, H
@@ -9947,7 +9947,7 @@ retry:
 		}
 	case `di`:
 		H := 3.4494359973163755
-		r := rng.IntN(288)
+		r := g.Rng.IntN(288)
 		switch {
 		case r < 71:
 			return `s`, H
@@ -9994,7 +9994,7 @@ retry:
 		}
 	case `se`:
 		H := 3.6228884091123996
-		r := rng.IntN(199)
+		r := g.Rng.IntN(199)
 		switch {
 		case r < 32:
 			return `d`, H
@@ -10041,7 +10041,7 @@ retry:
 		}
 	case `ur`:
 		H := 3.773670379758159
-		r := rng.IntN(244)
+		r := g.Rng.IntN(244)
 		switch {
 		case r < 63:
 			return `e`, H
@@ -10088,7 +10088,7 @@ retry:
 		}
 	case `do`:
 		H := 3.6985346528002148
-		r := rng.IntN(103)
+		r := g.Rng.IntN(103)
 		switch {
 		case r < 15:
 			return `r`, H
@@ -10135,7 +10135,7 @@ retry:
 		}
 	case `ut`:
 		H := 3.8482247103998266
-		r := rng.IntN(152)
+		r := g.Rng.IntN(152)
 		switch {
 		case r < 27:
 			return `e`, H
@@ -10182,7 +10182,7 @@ retry:
 		}
 	case `e`:
 		H := 3.440729337470061
-		r := rng.IntN(398)
+		r := g.Rng.IntN(398)
 		switch {
 		case r < 87:
 			return `n`, H
@@ -10229,7 +10229,7 @@ retry:
 		}
 	case `ma`:
 		H := 3.24717090849481
-		r := rng.IntN(267)
+		r := g.Rng.IntN(267)
 		switch {
 		case r < 75:
 			return `n`, H
@@ -10276,7 +10276,7 @@ retry:
 		}
 	case `is`:
 		H := 3.425586749295823
-		r := rng.IntN(339)
+		r := g.Rng.IntN(339)
 		switch {
 		case r < 84:
 			return `t`, H
@@ -10323,7 +10323,7 @@ retry:
 		}
 	case `nd`:
 		H := 3.5314039953405065
-		r := rng.IntN(257)
+		r := g.Rng.IntN(257)
 		switch {
 		case r < 75:
 			return `e`, H
@@ -10370,7 +10370,7 @@ retry:
 		}
 	case `ee`:
 		H := 3.7833598092940597
-		r := rng.IntN(126)
+		r := g.Rng.IntN(126)
 		switch {
 		case r < 20:
 			return `n`, H
@@ -10417,7 +10417,7 @@ retry:
 		}
 	case `lo`:
 		H := 3.9481220227019564
-		r := rng.IntN(203)
+		r := g.Rng.IntN(203)
 		switch {
 		case r < 26:
 			return `g`, H
@@ -10466,7 +10466,7 @@ retry:
 		}
 	case `a`:
 		H := 3.8126739941897543
-		r := rng.IntN(407)
+		r := g.Rng.IntN(407)
 		switch {
 		case r < 74:
 			return `n`, H
@@ -10515,7 +10515,7 @@ retry:
 		}
 	case `de`:
 		H := 3.6173342588664883
-		r := rng.IntN(390)
+		r := g.Rng.IntN(390)
 		switch {
 		case r < 97:
 			return `r`, H
@@ -10564,7 +10564,7 @@ retry:
 		}
 	case `in`:
 		H := 2.1017950678134936
-		r := rng.IntN(1050)
+		r := g.Rng.IntN(1050)
 		switch {
 		case r < 665:
 			return `g`, H
@@ -10613,7 +10613,7 @@ retry:
 		}
 	case `li`:
 		H := 3.546418837133385
-		r := rng.IntN(475)
+		r := g.Rng.IntN(475)
 		switch {
 		case r < 157:
 			return `n`, H
@@ -10662,7 +10662,7 @@ retry:
 		}
 	case `ne`:
 		H := 3.0862784397322383
-		r := rng.IntN(326)
+		r := g.Rng.IntN(326)
 		switch {
 		case r < 133:
 			return `s`, H
@@ -10711,7 +10711,7 @@ retry:
 		}
 	case `on`:
 		H := 3.7481496950737694
-		r := rng.IntN(302)
+		r := g.Rng.IntN(302)
 		switch {
 		case r < 59:
 			return `e`, H
@@ -10760,7 +10760,7 @@ retry:
 		}
 	case `le`:
 		H := 3.601021056216224
-		r := rng.IntN(318)
+		r := g.Rng.IntN(318)
 		switch {
 		case r < 69:
 			return `s`, H
@@ -10811,7 +10811,7 @@ retry:
 		}
 	case `al`:
 		H := 3.693547477659404
-		r := rng.IntN(250)
+		r := g.Rng.IntN(250)
 		switch {
 		case r < 55:
 			return `l`, H
@@ -10862,7 +10862,7 @@ retry:
 		}
 	case `ra`:
 		H := 3.9497641727639463
-		r := rng.IntN(471)
+		r := g.Rng.IntN(471)
 		switch {
 		case r < 69:
 			return `n`, H
@@ -10913,7 +10913,7 @@ retry:
 		}
 	case `ar`:
 		H := 4.022304287988487
-		r := rng.IntN(513)
+		r := g.Rng.IntN(513)
 		switch {
 		case r < 79:
 			return `d`, H
@@ -10964,7 +10964,7 @@ retry:
 		}
 	case `to`:
 		H := 2.943211643112022
-		r := rng.IntN(200)
+		r := g.Rng.IntN(200)
 		switch {
 		case r < 82:
 			return `r`, H
@@ -11015,7 +11015,7 @@ retry:
 		}
 	case `en`:
 		H := 3.239836470529042
-		r := rng.IntN(441)
+		r := g.Rng.IntN(441)
 		switch {
 		case r < 148:
 			return `t`, H
@@ -11066,7 +11066,7 @@ retry:
 		}
 	case `an`:
 		H := 3.4086078047375628
-		r := rng.IntN(553)
+		r := g.Rng.IntN(553)
 		switch {
 		case r < 125:
 			return `d`, H
@@ -11119,7 +11119,7 @@ retry:
 		}
 	case `co`:
 		H := 3.4735036327365343
-		r := rng.IntN(349)
+		r := g.Rng.IntN(349)
 		switch {
 		case r < 93:
 			return `n`, H
@@ -11172,7 +11172,7 @@ retry:
 		}
 	case `er`:
 		H := 4.231365586934958
-		r := rng.IntN(466)
+		r := g.Rng.IntN(466)
 		switch {
 		case r < 48:
 			return `s`, H
@@ -11225,7 +11225,7 @@ retry:
 		}
 	case `ro`:
 		H := 4.143180722133236
-		r := rng.IntN(388)
+		r := g.Rng.IntN(388)
 		switch {
 		case r < 45:
 			return `u`, H
@@ -11278,7 +11278,7 @@ retry:
 		}
 	case `un`:
 		H := 4.013869088306411
-		r := rng.IntN(583)
+		r := g.Rng.IntN(583)
 		switch {
 		case r < 92:
 			return `d`, H
@@ -11333,7 +11333,7 @@ retry:
 		}
 	case `re`:
 		H := 4.070035666531293
-		r := rng.IntN(744)
+		r := g.Rng.IntN(744)
 		switch {
 		case r < 88:
 			return `a`, H
@@ -11390,7 +11390,7 @@ retry:
 		}
 	case ``:
 		H := 4.2128960043149775
-		r := rng.IntN(7776)
+		r := g.Rng.IntN(7776)
 		switch {
 		case r < 1087:
 			return `s`, H
@@ -11460,8 +11460,8 @@ retry:
 //   - Return values:
 //     int: The selected word length in characters.
 //     float64: The entropy contributed by the length selection process.
-func PickLength() (int, float64) {
-	r := rng.IntN(7776)
+func (g *Generator) PickLength() (int, float64) {
+	r := g.Rng.IntN(7776)
 	H := 2.5404552183901115
 	if r < 1779 {
 		return 8, H

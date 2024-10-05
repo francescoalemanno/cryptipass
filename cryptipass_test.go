@@ -8,7 +8,8 @@ import (
 )
 
 func TestBasic(t *testing.T) {
-	pw, H := cryptipass.GenPassphrase(4)
+	g := cryptipass.NewInstance()
+	pw, H := g.GenPassphrase(4)
 	if len(pw) < 15 {
 		t.Fatalf(`Wrong length "%s"`, pw)
 	}
@@ -20,8 +21,9 @@ func TestBasic(t *testing.T) {
 
 // TestGenPassphrase tests the GenPassphrase function for generating a passphrase and validating its length.
 func TestGenPassphrase(t *testing.T) {
+	g := cryptipass.NewInstance()
 	words := uint64(5)
-	passphrase, entropy := cryptipass.GenPassphrase(words)
+	passphrase, entropy := g.GenPassphrase(words)
 	wordList := strings.Split(passphrase, ".")
 
 	if len(wordList) != int(words) {
@@ -35,7 +37,8 @@ func TestGenPassphrase(t *testing.T) {
 
 // TestGenWord tests that GenWord generates a word and returns a positive entropy value.
 func TestGenWord(t *testing.T) {
-	word, entropy := cryptipass.GenWord('W')
+	g := cryptipass.NewInstance()
+	word, entropy := g.GenWord('W')
 
 	if len(word) == 0 {
 		t.Error("Expected a word, got an empty string")
@@ -48,8 +51,9 @@ func TestGenWord(t *testing.T) {
 
 // TestPickNext tests that PickNext generates a valid character appended to the seed and returns entropy.
 func TestPickNext(t *testing.T) {
+	g := cryptipass.NewInstance()
 	seed := "te"
-	next, entropy := cryptipass.PickNext(seed)
+	next, entropy := g.PickNext(seed)
 	if len(next) != 1 {
 		t.Errorf("Expected string extension to be 1 rune long")
 	}
@@ -61,7 +65,8 @@ func TestPickNext(t *testing.T) {
 
 // TestPickLength tests that PickLength generates a valid word length and returns entropy.
 func TestPickLength(t *testing.T) {
-	length, entropy := cryptipass.PickLength()
+	g := cryptipass.NewInstance()
+	length, entropy := g.PickLength()
 
 	if length < 3 || length > 9 {
 		t.Errorf("Expected length to be between 3 and 9, got %d", length)
@@ -74,8 +79,9 @@ func TestPickLength(t *testing.T) {
 
 // TestGenFromPattern tests that GenFromPattern generates a word of a specific length and returns a positive entropy value.
 func TestGenFromPattern(t *testing.T) {
+	g := cryptipass.NewInstance()
 	pattern := "Cccc.cccc@dd"
-	word, entropy := cryptipass.GenFromPattern(pattern)
+	word, entropy := g.GenFromPattern(pattern)
 
 	if len(word) != len(pattern) {
 		t.Errorf("Expected word length %d, got %d", len(pattern), len(word))

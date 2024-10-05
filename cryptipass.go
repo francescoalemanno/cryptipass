@@ -11,18 +11,23 @@ import (
 	"strings"
 )
 
-var rng *rand.Rand
+type Generator struct {
+	Rng *rand.Rand
+}
 
-// init initializes the cryptographically secure random number generator (RNG).
+// NewInstance initializes the cryptographically secure random number generator (RNG).
 // It reads 32 bytes of entropy from crypto/rand and uses them to seed a ChaCha8-based RNG.
 // If the required number of bytes is not read, it logs a fatal error.
-func init() {
+func NewInstance() *Generator {
 	seed := [32]byte{}
 	n, err := cr.Reader.Read(seed[:])
 	if err != nil || n != 32 {
 		log.Fatal(n, err, seed)
 	}
-	rng = rand.New(rand.NewChaCha8(seed))
+	rng := rand.New(rand.NewChaCha8(seed))
+	g := new(Generator)
+	g.Rng = rng
+	return g
 }
 
 // NewPassphrase generates a passphrase consisting of the specified number of random words.
@@ -38,11 +43,11 @@ func init() {
 //     string: The generated passphrase, with words joined by periods.
 //
 //     float64: The total entropy (in bits) of the passphrase, indicating its strength.
-func GenPassphrase(words uint64) (string, float64) {
+func (g *Generator) GenPassphrase(words uint64) (string, float64) {
 	wordvec := []string{}
 	total_entropy := 0.0
 	for range words {
-		tok, h := GenFromPattern("w")
+		tok, h := g.GenFromPattern("w")
 		wordvec = append(wordvec, tok)
 		total_entropy += h
 	}
@@ -73,7 +78,7 @@ func GenPassphrase(words uint64) (string, float64) {
 //
 //     float64: The total entropy (in bits) of the generated passphrase.
 
-func GenFromPattern(pattern string) (string, float64) {
+func (g *Generator) GenFromPattern(pattern string) (string, float64) {
 	passphrase := ""
 	entropy := 0.0
 	pushnext := false
@@ -88,22 +93,22 @@ func GenFromPattern(pattern string) (string, float64) {
 			pushnext = true
 			continue
 		case 'w', 'W':
-			head, h_head := GenWord(c)
+			head, h_head := g.GenWord(c)
 			passphrase = passphrase + head
 			entropy = entropy + h_head
 		case 'd':
-			d := rng.IntN(10)
+			d := g.Rng.IntN(10)
 			H := math.Log2(10.0)
 			passphrase += fmt.Sprint(d)
 			entropy += H
 		case 's':
 			symbols := "@#!$%&=?^+-*\""
-			d := rng.IntN(len(symbols))
+			d := g.Rng.IntN(len(symbols))
 			H := math.Log2(float64(len(symbols)))
 			passphrase += string(symbols[d])
 			entropy += H
 		case 'c', 'C':
-			runc, dH := PickNext(strings.ToLower(passphrase))
+			runc, dH := g.PickNext(strings.ToLower(passphrase))
 			if c == 'C' {
 				runc = strings.ToUpper(runc)
 			}
@@ -117,14 +122,14 @@ func GenFromPattern(pattern string) (string, float64) {
 	return passphrase, entropy
 }
 
-func GenWord(c rune) (string, float64) {
-	head, h_head := PickNext("")
-	leng, h_leng := PickLength()
+func (g *Generator) GenWord(c rune) (string, float64) {
+	head, h_head := g.PickNext("")
+	leng, h_leng := g.PickLength()
 	if c == 'W' {
 		head = strings.ToUpper(head)
 	}
 	for len(head) < leng {
-		c, h := PickNext(strings.ToLower(head))
+		c, h := g.PickNext(strings.ToLower(head))
 		head += c
 		h_head += h
 	}
