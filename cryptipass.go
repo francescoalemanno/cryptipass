@@ -31,11 +31,16 @@ func distill(tokens []string) map[string]Transition {
 		}
 		transition_matrix[str][r]++
 	}
-
 	for _, w := range tokens {
-		R := []rune(w)
-		put("lengths", rune(len(R)))
+		R := []rune(strings.ToLower(w))
+		if len(R) == 0 {
+			continue
+		}
+		put("LENGTHS", rune(len(R)))
 		put("", R[0])
+		if len(R) == 1 {
+			continue
+		}
 		put(string(R[0]), R[1])
 		for i := 0; i < len(R)-2; i++ {
 			put(string(R[i])+string(R[i+1]), R[i+2])
@@ -72,7 +77,7 @@ type generator struct {
 	JumpTable *map[string]Transition
 }
 
-// NewInstanceFromList generates a new passphrase generator using a custom
+// NewInstanceFromList returns a new passphrase generator using a custom
 // list of tokens (words). It uses the ChaCha8 random number generator seeded
 // by cryptographically secure random bytes.
 func NewInstanceFromList(tokens []string) *generator {
@@ -93,7 +98,7 @@ func NewInstanceFromList(tokens []string) *generator {
 // NewInstance returns a new passphrase generator initialized with a default
 // wordlist. It uses the ChaCha8 random number generator for randomization.
 func NewInstance() *generator {
-	return NewInstanceFromList(eff_long_word_list)
+	return NewInstanceFromList(eff_short_word_list_2_0)
 }
 
 // GenPassphrase generates a passphrase consisting of the specified number of
@@ -251,7 +256,7 @@ retry:
 // transition matrix of word lengths. It ensures the generated word has an
 // appropriate length and entropy.
 func (g *generator) PickLength() (int, float64) {
-	tr, ok := (*g.JumpTable)["lengths"]
+	tr, ok := (*g.JumpTable)["LENGTHS"]
 	if ok {
 		N := g.Rng.IntN(tr.Total)
 		for i, v := range tr.Counts {

@@ -1,117 +1,111 @@
-# genpw - CryptiPass CLI
+# cryptipass
 
-`genpw` is a simple command-line interface (CLI) for generating high-entropy, pronounceable passphrases using the CryptiPass library. It allows users to specify the pattern used to generate each passphrase (e.g. the number of words, symbols, digits), the number of passphrases to generate making it easy to quickly create secure, human-friendly passwords directly from the terminal.
+[![Go Report Card](https://goreportcard.com/badge/github.com/francescoalemanno/cryptipass)](https://goreportcard.com/report/github.com/francescoalemanno/cryptipass)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![GoDoc](https://godoc.org/github.com/francescoalemanno/cryptipass?status.svg)](https://pkg.go.dev/github.com/francescoalemanno/cryptipass)
 
-This tool is part of the [CryptiPass](https://github.com/francescoalemanno/cryptipass) project and resides in the `cmd/genpw` subdirectory.
+**cryptipass** is a flexible, high-entropy passphrase generator that creates secure, pronounceable passwords using a probabilistic model. It's designed for security-conscious developers who need memorable yet strong passphrases.
+
+---
 
 ## Features
 
-- **Generate Secure Passphrases**: Easily generate high-entropy, pronounceable passphrases with customizable length.
-- **Customizable Output**: Control the number of words per passphrase and how many passphrases you want to generate.
-- **Lightweight and Easy to Use**: Simple CLI flags for ease of use and quick password generation.
+- **Pronounceable Passwords**: Generates words based on real-world token patterns, making them easy to remember.
+- **Highly Customizable**: Define your own word list or use pre-defined patterns like symbols, numbers, and mixed-case letters.
+- **Secure Randomness**: Uses cryptographic-grade randomness (`crypto/rand`) for generating passphrases.
+- **Entropy Analysis**: Built-in entropy calculations and certification to ensure high randomness and strength.
+- **Pattern-Based Generation**: Control password structure using customizable patterns (e.g., words, digits, symbols).
+  
+---
 
 ## Installation
 
-To install the `genpw` CLI, first ensure you have Go installed. Then run:
+To install `cryptipass`, use `go get`:
 
 ```bash
-go install github.com/francescoalemanno/cryptipass/cmd/genpw@latest
+go get github.com/francescoalemanno/cryptipass
 ```
 
-This will install the `genpw` binary in your `$GOPATH/bin` directory.
+Then, import it into your project:
 
-## Usage
-
-Once installed, you can generate passphrases by running `genpw` with the following options:
-
-```bash
-Usage of genpw:
-  -n uint
-        number of passwords to generate (default 6)
-  -p string
-        pattern used to generate passphrase e.g. try:
-                -p WWW20dd
-    
-                other possible patterns are formed by combining:
-                - 'w' lowercase word, 'W' for uppercase word.
-                - 'c' a lowercase character, 'C' a uppercase character.
-                - 's' symbol, 'd' digit.
-                 (default "W.w.w")
+```go
+import "github.com/francescoalemanno/cryptipass"
 ```
 
-### Example Commands
+---
 
-1. **Generate 6 passphrases with 3 words each** (default):
+## Quick Start
 
-```bash
-genpw
+Here's how to generate a passphrase using the default word style:
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/francescoalemanno/cryptipass"
+)
+
+func main() {
+	// Create a new cryptipass generator
+	gen := cryptipass.NewInstance()
+
+	// Generate a 4-word passphrase
+	passphrase, entropy := gen.GenPassphrase(4) 
+
+	fmt.Println("Passphrase:", passphrase) //e.g. netica.peroundl.opantmene.symnals
+	fmt.Println("Entropy:", entropy)
+}
 ```
 
-This will output something like:
+Want more control over the pattern? Use `GenFromPattern`:
 
-```bash
-Passphrase                    Log10(Guesses)    Log2Entropy      Strength
-                                                                
-Candox.swortone.harvingl         23.37             78.64       [============]
-Kinywaya.preterpr.reefrate       24.31             81.76       [============]
-Ratererl.ruse.elikewa            20.44             68.92       [==========..]
-Relemalo.anli.systuri            20.77             70.01       [==========..]
-Unpori.grog.bodityi              18.05             60.97       [=========...]
-Uperti.ampilyon.extedes          22.23             74.86       [===========.]
+```go
+// Generate a password with pattern: Word-Number-Symbol
+pass, entropy := gen.GenFromPattern("w-d-s") // eg. opantmene-4-%
+fmt.Println("Generated Password:", pass)
 ```
 
-1. **Generate passphrases with custom pattern**:
+Possible patterns are formed by combining:
+- 'w' lowercase word, 'W' for uppercase word.
+- 'c' a lowercase character, 'C' a uppercase character.
+- 's' symbol, 'd' digit.
+  
+other symbols are interpolated in the final password and to interpolate one of the reserved symbols use escaping with "\".
 
-```bash
-genpw -p "WW20dds" -n 5
+---
+
+## Custom Word Lists
+
+You can customize the word style by creating a new instance from your own token set:
+
+```go
+myTokens := []string{"alpha", "bravo", "charlie", "delta"}
+gen := cryptipass.NewInstanceFromList(myTokens)
+
+pass, entropy := gen.GenPassphrase(3)
+fmt.Println("Custom Passphrase:", pass) //e.g. alphar.bravo.delta
+fmt.Println("Entropy:", entropy)
 ```
 
-The output might look like:
+---
 
-```bash
-Passphrase               Log10(Guesses)    Log2Entropy      Strength
-                                                           
-HandmarmOvera2053"          16.24             54.96       [========....]
-ResabledAnverbou2004+       19.22             64.85       [==========..]
-RocraryiRegonede2072!       19.96             67.29       [==========..]
-SagureraHassain2045-        19.70             66.45       [==========..]
-WoutbDemitte2019#           15.37             52.07       [========....]
-```
+## Documentation
 
-or
+Full API documentation is available at [GoDoc](https://pkg.go.dev/github.com/francescoalemanno/cryptipass).
 
-```bash
-genpw -p "w.w.w.w" -n 5
-```
-
-The output might look like:
-
-```bash
-Passphrase                               Log10(Guesses)    Log2Entropy      Strength
-                                                                           
-cleatabit.sphongedi.zedizmobl.drooky        32.40             108.62      [============]
-comprewa.cedivet.refyerm.unancling          31.19             104.61      [============]
-eitispayi.woblyoffo.unounde.pradimisf       35.27             118.18      [============]
-juiselid.partu.ovenes.slampos               28.32             95.08       [============]
-yaholl.boort.rentlestu.hustfierm            29.38             98.61       [============]
-```
-
-### Entropy Considerations
-
-Each password generated by CryptiPass comes with an exact entropy evaluation . For example:
-- A 4-word passphrase (pattern "wwww") has on average 97 bits of entropy.
-- A 6-word passphrase (pattern "wwwwww") has on average 146 bits of entropy.
-
-This allows for highly secure passphrases, even against brute-force attacks.
-
-## Contributing
-
-Contributions are welcome! Please open an issue or submit a pull request via the [main repository](https://github.com/francescoalemanno/cryptipass).
+---
 
 ## License
 
-This tool is open-source and licensed under the MIT License.
+`cryptipass` is licensed under the MIT License. See [LICENSE](LICENSE) for details.
 
-## Contact
+---
 
-For any questions, issues, or suggestions, please visit the [issue tracker](https://github.com/francescoalemanno/cryptipass/issues) on GitHub.
+## Contributing
+
+Contributions, issues, and feature requests are welcome! Feel free to check out [issues](https://github.com/francescoalemanno/cryptipass/issues) or open a pull request.
+
+---
+
+**cryptipass** – Secure, flexible, and pronounceable passphrases for your Go applications.

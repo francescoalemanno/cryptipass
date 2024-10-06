@@ -56,7 +56,16 @@ Entropy: 133.21 bits
 
 ### Generate a Password according to a pattern
 
-You can generate a new password using the `GenFromPattern` function. You can specify how many words you want in the passphrase, and the function returns the passphrase and its total entropy.
+You can generate a new password using the `GenFromPattern` function. You can specify how many words, symbols, digits you want in the passphrase by defining a pattern.
+
+Possible patterns are formed by combining:
+- 'w' lowercase word, 'W' for uppercase word.
+- 'c' a lowercase character, 'C' a uppercase character.
+- 's' symbol, 'd' digit.
+- 
+other symbols are interpolated in the final password and to interpolate one of the reserved symbols use escaping with "\".
+
+The function returns the passphrase and its total entropy.
 
 Example:
 
@@ -67,14 +76,7 @@ import (
 	"fmt"
 	"github.com/francescoalemanno/cryptipass"
 )
-/*
-	possible patterns are formed by combining:
-    - 'w' lowercase word, 'W' for uppercase word.
-    - 'c' a lowercase character, 'C' a uppercase character.
-    - 's' symbol, 'd' digit.
-	other symbols are interpolated in the final password.
-	To interpolate one of the reserved symbols use escaping with "\".
-*/
+
 func main() {
 	cp := cryptipass.NewInstance()
 	passphrase, entropy := cp.GenFromPattern("W-w.cccc.CCCC(ss)[20dd]")
