@@ -8,14 +8,6 @@ import (
 
 func main() {
 	cp := cryptipass.NewInstanceFromList(custom_list)
-
-	/*
-		//Enable this piece to replace the length statistics with the more reasonable default
-		//it will improve entropy
-			tp := cryptipass.NewInstance()
-			(*cp.JumpTable)["LENGTHS"] = (*tp.JumpTable)["LENGTHS"]
-	*/
-
 	avgH := 0.0
 	tot := 0.0
 	for i := range 200000 {
