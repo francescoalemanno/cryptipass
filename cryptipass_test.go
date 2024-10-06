@@ -91,19 +91,6 @@ func TestGenPassphrase(t *testing.T) {
 	}
 }
 
-func TestGenWord(t *testing.T) {
-	g := cryptipass.NewInstance()
-	word, entropy := g.GenWord('W')
-
-	if len(word) == 0 {
-		t.Error("Expected a word, got an empty string")
-	}
-
-	if entropy < 0 {
-		t.Errorf("Expected entropy to be greater than 0, got %f", entropy)
-	}
-}
-
 func TestPickNext(t *testing.T) {
 	g := cryptipass.NewInstance()
 	seed := "te"

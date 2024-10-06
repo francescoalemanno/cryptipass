@@ -1,6 +1,8 @@
-// Package cryptipass provides a passphrase generation and entropy calculation
-// system using wordlists and patterns. It is designed to ensure randomness
-// while offering flexibility in the structure of generated passwords.
+// Package cryptipass provides a flexible and secure password generation system that creates pronounceable passphrases based on a probabilistic model.
+//
+// It is designed for security-conscious developers who need to generate strong, memorable passwords.
+//
+// The package supports custom word lists and pattern-based password generation, allowing users to tailor the output to their needs.
 package cryptipass
 
 import (
@@ -13,9 +15,26 @@ import (
 	"strings"
 )
 
-// Transition represents the probability distribution of rune sequences within
-// words. It stores the runes, their counts, the total occurrences, and the
-// entropy of the sequence.
+// Transition represents a character transition model for generating
+// pronounceable passwords. It encapsulates the statistical data
+// necessary to understand the frequency and distribution of
+// character transitions based on a given set of tokens.
+//
+// Fields:
+//   - Runes:   A slice of runes representing characters that can follow
+//     a given state in the transition matrix.
+//   - Counts:  A slice of integers where each integer represents the
+//     cumulative frequency count of the corresponding rune in
+//     the Runes slice.
+//   - Total:   An integer representing the total count of transitions
+//     for the current state, used for entropy calculations.
+//   - Entropy: A float64 representing the entropy of the transitions,
+//     calculated using the Shannon entropy formula to provide
+//     a measure of uncertainty or randomness in the transitions.
+//
+// The Transition struct is used internally to facilitate the generation
+// of secure and unpredictable passwords by modeling the relationships
+// between characters in the generated output.
 type Transition struct {
 	Runes   []rune
 	Counts  []int
@@ -23,6 +42,32 @@ type Transition struct {
 	Entropy float64
 }
 
+// distill processes a list of words and builds a probabilistic transition matrix
+// that models the relationships between successive characters within those words.
+//
+// The transition matrix is a map where each key represents a string prefix (up to two characters),
+// and the value is a Transition struct that tracks the possible next characters, their frequencies,
+// and the total number of transitions.
+//
+// This matrix enables generating new sequences of characters based on learned patterns,
+// making it useful for generating pronounceable words.
+//
+// The function returns a map of transitions that can be used for creating passphrases or similar text generation.
+//
+// Parameters:
+//
+//	tokens - a slice of strings representing the input tokens from which to distill the transition matrix.
+//
+// Returns:
+//
+//	map[string]Transition - a map where each key is a string prefix and each value is a Transition struct.
+//
+// Example:
+//
+//	tokens := []string{"hello", "world", "golang"}
+//	transitions := distill(tokens)
+//
+//	// 'transitions' will contain a probabilistic model for generating new character sequences.
 func distill(tokens []string) map[string]Transition {
 	transition_matrix := make(map[string]map[rune]int)
 	put := func(str string, r rune) {
@@ -77,9 +122,28 @@ type generator struct {
 	JumpTable *map[string]Transition
 }
 
-// NewInstanceFromList returns a new passphrase generator using a custom
-// list of tokens (words). It uses the ChaCha8 random number generator seeded
-// by cryptographically secure random bytes.
+// NewInstanceFromList creates a new instance of the cryptipass password generator
+// using a custom word list. The word list should consist of tokens (words) that
+// will be used to construct pronounceable passphrases.
+//
+// The function returns a pointer to a generator instance, which can be used
+// to generate passphrases with the provided word list.
+//
+// Example usage:
+//
+//	tokens := []string{"alpha", "bravo", "charlie", "delta"}
+//	gen := cryptipass.NewInstanceFromList(tokens)
+//	passphrase, entropy := gen.GenPassphrase(4)
+//
+// Parameters:
+//   - tokens []string: A list of words (tokens) from which the generator will
+//     build passphrases.
+//
+// Returns:
+//   - *generator: A new generator instance using the custom word list.
+//
+// If the random seed cannot be read from the crypto/rand source, the function
+// will log a fatal error and terminate the application.
 func NewInstanceFromList(tokens []string) *generator {
 	seed := [32]byte{}
 	n, err := cr.Reader.Read(seed[:])
@@ -95,14 +159,50 @@ func NewInstanceFromList(tokens []string) *generator {
 	return g
 }
 
-// NewInstance returns a new passphrase generator initialized with a default
-// wordlist. It uses the ChaCha8 random number generator for randomization.
+// NewInstance creates a new generator using a default word list to
+// produce pronounceable, secure passphrases.
+//
+// The generator uses a probabilistic transition model, initialized with a pre-defined
+// set of tokens to construct pronounceable passwords based on patterns of letter transitions.
+//
+// Example usage:
+//
+//	gen := cryptipass.NewInstance()
+//	passphrase, entropy := gen.GenPassphrase(4)
+//
+// This will create a 4-word passphrase with high entropy.
+//
+// NewInstance is ideal for general use cases where you want to generate secure
+// passphrases with a focus on ease of pronunciation and memorization.
 func NewInstance() *generator {
 	return NewInstanceFromList(eff_short_word_list_2_0)
 }
 
-// GenPassphrase generates a passphrase consisting of the specified number of
-// words. It returns the passphrase and its total entropy value.
+// GenPassphrase generates a passphrase composed of a specified number of words.
+//
+// Each word is randomly selected based on transition probabilities, ensuring
+// pronounceability while maintaining strong entropy. The words are separated by
+// dots to improve readability and security (similar to the Diceware method).
+//
+// This method uses a cryptographically secure random number generator (via `crypto/rand`)
+// for enhanced security.
+//
+// Parameters:
+//   - words: The number of words to include in the passphrase.
+//
+// Returns:
+//   - passphrase (string): The generated passphrase, with words separated by dots.
+//   - entropy (float64): The total entropy of the passphrase, measured in bits.
+//
+// Example:
+//
+//	gen := cryptipass.NewInstance()
+//	passphrase, entropy := gen.GenPassphrase(4)
+//	fmt.Println("Passphrase:", passphrase)
+//	fmt.Println("Entropy:", entropy)
+//
+// The entropy value reflects the randomness of the passphrase. The higher the entropy,
+// the more secure the passphrase is, making it difficult for attackers to guess.
 func (g *generator) GenPassphrase(words uint64) (string, float64) {
 	wordvec := []string{}
 	total_entropy := 0.0
@@ -114,12 +214,32 @@ func (g *generator) GenPassphrase(words uint64) (string, float64) {
 	return strings.Join(wordvec, "."), total_entropy
 }
 
-// GenFromPattern generates a passphrase following the specified pattern.
-// Supported pattern symbols are:
-//   - 'w', 'W': words (lowercase or capitalized)
-//   - 'd': digits
-//   - 's': symbols
-//   - 'c', 'C': characters (lowercase or uppercase)
+// GenFromPattern generates a password or passphrase based on a user-defined pattern.
+//
+// The pattern string can include special placeholders that dictate the structure
+// of the generated password. Each placeholder corresponds to a specific type of character.
+// The supported placeholders are:
+//
+//   - 'w' : Generates a word in lowercase.
+//   - 'W' : Generates a word with the first letter capitalized.
+//   - 'd' : Generates a random digit (0-9).
+//   - 's' : Generates a random symbol from a predefined set (@#!$%&=?^+-*").
+//   - 'c' : Generates a random lowercase letter.
+//   - 'C' : Generates a random uppercase letter.
+//   - '\\' : Escapes the next character in the pattern, allowing you to include literal values.
+//
+// Example usage:
+//
+//	g := cryptipass.NewInstance()
+//	passphrase, entropy := g.GenFromPattern("Ww-d-s")
+//	fmt.Println("Generated passphrase:", passphrase)
+//	fmt.Println("Entropy:", entropy)
+//
+// This will generate a passphrase consisting of a capitalized word, a lowercase word,
+// a digit, and a symbol, such as "Alpha-bravo-7-$".
+//
+// The function returns the generated password or passphrase and the estimated entropy
+// in bits, which quantifies its strength.
 func (g *generator) GenFromPattern(pattern string) (string, float64) {
 	passphrase := ""
 	entropy := 0.0
@@ -135,7 +255,7 @@ func (g *generator) GenFromPattern(pattern string) (string, float64) {
 			pushnext = true
 			continue
 		case 'w', 'W':
-			head, h_head := g.GenWord(c)
+			head, h_head := g.genword(c)
 			passphrase = passphrase + head
 			entropy = entropy + h_head
 		case 'd':
@@ -164,9 +284,27 @@ func (g *generator) GenFromPattern(pattern string) (string, float64) {
 	return passphrase, entropy
 }
 
-// GenWord generates a word based on the character pattern (e.g., 'w', 'W').
-// It returns the generated word and its entropy.
-func (g *generator) GenWord(c rune) (string, float64) {
+// genword generates a random word using the internal transition matrix and length model.
+// The generated word can either be lowercase or capitalized based on the input rune.
+//
+// The function uses a probabilistic model to pick the initial character and
+// iteratively selects subsequent characters based on prior context, ensuring
+// the word is pronounceable. It also chooses the word length from a distribution
+// based on real-world token data.
+//
+// If the input rune is 'W', the generated word will be capitalized, while
+// a lowercase 'w' will generate a lowercase word.
+//
+// Returns:
+//   - A string representing the generated word.
+//   - A float64 representing the total entropy of the generated word.
+//
+// Example:
+//
+//	g := cryptipass.NewInstance()
+//	word, entropy := g.genword('w')
+//	fmt.Printf("Generated Word: %s, Entropy: %.2f\n", word, entropy)
+func (g *generator) genword(c rune) (string, float64) {
 	head, h_head := g.PickNext("")
 	leng, h_leng := g.PickLength()
 	if c == 'W' {
@@ -187,14 +325,35 @@ type CertifyResult struct {
 	StdDev   float64
 }
 
-// Certify verifies the randomness and entropy of the generated passphrases.
-// It runs multiple iterations to certify that the empirical entropy matches the nominal entropy.
+// Certify evaluates the entropy and randomness of passphrases generated by a given function.
+//
+// The Certify function runs a comprehensive statistical analysis on the provided password generator
+// function `Gen` by simulating trials of passphrase generation. It computes the average entropy
+// and monitors the gap between the expected entropy and the actual entropy based on the frequency
+// distribution of passphrases generated.
+//
+// It returns a CertifyResult struct, which includes:
+// - NominalH: The nominal entropy of the passphrases, averaged over all trials.
+// - Gap: The difference between the nominal entropy and the actual observed entropy.
+// - StdDev: The standard deviation of the nominal entropy across trials, giving a measure of variability.
+//
+// This function is useful for verifying the strength and unpredictability of passphrases generated by
+// custom implementations of password generators.
+//
+// Parameters:
+// - Gen: A function that generates a passphrase and returns it alongside its entropy.
+//
+// Returns:
+//
+// - CertifyResult: A struct containing the analysis of the generator's entropy.
+//
+// This process continues until the gap between nominal and actual entropy is small enough,
+// or a sufficient number of trials has been conducted.
 func Certify(Gen func() (string, float64)) CertifyResult {
 	nominal_H := 0.0
 	nominal_H2 := 0.0
 	cnt_nom_H := 0.0
 	for range 1000 {
-
 		_, nh := Gen()
 		nominal_H += nh
 		nominal_H2 += nh * nh
@@ -232,9 +391,37 @@ func Certify(Gen func() (string, float64)) CertifyResult {
 
 }
 
-// PickNext selects the next rune in the sequence based on the previous seed.
-// It uses the stored transition matrix to ensure a smooth distribution of
-// rune occurrences, retrying until a valid match is found.
+// PickNext selects the next rune based on the current seed (context) and
+// a probabilistic model derived from the transition matrix. It generates a
+// rune that is most likely to follow the given string context `seed`,
+// where `seed` can be up to two characters long.
+//
+// If the `seed` is too short or does not match any known transitions in the
+// matrix, it falls back to using shorter prefixes until a match is found.
+// The function retries with successively smaller parts of the `seed`
+// until a suitable transition is discovered.
+//
+// The function returns the selected rune as a string and its entropy value.
+//
+// Parameters:
+//   - seed: A string representing the current context (up to 2 characters).
+//
+// Returns:
+//
+//	string: The next rune, represented as a string.
+//	float64: The entropy value associated with the selected rune.
+//
+// Example:
+//
+//	seed := "th"
+//	nextRune, entropy := generator.PickNext(seed)
+//	fmt.Printf("Next rune: %s, Entropy: %.2f\n", nextRune, entropy)
+//
+// Panic:
+//
+//	This function panics if the transition matrix is not initialized or
+//	if the selection process encounters an unexpected error while choosing
+//	the next rune.
 func (g *generator) PickNext(seed string) (string, float64) {
 	L := min(len(seed), 2)
 	tok := strings.ToLower(seed[len(seed)-L:])
@@ -252,9 +439,25 @@ retry:
 	goto retry
 }
 
-// PickLength selects the length of the next generated word based on the
-// transition matrix of word lengths. It ensures the generated word has an
-// appropriate length and entropy.
+// PickLength selects a word length based on a pre-computed probability distribution
+// from the transition matrix. It uses a cryptographically secure random number generator
+// to ensure unpredictable outcomes.
+//
+// It returns an integer representing the word length and a float64 value representing
+// the entropy associated with that selection.
+//
+// The function panics if an unexpected random number is encountered.
+//
+// Example:
+//
+//	gen := cryptipass.NewInstance()
+//	length, entropy := gen.PickLength()
+//	fmt.Printf("Generated word length: %d, Entropy: %.2f\n", length, entropy)
+//
+// Returns:
+//
+//	int     - Word length selected from the transition matrix.
+//	float64 - Entropy of the selected length based on its likelihood.
 func (g *generator) PickLength() (int, float64) {
 	tr, ok := (*g.JumpTable)["LENGTHS"]
 	if ok {
