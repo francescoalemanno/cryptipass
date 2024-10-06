@@ -76,7 +76,6 @@ func TestCert(t *testing.T) {
 
 }
 
-// TestGenPassphrase tests the GenPassphrase function for generating a passphrase and validating its length.
 func TestGenPassphrase(t *testing.T) {
 	g := cryptipass.NewInstance()
 	words := uint64(5)
@@ -92,7 +91,6 @@ func TestGenPassphrase(t *testing.T) {
 	}
 }
 
-// TestGenWord tests that GenWord generates a word and returns a positive entropy value.
 func TestGenWord(t *testing.T) {
 	g := cryptipass.NewInstance()
 	word, entropy := g.GenWord('W')
@@ -106,7 +104,6 @@ func TestGenWord(t *testing.T) {
 	}
 }
 
-// TestPickNext tests that PickNext generates a valid character appended to the seed and returns entropy.
 func TestPickNext(t *testing.T) {
 	g := cryptipass.NewInstance()
 	seed := "te"
@@ -120,7 +117,6 @@ func TestPickNext(t *testing.T) {
 	}
 }
 
-// TestPickLength tests that PickLength generates a valid word length and returns entropy.
 func TestPickLength(t *testing.T) {
 	g := cryptipass.NewInstance()
 	length, entropy := g.PickLength()
@@ -134,7 +130,6 @@ func TestPickLength(t *testing.T) {
 	}
 }
 
-// TestGenFromPattern tests that GenFromPattern generates a word of a specific length and returns a positive entropy value.
 func TestGenFromPattern(t *testing.T) {
 	g := cryptipass.NewInstance()
 	pattern := "Cccc.cccc@dd"
