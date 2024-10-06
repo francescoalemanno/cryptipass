@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"math"
 	"os"
-	"slices"
 	"strings"
 	"text/tabwriter"
 
@@ -32,29 +31,17 @@ func main() {
 	flag.Parse()
 	pattern := *f_pattern
 
-	pws := []Passphrase{}
-	for range *passwords {
-		F, H := g.GenFromPattern(pattern)
-		pws = append(pws, Passphrase{F: F, H: H})
-	}
-
-	slices.SortFunc(pws, func(a, b Passphrase) int {
-		if a.F > b.F {
-			return 1
-		} else if a.F < b.F {
-			return -1
-		}
-		return 0
-	})
-
 	w := tabwriter.NewWriter(os.Stdout, 1, 1, 4, ' ', 0)
 	fmt.Fprintln(w, "Passphrase\tLog10(Guesses)\tLog2Entropy\t  Strength")
 	fmt.Fprintln(w, " \t \t \t ")
-	for _, p := range pws {
-		log10guess := (p.H - 1) / math.Log2(10)
+	N := *passwords
+	for N > 0 {
+		F, H := g.GenFromPattern(pattern)
+		N--
+		log10guess := (H - 1) / math.Log2(10)
 		meterbar := int(min(log10guess/2+0.5, 12))
 		meter := "[" + strings.Repeat("=", meterbar) + strings.Repeat(".", 12-meterbar) + "]"
-		fmt.Fprintf(w, "%v\t   %.2f\t   %.2f\t%v\n", p.F, log10guess, p.H, meter)
+		fmt.Fprintf(w, "%v\t   %.2f\t   %.2f\t%v\n", F, log10guess, H, meter)
 	}
 	w.Flush()
 
