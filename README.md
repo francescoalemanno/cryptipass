@@ -83,7 +83,7 @@ You can customize the word style by creating a new instance from your own token 
 
 ```go
 myTokens := []string{"alpha", "bravo", "charlie", "delta"}
-gen := cryptipass.NewInstanceFromList(myTokens)
+gen := cryptipass.NewCustomInstance(myTokens, 1) //instead of 1, try 2,3,4 to see the tradeoff between fidelity to the wordlist and entropy gain.
 
 pass, entropy := gen.GenPassphrase(3)
 fmt.Println("Custom Passphrase:", pass) //e.g. alphar.bravo.delta

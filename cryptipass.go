@@ -15,29 +15,33 @@ import (
 	"strings"
 )
 
-// NewInstanceFromList creates a new instance of the cryptipass password generator
+// NewCustomInstance creates a new instance of the cryptipass password generator
 // using a custom word list. The word list should consist of tokens (words) that
 // will be used to construct pronounceable passphrases.
 //
 // The function returns a pointer to a generator instance, which can be used
 // to generate passphrases with the provided word list.
 //
+// The generator uses a probabilistic transition model, initialized with a pre-defined
+// set of tokens to construct pronounceable passwords based on patterns of letter transitions.
+//
 // Example usage:
 //
 //	tokens := []string{"alpha", "bravo", "charlie", "delta"}
-//	gen := cryptipass.NewInstanceFromList(tokens)
+//	gen := cryptipass.NewCustomInstance(tokens, 1)
 //	passphrase, entropy := gen.GenPassphrase(4)
 //
 // Parameters:
-//   - tokens []string: A list of words (tokens) from which the generator will
+//   - tokens      []string: A list of words (tokens) from which the generator will
 //     build passphrases.
+//   - chain_depth int: The correlation length used to distill the probabilistic model.
 //
 // Returns:
 //   - *generator: A new generator instance using the custom word list.
 //
 // If the random seed cannot be read from the crypto/rand source, the function
 // will log a fatal error and terminate the application.
-func NewInstanceFromList(tokens []string) *generator {
+func NewCustomInstance(tokens []string, chain_depth int) *generator {
 	seed := [32]byte{}
 	n, err := cr.Reader.Read(seed[:])
 	if err != nil || n != 32 {
@@ -46,17 +50,14 @@ func NewInstanceFromList(tokens []string) *generator {
 	rng := rand.New(rand.NewChaCha8(seed))
 	g := new(generator)
 	g.Rng = rng
-	jtbl := distill(tokens)
+	jtbl := distill(tokens, chain_depth)
 	g.jump_table = &jtbl
-
+	g.depth = chain_depth
 	return g
 }
 
 // NewInstance creates a new generator using a default word list to
 // produce pronounceable, secure passphrases.
-//
-// The generator uses a probabilistic transition model, initialized with a pre-defined
-// set of tokens to construct pronounceable passwords based on patterns of letter transitions.
 //
 // Example usage:
 //
@@ -68,7 +69,12 @@ func NewInstanceFromList(tokens []string) *generator {
 // NewInstance is ideal for general use cases where you want to generate secure
 // passphrases with a focus on ease of pronunciation and memorization.
 func NewInstance() *generator {
-	return NewInstanceFromList(eff_short_word_list_2_0)
+	return NewCustomInstance(WordListEFF(), 3)
+}
+
+// NewInstanceHE is a higher entropy version of NewInstance, it trades off pronounceability for an higher entropy margin, for a fuller documentation look at `NewInstance`.
+func NewInstanceHE() *generator {
+	return NewCustomInstance(WordListEFF(), 2)
 }
 
 // GenPassphrase generates a passphrase composed of a specified number of words.
@@ -188,8 +194,7 @@ func (g *generator) GenFromPattern(pattern string) (string, float64) {
 
 // GenNextToken selects the next token based on the current seed (context) and
 // a probabilistic model derived from the transition matrix. It generates a
-// token that is most likely to follow the given string context `seed`,
-// where `seed` can be up to two characters long.
+// token that is most likely to follow the given string context `seed`.
 //
 // If the `seed` is too short or does not match any known transitions in the
 // matrix, it falls back to using shorter prefixes until a match is found.
@@ -199,7 +204,7 @@ func (g *generator) GenFromPattern(pattern string) (string, float64) {
 // The function returns the selected token as a string and its entropy value.
 //
 // Parameters:
-//   - seed: A string representing the current context (up to 2 characters).
+//   - seed: A string representing the current context.
 //
 // Returns:
 //
@@ -218,7 +223,7 @@ func (g *generator) GenFromPattern(pattern string) (string, float64) {
 //	if the selection process encounters an unexpected error while choosing
 //	the next token.
 func (g *generator) GenNextToken(seed string) (string, float64) {
-	L := min(len(seed), 2)
+	L := min(len(seed), g.depth)
 	tok := strings.ToLower(seed[len(seed)-L:])
 retry:
 	if tr, ok := (*g.jump_table)[tok]; ok {

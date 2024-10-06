@@ -6,6 +6,16 @@ import (
 	"strings"
 )
 
+// generator is a structure that holds the state of the password
+// generator instance. It includes a random number generator (Rng)
+// and a jump table (JumpTable) which defines character transition
+// probabilities for generating secure, pronounceable passwords.
+type generator struct {
+	Rng        *rand.Rand // Rng remains public to allow custom RNGS
+	jump_table *map[string]distribution
+	depth      int
+}
+
 // distribution represents a character transition model for generating
 // pronounceable passwords. It encapsulates the statistical data
 // necessary to understand the frequency and distribution of
@@ -24,8 +34,7 @@ import (
 //     a measure of uncertainty or randomness in the transitions.
 //
 // The distribution struct is used internally to facilitate the generation
-// of secure and unpredictable passwords by modeling the relationships
-// between characters in the generated output.
+// of passwords by modeling the relationships between characters in the generated output.
 type distribution struct {
 	tokens  []string
 	counts  []int
@@ -48,6 +57,7 @@ type distribution struct {
 // Parameters:
 //
 //	tokens - a slice of strings representing the input tokens from which to distill the transition matrix.
+//	depth - the correlation length used to generate the transition matrix.
 //
 // Returns:
 //
@@ -59,11 +69,11 @@ type distribution struct {
 //	transitions := distill(tokens)
 //
 //	// 'transitions' will contain a probabilistic model for generating new character sequences.
-func distill(tokens []string) map[string]distribution {
-	transition_matrix := make(map[string]map[rune]int)
-	put := func(str string, r rune) {
+func distill(tokens []string, depth int) map[string]distribution {
+	transition_matrix := make(map[string]map[string]int)
+	put := func(str string, r string) {
 		if transition_matrix[str] == nil {
-			transition_matrix[str] = make(map[rune]int)
+			transition_matrix[str] = make(map[string]int)
 		}
 		transition_matrix[str][r]++
 	}
@@ -72,14 +82,12 @@ func distill(tokens []string) map[string]distribution {
 		if len(R) == 0 {
 			continue
 		}
-		put("LENGTHS", rune(len(R)))
-		put("", R[0])
-		if len(R) == 1 {
-			continue
+		put("LENGTHS", string(rune(len(R))))
+		for i := 0; i < min(depth, len(R)); i++ {
+			put(string(R[:i]), string(R[i]))
 		}
-		put(string(R[0]), R[1])
-		for i := 0; i < len(R)-2; i++ {
-			put(string(R[i])+string(R[i+1]), R[i+2])
+		for i := 0; i < len(R)-depth; i++ {
+			put(string(R[i:i+depth]), string(R[i+depth]))
 		}
 	}
 	dist_trans_matrix := make(map[string]distribution)
@@ -106,13 +114,4 @@ func distill(tokens []string) map[string]distribution {
 		dist_trans_matrix[k] = tr
 	}
 	return dist_trans_matrix
-}
-
-// generator is a structure that holds the state of the password
-// generator instance. It includes a random number generator (Rng)
-// and a jump table (JumpTable) which defines character transition
-// probabilities for generating secure, pronounceable passwords.
-type generator struct {
-	Rng        *rand.Rand // Rng remains public to allow custom RNGS
-	jump_table *map[string]distribution
 }
