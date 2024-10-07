@@ -36,11 +36,11 @@ func (g *Generator) assert_ready() {
 //   - counts:  A slice of integers where each integer represents the
 //     cumulative frequency count of the corresponding token in
 //     the tokens slice.
-//   - total:   An integer representing the total count of transitions
-//     for the current state, used for entropy calculations.
-//   - entropy: A float64 representing the entropy of the transitions,
+//   - entropies: A slice of float64 representing the entropy of the transitions,
 //     calculated using the Shannon entropy formula to provide
 //     a measure of uncertainty or randomness in the transitions.
+//   - total:   An integer representing the total count of transitions
+//     for the current state, used for entropy calculations.
 //
 // The distribution struct is used internally to facilitate the generation
 // of passwords by modeling the relationships between characters in the generated output.
