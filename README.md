@@ -45,7 +45,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/francescoalemanno/cryptipass"
+	"github.com/francescoalemanno/cryptipass/v2"
 )
 
 func main() {
