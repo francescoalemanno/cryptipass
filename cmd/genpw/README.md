@@ -29,7 +29,7 @@ Ensure `$GOPATH/bin` is added to your `PATH` to run the command directly.
 You can generate a set of passwords with the desired pattern using the following command:
 
 ```bash
-genpw -p [PATTERN] -n [NUMBER OF PASSWORDS]
+genpw -p [PATTERN] -n [NUMBER OF PASSWORDS (default 6)] -d [CHAIN DEPTH (default 2)]
 ```
 
 ### Pattern Options
