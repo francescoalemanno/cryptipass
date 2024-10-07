@@ -246,7 +246,7 @@ func (g *Generator) GenNextToken(seed string) (string, float64) {
 			N := g.Rng.IntN(tr.total)
 			for i, v := range tr.counts {
 				if N < v {
-					return tr.tokens[i], tr.entropy
+					return tr.tokens[i], tr.entropies[i]
 				}
 			}
 			panic("unexpected")
@@ -280,7 +280,7 @@ func (g *Generator) GenWordLength() (int, float64) {
 		N := g.Rng.IntN(tr.total)
 		for i, v := range tr.counts {
 			if N < v {
-				return int(tr.tokens[i][0]), tr.entropy
+				return int(tr.tokens[i][0]), tr.entropies[i]
 			}
 		}
 	}

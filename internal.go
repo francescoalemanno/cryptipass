@@ -45,10 +45,10 @@ func (g *Generator) assert_ready() {
 // The distribution struct is used internally to facilitate the generation
 // of passwords by modeling the relationships between characters in the generated output.
 type distribution struct {
-	tokens  []string
-	counts  []int
-	total   int
-	entropy float64
+	tokens    []string
+	counts    []int
+	entropies []float64
+	total     int
 }
 
 // distill processes a list of words and builds a probabilistic transition matrix
@@ -105,7 +105,6 @@ func distill(tokens []string, depth int) map[string]distribution {
 		for _, freq := range rfreq {
 			C += freq
 		}
-		H := 0.0
 		tr := distribution{}
 		tr.counts = make([]int, 0)
 
@@ -113,13 +112,12 @@ func distill(tokens []string, depth int) map[string]distribution {
 		cum := 0
 		for ru, freq := range rfreq {
 			p := float64(freq) / float64(C)
-			H -= math.Log2(p) * p
 			cum += freq
 			tr.counts = append(tr.counts, cum)
 			tr.tokens = append(tr.tokens, string(ru))
+			tr.entropies = append(tr.entropies, math.Log2(1.0/p))
 		}
 		tr.total = C
-		tr.entropy = H
 		dist_trans_matrix[k] = tr
 	}
 	return dist_trans_matrix
