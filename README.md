@@ -1,8 +1,8 @@
 # cryptipass
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/francescoalemanno/cryptipass)](https://goreportcard.com/report/github.com/francescoalemanno/cryptipass)
+[![Go Report Card](https://goreportcard.com/badge/github.com/francescoalemanno/cryptipass/v2)](https://goreportcard.com/report/github.com/francescoalemanno/cryptipass/v2)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![GoDoc](https://godoc.org/github.com/francescoalemanno/cryptipass?status.svg)](https://pkg.go.dev/github.com/francescoalemanno/cryptipass)
+[![GoDoc](https://godoc.org/github.com/francescoalemanno/cryptipass/v2?status.svg)](https://pkg.go.dev/github.com/francescoalemanno/cryptipass/v2)
 
 **cryptipass** is a flexible, high-entropy passphrase generator that creates secure, pronounceable passwords using a probabilistic model. It's designed for security-conscious developers who need memorable yet strong passphrases.
 
@@ -94,7 +94,7 @@ fmt.Println("Entropy:", entropy)
 
 ## Documentation
 
-Full API documentation is available at [GoDoc](https://pkg.go.dev/github.com/francescoalemanno/cryptipass).
+Full API documentation is available at [GoDoc](https://pkg.go.dev/github.com/francescoalemanno/cryptipass/v2).
 
 ---
 
