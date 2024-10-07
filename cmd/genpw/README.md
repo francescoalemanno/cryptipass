@@ -17,7 +17,7 @@
 To install **genpw**, use `go install`:
 
 ```bash
-go install github.com/francescoalemanno/cryptipass/cmd/genpw@latest
+go install github.com/francescoalemanno/cryptipass/v2/cmd/genpw@latest
 ```
 
 Ensure `$GOPATH/bin` is added to your `PATH` to run the command directly.
