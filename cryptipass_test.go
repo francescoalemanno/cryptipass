@@ -194,3 +194,13 @@ func TestGenFromPattern(t *testing.T) {
 		t.Errorf("Expected entropy to be greater than 0, got %f", entropy)
 	}
 }
+
+func TestPanic(t *testing.T) {
+	defer func() {
+		if r := recover(); r == nil {
+			t.Errorf("The code did not panic")
+		}
+	}()
+	g := cryptipass.Generator{} //its jump-table is uninitialized
+	g.GenPassphrase(2)          //this must panic
+}

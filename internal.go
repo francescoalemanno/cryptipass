@@ -6,14 +6,23 @@ import (
 	"strings"
 )
 
-// generator is a structure that holds the state of the password
-// generator instance. It includes a random number generator (Rng)
+// Generator is a structure that holds the state of the password
+// generator instance. It includes a random number Generator (Rng)
 // and a jump table (JumpTable) which defines character transition
-// probabilities for generating secure, pronounceable passwords.
-type generator struct {
+// probabilities.
+type Generator struct {
 	Rng        *rand.Rand // Rng remains public to allow custom RNGS
 	jump_table map[string]distribution
 	depth      int
+}
+
+func (g *Generator) isready() bool {
+	return g.Rng != nil && len(g.jump_table) != 0
+}
+func (g *Generator) assert_ready() {
+	if !g.isready() {
+		panic("generator must be initialised using the NewIstance or NewCustomInstance function")
+	}
 }
 
 // distribution represents a character transition model for generating

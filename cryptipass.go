@@ -41,9 +41,9 @@ import (
 //
 // If the random seed cannot be read from the crypto/rand source, the function
 // will log a fatal error and terminate the application.
-func NewCustomInstance(tokens []string, chain_depth int) *generator {
+func NewCustomInstance(tokens []string, chain_depth int) *Generator {
 	rng := new_chacha8_rng()
-	g := new(generator)
+	g := new(Generator)
 	g.Rng = rng
 	g.jump_table = distill(tokens, chain_depth)
 	g.depth = chain_depth
@@ -72,15 +72,15 @@ func new_chacha8_rng() *rand.Rand {
 //
 // NewInstance is ideal for general use cases where you want to generate secure
 // passphrases with a focus on ease of pronunciation and memorization.
-func NewInstance() *generator {
-	g := new(generator)
+func NewInstance() *Generator {
+	g := new(Generator)
 	g.Rng = new_chacha8_rng()
 	g.jump_table = global_jump_table.jump_table
 	g.depth = global_jump_table.depth
 	return g
 }
 
-var global_jump_table generator
+var global_jump_table Generator
 
 func init() {
 	global_jump_table.depth = 3
@@ -112,7 +112,8 @@ func init() {
 //
 // The entropy value reflects the randomness of the passphrase. The higher the entropy,
 // the more secure the passphrase is, making it difficult for attackers to guess.
-func (g *generator) GenPassphrase(words uint64) (string, float64) {
+func (g *Generator) GenPassphrase(words uint64) (string, float64) {
+	g.assert_ready()
 	wordvec := []string{}
 	total_entropy := 0.0
 	for range words {
@@ -149,7 +150,8 @@ func (g *generator) GenPassphrase(words uint64) (string, float64) {
 //
 // The function returns the generated password or passphrase and the estimated entropy
 // in bits, which quantifies its strength.
-func (g *generator) GenFromPattern(pattern string) (string, float64) {
+func (g *Generator) GenFromPattern(pattern string) (string, float64) {
+	g.assert_ready()
 	passphrase := ""
 	entropy := 0.0
 	pushnext := false
@@ -232,7 +234,8 @@ func (g *generator) GenFromPattern(pattern string) (string, float64) {
 //	This function panics if the transition matrix is not initialized or
 //	if the selection process encounters an unexpected error while choosing
 //	the next token.
-func (g *generator) GenNextToken(seed string) (string, float64) {
+func (g *Generator) GenNextToken(seed string) (string, float64) {
+	g.assert_ready()
 	L := min(len(seed), g.depth)
 	tok := strings.ToLower(seed[len(seed)-L:])
 	for {
@@ -268,7 +271,8 @@ func (g *generator) GenNextToken(seed string) (string, float64) {
 //
 //	int     - Word length selected from the transition matrix.
 //	float64 - Entropy of the selected length based on its likelihood.
-func (g *generator) GenWordLength() (int, float64) {
+func (g *Generator) GenWordLength() (int, float64) {
+	g.assert_ready()
 	if tr, ok := g.jump_table["LENGTHS"]; ok {
 		N := g.Rng.IntN(tr.total)
 		for i, v := range tr.counts {
