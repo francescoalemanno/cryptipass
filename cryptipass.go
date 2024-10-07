@@ -42,18 +42,22 @@ import (
 // If the random seed cannot be read from the crypto/rand source, the function
 // will log a fatal error and terminate the application.
 func NewCustomInstance(tokens []string, chain_depth int) *generator {
+	rng := new_chacha8_rng()
+	g := new(generator)
+	g.Rng = rng
+	g.jump_table = distill(tokens, chain_depth)
+	g.depth = chain_depth
+	return g
+}
+
+func new_chacha8_rng() *rand.Rand {
 	seed := [32]byte{}
 	n, err := cr.Reader.Read(seed[:])
 	if err != nil || n != 32 {
 		log.Fatal(n, err, seed)
 	}
 	rng := rand.New(rand.NewChaCha8(seed))
-	g := new(generator)
-	g.Rng = rng
-	jtbl := distill(tokens, chain_depth)
-	g.jump_table = &jtbl
-	g.depth = chain_depth
-	return g
+	return rng
 }
 
 // NewInstance creates a new generator using a default word list to
@@ -69,12 +73,18 @@ func NewCustomInstance(tokens []string, chain_depth int) *generator {
 // NewInstance is ideal for general use cases where you want to generate secure
 // passphrases with a focus on ease of pronunciation and memorization.
 func NewInstance() *generator {
-	return NewCustomInstance(WordListEFF(), 3)
+	g := new(generator)
+	g.Rng = new_chacha8_rng()
+	g.jump_table = global_jump_table.jump_table
+	g.depth = global_jump_table.depth
+	return g
 }
 
-// NewInstanceHE is a higher entropy version of NewInstance, it trades off pronounceability for an higher entropy margin, for a fuller documentation look at `NewInstance`.
-func NewInstanceHE() *generator {
-	return NewCustomInstance(WordListEFF(), 2)
+var global_jump_table generator
+
+func init() {
+	global_jump_table.depth = 3
+	global_jump_table.jump_table = distill(WordListEFF(), 3)
 }
 
 // GenPassphrase generates a passphrase composed of a specified number of words.
@@ -225,18 +235,18 @@ func (g *generator) GenFromPattern(pattern string) (string, float64) {
 func (g *generator) GenNextToken(seed string) (string, float64) {
 	L := min(len(seed), g.depth)
 	tok := strings.ToLower(seed[len(seed)-L:])
-retry:
-	if tr, ok := (*g.jump_table)[tok]; ok {
-		N := g.Rng.IntN(tr.total)
-		for i, v := range tr.counts {
-			if N < v {
-				return tr.tokens[i], tr.entropy
+	for {
+		if tr, ok := g.jump_table[tok]; ok {
+			N := g.Rng.IntN(tr.total)
+			for i, v := range tr.counts {
+				if N < v {
+					return tr.tokens[i], tr.entropy
+				}
 			}
+			panic("unexpected")
 		}
-		panic("unexpected")
+		tok = tok[1:]
 	}
-	tok = tok[1:]
-	goto retry
 }
 
 // GenWordLength selects a word length based on a pre-computed probability distribution
@@ -259,8 +269,7 @@ retry:
 //	int     - Word length selected from the transition matrix.
 //	float64 - Entropy of the selected length based on its likelihood.
 func (g *generator) GenWordLength() (int, float64) {
-	tr, ok := (*g.jump_table)["LENGTHS"]
-	if ok {
+	if tr, ok := g.jump_table["LENGTHS"]; ok {
 		N := g.Rng.IntN(tr.total)
 		for i, v := range tr.counts {
 			if N < v {

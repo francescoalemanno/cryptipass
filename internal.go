@@ -12,7 +12,7 @@ import (
 // probabilities for generating secure, pronounceable passwords.
 type generator struct {
 	Rng        *rand.Rand // Rng remains public to allow custom RNGS
-	jump_table *map[string]distribution
+	jump_table map[string]distribution
 	depth      int
 }
 

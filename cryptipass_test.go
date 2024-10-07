@@ -51,21 +51,15 @@ type CertifyResult struct {
 //
 // - CertifyResult: A struct containing the analysis of the generator's entropy.
 //
-// This process continues until the gap between nominal and actual entropy is small enough,
-// or a sufficient number of trials has been conducted.
+// This process continues until the gap between nominal and actual entropy is small enough.
 func Certify(Gen func() (string, float64)) CertifyResult {
 	nominal_H := 0.0
 	nominal_H2 := 0.0
 	cnt_nom_H := 0.0
-	for range 1000 {
-		_, nh := Gen()
-		nominal_H += nh
-		nominal_H2 += nh * nh
-		cnt_nom_H++
-	}
 	cnt := make(map[string]int)
 	n := float64(0)
-	Q := 64
+	Q := 512
+	ogap := 0.0
 	for {
 		for range Q {
 			w, nh := Gen()
@@ -76,19 +70,20 @@ func Certify(Gen func() (string, float64)) CertifyResult {
 			n++
 		}
 		Q += Q / 16
-		m := float64(len(cnt))
 		H := 0.0
 		for _, iC := range cnt {
 			c := float64(iC)
 			p := (c / n)
 			H -= p * math.Log2(p)
 		}
-		H += (m - 1) / (2 * n)
+		H += (float64(len(cnt)) - 1) / (2 * n)
 		nomH := nominal_H / cnt_nom_H
 		nomH2 := nominal_H2 / cnt_nom_H
 		stddev := math.Sqrt(max(nomH2-nomH*nomH, 1e-16))
 		gap := nomH - H
-		if math.Abs(gap) < 0.05 || math.Log2(n) > 3*nomH {
+		delta := ogap - gap
+		ogap = gap
+		if math.Abs(delta) < 0.0002 {
 			return CertifyResult{NominalH: nomH, Gap: gap, StdDev: stddev}
 		}
 	}
@@ -97,7 +92,6 @@ func Certify(Gen func() (string, float64)) CertifyResult {
 func TestCert(t *testing.T) {
 	g := cryptipass.NewInstance()
 	g.Rng = rand.New(rand.NewPCG(37512033, 27996124))
-
 	type FN func() (string, float64)
 	funcs := []FN{
 		func() (string, float64) {
