@@ -27,7 +27,7 @@ func main() {
 	- 's' symbol, 'd' digit.
 	`)
 	passwords := flag.Uint64("n", 6, "number of passwords to generate")
-	depth := flag.Uint64("d", 3, "markov chain depth, higher values lead to more plausible words but lower entropy")
+	depth := flag.Uint64("d", 2, "markov chain depth, higher values lead to more plausible words but lower entropy")
 	flag.Parse()
 
 	g := cryptipass.NewCustomInstance(cryptipass.WordListEFF(), int(*depth))
