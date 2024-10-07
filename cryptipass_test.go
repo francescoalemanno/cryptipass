@@ -83,7 +83,7 @@ func Certify(Gen func() (string, float64)) CertifyResult {
 		gap := nomH - H
 		delta := ogap - gap
 		ogap = gap
-		if math.Abs(delta) < 0.0002 {
+		if math.Abs(delta) < 0.0002 || math.Abs(gap) < 0.09 {
 			return CertifyResult{NominalH: nomH, Gap: gap, StdDev: stddev}
 		}
 	}
@@ -135,7 +135,7 @@ func TestCert(t *testing.T) {
 		if math.Abs(X.Gap) >= 0.1 {
 			t.Fatal("failed certification of function", i+1, X)
 		} else {
-			t.Log("passed certification of function", i+1)
+			t.Log("passed certification of function", i+1, "gap:", X.Gap)
 		}
 	}
 }

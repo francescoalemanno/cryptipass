@@ -153,21 +153,32 @@ func (g *Generator) GenPassphrase(words uint64) (string, float64) {
 //
 // The function returns the generated password or passphrase and the estimated entropy
 // in bits, which quantifies its strength.
-func (g *Generator) GenFromPattern(pattern string) (string, float64) {
+func (g *Generator) GenFromPattern(pattern_string string) (string, float64) {
+	runes_list := []rune(pattern_string)
 	g.assert_ready()
+	peek := func() rune {
+		if len(runes_list) == 0 {
+			return 0
+		}
+		return runes_list[0]
+	}
+	eat := func() rune {
+		r := peek()
+		if r != 0 {
+			runes_list = runes_list[1:]
+		}
+		return r
+	}
 	passphrase := ""
 	entropy := 0.0
-	pushnext := false
-	for _, c := range pattern {
-		if pushnext {
-			pushnext = false
-			passphrase += string(c)
-			continue
+	for {
+		c := eat()
+		if c == 0 {
+			break
 		}
 		switch c {
 		case '\\':
-			pushnext = true
-			continue
+			passphrase += string(eat())
 		case 'w', 'W':
 			head, h_head := g.GenNextToken("")
 			leng, h_leng := g.GenWordLength()
@@ -180,6 +191,12 @@ func (g *Generator) GenFromPattern(pattern string) (string, float64) {
 				h_head += nh
 			}
 			passphrase = passphrase + head
+			if peek() == 'w' {
+				//this is necessary to avoid random variable interference,
+				//two adjacent words without separation could be a bigger word,
+				//this would make the entropy evaluation inexact
+				passphrase += "."
+			}
 			entropy = entropy + h_head + h_leng
 		case 'd':
 			d := g.Rng.IntN(10)
