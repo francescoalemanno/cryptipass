@@ -1,80 +1,113 @@
-# Cryptipass
-NOTE: **We also have a [CLI](cmd/genpw) available for non-library uses.**
-Cryptipass is a Go package designed to generate secure passphrases composed of human-readable words. The passphrases are generated with a focus on both security (through entropy) and usability by combining cryptographic randomness and customizable word generation strategies. 
+# cryptipass
+
+[![Go Report Card](https://goreportcard.com/badge/github.com/francescoalemanno/cryptipass)](https://goreportcard.com/report/github.com/francescoalemanno/cryptipass)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![GoDoc](https://godoc.org/github.com/francescoalemanno/cryptipass?status.svg)](https://pkg.go.dev/github.com/francescoalemanno/cryptipass)
+
+**cryptipass** is a flexible, high-entropy passphrase generator that creates secure, pronounceable passwords using a probabilistic model. It's designed for security-conscious developers who need memorable yet strong passphrases.
+
+---
 
 ## Features
 
-- **Cryptographically secure randomization**: Uses `crypto/rand` for generating random data to seed the passphrase generation process, ensuring the highest level of security.
-- **Customizable passphrase length**: The number of words in the passphrase can be controlled by the user.
-- **Entropy calculation**: Provides an exact evaluation of the total entropy for the generated passphrase, helping users understand the strength of their passphrase.
-- **Configurable word lengths**: Words within the passphrase can vary in length, ensuring better randomness and complexity.
+- **Pronounceable Passwords**: Generates words based on real-world token patterns, making them easy to remember.
+- **Highly Customizable**: Define your own word list or use pre-defined patterns like symbols, numbers, and mixed-case letters.
+- **Secure Randomness**: Uses cryptographic-grade randomness (`crypto/rand`) for generating passphrases.
+- **Entropy Analysis**: Built-in entropy calculations and certification to ensure high randomness and strength.
+- **Pattern-Based Generation**: Control password structure using customizable patterns (e.g., words, digits, symbols).
+  
+---
 
 ## Installation
 
-To use the `cryptipass` package in your project, you need to install it using Go's package management:
+To install `cryptipass`, use `go get`:
 
 ```bash
 go get github.com/francescoalemanno/cryptipass
 ```
 
-Then import it in your Go files:
+Then, import it into your project:
 
 ```go
 import "github.com/francescoalemanno/cryptipass"
 ```
 
-## Usage
+NOTE: **We also have a [CLI](cmd/genpw) available for non-library uses.**
 
-### Generate a Passphrase
+---
 
-The primary function of the `cryptipass` package is to generate secure passphrases. You can generate a new passphrase using the `NewPassphrase` function. You can specify how many words you want in the passphrase, and the function returns the passphrase and its total entropy.
+## Quick Start
 
-Example:
+Here's how to generate a passphrase using the default word style:
 
 ```go
 package main
 
 import (
 	"fmt"
-	"cryptipass"
+	"github.com/francescoalemanno/cryptipass"
 )
 
 func main() {
-	passphrase, entropy := cryptipass.NewPassphrase(5)
-	fmt.Printf("Passphrase: %s\n", passphrase)
-	fmt.Printf("Entropy: %.2f bits\n", entropy)
+	// Create a new cryptipass generator
+	gen := cryptipass.NewInstance()
+
+	// Generate a 4-word passphrase
+	passphrase, entropy := gen.GenPassphrase(4) 
+
+	fmt.Println("Passphrase:", passphrase) //e.g. netica.peroundl.opantmene.symnals
+	fmt.Println("Entropy:", entropy)
 }
 ```
 
-### Example Output:
+Want more control over the pattern? Use `GenFromPattern`:
 
+```go
+// Generate a password with pattern: Word-Number-Symbol
+pass, entropy := gen.GenFromPattern("w-d-s") // eg. opantmene-4-%
+fmt.Println("Generated Password:", pass)
 ```
-Passphrase: jesside.flyperm.aunsis.dertsy
-Entropy: 97.63 bits
-```
 
-### Word Generation
-
-Internally, the package uses a series of functions to generate words of varying lengths. Each word contributes a certain amount of entropy, calculated during the generation process.
-
-- `GenMixWord()`: Generates a random word of mixed length, returning both the word and its entropy.
-- `GenWord(n int)`: Generates a word of exactly `n` characters.
-- `PickLength()`: Picks a random length for a word.
-- `PickNext()`: Generates the next part of a word based on the current string.
-
-## Notes
-
-- The package seeds the random number generator with `crypto/rand`, making it cryptographically secure. In scenarios where cryptographic security is not necessary and faster execution is preferred, the package also provides an alternative (commented out) `PCG` random number generator.
-- The entropy provided in the output is a measure of how unpredictable the passphrase is. The higher the entropy, the more secure the passphrase is.
-
-## Contributing
-
-Contributions are welcome! If you encounter any issues or have feature suggestions, feel free to open an issue or a pull request on the GitHub repository.
-
-## License
-
-This project is licensed under the MIT License.
+Possible patterns are formed by combining:
+- 'w' lowercase word, 'W' for uppercase word.
+- 'c' a lowercase character, 'C' a uppercase character.
+- 's' symbol, 'd' digit.
+  
+other symbols are interpolated in the final password and to interpolate one of the reserved symbols use escaping with "\".
 
 ---
 
-Happy coding and stay secure with Cryptipass!
+## Custom Word Lists
+
+You can customize the word style by creating a new instance from your own token set:
+
+```go
+myTokens := []string{"alpha", "bravo", "charlie", "delta"}
+gen := cryptipass.NewCustomInstance(myTokens, 1) //instead of 1, try 2,3,4 to see the tradeoff between fidelity to the wordlist and entropy gain.
+
+pass, entropy := gen.GenPassphrase(3)
+fmt.Println("Custom Passphrase:", pass) //e.g. alphar.bravo.delta
+fmt.Println("Entropy:", entropy)
+```
+
+---
+
+## Documentation
+
+Full API documentation is available at [GoDoc](https://pkg.go.dev/github.com/francescoalemanno/cryptipass).
+
+---
+
+## License
+
+`cryptipass` is licensed under the MIT License. See [LICENSE](LICENSE) for details.
+
+---
+
+## Contributing
+
+Contributions, issues, and feature requests are welcome! Feel free to check out [issues](https://github.com/francescoalemanno/cryptipass/issues) or open a pull request.
+
+---
+
+**cryptipass** – Secure, flexible, and pronounceable passphrases for your Go applications.
