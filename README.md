@@ -23,13 +23,13 @@
 To install `cryptipass`, use `go get`:
 
 ```bash
-go get github.com/francescoalemanno/cryptipass
+go get github.com/francescoalemanno/cryptipass/v2
 ```
 
 Then, import it into your project:
 
 ```go
-import "github.com/francescoalemanno/cryptipass"
+import "github.com/francescoalemanno/cryptipass/v2"
 ```
 
 NOTE: **We also have a [CLI](cmd/genpw) available for non-library uses.**

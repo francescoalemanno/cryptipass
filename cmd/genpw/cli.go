@@ -8,7 +8,7 @@ import (
 	"strings"
 	"text/tabwriter"
 
-	"github.com/francescoalemanno/cryptipass"
+	"github.com/francescoalemanno/cryptipass/v2"
 )
 
 type Passphrase struct {

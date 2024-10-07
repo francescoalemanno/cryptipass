@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/francescoalemanno/cryptipass"
+	"github.com/francescoalemanno/cryptipass/v2"
 )
 
 func TestBasic(t *testing.T) {
