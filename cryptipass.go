@@ -42,6 +42,9 @@ import (
 // If the random seed cannot be read from the crypto/rand source, the function
 // will log a fatal error and terminate the application.
 func NewCustomInstance(tokens []string, chain_depth int) *Generator {
+	if chain_depth < 1 {
+		panic("chain depths cannot be below 1")
+	}
 	rng := new_chacha8_rng()
 	g := new(Generator)
 	g.Rng = rng
@@ -83,8 +86,8 @@ func NewInstance() *Generator {
 var global_jump_table Generator
 
 func init() {
-	global_jump_table.depth = 3
-	global_jump_table.jump_table = distill(WordListEFF(), 3)
+	global_jump_table.depth = 2
+	global_jump_table.jump_table = distill(WordListEFF(), 2)
 }
 
 // GenPassphrase generates a passphrase composed of a specified number of words.

@@ -17,7 +17,6 @@ type Passphrase struct {
 }
 
 func main() {
-	g := cryptipass.NewInstance()
 	f_pattern := flag.String("p", "W.w.w",
 		`pattern used to generate passphrase e.g. try:
 	-p WWW20dd
@@ -28,7 +27,11 @@ func main() {
 	- 's' symbol, 'd' digit.
 	`)
 	passwords := flag.Uint64("n", 6, "number of passwords to generate")
+	depth := flag.Uint64("d", 3, "markov chain depth, higher values lead to more plausible words but lower entropy")
 	flag.Parse()
+
+	g := cryptipass.NewCustomInstance(cryptipass.WordListEFF(), int(*depth))
+
 	pattern := *f_pattern
 
 	w := tabwriter.NewWriter(os.Stdout, 1, 1, 4, ' ', 0)
