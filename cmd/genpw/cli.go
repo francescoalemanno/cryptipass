@@ -3,12 +3,13 @@ package main
 import (
 	"flag"
 	"fmt"
+	"log"
 	"math"
 	"os"
 	"strings"
 	"text/tabwriter"
 
-	"github.com/francescoalemanno/cryptipass/v2"
+	"github.com/francescoalemanno/cryptipass/v3"
 )
 
 type Passphrase struct {
@@ -23,14 +24,26 @@ func main() {
 	
 	other possible patterns are formed by combining:
 	- 'w' lowercase word, 'W' for uppercase word.
-	- 'c' a lowercase character, 'C' a uppercase character.
+	- 'c' a lowercase token, 'C' a uppercase token.
 	- 's' symbol, 'd' digit.
 	`)
 	passwords := flag.Uint64("n", 6, "number of passwords to generate")
 	depth := flag.Uint64("d", 2, "markov chain depth, higher values lead to more plausible words but lower entropy")
+	style := flag.String("s", "eff", "pseudo-word style: eff (english), latin, italian")
 	flag.Parse()
+	var wlist []string
 
-	g := cryptipass.NewCustomInstance(cryptipass.WordListEFF(), int(*depth))
+	switch *style {
+	case "eff", "english":
+		wlist = cryptipass.WordListEFF()
+	case "latin":
+		wlist = cryptipass.WordListLatin()
+	case "italian":
+		wlist = cryptipass.WordListItalian()
+	default:
+		log.Fatal("word style `", *style, "` is unknown.")
+	}
+	g := cryptipass.NewCustomInstance(wlist, int(*depth))
 
 	pattern := *f_pattern
 

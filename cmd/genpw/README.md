@@ -17,7 +17,7 @@
 To install **genpw**, use `go install`:
 
 ```bash
-go install github.com/francescoalemanno/cryptipass/v2/cmd/genpw@latest
+go install github.com/francescoalemanno/cryptipass/v3/cmd/genpw@latest
 ```
 
 Ensure `$GOPATH/bin` is added to your `PATH` to run the command directly.
@@ -36,14 +36,14 @@ genpw -p [PATTERN] -n [NUMBER OF PASSWORDS (default 6)] -d [CHAIN DEPTH (default
 
 - **w**: lowercase word.
 - **W**: uppercase word.
-- **c**: lowercase character.
-- **C**: uppercase character.
+- **c**: lowercase token.
+- **C**: uppercase token.
 - **d**: digit.
 - **s**: symbol.
 
 ### Example
 
-Generate 6 passphrases using a pattern of three words (with one capitalized), a two-digit number, and two lowercase characters:
+Generate 6 passphrases using a pattern of three words (with one capitalized), a two-digit number, and two lowercase tokens:
 
 ```bash
 genpw -p "W.w.w.ddcc" -n 6
@@ -80,7 +80,7 @@ Each generated passphrase includes a strength meter, represented by a bar betwee
 
 ## Customization
 
-You can define your own patterns to create passphrases tailored to your security and usability needs. Patterns can be mixed and matched to create combinations of words, digits, symbols, and characters, offering high flexibility.
+You can define your own patterns to create passphrases tailored to your security and usability needs. Patterns can be mixed and matched to create combinations of words, digits, symbols, and tokens, offering high flexibility.
 
 Examples:
 

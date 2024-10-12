@@ -1,8 +1,8 @@
 # cryptipass
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/francescoalemanno/cryptipass/v2)](https://goreportcard.com/report/github.com/francescoalemanno/cryptipass/v2)
+[![Go Report Card](https://goreportcard.com/badge/github.com/francescoalemanno/cryptipass/v3)](https://goreportcard.com/report/github.com/francescoalemanno/cryptipass/v3)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![GoDoc](https://godoc.org/github.com/francescoalemanno/cryptipass/v2?status.svg)](https://pkg.go.dev/github.com/francescoalemanno/cryptipass/v2)
+[![GoDoc](https://godoc.org/github.com/francescoalemanno/cryptipass/v3?status.svg)](https://pkg.go.dev/github.com/francescoalemanno/cryptipass/v3)
 
 **cryptipass** is a flexible, high-entropy passphrase generator that creates secure, pronounceable passwords using a probabilistic model. It's designed for security-conscious developers who need memorable yet strong passphrases.
 
@@ -23,13 +23,13 @@
 To install `cryptipass`, use `go get`:
 
 ```bash
-go get github.com/francescoalemanno/cryptipass/v2
+go get github.com/francescoalemanno/cryptipass/v3
 ```
 
 Then, import it into your project:
 
 ```go
-import "github.com/francescoalemanno/cryptipass/v2"
+import "github.com/francescoalemanno/cryptipass/v3"
 ```
 
 NOTE: **We also have a [CLI](cmd/genpw) available for non-library uses.**
@@ -45,7 +45,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/francescoalemanno/cryptipass/v2"
+	"github.com/francescoalemanno/cryptipass/v3"
 )
 
 func main() {
@@ -70,7 +70,7 @@ fmt.Println("Generated Password:", pass)
 
 Possible patterns are formed by combining:
 - 'w' lowercase word, 'W' for uppercase word.
-- 'c' a lowercase character, 'C' a uppercase character.
+- 'c' a lowercase token, 'C' a uppercase token.
 - 's' symbol, 'd' digit.
   
 other symbols are interpolated in the final password and to interpolate one of the reserved symbols use escaping with "\".
@@ -94,7 +94,7 @@ fmt.Println("Entropy:", entropy)
 
 ## Documentation
 
-Full API documentation is available at [GoDoc](https://pkg.go.dev/github.com/francescoalemanno/cryptipass/v2).
+Full API documentation is available at [GoDoc](https://pkg.go.dev/github.com/francescoalemanno/cryptipass/v3).
 
 ---
 

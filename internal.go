@@ -8,7 +8,7 @@ import (
 
 // Generator is a structure that holds the state of the password
 // generator instance. It includes a random number Generator (Rng)
-// and a jump table (JumpTable) which defines character transition
+// and a jump table (JumpTable) which defines token transition
 // probabilities.
 type Generator struct {
 	Rng        *rand.Rand // Rng remains public to allow custom RNGS
@@ -17,7 +17,7 @@ type Generator struct {
 }
 
 func (g *Generator) isready() bool {
-	return g.Rng != nil && len(g.jump_table) != 0
+	return g.depth > 0 && g.Rng != nil && len(g.jump_table) != 0
 }
 func (g *Generator) assert_ready() {
 	if !g.isready() {
@@ -25,13 +25,13 @@ func (g *Generator) assert_ready() {
 	}
 }
 
-// distribution represents a character transition model for generating
+// distribution represents a token transition model for generating
 // pronounceable passwords. It encapsulates the statistical data
 // necessary to understand the frequency and distribution of
-// character transitions based on a given set of tokens.
+// tokens transitions based on a given set of seed words.
 //
 // Fields:
-//   - tokens:   A slice of strings representing characters that can follow
+//   - tokens:   A slice of strings representing tokens that can follow
 //     a given state in the transition matrix.
 //   - counts:  A slice of integers where each integer represents the
 //     cumulative frequency count of the corresponding token in
@@ -43,7 +43,7 @@ func (g *Generator) assert_ready() {
 //     for the current state, used for entropy calculations.
 //
 // The distribution struct is used internally to facilitate the generation
-// of passwords by modeling the relationships between characters in the generated output.
+// of passwords by modeling the relationships between tokens in the generated output.
 type distribution struct {
 	tokens    []string
 	counts    []int
@@ -52,13 +52,13 @@ type distribution struct {
 }
 
 // distill processes a list of words and builds a probabilistic transition matrix
-// that models the relationships between successive characters within those words.
+// that models the relationships between successive tokens within those words.
 //
-// The transition matrix is a map where each key represents a string prefix (up to two characters),
-// and the value is a Transition struct that tracks the possible next characters, their frequencies,
+// The transition matrix is a map where each key represents a string prefix,
+// and the value is a Transition struct that tracks the possible next tokens, their frequencies,
 // and the total number of transitions.
 //
-// This matrix enables generating new sequences of characters based on learned patterns,
+// This matrix enables generating new sequences of tokens based on learned patterns,
 // making it useful for generating pronounceable words.
 //
 // The function returns a map of transitions that can be used for creating passphrases or similar text generation.
@@ -77,8 +77,17 @@ type distribution struct {
 //	tokens := []string{"hello", "world", "golang"}
 //	transitions := distill(tokens)
 //
-//	// 'transitions' will contain a probabilistic model for generating new character sequences.
+//	// 'transitions' will contain a probabilistic model for generating new token sequences.
 func distill(tokens []string, depth int) map[string]distribution {
+	transition_matrix := transition_matrix_from_tokens(tokens, depth)
+	dist_trans_matrix := make(map[string]distribution)
+	for k, rfreq := range transition_matrix {
+		dist_trans_matrix[k] = distribution_from_counts(rfreq)
+	}
+	return dist_trans_matrix
+}
+
+func transition_matrix_from_tokens(tokens []string, depth int) map[string]map[string]int {
 	transition_matrix := make(map[string]map[string]int)
 	put := func(str string, r string) {
 		if transition_matrix[str] == nil {
@@ -91,34 +100,41 @@ func distill(tokens []string, depth int) map[string]distribution {
 		if len(R) == 0 {
 			continue
 		}
-		put("LENGTHS", string(rune(len(R))))
-		for i := 0; i < min(depth, len(R)); i++ {
-			put(string(R[:i]), string(R[i]))
-		}
-		for i := 0; i < len(R)-depth; i++ {
-			put(string(R[i:i+depth]), string(R[i+depth]))
+		for i := range R {
+			from := string(R[max(i-depth, 0):i])
+			to := string(R[i:min(i+depth, len(R))])
+			if to == "" || from == to {
+				continue
+			}
+			put(from, to)
 		}
 	}
-	dist_trans_matrix := make(map[string]distribution)
-	for k, rfreq := range transition_matrix {
-		C := 0
-		for _, freq := range rfreq {
-			C += freq
-		}
-		tr := distribution{}
-		tr.counts = make([]int, 0)
+	return transition_matrix
+}
 
-		tr.tokens = make([]string, 0)
-		cum := 0
-		for ru, freq := range rfreq {
-			p := float64(freq) / float64(C)
-			cum += freq
-			tr.counts = append(tr.counts, cum)
-			tr.tokens = append(tr.tokens, string(ru))
-			tr.entropies = append(tr.entropies, math.Log2(1.0/p))
-		}
-		tr.total = C
-		dist_trans_matrix[k] = tr
+func distribution_from_counts(rfreq map[string]int) distribution {
+	C := 0
+	for _, freq := range rfreq {
+		C += freq
 	}
-	return dist_trans_matrix
+	tr := new_empty_distribution()
+	cum := 0
+	for ru, freq := range rfreq {
+		p := float64(freq) / float64(C)
+		cum += freq
+		tr.counts = append(tr.counts, cum)
+		tr.tokens = append(tr.tokens, string(ru))
+		tr.entropies = append(tr.entropies, math.Log2(1.0/p))
+	}
+	tr.total = C
+	return tr
+}
+
+func new_empty_distribution() distribution {
+	tr := distribution{}
+	tr.counts = make([]int, 0)
+	tr.tokens = make([]string, 0)
+	tr.entropies = make([]float64, 0)
+	tr.total = 0
+	return tr
 }

@@ -8,11 +8,11 @@ package cryptipass
 import (
 	cr "crypto/rand"
 	_ "embed"
-	"fmt"
 	"log"
 	"math"
 	"math/rand/v2"
 	"strings"
+	"unicode"
 )
 
 // NewCustomInstance creates a new instance of the cryptipass password generator
@@ -49,7 +49,13 @@ func NewCustomInstance(tokens []string, chain_depth int) *Generator {
 	g := new(Generator)
 	g.Rng = rng
 	g.jump_table = distill(tokens, chain_depth)
-	g.depth = chain_depth
+	g.depth = 0
+	for k, v := range g.jump_table {
+		g.depth = max(g.depth, len(k))
+		for _, w := range v.tokens {
+			g.depth = max(g.depth, len(w))
+		}
+	}
 	return g
 }
 
@@ -76,18 +82,7 @@ func new_chacha8_rng() *rand.Rand {
 // NewInstance is ideal for general use cases where you want to generate secure
 // passphrases with a focus on ease of pronunciation and memorization.
 func NewInstance() *Generator {
-	g := new(Generator)
-	g.Rng = new_chacha8_rng()
-	g.jump_table = global_jump_table.jump_table
-	g.depth = global_jump_table.depth
-	return g
-}
-
-var global_jump_table Generator
-
-func init() {
-	global_jump_table.depth = 2
-	global_jump_table.jump_table = distill(WordListEFF(), 2)
+	return NewCustomInstance(WordListEFF(), 3)
 }
 
 // GenPassphrase generates a passphrase composed of a specified number of words.
@@ -124,21 +119,22 @@ func (g *Generator) GenPassphrase(words uint64) (string, float64) {
 		wordvec = append(wordvec, tok)
 		total_entropy += h
 	}
+
 	return strings.Join(wordvec, "."), total_entropy
 }
 
 // GenFromPattern generates a password or passphrase based on a user-defined pattern.
 //
 // The pattern string can include special placeholders that dictate the structure
-// of the generated password. Each placeholder corresponds to a specific type of character.
+// of the generated password. Each placeholder corresponds to a specific type of token.
 // The supported placeholders are:
 //
 //   - 'w' : Generates a word in lowercase.
 //   - 'W' : Generates a word with the first letter capitalized.
 //   - 'd' : Generates a random digit (0-9).
 //   - 's' : Generates a random symbol from a predefined set (@#!$%&=?^+-*").
-//   - 'c' : Generates a random lowercase letter.
-//   - 'C' : Generates a random uppercase letter.
+//   - 'c' : Generates a random lowercase token.
+//   - 'C' : Generates a random capitalized token.
 //   - '\\' : Escapes the next character in the pattern, allowing you to include literal values.
 //
 // Example usage:
@@ -154,6 +150,8 @@ func (g *Generator) GenPassphrase(words uint64) (string, float64) {
 // The function returns the generated password or passphrase and the estimated entropy
 // in bits, which quantifies its strength.
 func (g *Generator) GenFromPattern(pattern_string string) (string, float64) {
+	passphrase := ""
+	entropy := 0.0
 	runes_list := []rune(pattern_string)
 	g.assert_ready()
 	peek := func() rune {
@@ -169,8 +167,7 @@ func (g *Generator) GenFromPattern(pattern_string string) (string, float64) {
 		}
 		return r
 	}
-	passphrase := ""
-	entropy := 0.0
+
 	for {
 		c := eat()
 		if c == 0 {
@@ -180,39 +177,29 @@ func (g *Generator) GenFromPattern(pattern_string string) (string, float64) {
 		case '\\':
 			passphrase += string(eat())
 		case 'w', 'W':
-			head, h_head := g.GenNextToken("")
-			leng, h_leng := g.GenWordLength()
-			if c == 'W' {
-				head = strings.ToUpper(head)
+			nelen := 0
+			for i := 0; nelen < 8; i++ {
+				nc, nh := g.GenNextToken(passphrase)
+				if c == 'W' && i == 0 {
+					nc = first_to_upper(nc)
+				}
+				passphrase = passphrase + nc
+				entropy = entropy + nh
+				nelen += g.depth
 			}
-			for len(head) < leng {
-				nc, nh := g.GenNextToken(strings.ToLower(head))
-				head += nc
-				h_head += nh
-			}
-			passphrase = passphrase + head
-			if peek() == 'w' {
-				//this is necessary to avoid random variable interference,
-				//two adjacent words without separation could be a bigger word,
-				//this would make the entropy evaluation inexact
-				passphrase += "."
-			}
-			entropy = entropy + h_head + h_leng
-		case 'd':
-			d := g.Rng.IntN(10)
-			H := math.Log2(10.0)
-			passphrase += fmt.Sprint(d)
-			entropy += H
-		case 's':
+		case 's', 'd':
 			symbols := "@#!$%&=?^+-*\""
+			if c == 'd' {
+				symbols = "1234567890"
+			}
 			d := g.Rng.IntN(len(symbols))
 			H := math.Log2(float64(len(symbols)))
 			passphrase += string(symbols[d])
 			entropy += H
 		case 'c', 'C':
-			tok, dH := g.GenNextToken(strings.ToLower(passphrase))
+			tok, dH := g.GenNextToken(passphrase)
 			if c == 'C' {
-				tok = strings.ToUpper(tok)
+				tok = first_to_upper(tok)
 			}
 			passphrase += string(tok)
 			entropy += dH
@@ -256,8 +243,7 @@ func (g *Generator) GenFromPattern(pattern_string string) (string, float64) {
 //	the next token.
 func (g *Generator) GenNextToken(seed string) (string, float64) {
 	g.assert_ready()
-	L := min(len(seed), g.depth)
-	tok := strings.ToLower(seed[len(seed)-L:])
+	tok := strings.ToLower(seed[max(len(seed)-g.depth, 0):])
 	for {
 		if tr, ok := g.jump_table[tok]; ok {
 			N := g.Rng.IntN(tr.total)
@@ -272,34 +258,18 @@ func (g *Generator) GenNextToken(seed string) (string, float64) {
 	}
 }
 
-// GenWordLength selects a word length based on a pre-computed probability distribution
-// from the transition matrix. It uses a cryptographically secure random number generator
-// to ensure unpredictable outcomes.
-//
-// It returns an integer representing the word length and a float64 value representing
-// the entropy associated with that selection.
-//
-// The function panics if an unexpected random number is encountered.
-//
-// Example:
-//
-//	gen := cryptipass.NewInstance()
-//	length, entropy := gen.GenWordLength()
-//	fmt.Printf("Generated word length: %d, Entropy: %.2f\n", length, entropy)
-//
-// Returns:
-//
-//	int     - Word length selected from the transition matrix.
-//	float64 - Entropy of the selected length based on its likelihood.
-func (g *Generator) GenWordLength() (int, float64) {
-	g.assert_ready()
-	if tr, ok := g.jump_table["LENGTHS"]; ok {
-		N := g.Rng.IntN(tr.total)
-		for i, v := range tr.counts {
-			if N < v {
-				return int(tr.tokens[i][0]), tr.entropies[i]
+func first_to_upper(s string) string {
+	// Use a closure here to remember state.
+	// Hackish but effective. Depends on Map scanning in order and calling
+	// the closure once per rune.
+	first := true
+	return strings.Map(
+		func(r rune) rune {
+			if first {
+				first = false
+				return unicode.ToTitle(r)
 			}
-		}
-	}
-	panic("unexpected rand num")
+			return r
+		},
+		s)
 }

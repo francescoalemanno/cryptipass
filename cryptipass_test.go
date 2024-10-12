@@ -1,13 +1,12 @@
 package cryptipass_test
 
 import (
-	"fmt"
 	"math"
 	"math/rand/v2"
 	"strings"
 	"testing"
 
-	"github.com/francescoalemanno/cryptipass/v2"
+	"github.com/francescoalemanno/cryptipass/v3"
 )
 
 func TestBasic(t *testing.T) {
@@ -90,12 +89,18 @@ func Certify(Gen func() (string, float64)) CertifyResult {
 
 }
 func TestCert(t *testing.T) {
-	g := cryptipass.NewInstance()
+	g := cryptipass.NewCustomInstance(cryptipass.WordListDebug(), 3)
 	g.Rng = rand.New(rand.NewPCG(37512033, 27996124))
 	type FN func() (string, float64)
 	funcs := []FN{
 		func() (string, float64) {
 			return g.GenFromPattern("Ccc20d")
+		},
+		func() (string, float64) {
+			return g.GenFromPattern("ww")
+		},
+		func() (string, float64) {
+			return g.GenFromPattern("w.w")
 		},
 		func() (string, float64) {
 			return g.GenFromPattern("cCc2d0")
@@ -115,10 +120,6 @@ func TestCert(t *testing.T) {
 			s, h := g.GenFromPattern(strings.Repeat("c", 2+r))
 			h += math.Log2(float64(N))
 			return s, h
-		},
-		func() (string, float64) {
-			r, h := g.GenWordLength()
-			return fmt.Sprint(r), h
 		},
 		func() (string, float64) {
 			words := []string{"", "ciao", "gi", "ok", "s"}
@@ -159,25 +160,12 @@ func TestPickNext(t *testing.T) {
 	g := cryptipass.NewInstance()
 	seed := "te"
 	next, entropy := g.GenNextToken(seed)
-	if len(next) != 1 {
-		t.Errorf("Expected string extension to be 1 rune long")
+	if len(next) == 0 {
+		t.Errorf("Expected string extension to be atleast 1 rune long")
 	}
 
 	if entropy < 0 {
 		t.Errorf("Expected entropy to be >= 0, got %f", entropy)
-	}
-}
-
-func TestPickLength(t *testing.T) {
-	g := cryptipass.NewInstance()
-	length, entropy := g.GenWordLength()
-
-	if length < 3 || length > 9 {
-		t.Errorf("Expected length to be between 3 and 9, got %d", length)
-	}
-
-	if entropy < 0 {
-		t.Errorf("Expected entropy to be greater than 0, got %f", entropy)
 	}
 }
 
@@ -186,8 +174,8 @@ func TestGenFromPattern(t *testing.T) {
 	pattern := "Cccc.cccc@dd"
 	word, entropy := g.GenFromPattern(pattern)
 
-	if len(word) != len(pattern) {
-		t.Errorf("Expected word length %d, got %d", len(pattern), len(word))
+	if len(word) < len(pattern) {
+		t.Errorf("Expected word length > %d, got %d", len(pattern), len(word))
 	}
 
 	if entropy < 0 {

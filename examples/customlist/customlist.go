@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/francescoalemanno/cryptipass/v2"
+	"github.com/francescoalemanno/cryptipass/v3"
 )
 
 func main() {
